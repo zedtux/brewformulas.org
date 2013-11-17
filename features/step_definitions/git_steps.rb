@@ -21,7 +21,19 @@ Given /^the Github homebrew repository has the following formula:$/ do |table|
 end
 
 Given /^the Github homebrew repository has a new formula$/ do
-  HomebrewFormula.new_formula(name: "Ack", homepage: "http://beyondgrep.com/", version: "2.09")
+  HomebrewFormula.new_formula(name: "llvm", homepage: "http://llvm.org/")
+end
+
+Given /^the Github homebrew repository has a formula having multiple formula classes$/ do
+  HomebrewFormula.new_formula(
+    {
+      name: "llvm",
+      homepage: "http://llvm.org/",
+      others: [
+        {name: "clang", homepage: "http://llvm.org/"}
+      ]
+    }
+  )
 end
 
 Given /^the Github homebrew repository has an updated formula$/ do

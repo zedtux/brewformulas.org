@@ -42,14 +42,14 @@ class HomebrewGit
       # Read the Ruby file content
       formula = File.read(formula_path)
 
-      regex = /require\s?(?:'|")formula(?:'|")([\s\w\W]+)?^class (\w+) < (Formula|AmazonWebServicesFormula|GithubGistFormula|ScriptFileFormula)$/
+      regex = /require\s?(?:'|")formula(?:'|")[\s\w\W]+^class (\w+) < (Formula|AmazonWebServicesFormula|GithubGistFormula|ScriptFileFormula)$/
 
       # Extract the class name
-      formula_class_name = formula.scan(regex).flatten[1]
+      formula_class_name = formula.scan(regex).flatten[0]
       formula_class_name = "Homebrew::#{formula_class_name}"
 
       # Prepend the class with a namespace
-      formula.gsub!(regex, "require 'homebrew/fake_formula'\n#{$1}\nclass #{formula_class_name} < Homebrew::FakeFormula")
+      formula.gsub!(regex, "require 'homebrew/fake_formula'\n\nclass #{formula_class_name} < Homebrew::FakeFormula")
 
       # Eval the formula
       eval formula

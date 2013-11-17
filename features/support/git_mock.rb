@@ -3,21 +3,46 @@ module HomebrewFormula
 
   def self.new_formula(formula={})
     self.formulas ||= []
+    formula.merge!(others: []) unless formula.has_key?(:others)
     self.formulas << formula
   end
 
+  #
+  # {
+  #   formula_one: {name: "Test", homepage: "http://google.com/"}
+  # }
+  #
+  # {
+  #   formula_one: {name: "clang", homepage: "http://llvm.org"},
+  #   formula_two: {name: "llvm", homepage: "http://llvm.org", primary: true}
+  # }
   def self.write_formulae_to(formula_basedir)
     self.formulas.each do |formula|
-      formula_content = "require 'formula'\n\nclass #{formula[:name].camelize} < Formula\n"
-      formula.keys.each do |attribute|
-        next if attribute == :name
-        formula_content << "  #{attribute} \"#{formula[attribute.to_sym]}\"\n"
+
+      formula_content = "require 'formula'\n\n"
+
+      formula[:others].each do |sub_formula|
+        formula_content << self.build_formula_class(sub_formula)
       end
-      formula_content << "\nend\n"
+
+      formula_content << self.build_formula_class(formula)
+
+      Rails.logger.debug "[debug(#{__FILE__.split("app/")[1]}:#{__LINE__})] formula_content: #{formula_content.inspect}"
       File.open(File.join(formula_basedir, "#{formula[:name].downcase}.rb"), "w") {|f|
         f.write(formula_content)
       }
     end
+  end
+
+  def self.build_formula_class(formula)
+    formula_content = ""
+    formula_content << "class #{formula[:name].camelize} < Formula\n"
+    formula.keys.each do |attribute|
+      next if [:name, :others].include?(attribute)
+      formula_content << "  #{attribute} \"#{formula[attribute.to_sym]}\"\n"
+    end
+    formula_content << "\nend\n"
+    formula_content
   end
 end
 World(HomebrewFormula)

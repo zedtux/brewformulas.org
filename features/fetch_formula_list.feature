@@ -27,6 +27,13 @@ Feature: Fetch formula list
     Then no new formula should be in the database
     And a formula should be updated
 
+  Scenario: Update existing repository with a formula with multiple formula classes
+    Given some formulas exist
+    And the Github homebrew repository has been cloned
+    And the Github homebrew repository has a formula having multiple formula classes
+    When the background task to get or update the formulae is executed
+    Then a new formula should be available in the database
+
   Scenario: Update existing repository with new formula
     Given some formulas exist
     And the Github homebrew repository has been cloned
