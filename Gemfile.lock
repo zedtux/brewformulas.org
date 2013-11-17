@@ -195,7 +195,6 @@ DEPENDENCIES
   binding_of_caller
   bootstrap-sass (>= 3.0.0.0)
   capybara
-  coffee-rails (~> 4.0.0)
   cucumber-rails
   database_cleaner (= 1.0.1)
   email_spec
