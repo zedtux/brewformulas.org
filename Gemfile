@@ -16,6 +16,7 @@ gem 'slim'
 gem 'git'
 gem 'appconfig', :require => 'app_config'
 gem 'sidekiq'
+gem 'sinatra', '>= 1.3.0', :require => nil
 gem 'yard'
 
 group :development do

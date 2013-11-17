@@ -108,6 +108,8 @@ GEM
     quiet_assets (1.0.2)
       railties (>= 3.1, < 5.0)
     rack (1.5.2)
+    rack-protection (1.5.1)
+      rack
     rack-test (0.6.2)
       rack (>= 1.0)
     rails (4.0.1)
@@ -152,6 +154,10 @@ GEM
       json
       redis (>= 3.0.4)
       redis-namespace (>= 1.3.1)
+    sinatra (1.4.4)
+      rack (~> 1.4)
+      rack-protection (~> 1.4)
+      tilt (~> 1.3, >= 1.3.4)
     slim (2.0.2)
       temple (~> 0.6.6)
       tilt (>= 1.3.3, < 2.1)
@@ -211,6 +217,7 @@ DEPENDENCIES
   sass-rails (~> 4.0.0)
   shoulda-matchers
   sidekiq
+  sinatra (>= 1.3.0)
   slim
   turbolinks
   uglifier (>= 1.3.0)

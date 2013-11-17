@@ -5,6 +5,6 @@ homebrew:
     location: <%= File.join(Rails.root, "cache") %>
 redis:
   server: localhost
-  port: 5678
+  port: 6379
   db_num: 0
   namespace: "brewformulas"

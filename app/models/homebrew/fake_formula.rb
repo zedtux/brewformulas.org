@@ -35,42 +35,42 @@ module Homebrew
     end
 
   end
-
-  class MacOS
-    class << self
-      def version; :mavericks; end
-
-      def method_missing(method, *args, &block)
-        self
-      end
-    end
-  end
-
-  class DummyClass
-    class << self
-      def test; end
-      def include?(*args); ""; end
-
-      def method_missing(method, *args, &block)
-        self
-      end
-    end
-  end
-  Homebrew::AmazonWebServicesFormula = DummyClass
-  Homebrew::CurlDownloadStrategy = DummyClass
-  Homebrew::CurlUnsafeDownloadStrategy = DummyClass
-  Homebrew::GitDownloadStrategy = DummyClass
-  Homebrew::GithubGistFormula = DummyClass
-  Homebrew::MacOS::CLT = DummyClass
-  Homebrew::MacOS::Xcode = DummyClass
-  Homebrew::MacOS::X11 = DummyClass
-  Homebrew::MysqlDependency = DummyClass
-  Homebrew::Requirement = DummyClass
-  Homebrew::ScriptFileFormula = DummyClass
-  Homebrew::StrictSubversionDownloadStrategy = DummyClass
-  Homebrew::Tab = DummyClass
-  Homebrew::UnsafeSubversionDownloadStrategy = DummyClass
-  Homebrew::Version = DummyClass
-
-  HOMEBREW_PREFIX=""
 end
+
+class MacOS
+  class << self
+    def version; :mavericks; end
+
+    def method_missing(method, *args, &block)
+      self
+    end
+  end
+end
+
+class DummyClass
+  class << self
+    def test; end
+    def include?(*args); ""; end
+
+    def method_missing(method, *args, &block)
+      self
+    end
+  end
+end
+::AmazonWebServicesFormula = DummyClass
+::CurlDownloadStrategy = DummyClass
+::CurlUnsafeDownloadStrategy = DummyClass
+::GitDownloadStrategy = DummyClass
+::GithubGistFormula = DummyClass
+::MacOS::CLT = DummyClass
+::MacOS::Xcode = DummyClass
+::MacOS::X11 = DummyClass
+::MysqlDependency = DummyClass
+::Requirement = DummyClass
+::ScriptFileFormula = DummyClass
+::StrictSubversionDownloadStrategy = DummyClass
+::Tab = DummyClass
+::UnsafeSubversionDownloadStrategy = DummyClass
+::Version = DummyClass
+
+HOMEBREW_PREFIX=""
