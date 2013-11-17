@@ -37,18 +37,9 @@ module Homebrew
   end
 end
 
-class MacOS
-  class << self
-    def version; :mavericks; end
-
-    def method_missing(method, *args, &block)
-      self
-    end
-  end
-end
-
 class DummyClass
   class << self
+    def version; :mavericks; end
     def test; end
     def include?(*args); ""; end
 
@@ -57,20 +48,5 @@ class DummyClass
     end
   end
 end
-::AmazonWebServicesFormula = DummyClass
-::CurlDownloadStrategy = DummyClass
-::CurlUnsafeDownloadStrategy = DummyClass
-::GitDownloadStrategy = DummyClass
-::GithubGistFormula = DummyClass
-::MacOS::CLT = DummyClass
-::MacOS::Xcode = DummyClass
-::MacOS::X11 = DummyClass
-::MysqlDependency = DummyClass
-::Requirement = DummyClass
-::ScriptFileFormula = DummyClass
-::StrictSubversionDownloadStrategy = DummyClass
-::Tab = DummyClass
-::UnsafeSubversionDownloadStrategy = DummyClass
-::Version = DummyClass
 
 HOMEBREW_PREFIX=""

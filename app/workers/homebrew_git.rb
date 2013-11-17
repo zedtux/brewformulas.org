@@ -1,6 +1,19 @@
 class HomebrewGit
   include Sidekiq::Worker
 
+  def load_formula(formula, klasses_to_override=[])
+    eval formula
+  rescue NameError => error
+    if klass = error.message.scan(/uninitialized constant ([\w\:]+)/).flatten.first
+      # For all classes which aren't existing
+      # juste override them with the DummyClass
+      eval "::#{klass.demodulize} = DummyClass"
+      self.load_formula(formula, klasses_to_override)
+    else
+      raise
+    end
+  end
+
   #
   # Get the Homebrew source code from Github
   # and keep it up-to-date.
@@ -52,26 +65,21 @@ class HomebrewGit
       formula.gsub!(regex, "require 'homebrew/fake_formula'\n\nclass #{formula_class_name} < Homebrew::FakeFormula")
 
       # Eval the formula
-      eval formula
+      self.load_formula(formula)
 
       # Now access the formula attributes like a normal Ruby class
       klass = formula_class_name.constantize
 
       # Look for an existing formula
-      if homebrew_formula = Homebrew::Formula.where(name: klass.name.demodulize).first
-        [:version, :homepage].each do |column|
-          homebrew_formula.send "#{column.to_s}=", klass.try(column)
-        end
-        homebrew_formula.save!
-      else
-        version = klass.try(:version)
-        version = version.keys.first if version.is_a?(Hash)
-        Homebrew::Formula.create(
-          name: klass.name.demodulize,
-          version: version,
-          homepage: klass.try(:homepage)
-        )
+      homebrew_formula = Homebrew::Formula.where(name: klass.name.demodulize).first
+      homebrew_formula = Homebrew::Formula.create!(name: klass.name.demodulize) unless homebrew_formula
+
+      [:version, :homepage].each do |column|
+        value = klass.try(column)
+        value = value.keys.first if value.is_a?(Hash)
+        homebrew_formula.send "#{column.to_s}=", value
       end
+      homebrew_formula.save!
     end
   end
 end
