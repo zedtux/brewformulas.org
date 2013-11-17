@@ -1,0 +1,10 @@
+homebrew:
+  git_repository:
+    url: "https://github.com/mxcl/homebrew.git"
+    name: "homebrew"
+    location: <%= File.join(Rails.root, "cache") %>
+redis:
+  server: localhost
+  port: 5678
+  db_num: 0
+  namespace: "brewformulas"
