@@ -35,4 +35,5 @@ group :test do
   gem 'launchy'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
+  gem 'rake'
 end
