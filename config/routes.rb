@@ -1,5 +1,9 @@
-require 'sidekiq/web'
+require "sidekiq/web"
 
 BrewformulasOrg::Application.routes.draw do
-  mount Sidekiq::Web => '/sidekiq'
+  mount Sidekiq::Web => "/sidekiq"
+
+  resources :formulas
+
+  root "formulas#index"
 end

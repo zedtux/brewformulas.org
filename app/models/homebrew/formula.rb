@@ -15,6 +15,9 @@ module Homebrew
     # @nodoc ~~~ custom class methods ~~~
 
     # @nodoc ~~~ custom instance methods ~~~
+    def description
+      self[:description] || "No description available"
+    end
 
   end
 end

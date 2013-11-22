@@ -27,7 +27,6 @@ module HomebrewFormula
 
       formula_content << self.build_formula_class(formula)
 
-      Rails.logger.debug "[debug(#{__FILE__.split("app/")[1]}:#{__LINE__})] formula_content: #{formula_content.inspect}"
       File.open(File.join(formula_basedir, "#{formula[:name].downcase}.rb"), "w") {|f|
         f.write(formula_content)
       }

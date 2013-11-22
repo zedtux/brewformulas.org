@@ -1,0 +1,8 @@
+h2
+  | Formula list
+  small= "#{@formulas.size} formulas"
+.list-group
+  - @formulas.each do |formula|
+    a.list-group-item href="#"
+      h4.list-group-item-heading= formula.name
+      p.list-group-item-text= formula.description
