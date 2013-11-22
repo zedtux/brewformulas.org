@@ -6,6 +6,7 @@ require 'capistrano/deploy'
 
 require 'capistrano/rails'
 require 'capistrano/bundler'
+require 'sidekiq/capistrano'
 
 # Includes tasks from other gems included in your Gemfile
 #
