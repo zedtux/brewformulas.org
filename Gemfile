@@ -1,5 +1,4 @@
 source 'https://rubygems.org'
-ruby '2.0.0'
 
 gem 'rails', '4.0.1'
 gem 'uglifier', '>= 1.3.0'
@@ -15,6 +14,7 @@ gem 'slim-rails'
 gem 'git'
 gem 'appconfig', :require => 'app_config'
 gem 'sidekiq'
+gem 'sidetiq', '~> 0.4.3' # Recurring jobs
 gem 'sinatra', '>= 1.3.0', :require => nil
 
 group :development do
@@ -24,6 +24,9 @@ group :development do
   gem 'quiet_assets'
   gem 'rails_layout'
   gem 'yard'
+  gem 'capistrano'
+  gem 'capistrano-rails'
+  gem 'capistrano-bundler'
 end
 
 group :test do

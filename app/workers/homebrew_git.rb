@@ -1,5 +1,8 @@
 class HomebrewGit
   include Sidekiq::Worker
+  include Sidetiq::Schedulable
+
+  recurrence { daily }
 
   def load_formula(formula, klasses_to_override=[])
     eval formula

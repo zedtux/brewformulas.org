@@ -36,7 +36,16 @@ GEM
       debug_inspector (>= 0.0.1)
     bootstrap-on-rails (0.0.1)
     builder (3.1.4)
-    capybara (2.1.0)
+    capistrano (3.0.1)
+      i18n
+      rake (>= 10.0.0)
+      sshkit (>= 0.0.23)
+    capistrano-bundler (1.0.0)
+      capistrano (>= 3.0.0.pre)
+    capistrano-rails (1.1.0)
+      capistrano (>= 3.0.0)
+      capistrano-bundler (>= 1.0.0)
+    capybara (2.2.0)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
       rack (>= 1.0.0)
@@ -79,6 +88,7 @@ GEM
     hike (1.2.3)
     hub (1.10.6)
     i18n (0.6.5)
+    ice_cube (0.11.1)
     jbuilder (1.5.2)
       activesupport (>= 3.0.0)
       multi_json (>= 1.2.0)
@@ -102,6 +112,9 @@ GEM
     minitest (4.7.5)
     multi_json (1.8.2)
     multi_test (0.0.2)
+    net-scp (1.1.2)
+      net-ssh (>= 2.6.5)
+    net-ssh (2.7.0)
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
     pg (0.17.0)
@@ -123,7 +136,7 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.0.1)
       sprockets-rails (~> 2.0.0)
-    rails_layout (0.5.0)
+    rails_layout (0.5.3)
     railties (4.0.1)
       actionpack (= 4.0.1)
       activesupport (= 4.0.1)
@@ -147,12 +160,16 @@ GEM
       rspec-mocks (~> 2.14.0)
     shoulda-matchers (2.4.0)
       activesupport (>= 3.0.0)
-    sidekiq (2.16.1)
+    sidekiq (2.15.2)
       celluloid (>= 0.15.2)
       connection_pool (>= 1.0.0)
       json
       redis (>= 3.0.4)
       redis-namespace (>= 1.3.1)
+    sidetiq (0.4.3)
+      celluloid (>= 0.14.1)
+      ice_cube (~> 0.11.0)
+      sidekiq (~> 2.15.0)
     sinatra (1.4.4)
       rack (~> 1.4)
       rack-protection (~> 1.4)
@@ -174,7 +191,13 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (~> 2.8)
+    sshkit (1.1.0)
+      net-scp
+      net-ssh
+      term-ansicolor
     temple (0.6.7)
+    term-ansicolor (1.2.2)
+      tins (~> 0.8)
     therubyracer (0.12.0)
       libv8 (~> 3.16.14.0)
       ref
@@ -183,6 +206,7 @@ GEM
       atomic
     tilt (1.4.1)
     timers (1.1.0)
+    tins (0.13.1)
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
@@ -204,6 +228,9 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootstrap-on-rails
+  capistrano
+  capistrano-bundler
+  capistrano-rails
   capybara
   cucumber-rails
   database_cleaner (= 1.0.1)
@@ -223,6 +250,7 @@ DEPENDENCIES
   rspec-rails
   shoulda-matchers
   sidekiq
+  sidetiq (~> 0.4.3)
   sinatra (>= 1.3.0)
   slim-rails
   therubyracer
