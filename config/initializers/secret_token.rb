@@ -9,4 +9,6 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-BrewformulasOrg::Application.config.secret_key_base = '552573ba7d00afb0b67dad7532bb78b7492e02f1573011c15fd4f5b979ec266932c6b13b42c146eec993284a1124eb288334b58d8362f9b8a5ec47ac5b0d2e63'
+BrewformulasOrg::Application.config.secret_key_base = AppConfig.secret_key_base rescue "552573ba7d00afb0b67dad7532bb78b7492e02f1573011c15fd4f5b979ec266932c6b13b42c146eec993284a1124eb288334b58d8362f9b8a5ec47ac5b0d2e63"
+
+# In development, test and cucumber environment use the old secret_key_base

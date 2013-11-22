@@ -99,7 +99,7 @@ namespace :brewformulas do
       within release_path do
         execute :rm, "-rf #{release_path}/log"
         execute :ln, "-nfs #{shared_path}/log #{release_path}"
-        execute :ln, "-nfs #{shared_path}/sidekiq.yml #{release_path}/config/sidekiq.appconfig.yml"
+        execute :ln, "-nfs #{shared_path}/prod_app_config.yml #{release_path}/config/production.appconfig.yml"
         execute :ln, "-nfs #{shared_path}/database.yml #{release_path}/config/database.yml"
       end
     end
