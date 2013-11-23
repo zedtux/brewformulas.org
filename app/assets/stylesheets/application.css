@@ -12,8 +12,8 @@ body {
   padding-top: 70px;
 }
 
-form.navbar-form > button.btn {
-  margin-left: 5px;
+form.navbar-form * {
+  padding-right: 10px;
 }
 
 h2 > small {
