@@ -1,0 +1,18 @@
+postgresql: &postgresql
+  adapter: postgresql
+  username: postgres
+  password:
+  database: brewformulas_org
+  min_messages: ERROR
+
+defaults: &defaults
+  pool: 5
+  timeout: 5000
+  host: localhost
+  <<: *<%= ENV['DB'] || "postgresql" %>
+
+test:
+  <<: *defaults
+
+cucumber:
+  <<: *defaults

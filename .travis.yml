@@ -7,4 +7,5 @@ env:
   - DB=postgresql
 
 before_script:
+  - cp config/database.travis.yml config/database.yml
   - psql -c 'create database brewformulas_org_test' -U postgres
