@@ -7,6 +7,7 @@ describe Homebrew::Formula do
     it { should have_db_column(:version).of_type(:string) }
     it { should have_db_column(:homepage).of_type(:string) }
     it { should have_db_column(:description).of_type(:text) }
+    it { should have_db_column(:touched_on).of_type(:date) }
   end
 
   describe "Validations" do

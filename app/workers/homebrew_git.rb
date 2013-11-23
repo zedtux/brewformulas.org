@@ -82,6 +82,8 @@ class HomebrewGit
         value = value.keys.first if value.is_a?(Hash)
         homebrew_formula.send "#{column.to_s}=", value
       end
+
+      homebrew_formula.touch
       homebrew_formula.save!
     end
   end

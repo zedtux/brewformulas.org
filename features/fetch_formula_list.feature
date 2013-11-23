@@ -40,3 +40,12 @@ Feature: Fetch formula list
     And the Github homebrew repository has a new formula
     When the background task to get or update the formulae is executed
     Then a new formula should be available in the database
+
+  Scenario: Update existing repository with deleted formula
+    Given it is currently yesterday
+    And some formulas exist
+    And the Github homebrew repository has been cloned
+    And the Github homebrew repository has an deleted formula
+    Given I jump in our Delorean and return to the present
+    When the background task to get or update the formulae is executed
+    Then a formula should be flagged as deleted in the database

@@ -53,6 +53,7 @@ GEM
       xpath (~> 2.0)
     celluloid (0.15.2)
       timers (~> 1.1.0)
+    chronic (0.10.2)
     coderay (1.1.0)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
@@ -206,6 +207,7 @@ GEM
     thread_safe (0.1.3)
       atomic
     tilt (1.4.1)
+    timecop (0.6.3)
     timers (1.1.0)
     tins (0.13.1)
     treetop (1.4.15)
@@ -233,6 +235,7 @@ DEPENDENCIES
   capistrano-bundler
   capistrano-rails
   capybara
+  chronic
   cucumber-rails
   database_cleaner (= 1.0.1)
   email_spec
@@ -256,6 +259,7 @@ DEPENDENCIES
   sinatra (>= 1.3.0)
   slim-rails
   therubyracer
+  timecop
   turbolinks
   uglifier (>= 1.3.0)
   yard

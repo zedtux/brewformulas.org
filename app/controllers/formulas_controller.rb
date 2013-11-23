@@ -1,7 +1,7 @@
 class FormulasController < ApplicationController
 
   def index
-    @formulas = Homebrew::Formula.order(:name).load
+    @formulas = Homebrew::Formula.where("touched_on = ?", Date.today).order(:name).load
   end
 
 end

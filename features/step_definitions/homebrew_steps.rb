@@ -31,3 +31,7 @@ Then /^a formula should be updated$/ do
     formula.created_at != formula.updated_at
   end.should be_present, "Expected to have a formula with a different date of update than creation but didn't"
 end
+
+Then /^a formula should be flagged as deleted in the database$/ do
+  Homebrew::Formula.where("touched_on < ?", Date.today).count.should == 1
+end
