@@ -105,16 +105,5 @@ namespace :brewformulas do
       end
     end
   end
-
-  desc "Start schedule jobs for sidekiq"
-  task :start_jobs do
-    on roles(:all) do
-      rake = fetch(:rake, "rake")
-      rails_env = fetch(:rails_env, "production")
-      execute "cd '#{current_path}' && #{rake} brewformulas:sidekiq:start RAILS_ENV=#{rails_env}"
-    end
-  end
 end
 after "bundler:install", "brewformulas:symlink"
-after "deploy:start", "brewformulas:start_jobs"
-after "deploy:restart", "brewformulas:start_jobs"
