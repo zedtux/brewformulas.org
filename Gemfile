@@ -38,6 +38,6 @@ group :test do
   gem 'launchy'
   gem 'rspec-rails'
   gem 'shoulda-matchers'
-  gem 'cucumber-timecop'
+  gem 'cucumber-timecop', :require => false
   gem 'rake'
 end
