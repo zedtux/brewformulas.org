@@ -79,3 +79,6 @@ pickle-email-*.html
 
 # Ignore Yard
 .yardoc
+
+# Keep newrelic license key secret =)
+config/newrelic.yml
