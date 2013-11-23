@@ -10,3 +10,13 @@ Given /^no ([^"]+) exist(?: in ([^"]+))?$/ do |model_name, namespace|
   ActiveRecord::Base.connection.reset_pk_sequence!(model.table_name)
   ActiveRecord::Base.connection.execute("REINDEX TABLE #{model.table_name}")
 end
+
+Given /^following (.+s) exist:$/ do |item, table|
+  table.hashes.each do |hash|
+    step "following #{item.singularize} exists:", table(hash.to_a)
+  end
+end
+
+Then /^show me the page$/ do
+  save_and_open_page
+end

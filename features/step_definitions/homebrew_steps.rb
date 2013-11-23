@@ -6,6 +6,11 @@ Given /^some formulas exist$/ do
   @homebrew_formula_count = Homebrew::Formula.count
 end
 
+Given /^following Homebrew formula exists:$/ do |formula|
+  formula = formula.rows_hash
+  Homebrew::Formula.create!(formula)
+end
+
 Then /^there should be some formulas in the database$/ do
   Homebrew::Formula.exists?.should be_true, "Expected to have formula in the database but didn't."
 end

@@ -27,20 +27,19 @@ html lang="en"
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.navbar-brand href="#" Brew Formulas
+          a.navbar-brand href="#{root_url}" Brew Formulas
         .navbar-collapse.collapse
           ul.nav.navbar-nav
-            li.active
-              a href="#" Home
             li
               a href="http://brew.sh" target="_blank" Homebrew project
             li
               a href="https://github.com/zedtux/brewformulas.org" target="_blank" Brewformulas.org on Github
-          form.navbar-form.navbar-right
-            label for="formula_name_or_keyword" Formula
+          = form_for :search, method: :get, html: {class: "navbar-form navbar-right"} do |f|
+            = f.label :name_or_keyword, "Formula"
             .form-group
-              input.form-control id="formula_name_or_keyword" placeholder="Name or keyword"
-            button.btn.btn-success type="submit" Search
+              = f.text_field :name_or_keyword, class: "form-control", placeholder: "Name or keyword",
+                value: params[:search] && params[:search][:name_or_keyword] || ""
+            = f.submit "Search", class: "btn btn-success"
     .container
       .jumbotron
         h1 Homebrew formulas index
