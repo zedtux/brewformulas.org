@@ -101,6 +101,7 @@ namespace :brewformulas do
         execute :ln, "-nfs #{shared_path}/log #{release_path}"
         execute :ln, "-nfs #{shared_path}/prod_app_config.yml #{release_path}/config/production.appconfig.yml"
         execute :ln, "-nfs #{shared_path}/database.yml #{release_path}/config/database.yml"
+        execute :ln, "-nfs #{shared_path}/newrelic.yml #{release_path}/config/newrelic.yml"
       end
     end
   end
