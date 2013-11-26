@@ -16,6 +16,11 @@ form.navbar-form * {
   padding-right: 10px;
 }
 
-h2 > small {
+h2 > small,
+h4 > small {
   margin-left: 10px;
+}
+
+input#search_term {
+  width: 200px;
 }

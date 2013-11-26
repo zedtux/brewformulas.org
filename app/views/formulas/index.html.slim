@@ -8,5 +8,7 @@ h2
   .list-group
     - @formulas.each do |formula|
       a.list-group-item href="#"
-        h4.list-group-item-heading= formula.name
+        h4.list-group-item-heading
+          = formula.name
+          small= formula.filename
         p.list-group-item-text= formula.description

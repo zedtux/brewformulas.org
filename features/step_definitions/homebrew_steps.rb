@@ -1,7 +1,7 @@
 Given /^some formulas exist$/ do
-  Homebrew::Formula.create!(name: "A2ps", homepage: "http://www.gnu.org/software/a2ps/")
+  Homebrew::Formula.create!(filename: "a2ps", name: "A2ps", homepage: "http://www.gnu.org/software/a2ps/")
   HomebrewFormula.new_formula(name: "A2ps", homepage: "http://www.gnu.org/software/a2ps/")
-  Homebrew::Formula.create!(name: "A52dec", homepage: "http://liba52.sourceforge.net/")
+  Homebrew::Formula.create!(filename: "a52dec", name: "A52dec", homepage: "http://liba52.sourceforge.net/")
   HomebrewFormula.new_formula(name: "A52dec", homepage: "http://liba52.sourceforge.net/")
   @homebrew_formula_count = Homebrew::Formula.count
 end

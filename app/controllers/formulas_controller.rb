@@ -7,8 +7,8 @@ class FormulasController < ApplicationController
     @formulas = @formulas.order(:name)
 
     # Search box
-    if params[:search] && params[:search][:name_or_keyword].present?
-      @formulas = @formulas.where("name iLIKE ?", "%#{params[:search][:name_or_keyword]}%")
+    if params[:search] && params[:search][:term].present?
+      @formulas = @formulas.where("filename iLIKE ? OR name iLIKE ?", "%#{params[:search][:term]}%", "%#{params[:search][:term]}%")
     end
   end
 

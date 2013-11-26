@@ -73,9 +73,15 @@ class HomebrewGit
       # Now access the formula attributes like a normal Ruby class
       klass = formula_class_name.constantize
 
+      # Get filename without extension
+      formula_filename = File.basename(formula_path, ".rb")
+
       # Look for an existing formula
-      homebrew_formula = Homebrew::Formula.where(name: klass.name.demodulize).first
-      homebrew_formula = Homebrew::Formula.create!(name: klass.name.demodulize) unless homebrew_formula
+      homebrew_formula = Homebrew::Formula.where(filename: formula_filename).first
+      homebrew_formula = Homebrew::Formula.new(filename: formula_filename) unless homebrew_formula
+
+      # Save the display name
+      homebrew_formula.name = klass.name.demodulize
 
       [:version, :homepage].each do |column|
         value = klass.try(column)

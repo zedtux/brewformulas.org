@@ -13,7 +13,8 @@ module Homebrew
     before_create :touch
 
     # @nodoc ~~~ validations ~~~
-    validates :name, presence: true, uniqueness: true
+    validates :filename, presence: true, uniqueness: true
+    validates :name, presence: true
 
     # @nodoc ~~~ custom class methods ~~~
 

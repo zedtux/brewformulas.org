@@ -28,7 +28,7 @@ Given /^the Github homebrew repository has an deleted formula$/ do
   # Create a new formula in the DB without adding it to the HomebrewFormula collection
   # When HomebrewFormula will create the formulas, the following forumla will not been
   # found and then flagged as deleted
-  Homebrew::Formula.create!(name: "Arm")
+  Homebrew::Formula.create!(filename: "arm", name: "Arm")
 end
 
 Given /^the Github homebrew repository has a formula having multiple formula classes$/ do

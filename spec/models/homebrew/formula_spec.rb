@@ -8,11 +8,17 @@ describe Homebrew::Formula do
     it { should have_db_column(:homepage).of_type(:string) }
     it { should have_db_column(:description).of_type(:text) }
     it { should have_db_column(:touched_on).of_type(:date) }
+    it { should have_db_column(:filename).of_type(:string).with_options(null: false) }
+    it { should have_db_index(:filename) }
   end
 
   describe "Validations" do
+    it { should validate_presence_of(:filename) }
+    it "should validate uniqueness of the filename" do
+      Homebrew::Formula.create!(filename: "test", name: "Test")
+      should validate_uniqueness_of(:filename)
+    end
     it { should validate_presence_of(:name) }
-    it { should validate_uniqueness_of(:name) }
   end
 
 end

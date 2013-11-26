@@ -6,11 +6,11 @@ Feature: Search formula
 
   Background:
     Given following Homebrew formulas exist:
-      | name   |
-      | A2ps   |
-      | A52dec |
-      | Bbcp   |
-      | Zzuf   |
+      | filename | name   |
+      | a2ps     | A2ps   |
+      | a52dec   | A52dec |
+      | bb-cp    | Bbcp   |
+      | zzuf     | Zzuf   |
 
   Scenario: Search a formula by its name without a result
     When I go to brewformulas.org
@@ -21,3 +21,8 @@ Feature: Search formula
     When I go to brewformulas.org
     And I search a formula with "2"
     Then I should see the A2ps and A52dec Homebrew formulas
+
+  Scenario: Search a formula by its filename with a result
+    When I go to brewformulas.org
+    And I search a formula with "bb-cp"
+    Then I should see the Bbcp Homebrew formula

@@ -35,10 +35,10 @@ html lang="en"
             li
               a href="https://github.com/zedtux/brewformulas.org" target="_blank" Brewformulas.org on Github
           = form_for :search, method: :get, html: {class: "navbar-form navbar-right"} do |f|
-            = f.label :name_or_keyword, "Formula"
+            = f.label :term, "Formula"
             .form-group
-              = f.text_field :name_or_keyword, class: "form-control", placeholder: "Name or keyword",
-                value: params[:search] && params[:search][:name_or_keyword] || ""
+              = f.text_field :term, class: "form-control", placeholder: "Filename, name or keyword",
+                value: params[:search] && params[:search][:term] || ""
             = f.submit "Search", class: "btn btn-success"
     .container
       .jumbotron
