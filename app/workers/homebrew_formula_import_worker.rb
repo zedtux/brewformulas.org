@@ -36,7 +36,6 @@ class HomebrewFormulaImportWorker
 
     # Save the display name
     homebrew_formula.name = klass.name.demodulize
-    homebrew_formula.description =~ /(^.*BIND\s(?:is an?|are).*\.$)/i
 
     [:version, :homepage].each do |column|
       value = klass.try(column)
