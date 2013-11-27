@@ -52,7 +52,7 @@ Given /^the Github homebrew repository doesn't have update$/ do
 end
 
 When /^the background task to get or update the formulae is executed$/ do
-  HomebrewGit.new.perform
+  HomebrewFormulaImportWorker.new.perform
 end
 
 Then /^the Github homebrew repository should be cloned$/ do
