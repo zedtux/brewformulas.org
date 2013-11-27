@@ -14,4 +14,5 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require universal_analytics
+//= require bootstrap/tab
 //= require_tree .

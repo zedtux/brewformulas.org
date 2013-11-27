@@ -12,4 +12,7 @@ class FormulasController < ApplicationController
     end
   end
 
+  def show
+    @formula = Homebrew::Formula.where(name: params[:id]).load.first
+  end
 end

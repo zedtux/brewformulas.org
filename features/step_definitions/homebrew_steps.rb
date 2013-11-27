@@ -11,6 +11,10 @@ Given /^following Homebrew formula exists:$/ do |formula|
   Homebrew::Formula.create!(formula)
 end
 
+When /^I click the formula "(.*?)"$/ do |formula|
+  click_on formula
+end
+
 Then /^there should be some formulas in the database$/ do
   Homebrew::Formula.exists?.should be_true, "Expected to have formula in the database but didn't."
 end

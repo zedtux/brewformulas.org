@@ -7,7 +7,7 @@ h2
 - else
   .list-group
     - @formulas.each do |formula|
-      a.list-group-item href="#"
+      a.list-group-item href="#{formula_path(formula.name)}"
         h4.list-group-item-heading
           = formula.name
           small= formula.filename
