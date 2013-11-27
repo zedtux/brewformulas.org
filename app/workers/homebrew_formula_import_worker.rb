@@ -23,23 +23,22 @@ class HomebrewFormulaImportWorker
     end
   end
 
-  def git(action)
-    case action
-    when :open
-      Git.open(
-        File.join(
-          AppConfig.homebrew.git_repository.location,
-          AppConfig.homebrew.git_repository.name
-        )
+  def open_git_repository
+    Git.open(
+      File.join(
+        AppConfig.homebrew.git_repository.location,
+        AppConfig.homebrew.git_repository.name
       )
-    when :clone
-      Git.clone(
-        AppConfig.homebrew.git_repository.url,
-        AppConfig.homebrew.git_repository.name,
-        path: AppConfig.homebrew.git_repository.location,
-        depth: 1 # Without the history
-      )
-    end
+    )
+  end
+
+  def clone_git_repository
+    Git.clone(
+      AppConfig.homebrew.git_repository.url,
+      AppConfig.homebrew.git_repository.name,
+      path: AppConfig.homebrew.git_repository.location,
+      depth: 1 # Without the history
+    )
   end
 
   #
@@ -51,12 +50,12 @@ class HomebrewFormulaImportWorker
   #
   def get_up_to_date_git_repository
     git = if File.exists?(AppConfig.homebrew.git_repository.location)
-      self.git(:open)
+      self.open_git_repository
     else
       # Create the location path
       FileUtils.mkdir_p(AppConfig.homebrew.git_repository.location)
       # Clone the Git repo to the location path
-      self.git(:clone)
+      self.clone_git_repository
     end
 
     # Update the code to the HEAD version
