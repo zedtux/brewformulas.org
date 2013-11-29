@@ -1,0 +1,312 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir="ltr">
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>The ACPI Component Architecture Project</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://acpica.org/blogapi/rsd" />
+<link rel="shortcut icon" href="/sites/all/themes/acpica/favicon.ico" type="image/x-icon" />
+<link rel="alternate" type="application/rss+xml" title="Site Feed" href="/rss.xml" />
+<link rel="alternate" type="application/rss+xml" title="Blog Feed" href="/blogs/feed" />
+  <link type="text/css" rel="stylesheet" media="all" href="/sites/all/modules/codefilter/codefilter.css?b" />
+<link type="text/css" rel="stylesheet" media="all" href="/modules/book/book.css?b" />
+<link type="text/css" rel="stylesheet" media="all" href="/modules/node/node.css?b" />
+<link type="text/css" rel="stylesheet" media="all" href="/modules/system/defaults.css?b" />
+<link type="text/css" rel="stylesheet" media="all" href="/modules/system/system.css?b" />
+<link type="text/css" rel="stylesheet" media="all" href="/modules/system/system-menus.css?b" />
+<link type="text/css" rel="stylesheet" media="all" href="/modules/user/user.css?b" />
+<link type="text/css" rel="stylesheet" media="all" href="/sites/all/modules/cck/theme/content-module.css?b" />
+<link type="text/css" rel="stylesheet" media="all" href="/sites/all/modules/date/date.css?b" />
+<link type="text/css" rel="stylesheet" media="all" href="/sites/all/modules/date/date_popup/themes/datepicker.css?b" />
+<link type="text/css" rel="stylesheet" media="all" href="/sites/all/modules/date/date_popup/themes/jquery.timeentry.css?b" />
+<link type="text/css" rel="stylesheet" media="all" href="/sites/all/modules/filefield/filefield.css?b" />
+<link type="text/css" rel="stylesheet" media="all" href="/sites/all/modules/lightbox2/css/lightbox.css?b" />
+<link type="text/css" rel="stylesheet" media="all" href="/sites/all/modules/logintoboggan/logintoboggan.css?b" />
+<link type="text/css" rel="stylesheet" media="all" href="/misc/farbtastic/farbtastic.css?b" />
+<link type="text/css" rel="stylesheet" media="all" href="/sites/all/modules/calendar/calendar.css?b" />
+<link type="text/css" rel="stylesheet" media="all" href="/sites/all/modules/extlink/extlink.css?b" />
+<link type="text/css" rel="stylesheet" media="all" href="/sites/all/modules/cck/modules/fieldgroup/fieldgroup.css?b" />
+<link type="text/css" rel="stylesheet" media="all" href="/sites/all/modules/views/css/views.css?b" />
+<link type="text/css" rel="stylesheet" media="all" href="/sites/all/themes/acpica/css/layout.css?b" />
+<link type="text/css" rel="stylesheet" media="all" href="/sites/all/themes/acpica/css/html-elements.css?b" />
+<link type="text/css" rel="stylesheet" media="all" href="/sites/all/themes/acpica/css/tabs.css?b" />
+<link type="text/css" rel="stylesheet" media="all" href="/sites/all/themes/acpica/css/master.css?b" />
+<link type="text/css" rel="stylesheet" media="all" href="/sites/all/themes/acpica/css/forms.css?b" />
+<link type="text/css" rel="stylesheet" media="all" href="/sites/all/themes/acpica/css/imce-content.css?b" />
+<link type="text/css" rel="stylesheet" media="all" href="/sites/all/themes/acpica/css/acpica.css?b" />
+<link type="text/css" rel="stylesheet" media="print" href="/sites/all/themes/acpica/css/print.css?b" />
+<!--[if IE]>
+<link type="text/css" rel="stylesheet" media="all" href="/sites/all/themes/acpica/css/ie.css?b" />
+<![endif]-->
+  <script type="text/javascript" src="/sites/acpica/files/js/js_a33c24afa52896c759e65cc6714947fb.js"></script>
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+jQuery.extend(Drupal.settings, { "basePath": "/", "googleanalytics": { "trackOutbound": 1, "trackMailto": 1, "trackDownload": 1, "trackDownloadExtensions": "7z|aac|arc|arj|asf|asx|avi|bin|csv|doc|exe|flv|gif|gz|gzip|hqx|jar|jpe?g|js|mp(2|3|4|e?g)|mov(ie)?|msi|msp|pdf|phps|png|ppt|qtm?|ra(m|r)?|sea|sit|tar|tgz|torrent|txt|wav|wma|wmv|wpd|xls|xml|z|zip" }, "lightbox2": { "rtl": 0, "file_path": "/(\\w\\w/)sites/acpica/files", "default_image": "/sites/all/modules/lightbox2/images/brokenimage.jpg", "border_size": 10, "font_color": "000", "box_color": "fff", "top_position": "", "overlay_opacity": "0.8", "overlay_color": "000", "disable_close_click": true, "resize_sequence": 0, "resize_speed": 400, "fade_in_speed": 400, "slide_down_speed": 600, "use_alt_layout": false, "disable_resize": false, "disable_zoom": false, "force_show_nav": false, "show_caption": true, "loop_items": false, "node_link_text": "View Image Details", "node_link_target": false, "image_count": "Image !current of !total", "video_count": "Video !current of !total", "page_count": "Page !current of !total", "lite_press_x_close": "press \x3ca href=\"#\" onclick=\"hideLightbox(); return FALSE;\"\x3e\x3ckbd\x3ex\x3c/kbd\x3e\x3c/a\x3e to close", "download_link_text": "", "enable_login": false, "enable_contact": false, "keys_close": "c x 27", "keys_previous": "p 37", "keys_next": "n 39", "keys_zoom": "z", "keys_play_pause": "32", "display_image_size": "original", "image_node_sizes": "()", "trigger_lightbox_classes": "", "trigger_lightbox_group_classes": "", "trigger_slideshow_classes": "", "trigger_lightframe_classes": "", "trigger_lightframe_group_classes": "", "custom_class_handler": 0, "custom_trigger_classes": "", "disable_for_gallery_lists": true, "disable_for_acidfree_gallery_lists": true, "enable_acidfree_videos": true, "slideshow_interval": 5000, "slideshow_automatic_start": true, "slideshow_automatic_exit": true, "show_play_pause": true, "pause_on_next_click": false, "pause_on_previous_click": true, "loop_slides": false, "iframe_width": 600, "iframe_height": 400, "iframe_border": 1, "enable_video": false }, "extlink": { "extTarget": 0, "extClass": "ext", "extSubdomains": 1, "extExclude": "", "extInclude": "", "extCssExclude": "", "extCssExplicit": "", "extAlert": 0, "extAlertText": "This link will take you to an external web site. We are not responsible for their content.", "mailtoClass": "mailto" } });
+//--><!]]>
+</script>
+  <script type="text/javascript"> </script>
+</head>
+
+<body class="front not-logged-in no-sidebars ">
+
+  <div id="page"><div id="page-inner">
+
+    <a name="top" id="navigation-top"></a>
+    <div id="skip-to-nav"><a href="#navigation">Skip to Navigation</a></div>
+
+    <div id="header"><div id="header-inner" class="clear-block">
+
+              <div id="logo-title">
+
+                      <div id="search-box"><div id="search-box-inner" class="clear-block">
+            	             
+							<form action="/"  accept-charset="UTF-8" method="post" id="search-theme-form">
+<div><div id="search" class="container-inline clear-block">
+  <div class="form-item" id="edit-search-theme-form-1-wrapper">
+ <label for="edit-search-theme-form-1">Search this site: </label>
+ <input type="text" maxlength="128" name="search_theme_form" id="edit-search-theme-form-1" size="15" value="" title="Enter the terms you wish to search for." class="form-text" />
+</div>
+<input type="submit" name="op" id="edit-submit" value="Search"  class="form-submit" />
+<input type="hidden" name="form_build_id" id="form-c4928f784d7bdc720dacf5cfd6fdd87f" value="form-c4928f784d7bdc720dacf5cfd6fdd87f"  />
+<input type="hidden" name="form_id" id="edit-search-theme-form" value="search_theme_form"  />
+    </div>
+
+</div></form>
+              
+                        		
+            </div></div> <!-- /#search-box -->
+          
+                      <div id='site-name'>
+              <a href="/" title="Home" rel="home">
+                <strong>The ACPI Component Architecture Project</strong>
+              </a>
+            </div>
+                
+        </div> <!-- /#logo-title -->
+      
+      
+    </div></div> <!-- /#header-inner, /#header -->
+
+    <div id="main"><div id="main-inner" class="clear-block with-navbar">
+       
+      <div id="content"><div id="content-inner">
+
+			        <div id="content-top" class="region region-content_top">
+          <div id="actions"><div id="actions-inner" class="region region-actions">
+                        <div id="mission"><p>The ACPI Component Architecture (ACPICA) project provides an operating system (OS)-independent reference implementation of the Advanced Configuration and Power Interface Specification (ACPI). It can be easily adapted to execute under any host OS. The ACPICA code is meant to be directly integrated into the host OS as a kernel-resident subsystem. Hosting the ACPICA subsystem requires no changes to the core ACPICA code. Instead, a small OS-specific interface layer is written specifically for each host OS in order to interface the ACPICA code to the native OS services.</p><br>
+<p>The complexity of the ACPI specification leads to a lengthy and difficult implementation in operating system software. The primary purpose of the ACPI Component Architecture is to simplify ACPI implementations for operating system vendors (OSVs) by providing major portions of an ACPI implementation in OS-independent ACPI modules that can be easily integrated into any OS.</p></div>
+            <div class="clear-block"></div>
+          </div></div> <!-- /#actions-inner, /#actions -->
+        </div> <!-- /#content-top -->
+      
+              <div id="home-left"><div id="home-left-inner" class="region region-right">
+							<div class="region region-home-left">
+  <div id="block-views-blogs-block_1" class="block block-views region-odd even region-count-1 count-2"><div class="block-inner">
+
+      <h2 class="title">Recent News</h2>
+  
+  <div class="content clear-block">
+    <div class="view view-blogs view-id-blogs view-display-id-block_1 view-dom-id-2">
+    
+  
+  
+      <div class="view-content">
+      <div class="item-list">
+    <ul>
+          <li class="views-row views-row-1 views-row-odd views-row-first">  
+  <span class="views-field-title">
+                <span class="field-content">AcpiExec supports full history and line-editing on unix systems, in version 20130927.</span>
+  </span>
+       -   
+  <span class="views-field-created">
+                <span class="field-content">27 September, 2013 - 08:55</span>
+  </span>
+</li>
+          <li class="views-row views-row-2 views-row-even">  
+  <span class="views-field-title">
+                <span class="field-content">Document &quot;Runtime BIOS Fixups for ACPI Tables&quot; is posted</span>
+  </span>
+       -   
+  <span class="views-field-created">
+                <span class="field-content">25 July, 2013 - 08:08</span>
+  </span>
+</li>
+          <li class="views-row views-row-3 views-row-odd">  
+  <span class="views-field-title">
+                <span class="field-content">AcpiDump is now supported on FreeBSD, Linux, and Windows in version 20130626.</span>
+  </span>
+       -   
+  <span class="views-field-created">
+                <span class="field-content">26 June, 2013 - 10:56</span>
+  </span>
+</li>
+          <li class="views-row views-row-4 views-row-even">  
+  <span class="views-field-title">
+                <span class="field-content">A portable AcpiDump utility has been released in version 20130517.</span>
+  </span>
+       -   
+  <span class="views-field-created">
+                <span class="field-content">17 May, 2013 - 08:30</span>
+  </span>
+</li>
+          <li class="views-row views-row-5 views-row-odd">  
+  <span class="views-field-title">
+                <span class="field-content">The entire ACPICA website has been reimplemented and upgraded</span>
+  </span>
+       -   
+  <span class="views-field-created">
+                <span class="field-content">4 April, 2013 - 07:11</span>
+  </span>
+</li>
+          <li class="views-row views-row-6 views-row-even">  
+  <span class="views-field-title">
+                <span class="field-content">The ACPICA bugzilla has been moved to https://bugs.acpica.org.</span>
+  </span>
+       -   
+  <span class="views-field-created">
+                <span class="field-content">4 April, 2013 - 06:49</span>
+  </span>
+</li>
+          <li class="views-row views-row-7 views-row-odd">  
+  <span class="views-field-title">
+                <span class="field-content">The ACPICA git source repository has been moved to: github.com/acpica/acpica.git</span>
+  </span>
+       -   
+  <span class="views-field-created">
+                <span class="field-content">7 March, 2013 - 07:59</span>
+  </span>
+</li>
+          <li class="views-row views-row-8 views-row-even">  
+  <span class="views-field-title">
+                <span class="field-content">The entire acpica.org website was moved to https (including the bugzilla).</span>
+  </span>
+       -   
+  <span class="views-field-created">
+                <span class="field-content">10 May, 2012 - 07:58</span>
+  </span>
+</li>
+          <li class="views-row views-row-9 views-row-odd">  
+  <span class="views-field-title">
+                <span class="field-content">Initial implementation of the iASL preprocessor released in version 20120320.</span>
+  </span>
+       -   
+  <span class="views-field-created">
+                <span class="field-content">20 March, 2012 - 07:58</span>
+  </span>
+</li>
+          <li class="views-row views-row-10 views-row-even views-row-last">  
+  <span class="views-field-title">
+                <span class="field-content">Full support for ACPI 5.0 in ACPICA is released (version 20111123).</span>
+  </span>
+       -   
+  <span class="views-field-created">
+                <span class="field-content">23 November, 2011 - 07:57</span>
+  </span>
+</li>
+      </ul>
+</div>    </div>
+  
+  
+  
+      
+<div class="more-link">
+  <a href="/blogs/recent">
+    more  </a>
+</div>
+  
+  
+  
+</div>   </div>
+
+	<div class="block-bottom"></div>
+  
+</div></div> <!-- /block-inner, /block -->
+</div> <!-- /.region -->
+        </div></div> <!-- /#home-left-inner, /#home-left -->
+            
+      
+      </div></div> <!-- /#content-inner, /#content -->
+
+              <div id="navbar"><div id="navbar-inner" class="region region-navbar">
+
+          <a name="navigation" id="navigation"></a>
+
+                      <div id="primary">
+              <ul class="links"><li class="menu-581 active-trail first active"><a href="/" title="" class="active">Home</a></li>
+<li class="menu-523"><a href="/about" title="About ACPICA">About</a></li>
+<li class="menu-1612"><a href="/documentation" title="ACPICA Documentation">Documentation</a></li>
+<li class="menu-579"><a href="/downloads" title="Downloads">Downloads</a></li>
+<li class="menu-2268"><a href="/source" title="Source">Source</a></li>
+<li class="menu-2339 last"><a href="/community" title="">Community</a></li>
+</ul>            </div> <!-- /#primary -->
+          
+          
+        </div></div> <!-- /#navbar-inner, /#navbar -->
+            
+
+    </div></div> <!-- /#main-inner, /#main -->
+
+    <div id="footer"><div id="footer-inner" class="clear-block region region-footer">
+
+      <div class="back-to-top">
+        <a href=/node#top><strong>back to top</strong></a>      </div>
+
+      <div class="region region-footer">
+  <div id="block-menu_block-2" class="block block-menu_block region-odd odd region-count-1 count-3"><div class="block-inner">
+
+  
+  <div class="content clear-block">
+    <div class="menu-block-2 menu-name-primary-links parent-mlid-0 menu-level-1">
+  <ul class="menu"><li class="leaf first menu-mlid-581 active active-trail"><a href="/" title="" class="active-trail active">Home</a></li>
+<li class="leaf menu-mlid-523 has-children"><a href="/about" title="About ACPICA">About</a></li>
+<li class="leaf menu-mlid-1612 has-children"><a href="/documentation" title="ACPICA Documentation">Documentation</a></li>
+<li class="leaf menu-mlid-579 has-children"><a href="/downloads" title="Downloads">Downloads</a></li>
+<li class="leaf menu-mlid-2268"><a href="/source" title="Source">Source</a></li>
+<li class="leaf last menu-mlid-2339"><a href="/community" title="">Community</a></li>
+</ul></div>
+  </div>
+
+	<div class="block-bottom"></div>
+  
+</div></div> <!-- /block-inner, /block -->
+<div id="block-site_tweaks-0" class="block block-site_tweaks region-even even region-count-2 count-4"><div class="block-inner">
+
+  
+  <div class="content clear-block">
+    <ul class="rss"><li class="menu-768 first"><a href="/rss.xml" title="">Site Feed</a></li>
+<li class="menu-767 last"><a href="/blogs/feed" title="">Blog Feed</a></li>
+</ul>  </div>
+
+	<div class="block-bottom"></div>
+  
+</div></div> <!-- /block-inner, /block -->
+<div id="block-menu-menu-footer-menu" class="block block-menu region-odd odd region-count-3 count-5"><div class="block-inner">
+
+  
+  <div class="content clear-block">
+    <ul class="menu"><li class="leaf first"><a href="/contact" title="">Contact</a></li>
+<li class="leaf last"><a href="/user/login" title=""><span class="tab">Login</span></a></li>
+</ul>  </div>
+
+	<div class="block-bottom"></div>
+  
+</div></div> <!-- /block-inner, /block -->
+</div> <!-- /.region -->
+      		
+			<div id="footer-message" class="footer-message">
+      										</div>
+      
+    </div></div> <!-- /#footer-inner, /#footer -->
+
+  </div></div> <!-- /#page-inner, /#page -->
+
+  
+  <script type="text/javascript">
+<!--//--><![CDATA[//><!--
+var _gaq = _gaq || [];_gaq.push(["_setAccount", "UA-8768382-1"]);_gaq.push(['_setCustomVar', 1, "User roles", "anonymous user", 1]);_gaq.push(["_trackPageview"]);(function() {var ga = document.createElement("script");ga.type = "text/javascript";ga.async = true;ga.src = ("https:" == document.location.protocol ? "https://ssl" : "http://www") + ".google-analytics.com/ga.js";var s = document.getElementsByTagName("script")[0];s.parentNode.insertBefore(ga, s);})();
+//--><!]]>
+</script>
+
+</body>
+</html>

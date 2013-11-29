@@ -1,4 +1,5 @@
 class FormulasController < ApplicationController
+  before_filter :current_object, only: [:show, :refresh_description]
 
   def index
     @formula_count = Homebrew::Formula.where("touched_on = ?", Date.today).count
@@ -12,7 +13,18 @@ class FormulasController < ApplicationController
     end
   end
 
-  def show
+  def show; end
+
+  def refresh_description
+    FormulaDescriptionFetchWorker.perform_async(@formula.id)
+    flash[:success] = "Your request has been successfully submitted."
+    redirect_to action: "show", id: @formula.name
+  end
+
+private
+
+  def current_object
     @formula = Homebrew::Formula.where(name: params[:id]).load.first
   end
+
 end

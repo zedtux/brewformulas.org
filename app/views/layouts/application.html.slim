@@ -45,6 +45,11 @@ html lang="en"
         h1 Homebrew formulas index
         p The aim of this website is to provide an easy way to search for an Homebrew formula.
 
+      - flash.each do |type, message|
+        div class="alert alert-dismissable #{bootstrap_class_for(type)}"
+          button type="button" class="close" data-dismiss="alert" aria-hidden="true" &times;
+          = message
+
       .row
         = yield
 

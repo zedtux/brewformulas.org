@@ -8,11 +8,30 @@ end
 
 Given /^following Homebrew formula exists:$/ do |formula|
   formula = formula.rows_hash
+  formula["filename"] = formula["name"] if formula["filename"].blank?
   Homebrew::Formula.create!(formula)
+end
+
+Given /^the (\w+) formula has the description "(.*?)"$/ do |name, description|
+  unless formula = Homebrew::Formula.find_by_name(name)
+    raise "Unable to find an Homebrew::Formula with name \"#{name}\""
+  end
+  formula.update_attribute(:description, description)
+end
+
+Given /^the automatically extracted description for the (\w+) formula is "(.*?)"$/ do |name, description|
+  unless formula = Homebrew::Formula.find_by_name(name)
+    raise "Unable to find an Homebrew::Formula with name \"#{name}\""
+  end
+  formula.update_attributes(description: description, description_automatic: true)
 end
 
 When /^I click the formula "(.*?)"$/ do |formula|
   click_on formula
+end
+
+When /the background task to fetch formula description runs/ do
+  FormulaDescriptionFetchWorker.new.perform(Homebrew::Formula.last.id)
 end
 
 Then /^there should be some formulas in the database$/ do
@@ -43,4 +62,25 @@ end
 
 Then /^a formula should be flagged as deleted in the database$/ do
   Homebrew::Formula.where("touched_on < ?", Date.today).count.should == 1
+end
+
+Then /^the formula (\w+) should have the following description:$/ do |name, description|
+  unless formula = Homebrew::Formula.find_by_name(name)
+    raise "Unable to find an Homebrew::Formula with name \"#{name}\""
+  end
+  formula.description.should == description
+end
+
+Then /^I should see the (\w+) formula description automatically extracted from the homepage$/ do |name|
+  unless formula = Homebrew::Formula.find_by_name(name)
+    raise "Unable to find an Homebrew::Formula with name \"#{name}\""
+  end
+
+  xpath = "//blockquote/p[normalize-space(.)='#{formula.description}']"
+  description_source = "#{name} homepage"
+  xpath << "/../small[normalize-space(.)='Extracted automatically from #{description_source}']"
+  xpath << "/cite[@title='#{formula.homepage}' and normalize-space(.)='#{description_source}']"
+
+  visit formula_path(name)
+  page.should have_xpath(xpath)
 end

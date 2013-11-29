@@ -41,5 +41,9 @@ module Homebrew
       self.touched_on = Date.today
     end
 
+    def has_description?
+      self[:description].present?
+    end
+
   end
 end

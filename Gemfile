@@ -40,4 +40,5 @@ group :test do
   gem 'shoulda-matchers'
   gem 'cucumber-timecop', :require => false
   gem 'rake'
+  gem 'webmock'
 end

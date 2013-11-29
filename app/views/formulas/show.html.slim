@@ -1,0 +1,23 @@
+h1
+  = @formula.name
+  small= @formula.filename
+hr
+
+- if @formula.has_description?
+  blockquote
+    p= @formula.description
+    - if @formula.description_automatic?
+      small
+        | Extracted automatically from
+        '
+        cite title="#{@formula.homepage}" #{@formula.name} homepage
+- else
+  .alert.alert-info
+    | No description available. You can request to update it by
+    '
+    a data-no-turbolink="true" href="#{refresh_description_formula_path(@formula.name)}" clicking this link
+    '.
+
+h4 Homepage
+
+a href="#{@formula.homepage}" target="_blank" #{@formula.homepage}

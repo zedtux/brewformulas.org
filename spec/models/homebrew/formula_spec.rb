@@ -9,6 +9,7 @@ describe Homebrew::Formula do
     it { should have_db_column(:description).of_type(:text) }
     it { should have_db_column(:touched_on).of_type(:date) }
     it { should have_db_column(:filename).of_type(:string).with_options(null: false) }
+    it { should have_db_column(:description_automatic).of_type(:boolean).with_options(default: false) }
     it { should have_db_index(:filename) }
   end
 

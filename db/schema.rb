@@ -11,20 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131126082842) do
+ActiveRecord::Schema.define(version: 20131127215330) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "homebrew_formulas", force: true do |t|
-    t.string   "name",        null: false
+    t.string   "name",                                  null: false
     t.string   "version"
     t.string   "homepage"
     t.text     "description"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.date     "touched_on"
-    t.string   "filename",    null: false
+    t.string   "filename",                              null: false
+    t.boolean  "description_automatic", default: false
   end
 
   add_index "homebrew_formulas", ["filename"], name: "index_homebrew_formulas_on_filename", using: :btree

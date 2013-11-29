@@ -20,3 +20,7 @@ end
 Then /^show me the page$/ do
   save_and_open_page
 end
+
+Then /^I should see "(.*?)"$/ do |something|
+  expect(page).to have_content(something)
+end
