@@ -25,3 +25,7 @@ Feature: Look at a formula
     When I go to brewformulas.org
     And I click the formula "A2ps"
     Then I should see "GNU a2ps is an Any to PostScript filter."
+
+  Scenario: Trying to access a formula which doesn't exists
+    When I go to the formula Rocksmith on brewformulas.org
+    Then I should see the error alert "This formula doesn't exists" on the homepage

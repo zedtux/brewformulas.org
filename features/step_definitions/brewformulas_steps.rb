@@ -2,6 +2,10 @@ When /^I go to brewformulas.org$/ do
   visit root_url
 end
 
+When /^I go to the formula (\w+) on brewformulas.org$/ do |name|
+  visit formula_path(name)
+end
+
 When /^I search a formula with "(.*)"$/ do |name_or_keyword|
   fill_in "Formula", with: name_or_keyword
   click_on "Search"

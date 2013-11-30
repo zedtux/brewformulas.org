@@ -24,3 +24,21 @@ end
 Then /^I should see "(.*?)"$/ do |something|
   expect(page).to have_content(something)
 end
+
+Then /^I should see the (success|error|info)? alert "(.*?)" on the homepage$/ do |type, message|
+  expect(current_url).to eq(root_url)
+
+  type = case
+  when "error"
+    "danger"
+  when "success", "info"
+    type
+  else
+    "info"
+  end
+
+  xpath = ["//div[contains(@class, 'alert') and"]
+  xpath << "contains(@class, 'alert-#{type}') and"
+  xpath << "contains(normalize-space(.),\"#{message}\")]"
+  page.should have_xpath(xpath.join(" "))
+end

@@ -24,7 +24,10 @@ class FormulasController < ApplicationController
 private
 
   def current_object
-    @formula = Homebrew::Formula.where(name: params[:id]).load.first
+    @formula = Homebrew::Formula.find_by!(name: params[:id])
+  rescue ActiveRecord::RecordNotFound
+    flash[:error] = "This formula doesn't exists"
+    redirect_to root_url
   end
 
 end
