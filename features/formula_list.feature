@@ -21,11 +21,6 @@ Feature: Formula list
   Scenario: Listing the formulas at midnight
     Given it is currently midnight
     When I go to brewformulas.org
-    Then I should see some formulas
-
-  Scenario: Listing the formulas 1 hour after midnight
-    Given it is currently 1 hours after midnight
-    When I go to brewformulas.org
     Then I should not see any formula
     Given the Github homebrew repository has been cloned
     When the background task to get or update the formulae is executed

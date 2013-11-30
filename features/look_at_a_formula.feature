@@ -5,7 +5,8 @@ Feature: Look at a formula
   So that I can determine if I need it or not
 
   Background:
-    Given the A2ps formula with homepage "http://a2ps/" exists
+    Given it is currently monday morning
+    And the A2ps formula with homepage "http://a2ps/" exists
 
   Scenario: Having a look to a formula show page without a description
     When I go to brewformulas.org

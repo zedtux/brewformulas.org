@@ -84,7 +84,7 @@ GEM
       cucumber (>= 1.2.0)
       nokogiri (>= 1.5.0)
       rails (>= 3.0.0)
-    cucumber-timecop (0.0.1)
+    cucumber-timecop (0.0.3)
       chronic
       cucumber
       timecop

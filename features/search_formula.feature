@@ -5,7 +5,8 @@ Feature: Search formula
   So that I can find quickly a formula based on its name or keywords
 
   Background:
-    Given following Homebrew formulas exist:
+    Given it is currently monday morning
+    And following Homebrew formulas exist:
       | filename | name   |
       | a2ps     | A2ps   |
       | a52dec   | A52dec |
