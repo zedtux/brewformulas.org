@@ -38,7 +38,7 @@ module Homebrew
     # formula wasn't present from the Homebrew git repo.
     #
     def touch
-      self.touched_on = Date.today
+      self.touched_on = Time.now.utc.to_date
     end
 
     def has_description?

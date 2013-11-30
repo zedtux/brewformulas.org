@@ -42,13 +42,16 @@ Feature: Fetch formula list
     Then a new formula should be available in the database
 
   Scenario: Update existing repository with deleted formula
-    Given it is currently yesterday
+    Given it is currently yesterday 2 hours after midnight
     And some formulas exist
     And the Github homebrew repository has been cloned
     And the Github homebrew repository has an deleted formula
-    Given I jump in our Delorean and return to the present
+    And it is currently midnight
     When the background task to get or update the formulae is executed
     Then a formula should be flagged as deleted in the database
+    When I go to brewformulas.org
+    Then I should see some formulas
+    But I should not see the Arm formula
 
   Scenario: Update existing repository with a formula including a backtick
     Given no formula exist in homebrew

@@ -109,3 +109,7 @@ end
 Then /^I should see some formulas$/ do
   expect(page).to_not have_content("Formula list0 formulas")
 end
+
+Then /^I should not see the (\w+) formula$/ do |name|
+  page.should_not have_xpath("//h4[@class='list-group-item-heading' and normalize-space(.)='#{name}']")
+end
