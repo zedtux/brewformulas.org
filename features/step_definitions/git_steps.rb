@@ -51,6 +51,14 @@ Given /^the Github homebrew repository doesn't have update$/ do
   # Nothing todo yet here.
 end
 
+Given /^the Github homebrew repository has a formula having backticks$/ do
+  HomebrewFormula.new_formula(
+    name: "Lsyncd",
+    homepage: "https://github.com/axkibe/lsyncd",
+    code: "osx_version = `sw_vers -productVersion`.strip"
+  )
+end
+
 When /^the background task to get or update the formulae is executed$/ do
   HomebrewFormulaImportWorker.new.perform
 end

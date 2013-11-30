@@ -49,3 +49,10 @@ Feature: Fetch formula list
     Given I jump in our Delorean and return to the present
     When the background task to get or update the formulae is executed
     Then a formula should be flagged as deleted in the database
+
+  Scenario: Update existing repository with a formula including a backtick
+    Given no formula exist in homebrew
+    And the Github homebrew repository has a formula having backticks
+    And the Github homebrew repository has been cloned
+    When the background task to get or update the formulae is executed
+    Then a new formula should be available in the database

@@ -33,12 +33,22 @@ module HomebrewFormula
     end
   end
 
+  def self.clean!
+    self.formulas = []
+    FileUtils.rm_rf Git::Lib.working_dir
+  end
+
+private
+
   def self.build_formula_class(formula)
     formula_content = ""
     formula_content << "class #{formula[:name].camelize} < Formula\n"
     formula.keys.each do |attribute|
-      next if [:name, :others].include?(attribute)
+      next if [:name, :others, :code].include?(attribute)
       formula_content << "  #{attribute} \"#{formula[attribute.to_sym]}\"\n"
+    end
+    if formula[:code]
+      formula_content << "\n  #{formula[:code]}\n"
     end
     formula_content << "\nend\n"
     formula_content
@@ -73,4 +83,8 @@ module Git
       true
     end
   end
+end
+
+After do
+  HomebrewFormula.clean!
 end

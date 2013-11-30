@@ -51,7 +51,7 @@ end
 Then /^a new formula should be available in the database$/ do
   formula = Homebrew::Formula.select(:created_at, :updated_at).last
   formula.created_at.to_i.should == formula.updated_at.to_i # Comparing date time isn't working
-  expect(Homebrew::Formula.count).to eq(@homebrew_formula_count + 1)
+  expect(Homebrew::Formula.count).to eq(@homebrew_formula_count.to_i + 1)
 end
 
 Then /^a formula should be updated$/ do
