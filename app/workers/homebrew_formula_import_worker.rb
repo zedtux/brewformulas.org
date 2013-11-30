@@ -9,51 +9,39 @@ class HomebrewFormulaImportWorker
   # @param  path [String] path to the formula ruby file
   #
   def create_or_update_formula_from(path)
+
     # Read the Ruby file content
     formula = File.read(path)
 
-    regex = /require\s?(?:'|")formula(?:'|")[\s\w\W]+^class (\w+) < (Formula|AmazonWebServicesFormula|GithubGistFormula|ScriptFileFormula)$/
+    # Extract the formula class name
+    # In the case the formula declare more than one Formula class
+    # use the latest one as the other are dependencies
+    formula_name = formula.scan(/^class\s(\w+)\s<\s(Formula|ScriptFileFormula|AmazonWebServicesFormula|GithubGistFormula)$/).flatten.last
 
-    # Extract the class name
-    formula_class_name = formula.scan(regex).flatten[0]
-    formula_class_name = "Homebrew::#{formula_class_name}"
+    # Regular expression to extract attributes from the formula ruby code
+    regex = /^\s+(homepage|version)\s+(?:'|")(.*)(?:'|")$/
 
-    # Prepend the class with a namespace
-    formula.gsub!(regex, "require 'homebrew/fake_formula'\n\nclass #{formula_class_name} < Homebrew::FakeFormula")
-
-    # Remove lines where there is backticks call
-    # following with a method call.
-    # For example `sw_vers -productVersion`.strip
-    formula.gsub!(/(^.*`.*`\..*$)/, "\n")
+    # Extract the formula attributes shown on brewformulas.org
+    extracted_attributes = formula.scan(regex)
+    formula_attributes = Hash[*extracted_attributes.flatten]
 
     # Get filename without extension
     formula_filename = File.basename(path, ".rb")
 
-    # Eval the formula
-    begin
-      self.send(:load_formula, formula)
-    rescue Exception => error
-      Rails.logger.error "The following error ocurred while importing the formula #{formula_filename}: #{error.message}"
-      return # Don't break the import process
-    end
-
-    # Now access the formula attributes like a normal Ruby class
-    klass = formula_class_name.constantize
-
-    # Look for an existing formula
+    # Find or create the formula
     homebrew_formula = Homebrew::Formula.where(filename: formula_filename).first
     homebrew_formula = Homebrew::Formula.new(filename: formula_filename) unless homebrew_formula
 
-    # Save the display name
-    homebrew_formula.name = klass.name.demodulize
+    # Set or update the display name
+    homebrew_formula.name = formula_name
 
-    [:version, :homepage].each do |column|
-      value = klass.try(column)
-      value = value.keys.first if value.is_a?(Hash)
-      homebrew_formula.send "#{column.to_s}=", value
+    formula_attributes.each_pair do |attribute, value|
+      homebrew_formula.send "#{attribute.to_s}=", value
     end
 
+    # Touch the formula in order to keep showing it on the homepage
     homebrew_formula.touch
+
     unless homebrew_formula.save
       Rails.logger.error "Import process wasn't able to save the formula #{formula_filename}: #{homebrew_formula.errors.full_messages.to_sentence}"
     end
@@ -74,7 +62,10 @@ class HomebrewFormulaImportWorker
     )
 
     # Treat each files (Ruby files)
-    Dir[formulas_path].each{|formula_path| self.create_or_update_formula_from(formula_path)}
+    formulas = Dir[formulas_path]
+    formulas.each{|formula_path| self.create_or_update_formula_from(formula_path)}
+
+    Rails.logger.info "Iterated over #{formulas.size} formulas and #{Homebrew::Formula.count} in database."
   end
 
 private
@@ -116,25 +107,6 @@ private
       path: AppConfig.homebrew.git_repository.location,
       depth: 1 # Without the history
     )
-  end
-
-  #
-  # Load the formula Ruby code in order to access attributes
-  # @param  formula [String] formula ruby code
-  # @param  klasses_to_override=[] [Array] List of class name which have to be overrided
-  #   in order to allow the worker to load the ruby code without exceptions.
-  #
-  def load_formula(formula, klasses_to_override=[])
-    eval formula
-  rescue NameError => error
-    if klass = error.message.scan(/uninitialized constant ([\w\:]+)/).flatten.first
-      # For all classes which aren't existing
-      # juste override them with the DummyClass
-      eval "::#{klass.demodulize} = DummyClass"
-      self.send(:load_formula, formula, klasses_to_override)
-    else
-      raise
-    end
   end
 
 end
