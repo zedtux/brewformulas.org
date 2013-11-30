@@ -9,7 +9,7 @@ class FormulaDescriptionFetchWorker
     formula = Homebrew::Formula.find(homebrew_formula_id)
 
     # Load homepage HTML code
-    page_content = open(formula.homepage, allow_redirections: :safe).read
+    page_content = open(formula.homepage, allow_redirections: :all).read
     page_content.gsub!(/&shy;/, "") # Remove all Hyphen
     page_content = page_content.encode(
       "UTF-8",
