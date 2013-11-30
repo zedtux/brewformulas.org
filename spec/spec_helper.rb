@@ -6,7 +6,7 @@ require 'email_spec'
 require 'rspec/autorun'
 
 require 'coveralls'
-Coveralls.wear!
+Coveralls.wear_merged!
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
