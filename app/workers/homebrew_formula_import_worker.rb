@@ -27,8 +27,8 @@ class HomebrewFormulaImportWorker
     # Eval the formula
     begin
       self.send(:load_formula, formula)
-    rescue Exception
-      Rails.logger.error "An error ocurred while importing the formula #{formula_filename}."
+    rescue Exception => error
+      Rails.logger.error "The following error ocurred while importing the formula #{formula_filename}: #{error.message}"
       return # Don't break the import process
     end
 
@@ -49,7 +49,9 @@ class HomebrewFormulaImportWorker
     end
 
     homebrew_formula.touch
-    homebrew_formula.save!
+    unless homebrew_formula.save
+      Rails.logger.error "Import process wasn't able to save the formula #{formula_filename}: #{homebrew_formula.errors.full_messages.to_sentence}"
+    end
   end
 
   #
