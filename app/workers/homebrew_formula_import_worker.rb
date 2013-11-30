@@ -16,7 +16,7 @@ class HomebrewFormulaImportWorker
     # Extract the formula class name
     # In the case the formula declare more than one Formula class
     # use the latest one as the other are dependencies
-    formula_name = formula.scan(/^class\s(\w+)\s<\s(Formula|ScriptFileFormula|AmazonWebServicesFormula|GithubGistFormula)$/).flatten.last
+    formula_name = formula.scan(/^class\s(\w+)\s<\s(?:Formula|ScriptFileFormula|AmazonWebServicesFormula|GithubGistFormula)$/).flatten.last
 
     # Regular expression to extract attributes from the formula ruby code
     regex = /^\s+(homepage|version)\s+(?:'|")(.*)(?:'|")$/
