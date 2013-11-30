@@ -7,8 +7,17 @@
 require 'cucumber/rails'
 require 'cucumber/timecop'
 
+require 'simplecov'
 require 'coveralls'
-Coveralls.wear_merged!
+
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
+  SimpleCov::Formatter::HTMLFormatter,
+  Coveralls::SimpleCov::Formatter
+]
+SimpleCov.start 'rails' do
+  add_filter '.bundle/'
+  add_group "Workers", "app/worker"
+end
 
 require 'sidekiq/testing'
 Sidekiq::Testing.inline!
