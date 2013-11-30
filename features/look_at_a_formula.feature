@@ -13,6 +13,8 @@ Feature: Look at a formula
     When I go to brewformulas.org
     And I click the formula "A2ps"
     Then I should see "No description available. You can request to update it by clicking this link."
+    When I request to update the formula description
+    Then I should see the success alert "Your request has been successfully submitted."
 
   Scenario: Having a look to a formula show page with a description automatically extracted from the homepage
     Given the automatically extracted description for the A2ps formula is "GNU a2ps is an Any to PostScript filter."

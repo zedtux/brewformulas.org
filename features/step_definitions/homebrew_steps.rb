@@ -38,6 +38,10 @@ When /the background task to fetch formula description runs/ do
   FormulaDescriptionFetchWorker.new.perform(Homebrew::Formula.last.id)
 end
 
+When /^I request to update the formula description$/ do
+  click_on "clicking this link"
+end
+
 Then /^there should be some formulas in the database$/ do
   Homebrew::Formula.exists?.should be_true, "Expected to have formula in the database but didn't."
 end

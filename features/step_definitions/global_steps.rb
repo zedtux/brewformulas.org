@@ -25,10 +25,10 @@ Then /^I should see "(.*?)"$/ do |something|
   expect(page).to have_content(something)
 end
 
-Then /^I should see the (success|error|info)? alert "(.*?)" on the homepage$/ do |type, message|
-  expect(current_url).to eq(root_url)
+Then /^I should see the (success|error|info)? alert "(.*?)"( on the homepage)?$/ do |type, message, on_homepage|
+  expect(current_url).to eq(root_url) if on_homepage
 
-  type = case
+  type = case type
   when "error"
     "danger"
   when "success", "info"
