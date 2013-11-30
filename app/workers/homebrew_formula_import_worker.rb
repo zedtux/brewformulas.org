@@ -21,8 +21,10 @@ class HomebrewFormulaImportWorker
     # Prepend the class with a namespace
     formula.gsub!(regex, "require 'homebrew/fake_formula'\n\nclass #{formula_class_name} < Homebrew::FakeFormula")
 
-    # Do not execute statements between ``
-    formula.gsub!(/(^.*`.*`.*$)/, "\n")
+    # Remove lines where there is backticks call
+    # following with a method call.
+    # For example `sw_vers -productVersion`.strip
+    formula.gsub!(/(^.*`.*`\..*$)/, "\n")
 
     # Get filename without extension
     formula_filename = File.basename(path, ".rb")
