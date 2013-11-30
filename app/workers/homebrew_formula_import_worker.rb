@@ -21,19 +21,19 @@ class HomebrewFormulaImportWorker
     # Prepend the class with a namespace
     formula.gsub!(regex, "require 'homebrew/fake_formula'\n\nclass #{formula_class_name} < Homebrew::FakeFormula")
 
+    # Get filename without extension
+    formula_filename = File.basename(path, ".rb")
+
     # Eval the formula
     begin
       self.send(:load_formula, formula)
     rescue Exception
-      Rails.logger.error "An error ocurred while importing the formula #{formula.name} having ID #{formula.id}."
+      Rails.logger.error "An error ocurred while importing the formula #{formula_filename}."
       return # Don't break the import process
     end
 
     # Now access the formula attributes like a normal Ruby class
     klass = formula_class_name.constantize
-
-    # Get filename without extension
-    formula_filename = File.basename(path, ".rb")
 
     # Look for an existing formula
     homebrew_formula = Homebrew::Formula.where(filename: formula_filename).first
