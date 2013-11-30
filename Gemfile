@@ -43,4 +43,5 @@ group :test do
   gem 'cucumber-timecop', :require => false
   gem 'rake'
   gem 'webmock'
+  gem 'coveralls', require: false
 end
