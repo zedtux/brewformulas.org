@@ -35,7 +35,7 @@ module HomebrewFormula
 
   def self.clean!
     self.formulas = []
-    FileUtils.rm_rf Git::Lib.working_dir
+    FileUtils.rm_rf(Git::Lib.working_dir) if Git::Lib.working_dir
   end
 
 private
