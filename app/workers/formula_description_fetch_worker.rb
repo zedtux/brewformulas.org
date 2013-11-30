@@ -22,5 +22,7 @@ class FormulaDescriptionFetchWorker
         break
       end
     end
+  rescue OpenURI::HTTPError => error
+    Rails.logger.error "Import process wasn't able to save the formula #{formula.name}: #{error}"
   end
 end

@@ -19,6 +19,10 @@ Given /^the (\w+) formula has the description "(.*?)"$/ do |name, description|
   formula.update_attribute(:description, description)
 end
 
+Given /^the (\w+) formula with homepage "(.*?)" exists$/ do |name, homepage|
+  Homebrew::Formula.create!(filename: name.downcase, name: name, homepage: homepage)
+end
+
 Given /^the automatically extracted description for the (\w+) formula is "(.*?)"$/ do |name, description|
   unless formula = Homebrew::Formula.find_by_name(name)
     raise "Unable to find an Homebrew::Formula with name \"#{name}\""
