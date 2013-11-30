@@ -7,6 +7,7 @@ class FormulaDescriptionFetchWorker
 
   def perform(homebrew_formula_id)
     formula = Homebrew::Formula.find(homebrew_formula_id)
+    return unless formula.homepage
 
     # Load homepage HTML code
     page_content = open(formula.homepage, allow_redirections: :all).read

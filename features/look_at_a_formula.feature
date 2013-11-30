@@ -5,9 +5,7 @@ Feature: Look at a formula
   So that I can determine if I need it or not
 
   Background:
-    Given following Homebrew formulas exist:
-      | name   |
-      | A2ps   |
+    Given the A2ps formula with homepage "http://a2ps/" exists
 
   Scenario: Having a look to a formula show page without a description
     When I go to brewformulas.org
@@ -15,6 +13,7 @@ Feature: Look at a formula
     Then I should see "No description available. You can request to update it by clicking this link."
     When I request to update the formula description
     Then I should see the success alert "Your request has been successfully submitted."
+    And I should see "GNU a2ps is an Any to PostScript filter."
 
   Scenario: Having a look to a formula show page with a description automatically extracted from the homepage
     Given the automatically extracted description for the A2ps formula is "GNU a2ps is an Any to PostScript filter."
