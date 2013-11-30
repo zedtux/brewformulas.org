@@ -18,6 +18,7 @@ gem 'sidetiq', '~> 0.4.3' # Recurring jobs
 gem 'sinatra', '>= 1.3.0', :require => nil
 gem 'newrelic_rpm'
 gem 'nokogiri'
+gem 'open_uri_redirections' # open-uri library patched to follow http to https redirects
 
 group :development do
   gem 'better_errors'

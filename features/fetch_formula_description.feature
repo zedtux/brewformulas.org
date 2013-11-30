@@ -21,6 +21,7 @@ Feature: Fetch formula description
     | Ack      | http://ack/      | ack 2.10 is a tool like grep, optimized for programmers   Designed for programmers with large heterogeneous  trees of source code, ack is written purely in  portable Perl 5 and takes advantage of the power of  Perl's regular expressions. |
     | ACPICA   | http://acpica/   | The ACPI Component Architecture (ACPICA) project provides an operating system (OS)-independent reference implementation of the Advanced Configuration and Power Interface Specification (ACPI).                                               |
     | activemq | http://activemq/ | Apache ActiveMQ ™ is the most popular and powerful open source messaging and Integration Patterns server.                                                                                                                                     |
+    | BibTool  | http://bibtool/  | No description available                                                                                                                                                                                                                      |
 
   Scenario: Try to fetch the description from an URL responding with a 404 error
     Given the Libgadu formula with homepage "http://toxygen.net/libgadu/" exists
