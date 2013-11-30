@@ -2,9 +2,10 @@ class FormulasController < ApplicationController
   before_filter :current_object, only: [:show, :refresh_description]
 
   def index
-    @formula_count = Homebrew::Formula.where("touched_on = ?", Date.today).count
+    current_date = Time.now.utc.to_date
+    @formula_count = Homebrew::Formula.where("touched_on = ?", current_date).count
 
-    @formulas = Homebrew::Formula.where("touched_on = ?", Date.today)
+    @formulas = Homebrew::Formula.where("touched_on = ?", current_date)
     @formulas = @formulas.order(:name)
 
     # Search box

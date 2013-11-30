@@ -105,3 +105,7 @@ end
 Then /^I should see the installation instruction "(.*?)"$/ do |instruction|
   page.should have_xpath("//pre[normalize-space(.)='#{instruction}']")
 end
+
+Then /^I should see some formulas$/ do
+  expect(page).to_not have_content("Formula list0 formulas")
+end
