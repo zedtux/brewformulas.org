@@ -5,6 +5,7 @@ h1
 
 hr
 
+h4 Description
 - if @formula.has_description?
   blockquote
     p= @formula.description
@@ -20,6 +21,12 @@ hr
     a data-no-turbolink="true" href="#{refresh_description_formula_path(@formula.name)}" clicking this link
     '.
 
-h4 Homepage
+dl.dl-horizontal
+  dt Homepage
+  dd
+    a href="#{@formula.homepage}" target="_blank" #{@formula.homepage}
+  dt Version
+  dd= @formula.version || "Unavailable"
 
-a href="#{@formula.homepage}" target="_blank" #{@formula.homepage}
+h4= "Install #{@formula.name}"
+pre= "brew install #{@formula.filename}"

@@ -34,10 +34,10 @@ html lang="en"
               a href="http://brew.sh" target="_blank" Homebrew project
             li
               a href="https://github.com/zedtux/brewformulas.org" target="_blank" Brewformulas.org on Github
-          = form_for :search, method: :get, html: {class: "navbar-form navbar-right"} do |f|
+          = form_for :search, url: "/", method: :get, html: {class: "navbar-form navbar-right"} do |f|
             = f.label :term, "Formula"
             .form-group
-              = f.text_field :term, class: "form-control", placeholder: "Filename, name or keyword",
+              = f.text_field :term, class: "form-control", placeholder: "Name or filename",
                 value: params[:search] && params[:search][:term] || ""
             = f.submit "Search", class: "btn btn-success"
 

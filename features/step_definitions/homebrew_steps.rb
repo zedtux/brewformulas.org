@@ -92,3 +92,16 @@ Then /^I should see the (\w+) formula description automatically extracted from t
   visit formula_path(name)
   page.should have_xpath(xpath)
 end
+
+Then /^I should see the following formula details:$/ do |details|
+  details.rows_hash.each_pair do |attribute, value|
+    xpath = "//dl[@class='dl-horizontal']/"
+    xpath << "dt[normalize-space(.)='#{attribute}']/../"
+    xpath << "dd[normalize-space(.)='#{value}']"
+    page.should have_xpath(xpath)
+  end
+end
+
+Then /^I should see the installation instruction "(.*?)"$/ do |instruction|
+  page.should have_xpath("//pre[normalize-space(.)='#{instruction}']")
+end

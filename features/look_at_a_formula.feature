@@ -14,6 +14,10 @@ Feature: Look at a formula
     When I request to update the formula description
     Then I should see the success alert "Your request has been successfully submitted."
     And I should see "GNU a2ps is an Any to PostScript filter."
+    And I should see the following formula details:
+      | Homepage | http://a2ps/ |
+      | Version  | Unavailable  |
+    And I should see the installation instruction "brew install a2ps"
 
   Scenario: Having a look to a formula show page with a description automatically extracted from the homepage
     Given the automatically extracted description for the A2ps formula is "GNU a2ps is an Any to PostScript filter."
