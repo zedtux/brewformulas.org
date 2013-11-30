@@ -22,7 +22,12 @@ class HomebrewFormulaImportWorker
     formula.gsub!(regex, "require 'homebrew/fake_formula'\n\nclass #{formula_class_name} < Homebrew::FakeFormula")
 
     # Eval the formula
-    self.send(:load_formula, formula)
+    begin
+      self.send(:load_formula, formula)
+    rescue Exception
+      Rails.logger.error "An error ocurred while importing the formula #{formula.name} having ID #{formula.id}."
+      return # Don't break the import process
+    end
 
     # Now access the formula attributes like a normal Ruby class
     klass = formula_class_name.constantize
