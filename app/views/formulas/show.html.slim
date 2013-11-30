@@ -1,6 +1,8 @@
 h1
   = @formula.name
   small= @formula.filename
+  a href="https://twitter.com/share" class="twitter-share-button" data-text="I have installed #{@formula.name} with homebrew" data-via="brewformulas" data-related="machomebrew" Tweet
+
 hr
 
 - if @formula.has_description?

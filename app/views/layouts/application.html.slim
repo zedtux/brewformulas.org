@@ -40,15 +40,8 @@ html lang="en"
               = f.text_field :term, class: "form-control", placeholder: "Filename, name or keyword",
                 value: params[:search] && params[:search][:term] || ""
             = f.submit "Search", class: "btn btn-success"
-    .container
-      .jumbotron
-        h1 Homebrew formulas index
-        p The aim of this website is to provide an easy way to search for an Homebrew formula.
 
-      .row
-        p.text-center
-          iframe src="http://ghbtns.com/github-btn.html?user=zedtux&repo=brewformulas.org&type=watch&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="170" height="30"
-          a href="https://twitter.com/share" class="twitter-share-button" data-via="brewformulas" data-size="large" data-related="machomebrew" Tweet
+    .container
 
       - flash.each do |type, message|
         div class="alert alert-dismissable #{bootstrap_class_for(type)}"

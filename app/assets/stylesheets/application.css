@@ -22,6 +22,10 @@ h4 > small {
   margin-left: 10px;
 }
 
+h1 > iframe {
+  margin-left: 50px;
+}
+
 input#search_term {
   width: 200px;
 }
