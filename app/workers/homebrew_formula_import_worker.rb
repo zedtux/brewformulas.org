@@ -22,7 +22,7 @@ class HomebrewFormulaImportWorker
     formula.gsub!(regex, "require 'homebrew/fake_formula'\n\nclass #{formula_class_name} < Homebrew::FakeFormula")
 
     # Do not execute statements between ``
-    formula.gsub!(/`/, "\"")
+    formula.gsub!(/(^.*`.*`.*$)/, "\n")
 
     # Get filename without extension
     formula_filename = File.basename(path, ".rb")
