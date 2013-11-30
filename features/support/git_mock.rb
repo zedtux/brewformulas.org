@@ -35,7 +35,7 @@ module HomebrewFormula
 
   def self.clean!
     self.formulas = []
-    FileUtils.rm_rf(Git::Lib.working_dir) if Git::Lib.working_dir
+    FileUtils.rm_rf(Git::Lib.root_path) if Git::Lib.root_path
   end
 
 private
@@ -59,19 +59,19 @@ World(HomebrewFormula)
 # This module mock the Git::Lib class from the ruby-git gem
 module Git
   class Lib
-    mattr_accessor :working_dir
+    mattr_accessor :root_path, :working_dir
 
     def run_command(git_cmd, &block)
       if git_cmd.include?("\"--\"")
-        action, url, location = git_cmd.scan(/git (\w+).* "--" "([\w\:\/\.\_\-]+)" "([\w\/\.\s]+)"/).first
+        action, url, self.root_path = git_cmd.scan(/git (\w+).* "--" "([\w\:\/\.\_\-]+)" "([\w\/\.\s]+)"/).first
       else
         action = git_cmd.scan(/git (\w+).*/).flatten.first
       end
 
       case action
       when "clone"
-        FileUtils.mkdir_p(File.join(location, ".git"))
-        self.working_dir = File.join(location, "Library", "Formula")
+        FileUtils.mkdir_p(File.join(self.root_path, ".git"))
+        self.working_dir = File.join(self.root_path, "Library", "Formula")
         FileUtils.mkdir_p(self.working_dir)
         HomebrewFormula.write_formulae_to(self.working_dir)
       when "pull"
