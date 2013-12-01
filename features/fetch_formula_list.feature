@@ -59,3 +59,10 @@ Feature: Fetch formula list
     And the Github homebrew repository has been cloned
     When the background task to get or update the formulae is executed
     Then a new formula should be available in the database
+
+  Scenario: Import a formula with dependencies
+    Given no formula exist in homebrew
+    And the Github homebrew repository has a formula with dependencies
+    And the Github homebrew repository has been cloned
+    When the background task to get or update the formulae is executed
+    Then new formulas should be available in the database

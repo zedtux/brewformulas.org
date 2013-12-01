@@ -59,6 +59,16 @@ Given /^the Github homebrew repository has a formula having backticks$/ do
   )
 end
 
+Given /^the Github homebrew repository has a formula with dependencies$/ do
+  HomebrewFormula.new_formula(
+    {
+      name: "Snort",
+      homepage: "http://www.snort.org/",
+      depends_on: ["Daq", "Libdnet", "Pcre"]
+    }
+  )
+end
+
 When /^the background task to get or update the formulae is executed$/ do
   HomebrewFormulaImportWorker.new.perform
 end

@@ -44,8 +44,13 @@ private
     formula_content = ""
     formula_content << "class #{formula[:name].camelize} < Formula\n"
     formula.keys.each do |attribute|
-      next if [:name, :others, :code].include?(attribute)
+      next if [:name, :others, :code, :depends_on].include?(attribute)
       formula_content << "  #{attribute} \"#{formula[attribute.to_sym]}\"\n"
+    end
+    if formula[:depends_on]
+      formula[:depends_on].each do |dependency|
+        formula_content << "\n  depends_on '#{dependency.downcase}'\n"
+      end
     end
     if formula[:code]
       formula_content << "\n  #{formula[:code]}\n"

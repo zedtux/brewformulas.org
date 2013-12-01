@@ -29,3 +29,7 @@ h1 > iframe {
 input#search_term {
   width: 200px;
 }
+
+li.dependency span {
+  margin-right: 3px;
+}

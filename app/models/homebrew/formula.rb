@@ -14,7 +14,6 @@ module Homebrew
 
     # @nodoc ~~~ links ~~~
     has_and_belongs_to_many :dependencies,
-      -> { uniq },
       association_foreign_key: :dependency_id,
       class_name: "Homebrew::Formula",
       join_table: :dependencies_formulas
@@ -51,6 +50,5 @@ module Homebrew
     def has_description?
       self[:description].present?
     end
-
   end
 end

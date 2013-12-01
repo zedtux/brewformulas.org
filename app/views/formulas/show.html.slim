@@ -40,4 +40,7 @@ h4
 - else
   ul.list-inline#formula_dependencies
     - @formula.dependencies.each do |dependency|
-      li= dependency.name
+      li.dependency
+        a href="#{formula_path(dependency.name)}"
+          span class="glyphicon glyphicon-link"
+          = dependency.name

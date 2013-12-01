@@ -72,6 +72,10 @@ Then /^there should be some formulas in the database$/ do
   Homebrew::Formula.exists?.should be_true, "Expected to have formula in the database but didn't."
 end
 
+Then /^new formulas should be available in the database$/ do
+  Homebrew::Formula.count.should > 1
+end
+
 Then /^formulas should not been updated$/ do
   Homebrew::Formula.select(:created_at, :updated_at).all? do |formula|
     formula.created_at.to_i.should == formula.updated_at.to_i
