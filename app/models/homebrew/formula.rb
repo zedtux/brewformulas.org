@@ -12,6 +12,13 @@ module Homebrew
     # @nodoc ~~~ callbacks ~~~
     before_create :touch
 
+    # @nodoc ~~~ links ~~~
+    has_and_belongs_to_many :dependencies,
+      -> { uniq },
+      association_foreign_key: :dependency_id,
+      class_name: "Homebrew::Formula",
+      join_table: :dependencies_formulas
+
     # @nodoc ~~~ validations ~~~
     validates :filename, presence: true, uniqueness: true
     validates :name, presence: true

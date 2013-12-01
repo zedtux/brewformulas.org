@@ -30,6 +30,32 @@ Given /^the automatically extracted description for the (\w+) formula is "(.*?)"
   formula.update_attributes(description: description, description_automatic: true)
 end
 
+Given /^the formula (\w+) is a dependency of (\w+)$/ do |dependence_name, dependent_name|
+  unless dependence = Homebrew::Formula.find_by_name(dependence_name)
+    raise "Unable to find an Homebrew::Formula with name \"#{dependence_name}\""
+  end
+  unless dependent = Homebrew::Formula.find_by_name(dependent_name)
+    raise "Unable to find an Homebrew::Formula with name \"#{dependent_name}\""
+  end
+  dependent.dependencies << dependence
+end
+
+Given /^the formulas (.*?) are dependencies of (\w+)$/ do |dependence_names, dependent_name|
+  unless dependent = Homebrew::Formula.find_by_name(dependent_name)
+    raise "Unable to find an Homebrew::Formula with name \"#{dependent_name}\""
+  end
+
+  dependence_names.split(",").each do |dependence_name|
+    dependence_name.strip!
+    dependence_name.gsub!(/and /, "")
+    Rails.logger.debug "[debug(#{__FILE__.split("app/")[1]}:#{__LINE__})] dependence_name: #{dependence_name.inspect}"
+    unless dependence = Homebrew::Formula.find_by_name(dependence_name)
+      raise "Unable to find an Homebrew::Formula with name \"#{dependence_name}\""
+    end
+    dependent.dependencies << dependence
+  end
+end
+
 When /^I click the formula "(.*?)"$/ do |formula|
   click_on formula
 end
@@ -112,4 +138,25 @@ end
 
 Then /^I should not see the (\w+) formula$/ do |name|
   page.should_not have_xpath("//h4[@class='list-group-item-heading' and normalize-space(.)='#{name}']")
+end
+
+Then /^I should see no dependencies$/ do
+  expect(page).to have_content("This formula has no dependencies.")
+end
+
+Then /^I should see (.*?) as a dependency$/ do |dependencies|
+  all_dependencies = if dependencies.include?(",")
+    dependencies.split(",")
+  else
+    [dependencies]
+  end
+
+  # Check h4 title
+  expect(page).to have_content("Dependencies#{all_dependencies.size}")
+
+  all_dependencies.each do |dependence_name|
+    dependence_name.strip!
+    dependence_name.gsub!(/and /, "")
+    page.should have_xpath("//ul[@id='formula_dependencies']/li[normalize-space(.)='#{dependence_name}']")
+  end
 end

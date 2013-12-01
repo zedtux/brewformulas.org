@@ -14,6 +14,10 @@ describe Homebrew::Formula do
   end
 
   describe "Validations" do
+    it { should have_and_belong_to_many(:dependencies).with_foreign_key(:dependency_id).class_name("Homebrew::Formula") }
+  end
+
+  describe "Validations" do
     it { should validate_presence_of(:filename) }
     it "should validate uniqueness of the filename" do
       Homebrew::Formula.create!(filename: "test", name: "Test")

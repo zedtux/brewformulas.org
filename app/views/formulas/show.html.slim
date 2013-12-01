@@ -30,3 +30,14 @@ dl.dl-horizontal
 
 h4= "Install #{@formula.name}"
 pre= "brew install #{@formula.filename}"
+br
+
+h4
+  | Dependencies
+  small= pluralize @formula.dependencies.size, "dependency"
+- if @formula.dependencies.blank?
+  p This formula has no dependencies.
+- else
+  ul.list-inline#formula_dependencies
+    - @formula.dependencies.each do |dependency|
+      li= dependency.name
