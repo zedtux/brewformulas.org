@@ -28,4 +28,6 @@ BrewformulasOrg::Application.configure do
   config.assets.debug = true  # Send email in development mode.
   config.action_mailer.perform_deliveries = true
 
+  # Precompiled assets always have a digest now
+  config.assets.digest = true
 end
