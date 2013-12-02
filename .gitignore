@@ -35,6 +35,7 @@ db/*.sqlite3
 /db/*.sqlite3
 /doc
 /public/cache
+public/assets
 /public/stylesheets/compiled
 /public/system/*
 /spec/tmp/*
