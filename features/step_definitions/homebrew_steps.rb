@@ -48,7 +48,6 @@ Given /^the formulas (.*?) are dependencies of (\w+)$/ do |dependence_names, dep
   dependence_names.split(",").each do |dependence_name|
     dependence_name.strip!
     dependence_name.gsub!(/and /, "")
-    Rails.logger.debug "[debug(#{__FILE__.split("app/")[1]}:#{__LINE__})] dependence_name: #{dependence_name.inspect}"
     unless dependence = Homebrew::Formula.find_by_name(dependence_name)
       raise "Unable to find an Homebrew::Formula with name \"#{dependence_name}\""
     end
