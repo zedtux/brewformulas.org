@@ -34,7 +34,7 @@ br
 
 h4
   | Dependencies
-  small= pluralize @formula.dependencies.size, "dependency"
+  span class="badge" title="Dependencies count"= @formula.dependencies.size
 - if @formula.dependencies.blank?
   p This formula has no dependencies.
 - else
