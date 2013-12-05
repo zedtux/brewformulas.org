@@ -118,8 +118,6 @@ private
     # Touch the formula in order to keep showing it on the homepage
     homebrew_formula.touch
 
-    Rails.logger.debug "[debug(#{__FILE__.split("app/")[1]}:#{__LINE__})] homebrew_formula: #{homebrew_formula.inspect}"
-
     unless homebrew_formula.save
       Rails.logger.error "Import process wasn't able to save the formula #{formula_filename}: #{homebrew_formula.errors.full_messages.to_sentence}"
     end
