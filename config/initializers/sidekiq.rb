@@ -27,3 +27,8 @@ Sidekiq.configure_client do |config|
     namespace: AppConfig.redis.namespace
   }
 end
+
+Sidetiq.configure do |config|
+  # When `true` uses UTC instead of local times (default: false).
+  config.utc = false
+end

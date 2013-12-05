@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'rails', '4.0.1'
+gem 'rails', '~> 4.0.2'
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
 gem 'less-rails'
@@ -37,7 +37,7 @@ end
 group :test do
   gem 'capybara'
   gem 'cucumber-rails', :require => false
-  gem 'database_cleaner', '1.0.1'
+  gem 'database_cleaner'
   gem 'email_spec'
   gem 'launchy'
   gem 'rspec-rails'
