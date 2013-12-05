@@ -16,7 +16,7 @@ describe Homebrew::Formula do
   describe "Links" do
     it { should have_many(:formula_dependencies) }
     it { should have_many(:dependencies).through(:formula_dependencies) }
-    it { should have_many(:formula_dependents).class_name("Homebrew::FormulaDependency").with_foreign_key(:formula_dependency_id) }
+    it { should have_many(:formula_dependents).class_name("Homebrew::FormulaDependency").with_foreign_key(:dependency_id) }
     it { should have_many(:dependents).through(:formula_dependents).source(:formula) }
   end
 

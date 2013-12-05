@@ -17,7 +17,7 @@ module Homebrew
     has_many :formula_dependencies
     has_many :dependencies, :through => :formula_dependencies
     # Other formulas depending on this formula
-    has_many :formula_dependents, class_name: "Homebrew::FormulaDependency", foreign_key: :formula_dependency_id
+    has_many :formula_dependents, class_name: "Homebrew::FormulaDependency", foreign_key: :dependency_id
     has_many :dependents, through: :formula_dependents, source: :formula
 
     # @nodoc ~~~ validations ~~~
@@ -51,6 +51,15 @@ module Homebrew
 
     def has_description?
       self[:description].present?
+    end
+
+    #
+    # Names of the formulas which are dependent
+    # on the current formula.
+    #
+    # @return [Array] with the names of the fromulas
+    def dependent_names
+      self.dependents.collect(&:name)
     end
   end
 end

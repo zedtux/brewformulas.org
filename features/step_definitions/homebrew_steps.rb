@@ -55,6 +55,21 @@ Given /^the formulas (.*?) are dependencies of (\w+)$/ do |dependence_names, dep
   end
 end
 
+Given /^the formulas (.*?) are dependents of (\w+)$/ do |dependent_names, dependence_name|
+  unless dependence = Homebrew::Formula.find_by_name(dependence_name)
+    raise "Unable to find an Homebrew::Formula with name \"#{dependence_name}\""
+  end
+
+  dependent_names.split(",").each do |dependent_name|
+    dependent_name.strip!
+    dependent_name.gsub!(/and /, "")
+    unless dependent = Homebrew::Formula.find_by_name(dependent_name)
+      raise "Unable to find an Homebrew::Formula with name \"#{dependent_name}\""
+    end
+    dependence.dependents << dependent
+  end
+end
+
 When /^I click the formula "(.*?)"$/ do |formula|
   click_on formula
 end
@@ -165,4 +180,8 @@ Then /^I should see (.*?) as a dependency$/ do |dependencies|
     dependence_name.gsub!(/and /, "")
     page.should have_xpath("//ul[@id='formula_dependencies']/li[normalize-space(.)='#{dependence_name}']")
   end
+end
+
+Then /^I should see (.*?) as dependents?$/ do |dependent_name|
+  expect(page).to have_content("This formula is required by #{dependent_name}.")
 end

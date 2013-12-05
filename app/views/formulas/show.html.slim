@@ -51,3 +51,13 @@ h4
         a href="#{formula_path(dependency.name)}"
           span class="glyphicon glyphicon-link"
           = dependency.name
+
+- if @formula.dependents.present?
+  h4
+    | Dependents
+    span class="badge" title="Dependents count"= @formula.dependents.size
+  p
+    | This formula is required by
+    '
+    = @formula.dependents.size < 4 ? @formula.dependent_names.to_sentence : @formula.dependents.size.to_s + " formulas"
+    '.

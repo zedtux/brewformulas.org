@@ -28,3 +28,24 @@ Feature: Formula dependencies
     And the formulas Daq, Libdnet, and Pcre are dependencies of Snort
     When I go to the formula Snort on brewformulas.org
     Then I should see Daq, Libdnet, and Pcre as a dependency
+
+  Scenario: Look at a formula which is a dependency for another formula
+    Given following Homebrew formulas exist:
+      | name  | homepage                                   |
+      | Lrzsz | http://www.ohse.de/uwe/software/lrzsz.html |
+      | Zssh  | http://zssh.sourceforge.net/               |
+    And the formula Lrzsz is a dependency of Zssh
+    When I go to the formula Lrzsz on brewformulas.org
+    Then I should see no dependencies
+    But I should see Zssh as dependent
+
+  Scenario: Look at a formula which is a dependency for 3 formulas
+    Given following Homebrew formulas exist:
+      | name    | homepage                          |
+      | Daq     | http://www.snort.org/             |
+      | Libdnet | http://code.google.com/p/libdnet/ |
+      | Pcre    | http://www.pcre.org/              |
+      | Snort   | http://www.snort.org              |
+    And the formulas Daq, Libdnet, and Pcre are dependents of Snort
+    When I go to the formula Snort on brewformulas.org
+    Then I should see Daq, Libdnet, and Pcre as dependents
