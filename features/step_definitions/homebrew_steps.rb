@@ -157,6 +157,9 @@ Then /^I should see (.*?) as a dependency$/ do |dependencies|
   # Check h4 title
   expect(page).to have_content("Dependencies#{all_dependencies.size}")
 
+  pluralized = (all_dependencies.size > 1 ? "#{all_dependencies.size} dependencies" : "dependency")
+  expect(page).to have_content("The following #{pluralized} will be installed if you install")
+
   all_dependencies.each do |dependence_name|
     dependence_name.strip!
     dependence_name.gsub!(/and /, "")

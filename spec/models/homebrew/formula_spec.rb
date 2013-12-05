@@ -13,8 +13,11 @@ describe Homebrew::Formula do
     it { should have_db_index(:filename) }
   end
 
-  describe "Validations" do
-    it { should have_and_belong_to_many(:dependencies).with_foreign_key(:dependency_id).class_name("Homebrew::Formula") }
+  describe "Links" do
+    it { should have_many(:formula_dependencies) }
+    it { should have_many(:dependencies).through(:formula_dependencies) }
+    it { should have_many(:formula_dependents).class_name("Homebrew::FormulaDependency").with_foreign_key(:formula_dependency_id) }
+    it { should have_many(:dependents).through(:formula_dependents).source(:formula) }
   end
 
   describe "Validations" do

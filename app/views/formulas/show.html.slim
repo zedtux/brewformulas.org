@@ -34,10 +34,17 @@ br
 
 h4
   | Dependencies
-  small= pluralize @formula.dependencies.size, "dependency"
+  small= pluralize(@formula.dependencies.size, "dependency")
 - if @formula.dependencies.blank?
   p This formula has no dependencies.
 - else
+  p
+    | The following
+    '
+    = pluralize(@formula.dependencies.size, "dependency", nil, no_count_if_one: true)
+    '  will be installed if you install
+    = @formula.name
+    ':
   ul.list-inline#formula_dependencies
     - @formula.dependencies.each do |dependency|
       li.dependency

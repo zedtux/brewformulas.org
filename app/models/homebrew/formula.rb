@@ -13,10 +13,12 @@ module Homebrew
     before_create :touch
 
     # @nodoc ~~~ links ~~~
-    has_and_belongs_to_many :dependencies,
-      association_foreign_key: :dependency_id,
-      class_name: "Homebrew::Formula",
-      join_table: :dependencies_formulas
+    # This formula dependencies
+    has_many :formula_dependencies
+    has_many :dependencies, :through => :formula_dependencies
+    # Other formulas depending on this formula
+    has_many :formula_dependents, class_name: "Homebrew::FormulaDependency", foreign_key: :formula_dependency_id
+    has_many :dependents, through: :formula_dependents, source: :formula
 
     # @nodoc ~~~ validations ~~~
     validates :filename, presence: true, uniqueness: true

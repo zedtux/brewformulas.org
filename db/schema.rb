@@ -11,17 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131201102917) do
+ActiveRecord::Schema.define(version: 20131204185540) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "dependencies_formulas", id: false, force: true do |t|
-    t.integer "dependency_id"
-    t.integer "formula_id"
+  create_table "homebrew_formula_dependencies", force: true do |t|
+    t.integer  "formula_id",    null: false
+    t.integer  "dependency_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
-  add_index "dependencies_formulas", ["dependency_id", "formula_id"], name: "index_dependencies_formulas_on_dependency_id_and_formula_id", unique: true, using: :btree
+  add_index "homebrew_formula_dependencies", ["formula_id", "dependency_id"], name: "homebrew_formula_dependencies_uniqueness", unique: true, using: :btree
 
   create_table "homebrew_formulas", force: true do |t|
     t.string   "name",                                  null: false

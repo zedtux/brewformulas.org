@@ -20,6 +20,7 @@ gem 'newrelic_rpm'
 gem 'nokogiri'
 gem 'open_uri_redirections' # open-uri library patched to follow http to https redirects
 gem 'array_is_uniq', :require => 'array' # Implemented the missing unqi? method on Ruby Arrays
+gem 'pluralize_no_count_if_one'
 
 group :development do
   gem 'better_errors'
@@ -40,7 +41,7 @@ group :test do
   gem 'email_spec'
   gem 'launchy'
   gem 'rspec-rails'
-  gem 'shoulda-matchers'
+  gem 'shoulda-matchers', :git => "https://github.com/thoughtbot/shoulda-matchers.git"
   gem 'cucumber-timecop', :require => false
   gem 'rake'
   gem 'webmock'
