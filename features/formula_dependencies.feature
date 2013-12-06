@@ -39,6 +39,16 @@ Feature: Formula dependencies
     Then I should see no dependencies
     But I should see Zssh as dependent
 
+  Scenario: Look at a formula which is a dependency for 2 formulas
+    Given following Homebrew formulas exist:
+      | name    | homepage                          |
+      | Daq     | http://www.snort.org/             |
+      | Libdnet | http://code.google.com/p/libdnet/ |
+      | Snort   | http://www.snort.org              |
+    And the formulas Daq and Libdnet are dependents of Snort
+    When I go to the formula Snort on brewformulas.org
+    Then I should see Daq and Libdnet as dependents
+
   Scenario: Look at a formula which is a dependency for 3 formulas
     Given following Homebrew formulas exist:
       | name    | homepage                          |
@@ -49,3 +59,15 @@ Feature: Formula dependencies
     And the formulas Daq, Libdnet, and Pcre are dependents of Snort
     When I go to the formula Snort on brewformulas.org
     Then I should see Daq, Libdnet, and Pcre as dependents
+
+  Scenario: Look at a formula which is a dependency for 4 formulas
+    Given following Homebrew formulas exist:
+      | name       | homepage                          |
+      | Daq        | http://www.snort.org/             |
+      | Libdnet    | http://code.google.com/p/libdnet/ |
+      | Pcre       | http://www.pcre.org/              |
+      | Pkg-config | http://pkgconfig.freedesktop.org/ |
+      | Snort      | http://www.snort.org              |
+    And the formulas Daq, Libdnet, Pcre, and Pkg-config are dependents of Snort
+    When I go to the formula Snort on brewformulas.org
+    Then I should see Daq, Libdnet, Pcre, and 1 other formulas as dependents

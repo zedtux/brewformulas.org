@@ -56,8 +56,29 @@ h4
   h4
     | Dependents
     span class="badge" title="Dependents count"= @formula.dependents.size
-  p
+  p.dependents
     | This formula is required by
     '
-    = @formula.dependents.size < 4 ? @formula.dependent_names.to_sentence : @formula.dependents.size.to_s + " formulas"
+    - @formula.dependent_names.take(3).each_with_index do |dependent_name, index|
+      a href="#{formula_path(dependent_name)}"
+        span class="glyphicon glyphicon-link"
+        = dependent_name
+      - if @formula.dependents.size > 1
+        - case @formula.dependents.size
+        - when 2
+          - if index == 0
+            '  and
+            '
+        - when 3
+          - if index == 0
+            ',
+            '
+          - elsif index == 1
+            ' , and
+            '
+        - else
+          ',
+          '
+    - if @formula.dependents.size > 3
+      = " and #{(@formula.dependents.size - 3).to_s} other formulas"
     '.

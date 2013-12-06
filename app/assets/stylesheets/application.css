@@ -31,6 +31,7 @@ input#search_term {
   width: 200px;
 }
 
-li.dependency span {
+li.dependency span,
+p.dependents span {
   margin-right: 3px;
 }

@@ -60,9 +60,10 @@ Given /^the formulas (.*?) are dependents of (\w+)$/ do |dependent_names, depend
     raise "Unable to find an Homebrew::Formula with name \"#{dependence_name}\""
   end
 
+  dependent_names.gsub!(/and /, ",")
   dependent_names.split(",").each do |dependent_name|
     dependent_name.strip!
-    dependent_name.gsub!(/and /, "")
+    next if dependent_name.blank?
     unless dependent = Homebrew::Formula.find_by_name(dependent_name)
       raise "Unable to find an Homebrew::Formula with name \"#{dependent_name}\""
     end
