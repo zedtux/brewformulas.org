@@ -11,10 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131204185540) do
+ActiveRecord::Schema.define(version: 20131207093430) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "homebrew_formula_conflicts", force: true do |t|
+    t.integer  "formula_id",  null: false
+    t.integer  "conflict_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "homebrew_formula_conflicts", ["formula_id", "conflict_id"], name: "homebrew_formula_conflicts_uniqueness", unique: true, using: :btree
 
   create_table "homebrew_formula_dependencies", force: true do |t|
     t.integer  "formula_id",    null: false
@@ -35,8 +44,10 @@ ActiveRecord::Schema.define(version: 20131204185540) do
     t.date     "touched_on"
     t.string   "filename",                              null: false
     t.boolean  "description_automatic", default: false
+    t.boolean  "external",              default: false, null: false
   end
 
+  add_index "homebrew_formulas", ["external"], name: "index_homebrew_formulas_on_external", using: :btree
   add_index "homebrew_formulas", ["filename"], name: "index_homebrew_formulas_on_filename", using: :btree
 
 end

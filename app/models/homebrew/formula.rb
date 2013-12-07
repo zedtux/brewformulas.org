@@ -13,16 +13,24 @@ module Homebrew
     before_create :touch
 
     # @nodoc ~~~ links ~~~
-    # This formula dependencies
-    has_many :formula_dependencies
-    has_many :dependencies, :through => :formula_dependencies
-    # Other formulas depending on this formula
+    # ~ Dependencies ~
+    has_many :formula_dependencies, dependent: :destroy
+    has_many :dependencies, through: :formula_dependencies
     has_many :formula_dependents, class_name: "Homebrew::FormulaDependency", foreign_key: :dependency_id
     has_many :dependents, through: :formula_dependents, source: :formula
+    # ~ Conflicts ~
+    has_many :formula_conflicts, dependent: :destroy
+    has_many :conflicts, through: :formula_conflicts
+    has_many :revert_formula_conflicts, class_name: "Homebrew::FormulaConflict", foreign_key: :conflict_id
+    has_many :revert_conflicts, through: :revert_formula_conflicts, source: :formula
 
     # @nodoc ~~~ validations ~~~
     validates :filename, presence: true, uniqueness: true
     validates :name, presence: true
+
+    # @nodoc ~~~ scopes ~~~
+    scope :externals, -> { where(external: true) }
+    scope :internals, -> { where(external: false) }
 
     # @nodoc ~~~ custom class methods ~~~
 
@@ -49,6 +57,10 @@ module Homebrew
       self.touched_on = Time.now.utc.to_date
     end
 
+    #
+    # Determine if the formula has a description
+    #
+    # @return [Boolean] true if the formula has a description in DB otherwise false
     def has_description?
       self[:description].present?
     end

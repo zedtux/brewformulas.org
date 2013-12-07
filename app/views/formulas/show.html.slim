@@ -1,7 +1,11 @@
 h1
   = @formula.name
-  small= @formula.filename
+  - unless @formula.external?
+    small= @formula.filename
   a href="https://twitter.com/share" class="twitter-share-button" data-text="I have installed #{@formula.name} with homebrew" data-via="brewformulas" data-related="machomebrew" Tweet
+
+- if @formula.external?
+  p.text-info This formula is an external dependency which means that Homebrew will not install it.
 
 hr
 
@@ -28,29 +32,30 @@ dl.dl-horizontal
   dt Version
   dd= @formula.version || "Unavailable"
 
-h4= "Install #{@formula.name}"
-pre= "brew install #{@formula.filename}"
-br
+- unless @formula.external?
+  h4= "Install #{@formula.name}"
+  pre= "brew install #{@formula.filename}"
+  br
 
-h4
-  | Dependencies
-  span class="badge" title="Dependencies count"= @formula.dependencies.size
-- if @formula.dependencies.blank?
-  p This formula has no dependencies.
-- else
-  p
-    | The following
-    '
-    = pluralize(@formula.dependencies.size, "dependency", nil, no_count_if_one: true)
-    '  will be installed if you install
-    = @formula.name
-    ':
-  ul.list-inline#formula_dependencies
-    - @formula.dependencies.each do |dependency|
-      li.dependency
-        a href="#{formula_path(dependency.name)}"
-          span class="glyphicon glyphicon-link"
-          = dependency.name
+  h4
+    | Dependencies
+    span class="badge" title="Dependencies count"= @formula.dependencies.size
+  - if @formula.dependencies.blank?
+    p This formula has no dependencies.
+  - else
+    p
+      | The following
+      '
+      = pluralize(@formula.dependencies.size, "dependency", nil, no_count_if_one: true)
+      '  will be installed if you install
+      = @formula.name
+      ':
+    ul.list-inline#formula_dependencies
+      - @formula.dependencies.each do |dependency|
+        li.dependency
+          a href="#{formula_path(dependency.name)}"
+            span class="glyphicon glyphicon-link"
+            = dependency.name
 
 - if @formula.dependents.present?
   h4
@@ -82,3 +87,17 @@ h4
     - if @formula.dependents.size > 3
       = " and #{(@formula.dependents.size - 3).to_s} other formulas"
     '.
+
+- if @formula.conflicts.present?
+  h4
+    | Conflicts
+    span class="badge" title="Conflicts count"= @formula.conflicts.size
+  p.conflicts
+    | This formula is in confict with
+    '
+    ul.list-inline#formula_conflicts
+      - @formula.conflicts.each do |conflict|
+        li.conflict
+          a href="#{formula_path(conflict.name)}"
+            span class="glyphicon glyphicon-link"
+            = conflict.name

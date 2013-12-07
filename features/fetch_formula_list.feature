@@ -66,3 +66,44 @@ Feature: Fetch formula list
     And the Github homebrew repository has been cloned
     When the background task to get or update the formulae is executed
     Then new formulas should be available in the database
+    And some formulas should be linked as dependencies
+
+  Scenario: Import a formula with a dependency not provided by Homebrew
+    Given no formula exist in homebrew
+    And the Github homebrew repository has a formula with an external dependency
+    And the Github homebrew repository has been cloned
+    When the background task to get or update the formulae is executed
+    Then new formulas should be available in the database
+    And a formula should be flagged as external dependency
+
+  Scenario: Import a formula with conflicts including a reason
+    Given no formula exist in homebrew
+    And the Github homebrew repository has a formula with conflicts with a reason
+    And the Github homebrew repository has been cloned
+    When the background task to get or update the formulae is executed
+    Then new formulas should be available in the database
+    And some formulas should be linked as conflicts
+
+  Scenario: Import a formula with conflicts including a reason with because issue
+    Given no formula exist in homebrew
+    And the Github homebrew repository has a formula with conflicts with a reason with because issue
+    And the Github homebrew repository has been cloned
+    When the background task to get or update the formulae is executed
+    Then new formulas should be available in the database
+    And some formulas should be linked as conflicts
+
+  Scenario: Import a formula with conflicts including a reason on multiple lines
+    Given no formula exist in homebrew
+    And the Github homebrew repository has a formula with conflicts with a reason on multiple lines
+    And the Github homebrew repository has been cloned
+    When the background task to get or update the formulae is executed
+    Then new formulas should be available in the database
+    And some formulas should be linked as conflicts
+
+  Scenario: Import a formula with conflicts excluding a reason
+    Given no formula exist in homebrew
+    And the Github homebrew repository has a formula with conflicts
+    And the Github homebrew repository has been cloned
+    When the background task to get or update the formulae is executed
+    Then new formulas should be available in the database
+    And some formulas should be linked as conflicts

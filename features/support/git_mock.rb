@@ -42,19 +42,48 @@ private
 
   def self.build_formula_class(formula)
     formula_content = ""
+
+    # Class name and inheritance
     formula_content << "class #{formula[:name].camelize} < Formula\n"
+
+    # Class attributes (homepage, version)
     formula.keys.each do |attribute|
-      next if [:name, :others, :code, :depends_on].include?(attribute)
+      next if [:name, :others, :code, :depends_on, :conflicts_with].include?(attribute)
       formula_content << "  #{attribute} \"#{formula[attribute.to_sym]}\"\n"
     end
+
+    # Dependencies
     if formula[:depends_on]
-      formula[:depends_on].each do |dependency|
+      [*formula[:depends_on]].each do |dependency|
         formula_content << "\n  depends_on '#{dependency.downcase}'\n"
       end
     end
+
+    # Conflicts
+    if formula[:conflicts_with]
+      # Add conflict with double quotes and simple quotes
+      conflicts = []
+      [*formula[:conflicts_with][:formulas]].each_with_index do |formula_name, index|
+        conflicts << (index.even? ? "\"#{formula_name}\"" : "'#{formula_name}'")
+      end
+      formula_content << "\n  conflicts_with #{conflicts.join(", ")}"
+      if formula[:conflicts_with][:because]
+        formula_content << ","
+        formula_content << "\n  " if formula[:conflicts_with][:on_multiple_lines]
+        formula_content << if formula[:conflicts_with][:because_issue]
+          " :beacuse => '#{formula[:conflicts_with][:because]}'"
+        else
+          " :because => '#{formula[:conflicts_with][:because]}'"
+        end
+      end
+      formula_content << "\n"
+    end
+
+    # Custom Ruby code
     if formula[:code]
       formula_content << "\n  #{formula[:code]}\n"
     end
+
     formula_content << "\nend\n"
     formula_content
   end

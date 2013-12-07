@@ -3,15 +3,20 @@ class FormulasController < ApplicationController
 
   def index
     current_date = Time.now.utc.to_date
-    @formula_count = Homebrew::Formula.where("touched_on = ?", current_date).count
+    @formula_count = Homebrew::Formula.internals.where("touched_on = ?", current_date).count
 
-    @formulas = Homebrew::Formula.where("touched_on = ?", current_date)
-    @formulas = @formulas.order(:name)
 
     # Search box
     if params[:search] && params[:search][:term].present?
+      @formulas = Homebrew::Formula.where("touched_on = ? OR external IS TRUE", current_date)
       @formulas = @formulas.where("filename iLIKE ? OR name iLIKE ?", "%#{params[:search][:term]}%", "%#{params[:search][:term]}%")
+    else
+      @formulas = Homebrew::Formula.where("touched_on = ?", current_date)
+      # Don't show external dependencies in the big list
+      @formulas = @formulas.internals
     end
+
+    @formulas = @formulas.order(:name)
   end
 
   def show; end

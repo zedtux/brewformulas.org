@@ -39,7 +39,7 @@ class HomebrewFormulaImportWorker
     formulas = Dir[formulas_path]
     formulas.each{|formula_path| self.create_or_update_formula_from(formula_path)}
 
-    Rails.logger.info "Iterated over #{formulas.size} formulas and #{Homebrew::Formula.count} in database."
+    Rails.logger.info "Iterated over #{formulas.size} formulas and #{Homebrew::Formula.count} in database including #{Homebrew::Formula.externals.count} external formulas."
   end
 
 private
@@ -83,10 +83,22 @@ private
     )
   end
 
-  # Find or create the formula
+
+  #
+  # Find or create the Homebrew::Formula for a given filename and name
+  #
+  # In the case the method create the formula, it is created with
+  # the external field to true so that, during the import, if a file
+  # has been parsed for this formula, the external field will be
+  # updated to false.
+  #
+  # @param  filename [String] Filename of the formula (without extention)
+  # @param  name [String] Name to be displayed
+  #
+  # @return [Homebrew::Formula] The one found or created
   def find_or_create_formula!(filename, name)
     formula = Homebrew::Formula.find_by(filename: filename)
-    formula ? formula : Homebrew::Formula.create(filename: filename, name: name)
+    formula ? formula : Homebrew::Formula.create(filename: filename, name: name, external: true)
   end
 
   # Extract the formula class name
@@ -105,8 +117,42 @@ private
   end
 
   def get_dependencies
-    dependency_names = self.formula.scan(/^\s+depends_on\s(?:\'|\:)([\w\+\-]+).*$$/).flatten
+    dependency_names = self.formula.scan(/^\s+depends_on\s(?:\'|\:)([\w\+\-]+).*$/).flatten
     dependency_names.collect{|name| self.send(:find_or_create_formula!, name, name.classify)}
+  end
+
+  def conflicts_because_check(conflicts)
+    # Looks like it is a common type mistake:
+    #  because => beacuse
+    if conflicts.include?(":beacuse")
+      Rails.logger.warn("Formula conflict \"because\" type mistake detected!")
+      conflicts.gsub!(/:beacuse/, ":because")
+    end
+    conflicts
+  end
+
+  def extract_conflict_reason_if_possible!(conflicts)
+    conflicts = self.send(:conflicts_because_check, conflicts)
+
+    if conflicts.include?(":because")
+      conflicts, because = conflicts.split(":because")
+      because.gsub!(/\s+=>\s+/, "")
+    end
+    [conflicts, because]
+  end
+
+  def get_conflicts
+    conflicts = self.formula.scan(/^\s+conflicts_with\s+(.*)$/).flatten.first
+
+    # No conflict found
+    return [] unless conflicts
+
+    conflicts.gsub!(/('|")/, "")
+
+    conflicts, because = self.send(:extract_conflict_reason_if_possible!, conflicts)
+
+    conflicting_formulas = conflicts.strip.split(",").map(&:strip)
+    conflicting_formulas.collect{|name| self.send(:find_or_create_formula!, name, name.classify)}
   end
 
   def create_or_update_formula!(formula_filename)
@@ -114,6 +160,11 @@ private
 
     homebrew_formula.attributes = self.send(:extract_formula_attributes)
     homebrew_formula.dependencies |= self.send(:get_dependencies)
+    homebrew_formula.conflicts |= self.send(:get_conflicts)
+
+    # Update the external field to false as a file has been found
+    # which means that Homebrew provide it and can install it.
+    homebrew_formula.external = false
 
     # Touch the formula in order to keep showing it on the homepage
     homebrew_formula.touch

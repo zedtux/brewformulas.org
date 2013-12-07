@@ -59,14 +59,44 @@ Given /^the Github homebrew repository has a formula having backticks$/ do
   )
 end
 
-Given /^the Github homebrew repository has a formula with dependencies$/ do
-  HomebrewFormula.new_formula(
-    {
-      name: "Snort",
-      homepage: "http://www.snort.org/",
-      depends_on: ["Daq", "Libdnet", "Pcre"]
-    }
-  )
+Given /^the Github homebrew repository has a formula with (dependencies|conflicts( with a reason( on multiple lines| with because issue)?)?)$/ do |dependencies_or_conflicts, with_reason, multiple_lines_or_because|
+  attributes = {
+    name: "Xpdf",
+    homepage: "http://www.foolabs.com/xpdf/"
+  }
+
+  if dependencies_or_conflicts == "dependencies"
+    attributes.merge!({
+      depends_on: ["lesstif", "x11"]
+    })
+  else
+    if with_reason
+      attributes.merge!({
+        conflicts_with: {
+          formulas: ["pdf2image", "poppler"],
+          because: "xpdf, pdf2image, and poppler install conflicting executables",
+          on_multiple_lines: multiple_lines_or_because == " on multiple lines",
+          because_issue: multiple_lines_or_because == " with because issue"
+        }
+      })
+    else
+      attributes.merge!({
+        conflicts_with: {
+          formulas: "pdf2image"
+        }
+      })
+    end
+  end
+
+  HomebrewFormula.new_formula(attributes)
+end
+
+Given /^the Github homebrew repository has a formula with an external dependency$/ do
+  HomebrewFormula.new_formula({
+    name: "Cliclick",
+    homepage: "http://www.bluem.net/jump/cliclick/",
+    depends_on: "Xcode"
+  })
 end
 
 When /^the background task to get or update the formulae is executed$/ do

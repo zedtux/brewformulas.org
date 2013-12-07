@@ -1,3 +1,10 @@
+def check_formula_names
+  # Ensure Homebrew::Formula#name never contains double or simple quotes
+  Homebrew::Formula.all.collect(&:name).each{|name|
+    name.should_not =~ /[\"|\']/
+  }
+end
+
 Given /^some formulas exist$/ do
   Homebrew::Formula.create!(filename: "a2ps", name: "A2ps", homepage: "http://www.gnu.org/software/a2ps/")
   HomebrewFormula.new_formula(name: "A2ps", homepage: "http://www.gnu.org/software/a2ps/")
@@ -12,51 +19,68 @@ Given /^following Homebrew formula exists:$/ do |formula|
   Homebrew::Formula.create!(formula)
 end
 
-Given /^the (\w+) formula has the description "(.*?)"$/ do |name, description|
-  unless formula = Homebrew::Formula.find_by_name(name)
+Given /^the (.*?) formula has the description "(.*?)"$/ do |name, description|
+  unless formula = Homebrew::Formula.find_by(name: name)
     raise "Unable to find an Homebrew::Formula with name \"#{name}\""
   end
   formula.update_attribute(:description, description)
 end
 
-Given /^the (\w+) formula with homepage "(.*?)" exists$/ do |name, homepage|
+Given /^the (.*?) formula with homepage "(.*?)" exists$/ do |name, homepage|
   Homebrew::Formula.create!(filename: name.downcase, name: name, homepage: homepage)
 end
 
-Given /^the automatically extracted description for the (\w+) formula is "(.*?)"$/ do |name, description|
-  unless formula = Homebrew::Formula.find_by_name(name)
+Given /^the automatically extracted description for the (.*?) formula is "(.*?)"$/ do |name, description|
+  unless formula = Homebrew::Formula.find_by(name: name)
     raise "Unable to find an Homebrew::Formula with name \"#{name}\""
   end
   formula.update_attributes(description: description, description_automatic: true)
 end
 
-Given /^the formula (\w+) is a dependency of (\w+)$/ do |dependence_name, dependent_name|
-  unless dependence = Homebrew::Formula.find_by_name(dependence_name)
+Given /^the formula (.*?) is a dependency of (.*?)$/ do |dependence_name, dependent_name|
+  unless dependence = Homebrew::Formula.find_by(name: dependence_name)
     raise "Unable to find an Homebrew::Formula with name \"#{dependence_name}\""
   end
-  unless dependent = Homebrew::Formula.find_by_name(dependent_name)
+  unless dependent = Homebrew::Formula.find_by(name: dependent_name)
     raise "Unable to find an Homebrew::Formula with name \"#{dependent_name}\""
   end
   dependent.dependencies << dependence
 end
 
-Given /^the formulas (.*?) are dependencies of (\w+)$/ do |dependence_names, dependent_name|
-  unless dependent = Homebrew::Formula.find_by_name(dependent_name)
+Given /^the formula (.*?) is in conflict with (.*?)$/ do |formula_name, conflict_names|
+  unless formula = Homebrew::Formula.find_by(name: formula_name)
+    raise "Unable to find an Homebrew::Formula with name \"#{formula_name}\""
+  end
+  conflict_names = if conflict_names.include?(" and ")
+    conflict_names.split(" and ")
+  else
+    [*conflict_names]
+  end
+  conflict_names.each do |conflict_name|
+    unless conflict = Homebrew::Formula.find_by(name: conflict_name)
+      raise "Unable to find an Homebrew::Formula with name \"#{conflict_name}\""
+    end
+    formula.conflicts << conflict
+  end
+end
+
+Given /^the formulas (.*?) are dependencies of (.*?)$/ do |dependence_names, dependent_name|
+  unless dependent = Homebrew::Formula.find_by(name: dependent_name)
     raise "Unable to find an Homebrew::Formula with name \"#{dependent_name}\""
   end
 
   dependence_names.split(",").each do |dependence_name|
     dependence_name.strip!
     dependence_name.gsub!(/and /, "")
-    unless dependence = Homebrew::Formula.find_by_name(dependence_name)
+    unless dependence = Homebrew::Formula.find_by(name: dependence_name)
       raise "Unable to find an Homebrew::Formula with name \"#{dependence_name}\""
     end
     dependent.dependencies << dependence
   end
 end
 
-Given /^the formulas (.*?) are dependents of (\w+)$/ do |dependent_names, dependence_name|
-  unless dependence = Homebrew::Formula.find_by_name(dependence_name)
+Given /^the formulas (.*?) are dependents of (.*?)$/ do |dependent_names, dependence_name|
+  unless dependence = Homebrew::Formula.find_by(name: dependence_name)
     raise "Unable to find an Homebrew::Formula with name \"#{dependence_name}\""
   end
 
@@ -64,11 +88,22 @@ Given /^the formulas (.*?) are dependents of (\w+)$/ do |dependent_names, depend
   dependent_names.split(",").each do |dependent_name|
     dependent_name.strip!
     next if dependent_name.blank?
-    unless dependent = Homebrew::Formula.find_by_name(dependent_name)
+    unless dependent = Homebrew::Formula.find_by(name: dependent_name)
       raise "Unable to find an Homebrew::Formula with name \"#{dependent_name}\""
     end
     dependence.dependents << dependent
   end
+end
+
+Given /^the (.*?) formula has (.*?) as external dependency$/ do |formula_name, dependence_name|
+  unless formula = Homebrew::Formula.find_by(name: formula_name)
+    raise "Unable to find an Homebrew::Formula with name \"#{formula_name}\""
+  end
+
+  dependence = Homebrew::Formula.find_by(name: dependence_name)
+  dependence = Homebrew::Formula.create!(filename: dependence_name.downcase, name: dependence_name) unless dependence
+  dependence.update_attribute(:external, true)
+  formula.dependencies << dependence
 end
 
 When /^I click the formula "(.*?)"$/ do |formula|
@@ -89,6 +124,22 @@ end
 
 Then /^new formulas should be available in the database$/ do
   Homebrew::Formula.count.should > 1
+  check_formula_names
+end
+
+Then /^some formulas should be linked as dependencies$/ do
+  Homebrew::FormulaDependency.count.should_not be_zero
+  check_formula_names
+end
+
+Then /^a formula should be flagged as external dependency$/ do
+  Homebrew::Formula.externals.count.should_not be_zero
+  check_formula_names
+end
+
+Then /^some formulas should be linked as conflicts$/ do
+  Homebrew::FormulaConflict.count.should_not be_zero
+  check_formula_names
 end
 
 Then /^formulas should not been updated$/ do
@@ -105,27 +156,30 @@ Then /^a new formula should be available in the database$/ do
   formula = Homebrew::Formula.select(:created_at, :updated_at).last
   formula.created_at.to_i.should == formula.updated_at.to_i # Comparing date time isn't working
   expect(Homebrew::Formula.count).to eq(@homebrew_formula_count.to_i + 1)
+  check_formula_names
 end
 
 Then /^a formula should be updated$/ do
   Homebrew::Formula.select(:created_at, :updated_at).to_a.detect do |formula|
     formula.created_at != formula.updated_at
   end.should be_present, "Expected to have a formula with a different date of update than creation but didn't"
+  check_formula_names
 end
 
 Then /^a formula should be flagged as deleted in the database$/ do
   Homebrew::Formula.where("touched_on < ?", Date.today).count.should == 1
+  check_formula_names
 end
 
-Then /^the formula (\w+) should have the following description:$/ do |name, description|
-  unless formula = Homebrew::Formula.find_by_name(name)
+Then /^the formula (.*?) should have the following description:$/ do |name, description|
+  unless formula = Homebrew::Formula.find_by(name: name)
     raise "Unable to find an Homebrew::Formula with name \"#{name}\""
   end
   formula.description.should == description
 end
 
-Then /^I should see the (\w+) formula description automatically extracted from the homepage$/ do |name|
-  unless formula = Homebrew::Formula.find_by_name(name)
+Then /^I should see the (.*?) formula description automatically extracted from the homepage$/ do |name|
+  unless formula = Homebrew::Formula.find_by(name: name)
     raise "Unable to find an Homebrew::Formula with name \"#{name}\""
   end
 
@@ -151,11 +205,15 @@ Then /^I should see the installation instruction "(.*?)"$/ do |instruction|
   page.should have_xpath("//pre[normalize-space(.)='#{instruction}']")
 end
 
+Then /^I not should see the installation instruction$/ do
+  page.should_not have_xpath("//pre")
+end
+
 Then /^I should see some formulas$/ do
   expect(page).to_not have_content("Formula list0 formulas")
 end
 
-Then /^I should not see the (\w+) formula$/ do |name|
+Then /^I should not see the (.*?) formula$/ do |name|
   page.should_not have_xpath("//h4[@class='list-group-item-heading' and normalize-space(.)='#{name}']")
 end
 
@@ -163,7 +221,11 @@ Then /^I should see no dependencies$/ do
   expect(page).to have_content("This formula has no dependencies.")
 end
 
-Then /^I should see (.*?) as a dependency$/ do |dependencies|
+Then /^I should see no conflicts$/ do
+  expect(page).to_not have_content("This formula is in conflict with")
+end
+
+Then /^I should see (.*?) as(?: a)? dependency$/ do |dependencies|
   all_dependencies = if dependencies.include?(",")
     dependencies.split(",")
   else
@@ -185,4 +247,23 @@ end
 
 Then /^I should see (.*?) as dependents?$/ do |dependent_name|
   expect(page).to have_content("This formula is required by #{dependent_name}.")
+end
+
+Then /^I should see a conflict with (.*?)$/ do |conflicts|
+  all_conflicts = if conflicts.include?(",")
+    conflicts.split(",")
+  elsif conflicts.include?(" and ")
+    conflicts.split(" and ")
+  else
+    [conflicts]
+  end
+
+  # Check h4 title
+  expect(page).to have_content("Conflicts#{all_conflicts.size}")
+
+  all_conflicts.each do |conflict_name|
+    conflict_name.strip!
+    conflict_name.gsub!(/and /, "")
+    page.should have_xpath("//ul[@id='formula_conflicts']/li[normalize-space(.)='#{conflict_name}']")
+  end
 end

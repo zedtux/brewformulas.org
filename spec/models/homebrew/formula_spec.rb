@@ -10,14 +10,20 @@ describe Homebrew::Formula do
     it { should have_db_column(:touched_on).of_type(:date) }
     it { should have_db_column(:filename).of_type(:string).with_options(null: false) }
     it { should have_db_column(:description_automatic).of_type(:boolean).with_options(default: false) }
+    it { should have_db_column(:external).of_type(:boolean).with_options(default: false, null: false) }
     it { should have_db_index(:filename) }
+    it { should have_db_index(:external) }
   end
 
   describe "Links" do
-    it { should have_many(:formula_dependencies) }
+    it { should have_many(:formula_dependencies).dependent(:destroy) }
     it { should have_many(:dependencies).through(:formula_dependencies) }
     it { should have_many(:formula_dependents).class_name("Homebrew::FormulaDependency").with_foreign_key(:dependency_id) }
     it { should have_many(:dependents).through(:formula_dependents).source(:formula) }
+    it { should have_many(:formula_conflicts).dependent(:destroy) }
+    it { should have_many(:conflicts).through(:formula_conflicts) }
+    it { should have_many(:revert_formula_conflicts).class_name("Homebrew::FormulaConflict").with_foreign_key(:conflict_id) }
+    it { should have_many(:revert_conflicts).through(:revert_formula_conflicts).source(:formula) }
   end
 
   describe "Validations" do

@@ -17,6 +17,10 @@ Given /^following (.+s) exist:$/ do |item, table|
   end
 end
 
+When /^I click the (.*?) formula name$/ do |formula_name|
+  click_on formula_name
+end
+
 Then /^show me the page$/ do
   save_and_open_page
 end

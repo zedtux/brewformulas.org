@@ -4,7 +4,7 @@ Feature: Formula dependencies
   I want to see the formula dependences
   So that I know what will be installed on my machine
 
-  Scenario: Look at a formula wihtout any dependency
+  Scenario: Look at a formula without any dependency
     Given the Zsync formula with homepage "http://zsync.moria.org.uk/" exists
     When I go to the formula Zsync on brewformulas.org
     Then I should see no dependencies
@@ -71,3 +71,11 @@ Feature: Formula dependencies
     And the formulas Daq, Libdnet, Pcre, and Pkg-config are dependents of Snort
     When I go to the formula Snort on brewformulas.org
     Then I should see Daq, Libdnet, Pcre, and 1 other formulas as dependents
+
+  Scenario: Look at a dependency which is not provided by Homebrew
+    Given the Cliclick formula with homepage "http://www.bluem.net/jump/cliclick/" exists
+    And the Cliclick formula has Xcode as external dependency
+    When I go to the formula Cliclick on brewformulas.org
+    Then I should see Xcode as dependency
+    When I click the Xcode formula name
+    And I not should see the installation instruction
