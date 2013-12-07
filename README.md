@@ -1,5 +1,4 @@
-brewformulas.org
-================
+# brewformulas.org
 
 [![Build Status](https://travis-ci.org/zedtux/brewformulas.org.png?branch=master)](https://travis-ci.org/zedtux/brewformulas.org) [![Coverage Status](https://coveralls.io/repos/zedtux/brewformulas.org/badge.png)](https://coveralls.io/r/zedtux/brewformulas.org) [![Code Climate](https://codeclimate.com/github/zedtux/brewformulas.org.png)](https://codeclimate.com/github/zedtux/brewformulas.org) [![Dependency Status](https://gemnasium.com/zedtux/brewformulas.org.png)](https://gemnasium.com/zedtux/brewformulas.org)
 
@@ -10,3 +9,7 @@ The aims of http://brewformulas.org/ is to provide a fast and simple web site to
 
 
 The website is under heavy development so feel free to check regularly in order to discover new features.
+
+# Documentation
+
+In the case you would like to get access to the technical documentation, [it's overhere](http://rdoc.info/github/zedtux/brewformulas.org/master/frames)
