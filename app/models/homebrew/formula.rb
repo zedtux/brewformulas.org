@@ -1,8 +1,7 @@
 # A Homebrew formula
 #
-# Represents a formula used by Homebrew.
-#
 # @author [guillaumeh]
+#
 module Homebrew
   class Formula < ActiveRecord::Base
 

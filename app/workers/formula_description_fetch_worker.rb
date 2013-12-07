@@ -1,5 +1,3 @@
-require "open-uri"
-require "open_uri_redirections"
 require "nokogiri"
 
 class FormulaDescriptionFetchWorker
@@ -9,17 +7,12 @@ class FormulaDescriptionFetchWorker
     formula = Homebrew::Formula.find(homebrew_formula_id)
     return unless formula.homepage
 
-    # Load homepage HTML code
-    page_content = open(formula.homepage, allow_redirections: :all).read
-    page_content.gsub!(/&shy;/, "") # Remove all Hyphen
-    page_content = page_content.encode(
-      "UTF-8",
-      invalid: :replace,
-      undef: :replace,
-      replace: "?"
-    ) # Manage non UTF-8 characters
+    # Initiate the Homebrew::HomepageContent class
+    # in order to fetch the homepage content of the
+    # formula passed as argument.
+    homepage = Homebrew::HomepageContent.new(formula)
 
-    doc = Nokogiri::HTML(page_content)
+    doc = Nokogiri::HTML(homepage.fetch)
     doc.traverse do |element|
       next unless ["p", "div", "dd"].include?(element.name)
 
@@ -32,6 +25,14 @@ class FormulaDescriptionFetchWorker
         break
       end
     end
+
+    # Read from HTML meta description
+    unless formula.description?
+      if meta_description = doc.xpath("/html/head/meta[@name='description']/@content").first.try(:value)
+        formula.update_attributes(description: meta_description, description_automatic: true)
+      end
+    end
+
   rescue OpenURI::HTTPError => error
     Rails.logger.error "Import process wasn't able to save the formula #{formula.name}: #{error}"
   end

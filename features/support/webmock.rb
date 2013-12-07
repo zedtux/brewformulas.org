@@ -31,5 +31,10 @@ stub_request(:get, "http://bibtool/").
   to_return(
     :status => 200,
     :body => File.read(File.join(fixture_root, "bibtool", "index.html")))
+stub_request(:get, "http://adobeairsdk/").
+  to_return(
+    :status => 200,
+    :body => File.read(File.join(fixture_root, "adobeairsdk", "index.html")))
+
 stub_request(:get, "http://toxygen.net/libgadu/").
   to_return(:status => [404, "Not Found"])

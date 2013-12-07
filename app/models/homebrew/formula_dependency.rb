@@ -1,6 +1,7 @@
 # Dependency link between formulas
 #
 # @author [guillaumeh]
+#
 module Homebrew
   class FormulaDependency < ActiveRecord::Base
 

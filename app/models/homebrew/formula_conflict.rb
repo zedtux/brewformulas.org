@@ -1,6 +1,7 @@
 # Conflict link between formulas
 #
 # @author [guillaumeh]
+#
 module Homebrew
   class FormulaConflict < ActiveRecord::Base
 
