@@ -26,6 +26,8 @@ class HomebrewFormulaImportWorker
   # and create/update the Homebrew::Formula
   #
   def perform
+    @import = Import.create(success: true)
+
     self.send(:get_up_to_date_git_repository)
 
     # Build the formulas folder path
@@ -40,6 +42,14 @@ class HomebrewFormulaImportWorker
     formulas.each{|formula_path| self.create_or_update_formula_from(formula_path)}
 
     Rails.logger.info "Iterated over #{formulas.size} formulas and #{Homebrew::Formula.count} in database including #{Homebrew::Formula.externals.count} external formulas."
+
+  rescue StandardError => error
+    @import.message = error.message
+    @import.success = false
+    raise
+  ensure
+    @import.ended_at = Time.now
+    @import.save
   end
 
 private
@@ -171,6 +181,7 @@ private
 
     unless homebrew_formula.save
       Rails.logger.error "Import process wasn't able to save the formula #{formula_filename}: #{homebrew_formula.errors.full_messages.to_sentence}"
+      @import.success = false
     end
   end
 end

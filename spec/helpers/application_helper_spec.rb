@@ -38,4 +38,24 @@ describe ApplicationHelper do
       end
     end
   end
+
+  describe "#import_status_class" do
+    context "passing a running Import" do
+      it "should return an empty string" do
+        helper.import_status_class(Import.new).should == ""
+      end
+    end
+    context "passing a finished Import" do
+      context "which has failed" do
+        it "should return the String \"danger\"" do
+          helper.import_status_class(Import.new(ended_at: Time.now, success: false)).should == "danger"
+        end
+      end
+      context "which has succeed" do
+        it "should return the String \"success\"" do
+          helper.import_status_class(Import.new(ended_at: Time.now, success: true)).should == "success"
+        end
+      end
+    end
+  end
 end

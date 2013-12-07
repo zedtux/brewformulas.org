@@ -1,28 +1,34 @@
 Feature: Formula list
-  In order to see all formulae
+  In order to see all formulas
   As a user
   I want the entire list of existing formulas
 
   Background:
-    Given it is currently the afternoon
-    And some formulas exist
-    And I jump in our Delorean and return to the present
+    Given some formulas exist
+    And it is currently tomorrow
 
-  Scenario: Listing the formulas 2 hours before midnight
-    Given it is currently 2 hours before midnight
+  Scenario: Looking at formula list without new imports of fomulas
     When I go to brewformulas.org
     Then I should see some formulas
 
-  Scenario: Listing the formulas 1 hour before midnight
-    Given it is currently 1 hours before midnight
+  Scenario: Looking at formula list with a running import of fomulas
+    Given an import is running
     When I go to brewformulas.org
     Then I should see some formulas
 
-  Scenario: Listing the formulas at midnight
-    Given it is currently midnight
+  Scenario: Looking at formula list with a finished import of fomulas on failure
+    Given an import has finished on failure since more than a minute
     When I go to brewformulas.org
-    Then I should not see any formula
-    Given the Github homebrew repository has been cloned
-    When the background task to get or update the formulae is executed
-    And I go to brewformulas.org
+    Then I should see some formulas
+
+  Scenario: Looking at formula list with a finished import of fomulas on success
+    Given an import has finished on success since more than a minute
+    And all formulas have been touched during the latest import
+    When I go to brewformulas.org
+    Then I should see some formulas
+
+  Scenario: Looking at formula list with a finished import of fomulas on success with one formula not touched
+    Given an import has finished on success since more than a minute
+    And all formulas have been touched during the latest import excepted A52dec
+    When I go to brewformulas.org
     Then I should see some formulas

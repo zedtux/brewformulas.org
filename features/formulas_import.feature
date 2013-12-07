@@ -1,4 +1,4 @@
-Feature: Fetch formula list
+Feature: Formulas import
   In order to show, search and look homebrew formulas
   As a robot
   I want to import the formulas from the Github repository

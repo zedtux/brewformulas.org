@@ -3,8 +3,11 @@ class FormulasController < ApplicationController
 
   def index
     current_date = Time.now.utc.to_date
-    @formula_count = Homebrew::Formula.internals.where("touched_on = ?", current_date).count
+    if import = Import.success.last
+      current_date = import.ended_at.try(:to_date)
+    end
 
+    @formula_count = Homebrew::Formula.internals.where("touched_on = ?", current_date).count
 
     # Search box
     if params[:search] && params[:search][:term].present?

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131207093430) do
+ActiveRecord::Schema.define(version: 20131207105221) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,5 +49,15 @@ ActiveRecord::Schema.define(version: 20131207093430) do
 
   add_index "homebrew_formulas", ["external"], name: "index_homebrew_formulas_on_external", using: :btree
   add_index "homebrew_formulas", ["filename"], name: "index_homebrew_formulas_on_filename", using: :btree
+
+  create_table "imports", force: true do |t|
+    t.boolean  "success"
+    t.text     "message"
+    t.datetime "ended_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "imports", ["created_at"], name: "index_imports_on_created_at", order: {"created_at"=>:desc}, using: :btree
 
 end

@@ -27,13 +27,21 @@ html lang="en"
             span.icon-bar
             span.icon-bar
             span.icon-bar
-          a.navbar-brand href="#{root_url}" Brew Formulas
+          a.navbar-brand href="#{root_url}" Homebrew Formulas
         .navbar-collapse.collapse
           ul.nav.navbar-nav
             li
               a href="http://brew.sh" target="_blank" Homebrew project
-            li
-              a href="https://github.com/zedtux/brewformulas.org" target="_blank" Brewformulas.org on Github
+            li class="dropdown"
+              a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                | Brewformulas.org
+                b class="caret"
+              ul class="dropdown-menu"
+                li
+                  a href="https://github.com/zedtux/brewformulas.org" target="_blank" Github page
+                li class="divider"
+                li
+                  a href="#{imports_path}" Imports
           = form_for :search, url: "/", method: :get, html: {class: "navbar-form navbar-right"} do |f|
             = f.label :term, "Formula"
             .form-group

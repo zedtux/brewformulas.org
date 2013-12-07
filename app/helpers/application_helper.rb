@@ -15,4 +15,10 @@ module ApplicationHelper
     end
   end
 
+  def import_status_class(import)
+    return "" if import.ended_at.nil?
+
+    import.success? ? "success" : "danger"
+  end
+
 end
