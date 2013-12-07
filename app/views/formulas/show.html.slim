@@ -2,7 +2,8 @@ h1
   = @formula.name
   - unless @formula.external?
     small= @formula.filename
-  a href="https://twitter.com/share" class="twitter-share-button" data-text="I have installed #{@formula.name} with homebrew" data-via="brewformulas" data-related="machomebrew" Tweet
+  - unless @formula.external?
+    a href="https://twitter.com/share" class="twitter-share-button" data-text="I have installed #{@formula.name} with homebrew" data-via="brewformulas" data-related="machomebrew" Tweet
 
 - if @formula.external?
   p.text-info This formula is an external dependency which means that Homebrew will not install it.
