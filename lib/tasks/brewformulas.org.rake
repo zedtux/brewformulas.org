@@ -9,7 +9,7 @@ namespace :brewformulas do
     raise "A fixture file already exists for Formula #{formula.name}!" if File.exists?(fixture_path)
 
     puts "Getting homepage..."
-    homepage = Homebrew::HomepageContent.new(formula)
+    homepage = Homepage.new(formula.homepage)
 
     puts "Saving homepage..."
     FileUtils.mkdir_p(fixture_path) unless File.exists?(fixture_path)

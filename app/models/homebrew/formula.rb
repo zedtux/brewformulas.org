@@ -5,6 +5,9 @@
 module Homebrew
   class Formula < ActiveRecord::Base
 
+    # @nodoc ~~~ virtual attributes ~~~
+    cattr_accessor :detected_service
+
     # @nodoc ~~~ special behaviours ~~~
     self.table_name = "homebrew_formulas"
 

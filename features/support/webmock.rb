@@ -3,38 +3,23 @@ include WebMock::API
 
 fixture_root = File.join(Rails.root, "features", "fixtures", "webmock")
 
-stub_request(:get, "http://a2ps/").
-  to_return(
-    :status => 200,
-    :body => File.read(File.join(fixture_root, "a2ps", "index.html")))
-stub_request(:get, "http://ack/").
-  to_return(
-    :status => 200,
-    :body => File.read(File.join(fixture_root, "ack", "index.html")))
-stub_request(:get, "http://abcl/").
-  to_return(
-    :status => 200,
-    :body => File.read(File.join(fixture_root, "abcl", "index.html")))
-stub_request(:get, "http://abook/").
-  to_return(
-    :status => 200,
-    :body => File.read(File.join(fixture_root, "abook", "index.html")))
-stub_request(:get, "http://acpica/").
-  to_return(
-    :status => 200,
-    :body => File.read(File.join(fixture_root, "acpica", "index.html")))
-stub_request(:get, "http://activemq/").
-  to_return(
-    :status => 200,
-    :body => File.read(File.join(fixture_root, "activemq", "index.html")))
-stub_request(:get, "http://bibtool/").
-  to_return(
-    :status => 200,
-    :body => File.read(File.join(fixture_root, "bibtool", "index.html")))
-stub_request(:get, "http://adobeairsdk/").
-  to_return(
-    :status => 200,
-    :body => File.read(File.join(fixture_root, "adobeairsdk", "index.html")))
+{
+  "http://www.gnu.org/software/a2ps/" => "a2ps",
+  "http://abcl.org" => "abcl",
+  "http://abook.sourceforge.net/" => "abook",
+  "http://beyondgrep.com/" => "ack",
+  "https://www.acpica.org/" => "acpica",
+  "http://activemq.apache.org/" => "activemq",
+  "http://www.gerd-neugebauer.de/software/TeX/BibTool/index.en.html" => "bibtool",
+  "http://adobe.com/products/air/sdk" => "adobeairsdk",
+  "https://github.com/pcarrier/afuse/" => "afuse",
+  "http://aircrack-ng.org/" => "aircrackng"
+}.each_pair do |url, folder|
+  stub_request(:get, url).
+    to_return(
+      :status => 200,
+      :body => File.read(File.join(fixture_root, folder, "index.html")))
+end
 
 stub_request(:get, "http://toxygen.net/libgadu/").
   to_return(:status => [404, "Not Found"])

@@ -10,30 +10,22 @@ class FormulaDescriptionFetchWorker
     # Initiate the Homebrew::HomepageContent class
     # in order to fetch the homepage content of the
     # formula passed as argument.
-    homepage = Homebrew::HomepageContent.new(formula)
+    homepage = Homepage.new(formula.homepage)
 
-    doc = Nokogiri::HTML(homepage.fetch)
-    doc.traverse do |element|
-      next unless ["p", "div", "dd"].include?(element.name)
+    service_detection = ServiceDetection.new(formula.homepage)
+    formula.detected_service = service_detection.detected_service
 
-      clean_text = element.text
-      clean_text = clean_text.gsub(/(\n|\t|\s+)/, " ")
-      clean_text = clean_text.strip
+    # Initialize a new Homebrew::Formula::Description
+    # which will be responsible to extract the formula
+    # description from the readed homepage content.
+    description = Homebrew::Formula::Description.new(formula)
+    description.lookup_from(homepage.fetch)
 
-      if description = clean_text.scan(/(^.*#{formula.name}(\)|\s\u2122|\s[\d\.]+)?\s(is\s(an?|the)|(project\s)?provides)[\s\w\'\(\)\,\-\+\/]+\.)/i).flatten.first
-        formula.update_attributes(description: description, description_automatic: true)
-        break
-      end
+    # In the case a description has been found
+    if description.found?
+      formula.update_attributes(description: description.text, description_automatic: true)
     end
-
-    # Read from HTML meta description
-    unless formula.description?
-      if meta_description = doc.xpath("/html/head/meta[@name='description']/@content").first.try(:value)
-        formula.update_attributes(description: meta_description, description_automatic: true)
-      end
-    end
-
-  rescue OpenURI::HTTPError => error
+  rescue Homepage::NotAccessibleError => error
     Rails.logger.error "Import process wasn't able to save the formula #{formula.name}: #{error}"
   end
 end
