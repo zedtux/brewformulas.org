@@ -46,3 +46,7 @@ Then /^I should see the (success|error|info)? alert "(.*?)"( on the homepage)?$/
   xpath << "contains(normalize-space(.),\"#{message}\")]"
   page.should have_xpath(xpath.join(" "))
 end
+
+Then /^the page title should be "(.*?)"$/ do |title|
+  expect(page).to have_title(title)
+end

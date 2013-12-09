@@ -1,3 +1,5 @@
+- content_for :title, AppConfig.page_title.dup << " - #{@formula.name}"
+
 h1
   = @formula.name
   - unless @formula.external?

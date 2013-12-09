@@ -1,3 +1,4 @@
+page_title: "Homebrew Formulas"
 homebrew:
   git_repository:
     url: "https://github.com/mxcl/homebrew.git"
