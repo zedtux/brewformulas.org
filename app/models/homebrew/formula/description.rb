@@ -51,14 +51,14 @@ module Homebrew
 
       def look_html_body
         @doc.traverse do |element|
-          next unless ["p", "div", "dd"].include?(element.name)
+          next unless ["p", "div", "dd", "td"].include?(element.name)
 
           clean_text = element.text
           clean_text = clean_text.gsub(/(\n|\t|\s+)/, " ")
           clean_text = clean_text.strip
 
           if description = clean_text.scan(/(^.*(?:#{@formula.name}|#{@formula.filename})(?:\)|\s\u2122|\s[\d\.]+)?\s(?:is\s(?:an?|the)|(?:project\s)?provides)[\s\w\'\(\)\,\-\+\/\.]+\.(?:\s|$))/i).flatten.first
-            @description_text = description.strip
+            @description_text = description.strip.gsub(/\s+/, " ")
             break
           end
         end

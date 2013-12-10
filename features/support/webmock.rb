@@ -13,7 +13,8 @@ fixture_root = File.join(Rails.root, "features", "fixtures", "webmock")
   "http://www.gerd-neugebauer.de/software/TeX/BibTool/index.en.html" => "bibtool",
   "http://adobe.com/products/air/sdk" => "adobeairsdk",
   "https://github.com/pcarrier/afuse/" => "afuse",
-  "http://aircrack-ng.org/" => "aircrackng"
+  "http://aircrack-ng.org/" => "aircrackng",
+  "http://www.zsh.org/" => "zsh"
 }.each_pair do |url, folder|
   stub_request(:get, url).
     to_return(
