@@ -44,7 +44,7 @@ module SoftwareDescriptionFetchers
 
       def look_html_body
         @nokogiri_html.traverse do |element|
-          next unless ["p", "div", "dd", "td", "li"].include?(element.name)
+          next unless %w(p div dd td li).include?(element.name)
 
           clean_text = self.send(:clean_text, element.text)
 
