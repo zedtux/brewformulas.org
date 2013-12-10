@@ -13,7 +13,7 @@ module SoftwareDescriptionFetchers
     private
 
       def fetch_description
-        description = @nokogiri_html.xpath("//td[contains(@class, 'psdescription')]/p/text()").first
+        description = @nokogiri_html.xpath("//span[@itemprop='description']/text()").first
         description = description.try(:text)
         description.strip if description
       end
