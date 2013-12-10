@@ -15,6 +15,7 @@ fixture_root = File.join(Rails.root, "features", "fixtures", "webmock")
   "http://aircrack-ng.org/" => "aircrackng",
   "http://www.gerd-neugebauer.de/software/TeX/BibTool/index.en.html" => "bibtool",
   "http://www.celt-codec.org/" => "celt",
+  "http://www.monkeymental.com/" => "cdpr",
   "https://code.google.com/p/zopfli/" => "zopfli",
   "http://www.zsh.org/" => "zsh"
 }.each_pair do |url, folder|
