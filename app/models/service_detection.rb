@@ -42,6 +42,8 @@ private
     @service_name = case @url
     when /https?\:\/\/.*github.com\/.*/
       :github
+    when /https?:\/\/code.google.com\/.*/
+      :google_code
     else
       :unknown
     end

@@ -14,6 +14,7 @@ fixture_root = File.join(Rails.root, "features", "fixtures", "webmock")
   "http://adobe.com/products/air/sdk" => "adobeairsdk",
   "https://github.com/pcarrier/afuse/" => "afuse",
   "http://aircrack-ng.org/" => "aircrackng",
+  "https://code.google.com/p/zopfli/" => "zopfli",
   "http://www.zsh.org/" => "zsh"
 }.each_pair do |url, folder|
   stub_request(:get, url).
