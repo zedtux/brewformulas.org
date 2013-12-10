@@ -10,10 +10,11 @@ fixture_root = File.join(Rails.root, "features", "fixtures", "webmock")
   "http://beyondgrep.com/" => "ack",
   "https://www.acpica.org/" => "acpica",
   "http://activemq.apache.org/" => "activemq",
-  "http://www.gerd-neugebauer.de/software/TeX/BibTool/index.en.html" => "bibtool",
   "http://adobe.com/products/air/sdk" => "adobeairsdk",
   "https://github.com/pcarrier/afuse/" => "afuse",
   "http://aircrack-ng.org/" => "aircrackng",
+  "http://www.gerd-neugebauer.de/software/TeX/BibTool/index.en.html" => "bibtool",
+  "http://www.celt-codec.org/" => "celt",
   "https://code.google.com/p/zopfli/" => "zopfli",
   "http://www.zsh.org/" => "zsh"
 }.each_pair do |url, folder|

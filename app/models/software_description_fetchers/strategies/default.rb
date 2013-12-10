@@ -18,15 +18,37 @@ module SoftwareDescriptionFetchers
 
     private
 
+      def clean_text(text)
+        clean_text = text.gsub(/(\n|\t|\s+)/, " ")
+        clean_text = clean_text.strip
+        clean_text
+      end
+
+      def regex
+        %r{
+          (                                             # Capture the entire line
+            ^.*                                         # Can begining with anything
+            (?:#{@software_name}|#{@software_filename}) # Then search the software name or filename
+            (?:\)|\s\u2122|\s[\d\.]+|\scodec)?          # Following a close parenthese, a TM symbol, a version number, or the codec word
+            \s
+            (?:
+              is\s(?:an?|the)|                          # Following a is a, is an, or is the
+              (?:project\s)?provides                    # Or project provides, or just provide
+            )
+            [\s\w\'\(\)\,\-\+\/\.]+                     # All allowed characters in the description sentence
+            \.                                          # And then a dot to end the sentence
+            (?:\s|$)                                    # Finally it must ends with a space or end of line
+          )
+        }ix
+      end
+
       def look_html_body
         @nokogiri_html.traverse do |element|
           next unless ["p", "div", "dd", "td"].include?(element.name)
 
-          clean_text = element.text
-          clean_text = clean_text.gsub(/(\n|\t|\s+)/, " ")
-          clean_text = clean_text.strip
+          clean_text = self.send(:clean_text, element.text)
 
-          if description = clean_text.scan(/(^.*(?:#{@software_name}|#{@software_filename})(?:\)|\s\u2122|\s[\d\.]+)?\s(?:is\s(?:an?|the)|(?:project\s)?provides)[\s\w\'\(\)\,\-\+\/\.]+\.(?:\s|$))/i).flatten.first
+          if description = clean_text.scan(self.send(:regex)).flatten.first
             # Stop and return the description
             return description.strip.gsub(/\s+/, " ")
           end
