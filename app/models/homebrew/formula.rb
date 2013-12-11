@@ -31,8 +31,9 @@ module Homebrew
     validates :name, presence: true
 
     # @nodoc ~~~ scopes ~~~
-    scope :externals, -> { where(external: true) }
     scope :internals, -> { where(external: false) }
+    scope :touched_on, ->(date) { where(touched_on: date) }
+    scope :touched_on_or_external, ->(date) { where("touched_on = ? OR external IS TRUE", date) }
 
     # @nodoc ~~~ custom class methods ~~~
 

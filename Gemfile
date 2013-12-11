@@ -32,6 +32,7 @@ group :development do
   gem 'capistrano'
   gem 'capistrano-rails'
   gem 'capistrano-bundler'
+  gem 'rails_best_practices'
 end
 
 group :test do

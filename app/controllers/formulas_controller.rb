@@ -27,15 +27,18 @@ private
   end
 
   def search
-    if params[:search] && params[:search][:term].present?
-      @formulas = Homebrew::Formula.where("touched_on = ? OR external IS TRUE", current_date)
-      @formulas = @formulas.where("filename iLIKE ? OR name iLIKE ?", "%#{params[:search][:term]}%", "%#{params[:search][:term]}%")
+    @formulas = if params[:search] && params[:search][:term].present?
+      formulas = Homebrew::Formula.touched_on_or_external(current_date)
+      # Search even external dependencies
+      formulas.where(
+        "filename iLIKE ? OR name iLIKE ?",
+        "%#{params[:search][:term]}%",
+        "%#{params[:search][:term]}%"
+      )
     else
-      @formulas = Homebrew::Formula.where("touched_on = ?", current_date)
       # Don't show external dependencies in the big list
-      @formulas = @formulas.internals
-    end
-    @formulas = @formulas.order(:name)
+      formulas = Homebrew::Formula.touched_on(current_date).internals
+    end.order(:name)
   end
 
   def current_object

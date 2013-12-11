@@ -16,7 +16,7 @@ module ApplicationHelper
   end
 
   def import_status_class(import)
-    return "" if import.ended_at.nil?
+    return "" unless import.ended_at
 
     import.success? ? "success" : "danger"
   end

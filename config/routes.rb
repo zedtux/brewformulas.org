@@ -4,9 +4,9 @@ require "sidetiq/web"
 BrewformulasOrg::Application.routes.draw do
   mount Sidekiq::Web => "/sidekiq"
 
-  resources :imports
+  resources :imports, only: :index
 
-  resources :formulas, path: "" do
+  resources :formulas, only: [:index, :show], path: "" do
     member do
       get "refresh_description"
     end
