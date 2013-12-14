@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/thoughtbot/shoulda-matchers.git
-  revision: 8a0bf45d0f85d5b6583f611d1e720ea9276b4b80
+  revision: d5e1a94aa2c566318a850f76c9fdd673efcfdcc2
   specs:
     shoulda-matchers (2.4.0)
       activesupport (>= 3.0.0)
@@ -214,7 +214,7 @@ GEM
       rainbow (>= 1.1.4)
     ruby-progressbar (1.2.0)
     safe_yaml (0.9.7)
-    sexp_processor (4.4.0)
+    sexp_processor (4.4.1)
     sidekiq (2.15.2)
       celluloid (>= 0.15.2)
       connection_pool (>= 1.0.0)
@@ -275,7 +275,7 @@ GEM
     turbolinks (2.0.0)
       coffee-rails
     tzinfo (0.3.38)
-    uglifier (2.3.2)
+    uglifier (2.3.3)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
     webmock (1.16.0)
