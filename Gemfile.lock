@@ -36,6 +36,7 @@ GEM
     appconfig (0.1.1)
     arel (4.0.1)
     array_is_uniq (0.0.1)
+    ast (1.1.0)
     atomic (1.1.14)
     awesome_print (1.2.0)
     better_errors (1.0.1)
@@ -147,10 +148,14 @@ GEM
     nokogiri (1.6.0)
       mini_portile (~> 0.5.0)
     open_uri_redirections (0.1.4)
+    parser (2.0.0)
+      ast (~> 1.1)
+      slop (~> 3.4, >= 3.4.5)
     pg (0.17.0)
     pluralize_no_count_if_one (0.0.1)
       railties
     polyglot (0.3.3)
+    powerpack (0.0.9)
     puma (2.7.1)
       rack (>= 1.1, < 2.0)
     quiet_assets (1.0.2)
@@ -183,6 +188,7 @@ GEM
       activesupport (= 4.0.2)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
+    rainbow (1.1.4)
     rake (10.1.0)
     redis (3.0.6)
     redis-namespace (1.4.1)
@@ -202,6 +208,10 @@ GEM
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
+    rubocop (0.15.0)
+      parser (~> 2.0)
+      powerpack (~> 0.0.6)
+      rainbow (>= 1.1.4)
     ruby-progressbar (1.2.0)
     safe_yaml (0.9.7)
     sexp_processor (4.4.0)
@@ -232,6 +242,7 @@ GEM
       activesupport (>= 3.0, < 4.1)
       railties (>= 3.0, < 4.1)
       slim (~> 2.0)
+    slop (3.4.7)
     sprockets (2.10.1)
       hike (~> 1.2)
       multi_json (~> 1.0)
@@ -310,6 +321,7 @@ DEPENDENCIES
   rails_layout
   rake
   rspec-rails
+  rubocop
   shoulda-matchers!
   sidekiq
   sidetiq (~> 0.4.3)

@@ -6,8 +6,8 @@ class CreateHomebrewFormulaConflictsTable < ActiveRecord::Migration
       t.timestamps
     end
     add_index :homebrew_formula_conflicts,
-      [:formula_id, :conflict_id],
-      unique: true,
-      name: "homebrew_formula_conflicts_uniqueness"
+              [:formula_id, :conflict_id],
+              unique: true,
+              name: 'homebrew_formula_conflicts_uniqueness'
   end
 end

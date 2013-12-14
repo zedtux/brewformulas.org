@@ -26,10 +26,12 @@
 
 module EmailHelpers
   def current_email_address
-    # Replace with your a way to find your current email. e.g @current_user.email
-    # last_email_address will return the last email address used by email spec to find an email.
+    # Replace with your a way to find your current email.
+    # e.g @current_user.email
+    # last_email_address will return the last email address used by email spec
+    # to find an email.
     # Note that last_email_address will be reset after each Scenario.
-    last_email_address || "example@example.com"
+    last_email_address || 'example@example.com'
   end
 end
 
@@ -65,7 +67,7 @@ Then /^(?:I|they|"([^"]*?)") should receive (an|no|\d+) emails? with subject \/(
 end
 
 Then /^(?:I|they|"([^"]*?)") should receive an email with the following body:$/ do |address, expected_body|
-  open_email(address, :with_text => expected_body)
+  open_email(address, with_text: expected_body)
 end
 
 #
@@ -78,19 +80,19 @@ When /^(?:I|they|"([^"]*?)") opens? the email$/ do |address|
 end
 
 When /^(?:I|they|"([^"]*?)") opens? the email with subject "([^"]*?)"$/ do |address, subject|
-  open_email(address, :with_subject => subject)
+  open_email(address, with_subject: subject)
 end
 
 When /^(?:I|they|"([^"]*?)") opens? the email with subject \/([^"]*?)\/$/ do |address, subject|
-  open_email(address, :with_subject => Regexp.new(subject))
+  open_email(address, with_subject: Regexp.new(subject))
 end
 
 When /^(?:I|they|"([^"]*?)") opens? the email with text "([^"]*?)"$/ do |address, text|
-  open_email(address, :with_text => text)
+  open_email(address, with_text: text)
 end
 
 When /^(?:I|they|"([^"]*?)") opens? the email with text \/([^"]*?)\/$/ do |address, text|
-  open_email(address, :with_text => Regexp.new(text))
+  open_email(address, with_text: Regexp.new(text))
 end
 
 #
@@ -126,15 +128,15 @@ Then /^(?:I|they) should see \/([^\"]*)\/ in the email "([^"]*?)" header$/ do |t
 end
 
 Then /^I should see it is a multi\-part email$/ do
-    current_email.should be_multipart
+  current_email.should be_multipart
 end
 
 Then /^(?:I|they) should see "([^"]*?)" in the email html part body$/ do |text|
-    current_email.html_part.body.to_s.should include(text)
+  current_email.html_part.body.to_s.should include(text)
 end
 
 Then /^(?:I|they) should see "([^"]*?)" in the email text part body$/ do |text|
-    current_email.text_part.body.to_s.should include(text)
+  current_email.text_part.body.to_s.should include(text)
 end
 
 #
@@ -185,7 +187,8 @@ end
 
 #
 # Debugging
-# These only work with Rails and OSx ATM since EmailViewer uses RAILS_ROOT and OSx's 'open' command.
+# These only work with Rails and OSx ATM since EmailViewer uses RAILS_ROOT
+# and OSx's 'open' command.
 # Patches accepted. ;)
 #
 

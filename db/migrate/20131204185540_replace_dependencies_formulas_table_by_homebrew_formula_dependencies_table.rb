@@ -8,8 +8,8 @@ class ReplaceDependenciesFormulasTableByHomebrewFormulaDependenciesTable < Activ
       t.timestamps
     end
     add_index :homebrew_formula_dependencies,
-      [:formula_id, :dependency_id],
-      unique: true,
-      name: "homebrew_formula_dependencies_uniqueness"
+              [:formula_id, :dependency_id],
+              unique: true,
+              name: 'homebrew_formula_dependencies_uniqueness'
   end
 end

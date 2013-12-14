@@ -1,6 +1,6 @@
 set :stage, :production
-set :branch, "master"
-set :rails_env, "production"
+set :branch, 'master'
+set :rails_env, 'production'
 
 # Simple Role Syntax
 # ==================
@@ -17,11 +17,16 @@ set :rails_env, "production"
 # definition into the server list. The second argument
 # something that quacks like a has can be used to set
 # extended properties on the server.
-server "www.brewformulas.org", user: "brewformulas", roles: %w{web app db}, primary: true
+server 'www.brewformulas.org',
+       user: 'brewformulas',
+       roles: %w{web app db},
+       primary: true
 
 # you can set custom ssh options
-# it's possible to pass any option but you need to keep in mind that net/ssh understand limited list of options
-# you can see them in [net/ssh documentation](http://net-ssh.github.io/net-ssh/classes/Net/SSH.html#method-c-start)
+# it's possible to pass any option but you need to keep in mind that
+# net/ssh understand limited list of options
+# you can see them in net/ssh documentation
+# http://net-ssh.github.io/net-ssh/classes/Net/SSH.html#method-c-start
 # set it globally
 # set :ssh_options, {
 # keys: %w(/home/rlisowski/.ssh/id_rsa),

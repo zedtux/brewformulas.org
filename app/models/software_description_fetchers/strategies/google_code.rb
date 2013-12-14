@@ -1,23 +1,27 @@
 module SoftwareDescriptionFetchers
   module Strategies
+    #
+    # Google code strategy to fetch the software description
+    #
+    # @author [guillaumeh]
+    #
     class GoogleCode
-
       def initialize(html_doc)
         @nokogiri_html = html_doc
       end
 
       def fetch
-        self.send(:fetch_description)
+        fetch_description
       end
 
-    private
+      private
 
       def fetch_description
-        description = @nokogiri_html.xpath("//span[@itemprop='description']/text()").first
+        xpath = '//span[@itemprop="description"]/text()'
+        description = @nokogiri_html.xpath(xpath).first
         description = description.try(:text)
         description.strip if description
       end
-
     end
   end
 end

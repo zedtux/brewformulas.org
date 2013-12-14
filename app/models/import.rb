@@ -2,7 +2,6 @@
 #
 # @author [guillaumeh]
 class Import < ActiveRecord::Base
-
   # @nodoc ~~~ special behaviours ~~~
 
   # @nodoc ~~~ callbacks ~~~
@@ -17,5 +16,4 @@ class Import < ActiveRecord::Base
   # @nodoc ~~~ custom class methods ~~~
 
   # @nodoc ~~~ custom instance methods ~~~
-
 end

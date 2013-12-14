@@ -1,0 +1,4 @@
+AllCops:
+  Excludes:
+    - !ruby/regexp /\/db\/.*$/
+    - !ruby/regexp /\/features\/.*$/

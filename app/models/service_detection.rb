@@ -4,6 +4,7 @@
 # @author [guillaumeh]
 #
 class ServiceDetection
+  attr_reader :detected_service
 
   #
   # Initialize a new ServiceDetection instance
@@ -11,19 +12,10 @@ class ServiceDetection
   #
   def initialize(url)
     @url = url
-    @service_name = nil
-    self.send(:detect)
+    detect
   end
 
-  #
-  # Get the name of the detect service
-  #
-  # @return [Symbol] name of the detected service
-  def detected_service
-    @service_name
-  end
-
-private
+  private
 
   #
   # Detect from the given URL the service.
@@ -39,13 +31,13 @@ private
   # prefere to use that in order to be sure and fast.
   #
   def detect
-    @service_name = case @url
-    when /https?\:\/\/.*github.com\/.*/
-      :github
-    when /https?:\/\/code.google.com\/.*/
-      :google_code
-    else
-      :unknown
-    end
+    @detected_service = case @url
+                        when %r{https?\:\/\/.*github.com\/.*}x
+                          :github
+                        when %r{https?:\/\/code.google.com\/.*}x
+                          :google_code
+                        else
+                          :unknown
+                        end
   end
 end

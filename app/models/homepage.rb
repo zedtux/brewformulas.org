@@ -1,5 +1,5 @@
-require "open-uri"
-require "open_uri_redirections"
+require 'open-uri'
+require 'open_uri_redirections'
 
 #
 # Get the HTML code from a given home page URL
@@ -23,12 +23,12 @@ class Homepage
   def fetch
     # Load homepage HTML code
     content = open(@url, allow_redirections: :all).read
-    content.gsub!(/&shy;/, "") # Remove all Hyphen
+    content.gsub!(/&shy;/, '') # Remove all Hyphen
     content.encode(
-      "UTF-8",
+      'UTF-8',
       invalid: :replace,
       undef: :replace,
-      replace: "?"
+      replace: '?'
     ) # Manage non UTF-8 characters
 
   rescue OpenURI::HTTPError => error

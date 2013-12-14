@@ -1,15 +1,23 @@
 module Homebrew
   class Formula
+    #
+    # Extract the Homebrew::Formula description from its homepage
+    #
+    # @author [guillaumeh]
+    #
     class Description
+      attr_reader :text
 
       #
-      # Intanciate a new Homebrew::Formula::Description
-      # @param  formula [Homebrew::Formula] Formula for which the description has to be extracted
+      # Instanciate a new Homebrew::Formula::Description
+      # @param  formula [Homebrew::Formula] Formula for which the description
+      #   has to be extracted
       #
-      # @return [Homebrew::Formula::Description] Returns a new instance of Homebrew::Formula::Description
+      # @return [Homebrew::Formula::Description] Returns a new instance of
+      #   Homebrew::Formula::Description
       def initialize(formula)
         @formula = formula
-        @description_text = nil
+        @text = nil
       end
 
       #
@@ -17,8 +25,8 @@ module Homebrew
       # @param  content [String] String containing somewhere the description
       #
       def lookup_from(content)
-        @nokogiri_html = Nokogiri::HTML(content)
-        self.send(:grab_description)
+        @html = Nokogiri::HTML(content)
+        grab_description
       end
 
       #
@@ -26,35 +34,27 @@ module Homebrew
       #
       # @return [Boolean] true if a description has been found otherwise false
       def found?
-        @description_text.present?
+        @text.present?
       end
 
-      #
-      # Get the extracted description text
-      #
-      # @return [String] Extracted description
-      def text
-        @description_text
-      end
+      private
 
-    private
-
-      def grab_description
-        fetcher = case @formula.detected_service
+      def software_description_strategy
+        case @formula.detected_service
         when :github
-          SoftwareDescriptionFetchers::Strategies::Github.new(@nokogiri_html)
+          SoftwareDescriptionFetchers::Strategies::Github.new(@html)
         when :google_code
-          SoftwareDescriptionFetchers::Strategies::GoogleCode.new(@nokogiri_html)
+          SoftwareDescriptionFetchers::Strategies::GoogleCode.new(@html)
         when :unknown
           SoftwareDescriptionFetchers::Strategies::Default.new(
-            @nokogiri_html,
-            name: @formula.name,
-            filename: @formula.filename
+            @html, name: @formula.name, filename: @formula.filename
           )
         end
-        @description_text = fetcher.fetch
       end
 
+      def grab_description
+        @text = software_description_strategy.fetch
+      end
     end
   end
 end

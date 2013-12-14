@@ -1,64 +1,55 @@
 module SoftwareDescriptionFetchers
   module Strategies
+    #
+    # Default strategy when the homepage is not known
+    #
+    # @author [guillaumeh]
+    #
     class Default
+      def initialize(nokogiri_html, options = {})
+        if options[:name].blank? || options[:filename].blank?
+          fail ArgumentError, 'You must provide a name and a filename'
+        end
 
-      def initialize(nokogiri_html, options={})
-        raise ArgumentError, "You must provide a name and a filename" if options[:name].blank? || options[:filename].blank?
-
-        @software_name = options[:name]
-        @software_filename = options[:filename]
-
-        @nokogiri_html = nokogiri_html
+        @software_name, @software_filename = options[:name], options[:filename]
+        @html = nokogiri_html
       end
 
       def fetch
-        description = self.send(:look_html_body)
-        description ? description : self.send(:look_html_head)
+        description = look_html_body
+        description ? description : look_html_head
       end
 
-    private
+      private
 
       def clean_text(text)
-        clean_text = text.gsub(/(\n|\t|\s+)/, " ")
+        clean_text = text.gsub(/(\n|\t|\s+)/, ' ')
         clean_text = clean_text.strip
         clean_text
       end
 
       def regex
-        %r{
-          (                                             # Capture the entire line
-            ^.*                                         # Can begining with anything
-            (?:#{@software_name}|#{@software_filename}) # Then search the software name or filename
-            (?:\)|\s\u2122|\s[\d\.]+|\scodec)?          # Following a close parenthese, a TM symbol, a version number, or the codec word
-            \s
-            (?:
-              is\s(?:an?|the)|                          # Following a is a, is an, or is the
-              (?:project\s)?provides                    # Or project provides, or just provide
-            )
-            [\s\w\'\(\)\,\-\+\/\.]+                     # All allowed characters in the description sentence
-            \.                                          # And then a dot to end the sentence
-            (?:\s|$)                                    # Finally it must ends with a space or end of line
-          )
-        }ix
+        /(^.*(?:#{@software_name}|#{@software_filename})
+          (?:\)|\s\u2122|\s[\d\.]+|\scodec)?\s(?:is\s
+          (?:an?|the)|(?:project\s)?provides)[\s\w\'\(\)\,\-\+\/\.]+\.(?:\s|$)
+        )/ix
       end
 
       def look_html_body
-        @nokogiri_html.traverse do |element|
+        @html.traverse do |element|
           next unless %w(p div dd td li).include?(element.name)
 
-          clean_text = self.send(:clean_text, element.text)
-
-          if description = clean_text.scan(self.send(:regex)).flatten.first
-            # Stop and return the description
-            return description.strip.gsub(/\s+/, " ")
-          end
+          clean_text = clean_text(element.text)
+          description = clean_text.scan(regex).flatten.first
+          # Stop and return the description
+          return description.strip.gsub(/\s+/, ' ') if description
         end
       end
 
       def look_html_head
-        @nokogiri_html.xpath("/html/head/meta[@name='description']/@content").first.try(:value)
+        xpath = '/html/head/meta[@name="description"]/@content'
+        @html.xpath(xpath).first.try(:value)
       end
-
     end
   end
 end

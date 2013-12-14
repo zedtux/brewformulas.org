@@ -1,21 +1,25 @@
 module SoftwareDescriptionFetchers
   module Strategies
+    #
+    # Strategy to fetch description from Github
+    #
+    # @author [guillaumeh]
+    #
     class Github
-
       def initialize(html_doc)
         @doc = html_doc
       end
 
       def fetch
-        self.send(:fetch_description)
+        fetch_description
       end
 
-    private
+      private
 
       def fetch_description
-        @doc.xpath("//div[contains(@class, 'repository-description')]/p/text()").first.try(:text)
+        xpath = '//div[contains(@class, "repository-description")]/p/text()'
+        @doc.xpath(xpath).first.try(:text)
       end
-
     end
   end
 end

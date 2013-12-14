@@ -33,6 +33,7 @@ group :development do
   gem 'capistrano-rails'
   gem 'capistrano-bundler'
   gem 'rails_best_practices'
+  gem 'rubocop'
 end
 
 group :test do

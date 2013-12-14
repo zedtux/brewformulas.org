@@ -6,6 +6,6 @@ class CreateImportsTable < ActiveRecord::Migration
       t.datetime :ended_at
       t.timestamps
     end
-    add_index :imports, :created_at, order: {created_at: :desc}
+    add_index :imports, :created_at, order: { created_at: :desc }
   end
 end
