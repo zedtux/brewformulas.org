@@ -64,33 +64,28 @@ namespace :deploy do
     on roles(:app) do
       current_stage = fetch(:stage)
       puma_log = "#{shared_path}/log/puma-#{fetch(:stage)}.log"
-      execute <<-eos
-        cd #{current_path} &&
-        bundle exec puma
-        -b '#{puma_sock}'
-        -e #{current_stage}
-        -t2:4 --control '#{puma_control}'
-        -S #{puma_state} >> #{puma_log} 2>&1 &", pty: false
-      eos
+      execute "cd #{current_path} && " \
+              "bundle exec puma " \
+              "-b '#{puma_sock}' " \
+              "-e #{current_stage} " \
+              "-t2:4 --control '#{puma_control}' " \
+              "-S #{puma_state} >> #{puma_log} 2>&1 &"
     end
   end
 
   desc 'Stop the application'
   task :stop do
     on roles(:app) do
-      execute <<-eos
-        cd #{current_path} &&
-        bundle exec pumactl -S #{puma_state} stop
-      eos
+      execute "cd #{current_path} && " \
+              "bundle exec pumactl -S #{puma_state} stop"
     end
   end
 
   desc 'Restart the application'
   task :restart do
     on roles(:app) do
-      execute <<-eos
-        cd #{current_path} &&
-        bundle exec pumactl -S #{puma_state} restart
+      execute "cd #{current_path} && " \
+              "bundle exec pumactl -S #{puma_state} restart"
       eos
     end
   end
@@ -98,10 +93,8 @@ namespace :deploy do
   desc 'Status of the application'
   task :status do
     on roles(:app) do
-      execute <<-eos
-        cd #{current_path} &&
-        bundle exec pumactl -S #{puma_state} stats
-      eos
+      execute "cd #{current_path} && " \
+              "bundle exec pumactl -S #{puma_state} stats"
     end
   end
 end
