@@ -1,0 +1,382 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN"
+                      "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta encoding="utf8">
+  <title>The LLVM Compiler Infrastructure Project</title>
+  <link rel="stylesheet" href="/llvm.css" type="text/css">
+</head>
+
+<body style="margin-left:0;">
+
+<div class="www_title">
+  The <strong>LLVM</strong> Compiler Infrastructure
+</div>
+
+<table width="100%" border=0 cellpadding=10>
+<tr>
+<td valign=top align=center>
+
+<!-- <img src="img/DragonSmall.png" width="136" height="136"> -->
+
+<b>Site Map:</b>
+<div class="www_sidebar">
+<a href="/">Overview</a><br>
+<a href="/Features.html">Features</a><br>
+<a href="/docs/">Documentation</a><br>
+<a href="/docs/CommandGuide/">Command Guide</a><br>
+<a href="/docs/FAQ.html">FAQ</a><br>
+<a href="/pubs/">Publications</a><br>
+<a href="/ProjectsWithLLVM/">LLVM&nbsp;Projects</a><br>
+<a href="/OpenProjects.html">Open&nbsp;Projects</a><br>
+<a href="/Users.html">LLVM&nbsp;Users</a><br>
+<a href="/bugs/">Bug&nbsp;Database</a><br>
+<a href="/Logo.html">LLVM Logo</a><br>
+<a href="http://blog.llvm.org/">Blog</a><br>
+<a href="/devmtg/">Meetings</a><br>
+</div>
+
+<br>
+
+<b>Download!</b>
+<div class="www_sidebar">
+<span style="font-size:smaller">Download now:</span>
+<a href="/releases/download.html#3.3"><b>LLVM&nbsp;3.3</b></a><br>
+<a href="/releases/">All Releases</a><br>
+<a href="/apt/">APT Packages</a><br>
+<a href="/builds/">Win Installer</a><br>
+<br>
+
+<span style="font-size:smaller">View the open-source</span><br>
+<a href="/releases/3.3/LICENSE.TXT"><b>license</b></a>
+</div>
+
+<br>
+
+<b>Search&nbsp;this&nbsp;Site</b>
+
+<div class="www_sidebar">
+  <form action="http://www.google.com/search" method="get">
+    <div>
+      <input type="hidden" name="sitesearch" value="llvm.org">
+      <input type=text name=q size=11><br>
+      <input type=submit value="Search!" name="submit">
+    </div>
+  </form>
+</div>
+
+<br>
+
+<b>Useful&nbsp;Links</b>
+<div class="www_sidebar">
+  <span style="font-size:smaller">Mailing Lists:</span><br>
+  <a href="http://lists.cs.uiuc.edu/mailman/listinfo/llvm-announce">LLVM-announce</a><br>
+  <a href="http://lists.cs.uiuc.edu/mailman/listinfo/llvmdev">LLVM-dev</a><br>
+  <a href="http://lists.cs.uiuc.edu/mailman/listinfo/llvmbugs">LLVM-bugs</a><br>
+  <a href="http://lists.cs.uiuc.edu/mailman/listinfo/llvm-commits">LLVM-commits</a><br>
+  <a href="http://lists.cs.uiuc.edu/mailman/listinfo/llvm-branch-commits">LLVM-branch-commits</a><br>
+  <a href="http://lists.cs.uiuc.edu/mailman/listinfo/llvm-testresults">LLVM-testresults</a>
+  <br><br>
+
+  <span style="font-size:smaller">IRC Channel:</span><br>
+  <a href="/docs/#irc">irc.oftc.net #llvm</a>
+
+  <br><br>
+
+  <span style="font-size:smaller">Dev. Resources:</span><br>
+  <a href="/doxygen/">doxygen</a>
+  <a href="/viewvc/llvm-project/">ViewVC</a><br>
+  <a href="http://blog.llvm.org/">Blog</a>
+  <a href="/bugs/">Bugzilla</a><br>
+  <a href="http://lab.llvm.org:8011/">Buildbot</a>
+  <a href="http://llvm.org/perf">LNT</a>
+  <a href="http://buildd-clang.debian.net/coverage/">Coverage</a>
+</div>
+
+<br>
+
+<b>Release&nbsp;Emails</b>
+<div class="www_sidebar">
+  <span style="font-size:smaller">
+  3.3: <a href="http://lists.cs.uiuc.edu/pipermail/llvm-announce/2013-June/000046.html">Jun 2013</a><br>
+  3.2: <a href="http://lists.cs.uiuc.edu/pipermail/llvm-announce/2012-December/000043.html">Dec 2012</a><br>
+  3.1: <a href="http://lists.cs.uiuc.edu/pipermail/llvm-announce/2012-May/000041.html">May 2012</a><br>
+  3.0: <a href="http://lists.cs.uiuc.edu/pipermail/llvm-announce/2011-December/000039.html">Dec 2011</a><br>
+  2.9: <a href="http://lists.cs.uiuc.edu/pipermail/llvm-announce/2011-April/000037.html">Apr 2011</a><br>
+  2.8: <a href="http://lists.cs.uiuc.edu/pipermail/llvm-announce/2010-October/000036.html">Oct  2010</a><br>
+  2.7: <a href="http://lists.cs.uiuc.edu/pipermail/llvm-announce/2010-April/000034.html">Apr 2010</a><br>
+  2.6: <a href="http://lists.cs.uiuc.edu/pipermail/llvm-announce/2009-October/000033.html">Oct 2009</a><br>
+  2.5: <a href="http://lists.cs.uiuc.edu/pipermail/llvm-announce/2009-March/000031.html">Mar 2009</a><br>
+  2.4: <a href="http://lists.cs.uiuc.edu/pipermail/llvm-announce/2008-November/000030.html">Nov 2008</a><br>
+  2.3: <a href="http://lists.cs.uiuc.edu/pipermail/llvm-announce/2008-June/000027.html">Jun 2008</a><br>
+  2.2: <a href="http://lists.cs.uiuc.edu/pipermail/llvm-announce/2008-February/000025.html">Feb 2008</a><br>
+  2.1: <a href="http://lists.cs.uiuc.edu/pipermail/llvm-announce/2007-September/000024.html">Sep 2007</a><br>
+  2.0: <a href="http://lists.cs.uiuc.edu/pipermail/llvm-announce/2007-May/000023.html">May 2007</a><br>
+  <a href="/OldNews.html">Older News</a><br>
+  </span>
+</div>
+
+<br>
+
+<b>Developer&nbsp;Mtgs</b>
+<div class="www_sidebar">
+  <span style="font-size:smaller">
+  <a href="http://llvm.org/devmtg/2014-04/">Apr 7, 2014</a><br>
+  <a href="http://llvm.org/devmtg/2013-11/">Nov 6, 2013</a><br>
+  <a href="http://llvm.org/devmtg/2013-04/">Apr 29, 2013</a><br>
+  <a href="http://llvm.org/devmtg/2012-11/">Nov 7, 2012</a><br>
+  <a href="http://llvm.org/devmtg/2012-04-12/">Apr 12, 2012</a><br>
+  <a href="http://llvm.org/devmtg/2011-11/">Nov 18, 2011</a><br>
+  <a href="http://llvm.org/devmtg/2011-09-16/">Sep 16, 2011</a><br>
+  <a href="http://llvm.org/devmtg/2010-11/">Nov 4, 2010</a><br>
+  <a href="http://llvm.org/devmtg/2009-10/">Oct 2, 2009</a><br>
+  <a href="http://llvm.org/devmtg/2008-08-23/">Aug 23, 2008</a><br>
+  <a href="http://llvm.org/devmtg/2008-08/">Aug 1, 2008</a><br>
+  <a href="http://llvm.org/devmtg/2007-05/">May 25, 2007</a><br>
+  </span>
+</div>
+
+<br>
+
+
+<span style="font-size:smaller">Maintained by:<br> <a href="mailto:sabre@nondot.org">Chris
+Lattner</a></span>
+
+</td>
+<td valign=top>
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="95%">
+<!-- Start of the left bar... -->
+<tr>
+<td valign="top" style="width:64%">
+
+<div class="www_sectiontitle">LLVM Overview</div>
+
+<div class="www_text">
+
+<p>The LLVM Project is a collection of modular and reusable compiler and
+   toolchain technologies.  Despite its name, LLVM has little to do with
+   traditional virtual machines, though it does provide helpful libraries that 
+   can be <a href="http://vmkit.llvm.org">used to build them</a>.  The name
+   "LLVM" itself is not an acronym; it is the full name of the project.</p>
+
+<p>LLVM began as a <a href="pubs/2004-01-30-CGO-LLVM.html">research
+   project</a> at
+   the <a href="http://cs.illinois.edu/">University of Illinois</a>, with
+   the goal of providing a modern, SSA-based compilation strategy capable
+   of supporting both static and dynamic compilation of arbitrary
+   programming languages.  Since then, LLVM has
+   grown to be an umbrella project consisting of a number of
+   subprojects, many of which are being used in production by a wide variety of
+   <a href="Users.html">commercial and open source</a> projects
+   as well as being widely used in <a href="pubs/">academic research</a>.  Code
+   in the LLVM project is licensed under the <a
+   href="docs/DeveloperPolicy.html#license">"UIUC" BSD-Style license</a>.</p>
+   
+<p>The primary sub-projects of LLVM are:</p>
+   
+<ol>
+<li><p>The <b>LLVM Core</b> libraries provide a modern source- and
+    target-independent <a href="docs/Passes.html">optimizer</a>, along with
+    <a href="docs/CodeGenerator.html">code generation support</a> for many
+    popular CPUs (as well as some less common ones!) These libraries are built
+    around a <a href="docs/LangRef.html">well specified</a> code representation
+    known as the LLVM intermediate representation ("LLVM IR").  The LLVM Core
+    libraries are <a href="docs/">well documented</a>, and it is particularly
+    easy to invent your own language (or port an existing compiler) to use
+    <a href="docs/tutorial/">LLVM as an optimizer and code generator</a>.</p>
+</li>
+
+<li><p><b><a href="http://clang.llvm.org">Clang</a></b> is an "LLVM native"
+    C/C++/Objective-C compiler, which aims to  deliver amazingly fast compiles
+    (e.g. about <a
+    href="http://clang.llvm.org/features.html#performance">3x faster than GCC</a> when
+    compiling Objective-C code in a debug configuration), extremely useful <a
+    href="http://clang.llvm.org/diagnostics.html">error and warning messages</a>
+    and to provide a platform for building great source level tools.  The
+    <a href="http://clang-analyzer.llvm.org/">Clang Static Analyzer</a> is a
+    tool that automatically finds bugs in your code, and is a great example of the
+    sort of tool that can be built using the Clang frontend as a library to
+    parse C/C++ code.</p></li>
+
+<li><p><b><a href="http://dragonegg.llvm.org">dragonegg</a></b> 
+    integrates the LLVM optimizers and code generator with the GCC parsers.
+    This allows LLVM to compile Ada, Fortran, and other languages supported by
+    the GCC compiler frontends, and access to C features not supported by Clang
+    (such as OpenMP).</p></li>
+
+<li><p>The <b><a href="http://lldb.llvm.org">LLDB</a></b> project builds on
+    libraries provided by LLVM and Clang to provide a great native debugger.
+    It uses the Clang ASTs and expression parser, LLVM JIT, LLVM disassembler,
+    etc so that it provides an experience that "just works".  It is also 
+    blazing fast and much more memory efficient than GDB at loading symbols.
+    </p></li>
+    
+<li><p>The <b><a href="http://libcxx.llvm.org">libc++</a></b> and
+    <b><a href="http://libcxxabi.llvm.org">libc++ ABI</a></b> projects provide
+    a standard conformant and high-performance implementation of the C++
+    Standard Library, including full support for C++11.</p></li>
+    
+<li><p>The <b><a href="http://compiler-rt.llvm.org">compiler-rt</a></b> project
+    provides highly tuned implementations of the low-level code generator
+    support routines like "<tt>__fixunsdfdi</tt>" and other calls generated when
+    a target doesn't have a short sequence of native instructions to implement
+    a core IR operation.</p></li>
+
+<li><p>The <b><a href="http://openmp.llvm.org">OpenMP</a></b> subproject
+    provides an <a href="http://openmp.org">OpenMP</a> runtime for use with the
+    OpenMP implementation in Clang.</p></li>
+
+<li><p>The <b><a href="http://vmkit.llvm.org">vmkit</a></b> project is an
+    implementation of the Java and .NET Virtual Machines that is built on LLVM
+    technologies.</p></li>
+
+<li><p>The <b><a href="http://polly.llvm.org/">polly</a></b> project implements
+    a suite of cache-locality optimizations as well as auto-parallelism and
+    vectorization using a polyhedral model.</p></li>
+
+<li><p>The <b><a href="http://libclc.llvm.org/">libclc</a></b> project aims to
+    implement the OpenCL standard library.</p></li>
+
+<li><p>The <b><a href="http://klee.llvm.org">klee</a></b> project implements a 
+    "symbolic virtual machine" which uses a theorem prover to try to evaluate
+    all dynamic paths through a program in an effort to find bugs and to prove
+    properties of functions.  A major feature of klee is that it can produce a
+    testcase in the event that it detects a bug.</p></li>
+
+<li><p>The <b><a href="http://safecode.cs.illinois.edu">SAFECode</a></b>
+    project is a memory safety compiler for C/C++ programs.  It instruments
+    code with run-time checks to detect memory safety errors (e.g., buffer
+    overflows) at run-time.  It can be used to protect software from
+    security attacks and can also be used as a memory safety error debugging
+    tool like Valgrind.</p></li>
+
+<li><p>The <b><a href="http://lld.llvm.org/">lld</a></b> project aims to
+    to be the built-in linker for clang/llvm.  Currently, clang must invoke
+    the system linker to produce executables. </p></li>
+</ol>
+
+<p>In addition to official subprojects of LLVM, there are a broad variety of
+other projects that <a href="/ProjectsWithLLVM/">use components
+of LLVM for various tasks</a>.  Through these external projects you can use
+LLVM to compile Ruby, Python, Haskell, Java, D, PHP, Pure, Lua, and a number of
+other languages.  A major strength of LLVM is its versatility, flexibility, and
+reusability, which is why it is being used for such a wide variety of different
+tasks: everything from doing light-weight JIT compiles of embedded languages
+like Lua to compiling Fortran code for massive super computers.</p>
+
+<p>As much as everything else, LLVM has a broad and friendly community of people
+who are interested in building great low-level tools.  If you are interested in
+getting involved, a good first place is to skim the <a
+href="http://blog.llvm.org">LLVM Blog</a> and to sign up for the <a
+href="http://lists.cs.uiuc.edu/mailman/listinfo/llvmdev">LLVM Developer mailing
+list</a>.  For information on how to send in a patch, get commit access, and
+copyright and license topics, please see <a href="docs/DeveloperPolicy.html">the
+LLVM Developer Policy</a>.
+</p>
+
+</div>
+
+</td>
+
+<!-- Dividing space between columns -->
+<td style="width:2%"></td>
+<!-- Start of the right bar... 359 -->
+<td valign="top" style="width:35%">
+
+<div class="www_sectiontitle">ACM Software System Award!</div>
+
+<div class="www_text">
+ <p>LLVM has been awarded the <b>2012 ACM Software System Award</b>!
+     This award is given by ACM to <i>one</i> software system worldwide
+   every year. 
+   <!--
+     and is "<i>Awarded to an institution or individual(s) recognized for
+     developing a software system that has had a lasting influence,
+     reflected in contributions to concepts, in commercial acceptance,
+     or both</i>".-->
+     LLVM is <a href="http://awards.acm.org/software_system/year.cfm">
+     in highly distinguished company</a>!
+     Click on any of the individual recipients' names on that page for
+     the detailed citation describing the award.
+  </b></p>
+</div>
+
+
+<div class="www_sectiontitle">Latest LLVM Release!</div>
+
+<div class="www_text">
+  <p><b>Jun 17, 2013</b>: LLVM 3.3 is now <a href="releases/"><b>available
+  for download</b></a>!  LLVM is publicly available under an open source <a
+  href="releases/3.3/LICENSE.TXT">License</a>.  Also, you might want to
+  check out <a href="docs/ReleaseNotes.html#whatsnew"><b>the new 
+  features</b></a> in SVN that will appear in the next LLVM release.  If
+  you want them early, <a href="releases/">download LLVM</a> through 
+  anonymous SVN.</p>
+</div>
+
+<br>
+
+<div class="www_sectiontitle">Upcoming Releases</div>
+
+<div class="www_text">
+
+<p><b>LLVM 3.4 Release Schedule:</b></p>
+
+<ul>
+
+<li>Nov 19-Nov 24: Phase I Testing</li>
+<li>Nov 25-Dec 1: Fix bugs from Phase I</li>
+<li>Dec 2-Dec 8: Phase II Testing</li>
+<li><b>Dec 9-Dec 15: Fix bugs from Phase II</b></li>
+<li>Dec 16-Dec 22: Final Binaries Generated</li>
+<li>Dec 23: Release Date</li>
+
+</ul>
+
+</div>
+
+<br>
+
+<div class="www_sectiontitle">Developer&nbsp;Meetings</div>
+
+<div class="www_text">
+<p>Upcoming: <a href="/devmtg/2014-04/">April 7-8, 2014</a>
+<p>Proceedings from past meetings:</p>
+<ul>
+<li><a href="/devmtg/2013-11/">Nov 6-7, 2013</a></li>
+<li><a href="/devmtg/2013-04/">April 29-30, 2013</a></li>
+<li><a href="/devmtg/2012-11/">November 7-8, 2012</a></li>
+<li><a href="/devmtg/2012-04-12/">April 12, 2012</a></li>
+<li><a href="/devmtg/2011-11/">November 18, 2011</a></li>
+<li><a href="/devmtg/2011-09-16/">September 2011</a></li>
+<li><a href="/devmtg/2010-11/">November 2010</a></li>
+<li><a href="/devmtg/2009-10/">October 2009</a></li>
+<li><a href="/devmtg/2008-08/">August 2008</a></li>
+<li><a href="/devmtg/2007-05/">May 2007</a></li>
+</ul>
+</div>
+
+<br>
+
+<!-- End of the right column -->
+        </td>
+    </tr>
+</table>
+
+<hr>
+<p style="font-size:smaller">
+This web site is hosted by the
+<a href="http://www.cs.uiuc.edu">Computer Science Department</a>
+at the
+<a href="http://www.uiuc.edu">University of Illinois at Urbana-Champaign</a>.
+</p>
+
+
+</td></tr>
+</table>
+</body>
+</html>
+

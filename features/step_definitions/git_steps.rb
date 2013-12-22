@@ -41,6 +41,10 @@ Given /^the Github homebrew repository has a new formula$/ do
   HomebrewFormula.new_formula(name: 'llvm', homepage: 'http://llvm.org/')
 end
 
+Given /^the Github homebrew repository has the (?:new )?(\w+) formula with homepage "(.*?)"$/ do |name, homepage|
+  HomebrewFormula.new_formula(name: name, homepage: homepage)
+end
+
 Given /^the Github homebrew repository has an deleted formula$/ do
   # Create a new formula in the DB
   # without adding it to the HomebrewFormula collection

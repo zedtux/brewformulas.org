@@ -14,7 +14,6 @@ class FormulaDescriptionFetchWorker
 
     html = Homepage.new(formula.homepage).fetch
     formula.update_description_from!(html)
-
   rescue Homepage::NotAccessibleError => error
     Rails.logger.error <<-eos
       Import process wasn't able to save the formula #{formula.name}: #{error}

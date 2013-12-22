@@ -22,6 +22,8 @@ module HomebrewFormula
   #   formula_two: {name: "llvm", homepage: "http://llvm.org", primary: true}
   # }
   def self.write_formulae_to(formula_basedir)
+    raise "No formula to be written" unless self.formulas
+
     self.formulas.each do |formula|
 
       @formula_content = "require 'formula'\n\n"

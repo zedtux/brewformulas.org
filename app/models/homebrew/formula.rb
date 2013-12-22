@@ -19,6 +19,7 @@ module Homebrew
 
     # @nodoc ~~~ callbacks ~~~
     before_create :touch
+    after_update :fetch_description
 
     # @nodoc ~~~ links ~~~
     # ~ Dependencies ~
@@ -115,6 +116,16 @@ module Homebrew
           description_automatic: true
         )
       end
+    end
+
+    private
+
+    def fetch_description
+      # Don't update the description
+      # until the homepage is updated
+      return unless self.homepage_changed?
+
+      FormulaDescriptionFetchWorker.perform_async(self.id)
     end
   end
 end
