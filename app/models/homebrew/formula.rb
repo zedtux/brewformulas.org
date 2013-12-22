@@ -125,7 +125,7 @@ module Homebrew
       # until the homepage is updated
       return unless self.homepage_changed?
 
-      FormulaDescriptionFetchWorker.perform_async(self.id)
+      FormulaDescriptionFetchWorker.perform_async(id)
     end
   end
 end

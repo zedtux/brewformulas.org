@@ -86,7 +86,6 @@ namespace :deploy do
     on roles(:app) do
       execute "cd #{current_path} && " \
               "bundle exec pumactl -S #{puma_state} restart"
-      eos
     end
   end
 
