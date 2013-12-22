@@ -1,7 +1,7 @@
 page_title: "Homebrew Formulas"
 homebrew:
   git_repository:
-    url: "https://github.com/mxcl/homebrew.git"
+    url: "https://github.com/Homebrew/homebrew.git"
     name: "homebrew"
     location: <%= File.join(Rails.root, "cache") %>
 redis:
