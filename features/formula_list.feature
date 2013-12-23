@@ -10,19 +10,19 @@ Feature: Formula list
   Scenario: Looking at formula list without new imports of fomulas
     When I go to brewformulas.org
     Then I should see some formulas
-    And I should see new formulas
+    And I should not see any new formulas
 
   Scenario: Looking at formula list with a running import of fomulas
     Given an import is running
     When I go to brewformulas.org
     Then I should see some formulas
-    And I should see new formulas
+    And I should not see any new formulas
 
   Scenario: Looking at formula list with a finished import of fomulas on failure
     Given an import has finished on failure since more than a minute
     When I go to brewformulas.org
     Then I should see some formulas
-    And I should see new formulas
+    And I should not see any new formulas
 
   Scenario: Looking at formula list with a finished import of fomulas on success
     Given an import has finished on success since more than a minute
