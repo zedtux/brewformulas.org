@@ -1,8 +1,6 @@
 .jumbotron
   h1 Homebrew formulas index
   p The aim of this website is to provide an easy way to search for an Homebrew formula.
-
-.row
   p.text-center
     iframe src="http://ghbtns.com/github-btn.html?user=zedtux&repo=brewformulas.org&type=watch&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="170" height="30"
     a href="https://twitter.com/share" class="twitter-share-button" data-via="brewformulas" data-size="large" data-related="machomebrew" Tweet
@@ -19,5 +17,8 @@ h2
       a.list-group-item href="#{formula_path(formula.name)}"
         h4.list-group-item-heading
           = formula.name
-          small= formula.external? ? "external dependency" : formula.filename
+          small
+            = formula.external? ? "external dependency" : formula.filename
+          - if formula.new?
+            span class="label label-success" New
         p.list-group-item-text= formula.description

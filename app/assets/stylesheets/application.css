@@ -19,7 +19,8 @@ form.navbar-form * {
 h1 > small,
 h2 > small,
 h4 > small,
-h4 > span.badge {
+h4 > span.badge,
+h4 > span.label {
   margin-left: 10px;
 }
 

@@ -264,6 +264,12 @@ Then /^I should see some formulas$/ do
   expect(page).to_not have_content('Formula list0 formulas')
 end
 
+Then /^I should( not)? see (?:any )?new formulas?$/ do |negation|
+  page.send(negation ? :should_not : :should,
+    have_xpath('//span[@class="label label-success" and normalize-space(.)="New"]')
+  )
+end
+
 Then /^I should see one formula$/ do
   expect(page).to have_content('Formula list1 formula')
 end

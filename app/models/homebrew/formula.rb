@@ -118,6 +118,14 @@ module Homebrew
       end
     end
 
+    #
+    # Get if the formula is new
+    #
+    # @return [Boolean] return true if new otherwise false
+    def new?
+      touched_on == Time.now.utc.to_date
+    end
+
     private
 
     def fetch_description
