@@ -7,16 +7,16 @@ html lang="en"
     meta name="description" content="#{AppConfig.brewformulas.description}"
     meta name="author" content="#{AppConfig.brewformulas.author}"
     meta name="keywords" content="#{AppConfig.brewformulas.keywords}"
-    title= content_for?(:title) ? yield(:title) : "Homebrew Formulas"
+    title= content_for?(:title) ? yield(:title) : 'Homebrew Formulas'
     = csrf_meta_tags
 
     /! HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries
     /[if lt IE 9]
-      = javascript_include_tag "https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"
-      = javascript_include_tag "https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"
+      = javascript_include_tag 'https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js'
+      = javascript_include_tag 'https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js'
 
-    = stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true
-    = favicon_link_tag "favicon.ico", :rel => "shortcut icon"
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    = favicon_link_tag 'favicon.ico', rel: 'shortcut icon', type: 'image/x-icon'
 
 
   body
@@ -43,12 +43,12 @@ html lang="en"
                 li class="divider"
                 li
                   a href="#{imports_path}" Imports
-          = form_for :search, url: "/", method: :get, html: {class: "navbar-form navbar-right"} do |f|
-            = f.label :term, "Formula"
+          = form_for :search, url: '/', method: :get, html: {class: 'navbar-form navbar-right'} do |f|
+            = f.label :term, 'Formula'
             .form-group
-              = f.text_field :term, class: "form-control", placeholder: "Name or filename",
-                value: params[:search] && params[:search][:term] || ""
-            = f.submit "Search", class: "btn btn-success"
+              = f.text_field :term, class: 'form-control', placeholder: 'Name or filename',
+                value: params[:search] && params[:search][:term] || ''
+            = f.submit 'Search', class: 'btn btn-success'
 
     .container
 
@@ -64,4 +64,4 @@ html lang="en"
         footer
           p &copy; Company 2013
 
-  = javascript_include_tag "application", "data-turbolinks-track" => true
+  = javascript_include_tag 'application', 'data-turbolinks-track' => true
