@@ -1,4 +1,8 @@
-page_title: "Homebrew Formulas"
+brewformulas:
+  page_title: "Homebrew Formulas"
+  description: "Homebrew (The missing package manager for OS X) formula list to search and discover new formulas"
+  author: "HAIN Guillaume <zedtux@zedroot.org>"
+  keywords: "MAC, Apple, Homebrew, brew, mxcl, Formula, Formulas, Formulae, search, description"
 homebrew:
   git_repository:
     url: "https://github.com/Homebrew/homebrew.git"
