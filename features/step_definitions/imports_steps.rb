@@ -17,6 +17,10 @@ Given /^all formulas have been touched during the latest import(?: excepted (.*?
   end
 end
 
+Given /^the new "(.*?)" formula has been imported$/ do |name|
+  Homebrew::Formula.create(name: name, filename: name.downcase)
+end
+
 Then /^I should see there is no imports$/ do
   expect(page).to have_content('No imports yet.')
 end

@@ -123,7 +123,7 @@ module Homebrew
     #
     # @return [Boolean] return true if new otherwise false
     def new?
-      touched_on == Time.now.utc.to_date
+      touched_on == created_at.to_date
     end
 
     private
