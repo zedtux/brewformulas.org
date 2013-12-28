@@ -46,18 +46,14 @@ module Homebrew
     # @nodoc ~~~ scopes ~~~
     scope :externals, -> { where(external: true) }
     scope :internals, -> { where(external: false) }
-    scope :active, lambda {
-      where(touched_on: Import.last_succes_date_or_today)
-    }
+    scope :active, -> { where(touched_on: Import.last_succes_date_or_today) }
     scope :active_or_external, lambda {
       where('touched_on = ? OR external IS TRUE',
             Import.last_succes_date_or_today)
     }
     scope :new_this_week, lambda {
-      where(
-        'created_at BETWEEN LOCALTIMESTAMP - INTERVAL ? AND LOCALTIMESTAMP',
-        '7 days'
-      )
+      where("created_at BETWEEN LOCALTIMESTAMP - INTERVAL '7 days' " \
+            "AND LOCALTIMESTAMP")
     }
     scope :inactive, lambda {
       where('touched_on < ?', Import.last_succes_date_or_today)
