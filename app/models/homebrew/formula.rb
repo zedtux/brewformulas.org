@@ -47,14 +47,11 @@ module Homebrew
     scope :externals, -> { where(external: true) }
     scope :internals, -> { where(external: false) }
     scope :active, lambda {
-      import = Import.success.last
-      date = import ? import.ended_at.try(:to_date) : Time.now.utc.to_date
-      where(touched_on: date)
+      where(touched_on: Import.last_succes_date_or_today)
     }
     scope :active_or_external, lambda {
-      import = Import.success.last
-      date = import ? import.ended_at.try(:to_date) : Time.now.utc.to_date
-      where('touched_on = ? OR external IS TRUE', date)
+      where('touched_on = ? OR external IS TRUE',
+            Import.last_succes_date_or_today)
     }
     scope :new_this_week, lambda {
       where(
@@ -63,9 +60,7 @@ module Homebrew
       )
     }
     scope :inactive, lambda {
-      import = Import.success.last
-      date = import ? import.ended_at.try(:to_date) : Time.now.utc.to_date
-      where('touched_on < ?', date)
+      where('touched_on < ?', Import.last_succes_date_or_today)
     }
 
     # @nodoc ~~~ custom class methods ~~~
