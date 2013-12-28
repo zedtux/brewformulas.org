@@ -12,20 +12,21 @@ body {
   padding-top: 70px;
 }
 
+/* Twitter bootstrap */
 form.navbar-form * {
   padding-right: 10px;
 }
 
 h1 > small,
-h2 > small,
 h4 > small,
 h4 > span.badge,
 h4 > span.label {
   margin-left: 10px;
 }
 
-h1 > iframe {
-  margin-left: 50px;
+.nav-tabs > li > a > .badge {
+  margin-left: 4px;
+  padding: 4px 7px;
 }
 
 input#search_term {
@@ -35,4 +36,13 @@ input#search_term {
 li.dependency span,
 p.dependents span {
   margin-right: 3px;
+}
+
+div.tab-pane {
+  margin-top: 15px;
+}
+
+/* Social buttons */
+h1 > iframe {
+  margin-left: 50px;
 }

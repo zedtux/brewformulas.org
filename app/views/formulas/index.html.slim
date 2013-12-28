@@ -5,20 +5,40 @@
     iframe src="http://ghbtns.com/github-btn.html?user=zedtux&repo=brewformulas.org&type=watch&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="170" height="30"
     a href="https://twitter.com/share" class="twitter-share-button" data-via="brewformulas" data-size="large" data-related="machomebrew" Tweet
 
-h2
-  | Formula list
-  small= pluralize @formula_count, "formula"
-- if @formulas.blank?
-  .alert.alert-info
-    = "No formula found."
-- else
-  .list-group
-    - @formulas.each do |formula|
-      a.list-group-item href="#{formula_path(formula.name)}"
-        h4.list-group-item-heading
-          = formula.name
-          small
-            = formula.external? ? "external dependency" : formula.filename
-          - if formula.new?
-            span class="label label-success" New
-        p.list-group-item-text= formula.description
+ul class="nav nav-tabs"
+  li class="active"
+    a href="#all_formulas" data-toggle="tab"
+      span class="badge pull-right"= @formulas.size
+      | All
+  li
+    a href="#new_since_a_week" data-toggle="tab"
+      span class="badge pull-right"= @new_since_a_week.size
+      | New since a week
+  li
+    a href="#inactive" data-toggle="tab"
+      span class="badge pull-right"= @inactive_formulas.size
+      | Inactive
+
+div class="tab-content"
+  div class="tab-pane active" id="all_formulas"
+    - if @formulas.blank?
+      .alert.alert-info
+        = 'No formula found.'
+    - else
+      = render partial: 'formulas', locals: { formulas: @formulas }
+  div class="tab-pane" id="new_since_a_week"
+    - if @new_since_a_week.blank?
+      .alert.alert-info
+        = "No new formula this week."
+    - else
+      = render partial: 'formulas', locals: { formulas: @new_since_a_week }
+  div class="tab-pane" id="inactive"
+    - if @inactive_formulas.blank?
+      .alert.alert-info
+        = "No inactive formulas."
+    - else
+      = render partial: 'formulas', locals: { formulas: @inactive_formulas }
+      p class="text-muted"
+        | This list include only formulae since the first import done on the
+        '
+        = @first_import_end_date

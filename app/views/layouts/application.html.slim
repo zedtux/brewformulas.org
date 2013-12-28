@@ -43,7 +43,7 @@ html lang="en"
                 li class="divider"
                 li
                   a href="#{imports_path}" Imports
-          = form_for :search, url: '/', method: :get, html: {class: 'navbar-form navbar-right'} do |f|
+          = form_for :search, url: search_formulas_path, method: :get, html: {class: 'navbar-form navbar-right'} do |f|
             = f.label :term, 'Formula'
             .form-group
               = f.text_field :term, class: 'form-control', placeholder: 'Name or filename',

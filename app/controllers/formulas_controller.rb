@@ -4,14 +4,15 @@
 # @author [guillaumeh]
 #
 class FormulasController < ApplicationController
-  before_filter :search, only: :index
   before_filter :current_object, only: [:show, :refresh_description]
 
   def index
-    @formula_count = Homebrew::Formula.internals.where(
-      'touched_on = ?',
-      current_date
-    ).count
+    @formulas = Homebrew::Formula.internals.active.order(:name)
+    @new_since_a_week = Homebrew::Formula.internals.new_this_week.order(:name)
+    @inactive_formulas = Homebrew::Formula.internals.inactive.order(:name)
+    if @inactive_formulas.present?
+      @first_import_end_date = Import.first.ended_at.to_date
+    end
   end
 
   def show; end
@@ -22,29 +23,15 @@ class FormulasController < ApplicationController
     redirect_to action: 'show', id: @formula.name
   end
 
-  private
-
-  def current_date
-    return @current_date if @current_date
-
-    @current_date = Time.now.utc.to_date
-    import = Import.success.last
-    @current_date = import.ended_at.try(:to_date) if import
-    @current_date
-  end
-
   def search
-    @formulas = if params[:search] && params[:search][:term].present?
-                  Homebrew::Formula.touched_on_or_external(current_date).where(
-                    'filename iLIKE ? OR name iLIKE ?',
-                    "%#{params[:search][:term]}%",
-                    "%#{params[:search][:term]}%"
-                  )
-                else
-                  # Don't show external dependencies in the big list
-                  Homebrew::Formula.touched_on(current_date).internals
-                end.order(:name)
+    @formulas = Homebrew::Formula.active_or_external.where(
+                  'filename iLIKE ? OR name iLIKE ?',
+                  "%#{params[:search][:term]}%",
+                  "%#{params[:search][:term]}%"
+                ).order(:name)
   end
+
+  private
 
   def current_object
     @formula = Homebrew::Formula.find_by!(name: params[:id])

@@ -1,0 +1,10 @@
+.list-group
+  - formulas.each do |formula|
+    a.list-group-item href="#{formula_path(formula.name)}"
+      h4.list-group-item-heading
+        = formula.name
+        small
+          = formula.external? ? "external dependency" : formula.filename
+        - if formula.new?
+          span class="label label-success" New
+      p.list-group-item-text= formula.description

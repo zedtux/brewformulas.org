@@ -10,6 +10,9 @@ BrewformulasOrg::Application.routes.draw do
     member do
       get 'refresh_description'
     end
+    collection do
+      get 'search'
+    end
   end
 
   root 'formulas#index'

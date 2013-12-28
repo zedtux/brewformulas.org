@@ -261,17 +261,22 @@ Then /^I not should see the installation instruction$/ do
 end
 
 Then /^I should see some formulas$/ do
-  expect(page).to_not have_content('Formula list0 formulas')
+  count = Homebrew::Formula.externals.count
+  expect(page).to_not have_content("#{count}All")
 end
 
-Then /^I should( not)? see (?:any )?new formulas?$/ do |negation|
-  page.send(negation ? :should_not : :should,
-    have_xpath('//span[@class="label label-success" and normalize-space(.)="New"]')
-  )
+Then /^I should see (no|\d+) new formulas?$/ do |formula_count|
+  formula_count = 0 if formula_count == "no"
+  expect(page).to have_content("#{formula_count}New since a week")
+end
+
+Then /^I should see (no|\d+) inactive formulas?$/ do |formula_count|
+  formula_count = 0 if formula_count == "no"
+  expect(page).to have_content("#{formula_count}Inactive")
 end
 
 Then /^I should see one formula$/ do
-  expect(page).to have_content('Formula list1 formula')
+  expect(page).to have_content('1All')
 end
 
 Then /^I should not see the (.*?) formula$/ do |name|
