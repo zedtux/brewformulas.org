@@ -35,7 +35,7 @@ class HomebrewFormulaImportWorker
   end
 
   def import_formulas
-    Homebrew::GitRepository.get_up_to_date_git_repository
+    Homebrew::GitRepository.fetch_up_to_date_git_repository
 
     # Treat each files (Ruby files)
     formulas = Dir[formulas_path]

@@ -81,7 +81,7 @@ module Homebrew
     #
     # @return [Boolean] true if the formula has a description in DB
     #   otherwise false
-    def has_description?
+    def description?
       self[:description].present?
     end
 

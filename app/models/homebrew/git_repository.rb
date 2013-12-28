@@ -12,7 +12,7 @@ module Homebrew
     # this method will clone the repository (without the history)
     # otherwise just call `git pull`.
     #
-    def self.get_up_to_date_git_repository
+    def self.fetch_up_to_date_git_repository
       git = if File.exists?(AppConfig.homebrew.git_repository.location)
               open_git_repository
             else
