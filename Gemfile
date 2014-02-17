@@ -14,7 +14,7 @@ gem 'slim-rails'
 gem 'git'
 gem 'appconfig', :require => 'app_config'
 gem 'sidekiq'
-gem 'sidetiq', '~> 0.4.3' # Recurring jobs
+gem 'sidetiq' # Recurring jobs
 gem 'sinatra', '>= 1.3.0', :require => nil
 gem 'newrelic_rpm'
 gem 'nokogiri'
