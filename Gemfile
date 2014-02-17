@@ -22,6 +22,8 @@ gem 'open_uri_redirections' # open-uri library patched to follow http to https r
 gem 'array_is_uniq', :require => 'array' # Implemented the missing unqi? method on Ruby Arrays
 gem 'pluralize_no_count_if_one'
 
+gem 'capistrano3-puma'
+
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_19, :mri_20, :rbx]

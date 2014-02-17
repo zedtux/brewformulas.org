@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/thoughtbot/shoulda-matchers.git
-  revision: 2cdae242ca109f1f0e0d21261303e210ca490016
+  revision: b805cc3a053b22b32c2a3226942f12d81391a795
   specs:
-    shoulda-matchers (2.4.0)
+    shoulda-matchers (2.5.0)
       activesupport (>= 3.0.0)
 
 GEM
@@ -34,7 +34,7 @@ GEM
       tzinfo (~> 0.3.37)
     addressable (2.3.5)
     appconfig (0.1.1)
-    arel (4.0.1)
+    arel (4.0.2)
     array_is_uniq (0.0.1)
     ast (1.1.0)
     atomic (1.1.14)
@@ -47,17 +47,19 @@ GEM
     bootstrap-on-rails (0.0.2)
       less-rails
     builder (3.1.4)
-    capistrano (3.0.1)
+    capistrano (3.1.0)
       i18n
       rake (>= 10.0.0)
-      sshkit (>= 0.0.23)
-    capistrano-bundler (1.1.1)
+      sshkit (~> 1.3)
+    capistrano-bundler (1.1.2)
       capistrano (~> 3.0)
-      sshkit (>= 1.2.0)
-    capistrano-rails (1.1.0)
-      capistrano (>= 3.0.0)
-      capistrano-bundler (>= 1.0.0)
-    capybara (2.2.0)
+      sshkit (~> 1.2)
+    capistrano-rails (1.1.1)
+      capistrano (~> 3.1)
+      capistrano-bundler (~> 1.1)
+    capistrano3-puma (0.2.2)
+      capistrano (~> 3.0)
+    capybara (2.2.1)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
       rack (>= 1.0.0)
@@ -66,7 +68,7 @@ GEM
     celluloid (0.15.2)
       timers (~> 1.1.0)
     chronic (0.10.2)
-    code_analyzer (0.4.3)
+    code_analyzer (0.4.4)
       sexp_processor
     coderay (1.1.0)
     coffee-rails (4.0.1)
@@ -75,7 +77,7 @@ GEM
     coffee-script (2.2.0)
       coffee-script-source
       execjs
-    coffee-script-source (1.6.3)
+    coffee-script-source (1.7.0)
     colored (1.2)
     commonjs (0.2.7)
     connection_pool (1.2.0)
@@ -85,8 +87,8 @@ GEM
       simplecov (>= 0.7)
       term-ansicolor
       thor
-    crack (0.4.1)
-      safe_yaml (~> 0.9.0)
+    crack (0.4.2)
+      safe_yaml (~> 1.0.0)
     cucumber (1.3.10)
       builder (>= 2.1.2)
       diff-lcs (>= 1.1.3)
@@ -105,7 +107,7 @@ GEM
     database_cleaner (1.2.0)
     debug_inspector (0.0.2)
     diff-lcs (1.2.5)
-    docile (1.1.1)
+    docile (1.1.3)
     email_spec (1.5.0)
       launchy (~> 2.1)
       mail (~> 2.2)
@@ -115,13 +117,13 @@ GEM
       multi_json (~> 1.3)
     git (1.2.6)
     hike (1.2.3)
-    hub (1.11.1)
+    hub (1.11.2)
     i18n (0.6.9)
-    ice_cube (0.11.1)
+    ice_cube (0.11.3)
     jbuilder (1.5.3)
       activesupport (>= 3.0.0)
       multi_json (>= 1.2.0)
-    jquery-rails (3.0.4)
+    jquery-rails (3.1.0)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
     json (1.8.1)
@@ -139,16 +141,16 @@ GEM
     mime-types (1.25.1)
     mini_portile (0.5.2)
     minitest (4.7.5)
-    multi_json (1.8.2)
-    multi_test (0.0.2)
+    multi_json (1.8.4)
+    multi_test (0.0.3)
     net-scp (1.1.2)
       net-ssh (>= 2.6.5)
-    net-ssh (2.7.0)
-    newrelic_rpm (3.7.1.180)
+    net-ssh (2.8.0)
+    newrelic_rpm (3.7.2.192)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
     open_uri_redirections (0.1.4)
-    parser (2.1.1)
+    parser (2.1.4)
       ast (~> 1.1)
       slop (~> 3.4, >= 3.4.5)
     pg (0.17.1)
@@ -161,7 +163,7 @@ GEM
     quiet_assets (1.0.2)
       railties (>= 3.1, < 5.0)
     rack (1.5.2)
-    rack-protection (1.5.1)
+    rack-protection (1.5.2)
       rack
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -173,7 +175,7 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.0.2)
       sprockets-rails (~> 2.0.0)
-    rails_best_practices (1.14.4)
+    rails_best_practices (1.15.1)
       activesupport
       awesome_print
       code_analyzer (>= 0.4.3)
@@ -182,15 +184,15 @@ GEM
       i18n
       require_all
       ruby-progressbar
-    rails_layout (0.5.9)
+    rails_layout (1.0.7)
     railties (4.0.2)
       actionpack (= 4.0.2)
       activesupport (= 4.0.2)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    rainbow (1.99.0)
+    rainbow (2.0.0)
     rake (10.1.1)
-    redis (3.0.6)
+    redis (3.0.7)
     redis-namespace (1.4.1)
       redis (~> 3.0.4)
     ref (1.0.5)
@@ -198,22 +200,24 @@ GEM
     rest-client (1.6.7)
       mime-types (>= 1.16)
     rspec-core (2.14.7)
-    rspec-expectations (2.14.4)
+    rspec-expectations (2.14.5)
       diff-lcs (>= 1.1.3, < 2.0)
-    rspec-mocks (2.14.4)
-    rspec-rails (2.14.0)
+    rspec-mocks (2.14.5)
+    rspec-rails (2.14.1)
       actionpack (>= 3.0)
+      activemodel (>= 3.0)
       activesupport (>= 3.0)
       railties (>= 3.0)
       rspec-core (~> 2.14.0)
       rspec-expectations (~> 2.14.0)
       rspec-mocks (~> 2.14.0)
-    rubocop (0.16.0)
-      parser (~> 2.1)
+    rubocop (0.18.1)
+      json (>= 1.7.7, < 2)
+      parser (~> 2.1.3)
       powerpack (~> 0.0.6)
-      rainbow (>= 1.1.4)
-    ruby-progressbar (1.3.2)
-    safe_yaml (0.9.7)
+      rainbow (>= 1.99.1, < 3.0)
+    ruby-progressbar (1.4.1)
+    safe_yaml (1.0.1)
     sexp_processor (4.4.1)
     sidekiq (2.15.2)
       celluloid (>= 0.15.2)
@@ -237,7 +241,7 @@ GEM
     slim (2.0.2)
       temple (~> 0.6.6)
       tilt (>= 1.3.3, < 2.1)
-    slim-rails (2.0.4)
+    slim-rails (2.1.0)
       actionpack (>= 3.0, < 4.1)
       activesupport (>= 3.0, < 4.1)
       railties (>= 3.0, < 4.1)
@@ -257,28 +261,28 @@ GEM
       net-ssh
       term-ansicolor
     temple (0.6.7)
-    term-ansicolor (1.2.2)
-      tins (~> 0.8)
-    therubyracer (0.12.0)
+    term-ansicolor (1.3.0)
+      tins (~> 1.0)
+    therubyracer (0.12.1)
       libv8 (~> 3.16.14.0)
       ref
     thor (0.18.1)
     thread_safe (0.1.3)
       atomic
     tilt (1.4.1)
-    timecop (0.7.0)
+    timecop (0.7.1)
     timers (1.1.0)
-    tins (0.13.1)
+    tins (1.0.0)
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
-    turbolinks (2.1.0)
+    turbolinks (2.2.1)
       coffee-rails
     tzinfo (0.3.38)
     uglifier (2.4.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
-    webmock (1.16.1)
+    webmock (1.17.3)
       addressable (>= 2.2.7)
       crack (>= 0.3.2)
     xpath (2.0.0)
@@ -297,6 +301,7 @@ DEPENDENCIES
   capistrano
   capistrano-bundler
   capistrano-rails
+  capistrano3-puma
   capybara
   coveralls
   cucumber-rails
