@@ -13,7 +13,7 @@ gem 'puma'
 gem 'slim-rails'
 gem 'git'
 gem 'appconfig', :require => 'app_config'
-gem 'sidekiq'
+gem 'sidekiq', '~> 2.17.7'
 gem 'sidetiq' # Recurring jobs
 gem 'sinatra', '>= 1.3.0', :require => nil
 gem 'newrelic_rpm'
