@@ -40,7 +40,7 @@ end
 Given /^the (.*?) formula has the description "(.*?)"$/ do |name, description|
   formula = Homebrew::Formula.find_by(name: name)
   unless formula
-    fail "Unable to find an Homebrew::Formula with name \"#{name}\""
+    fail "Unable to find a Homebrew::Formula with name \"#{name}\""
   end
   formula.update_attribute(:description, description)
 end
@@ -56,7 +56,7 @@ end
 Given /^the automatically extracted description for the (.*?) formula is "(.*?)"$/ do |name, description|
   formula = Homebrew::Formula.find_by(name: name)
   unless formula
-    fail "Unable to find an Homebrew::Formula with name \"#{name}\""
+    fail "Unable to find a Homebrew::Formula with name \"#{name}\""
   end
   formula.update_attributes(description: description, description_automatic: true)
 end
@@ -64,11 +64,11 @@ end
 Given /^the formula (.*?) is a dependency of (.*?)$/ do |dependence_name, dependent_name|
   dependence = Homebrew::Formula.find_by(name: dependence_name)
   unless dependence
-    fail "Unable to find an Homebrew::Formula with name \"#{dependence_name}\""
+    fail "Unable to find a Homebrew::Formula with name \"#{dependence_name}\""
   end
   dependent = Homebrew::Formula.find_by(name: dependent_name)
   unless dependent
-    fail "Unable to find an Homebrew::Formula with name \"#{dependent_name}\""
+    fail "Unable to find a Homebrew::Formula with name \"#{dependent_name}\""
   end
   dependent.dependencies << dependence
 end
@@ -76,7 +76,7 @@ end
 Given /^the formula (.*?) is in conflict with (.*?)$/ do |formula_name, conflict_names|
   formula = Homebrew::Formula.find_by(name: formula_name)
   unless formula
-    fail "Unable to find an Homebrew::Formula with name \"#{formula_name}\""
+    fail "Unable to find a Homebrew::Formula with name \"#{formula_name}\""
   end
   conflict_names = if conflict_names.include?(' and ')
                      conflict_names.split(' and ')
@@ -86,7 +86,7 @@ Given /^the formula (.*?) is in conflict with (.*?)$/ do |formula_name, conflict
   conflict_names.each do |conflict_name|
     conflict = Homebrew::Formula.find_by(name: conflict_name)
     unless conflict
-      fail "Unable to find an Homebrew::Formula with name \"#{conflict_name}\""
+      fail "Unable to find a Homebrew::Formula with name \"#{conflict_name}\""
     end
     formula.conflicts << conflict
   end
@@ -95,7 +95,7 @@ end
 Given /^the formulas (.*?) are dependencies of (.*?)$/ do |dependence_names, dependent_name|
   dependent = Homebrew::Formula.find_by(name: dependent_name)
   unless dependent
-    fail "Unable to find an Homebrew::Formula with name \"#{dependent_name}\""
+    fail "Unable to find a Homebrew::Formula with name \"#{dependent_name}\""
   end
 
   dependence_names.split(',').each do |dependence_name|
@@ -103,7 +103,7 @@ Given /^the formulas (.*?) are dependencies of (.*?)$/ do |dependence_names, dep
     dependence_name.gsub!(/and /, '')
     dependence = Homebrew::Formula.find_by(name: dependence_name)
     unless dependence
-      fail "Unable to find an Homebrew::Formula with name \"#{dependence_name}\""
+      fail "Unable to find a Homebrew::Formula with name \"#{dependence_name}\""
     end
     dependent.dependencies << dependence
   end
@@ -112,7 +112,7 @@ end
 Given /^the formulas (.*?) are dependents of (.*?)$/ do |dependent_names, dependence_name|
   dependence = Homebrew::Formula.find_by(name: dependence_name)
   unless dependence
-    fail "Unable to find an Homebrew::Formula with name \"#{dependence_name}\""
+    fail "Unable to find a Homebrew::Formula with name \"#{dependence_name}\""
   end
 
   dependent_names.gsub!(/and /, ',')
@@ -123,7 +123,7 @@ Given /^the formulas (.*?) are dependents of (.*?)$/ do |dependent_names, depend
 
     dependent = Homebrew::Formula.find_by(name: dependent_name)
     unless dependent
-      fail "Unable to find an Homebrew::Formula with name \"#{dependent_name}\""
+      fail "Unable to find a Homebrew::Formula with name \"#{dependent_name}\""
     end
     dependence.dependents << dependent
   end
@@ -132,7 +132,7 @@ end
 Given /^the (.*?) formula has (.*?) as external dependency$/ do |formula_name, dependence_name|
   formula = Homebrew::Formula.find_by(name: formula_name)
   unless formula
-    fail "Unable to find an Homebrew::Formula with name \"#{formula_name}\""
+    fail "Unable to find a Homebrew::Formula with name \"#{formula_name}\""
   end
 
   dependence = Homebrew::Formula.find_by(name: dependence_name)
@@ -218,7 +218,7 @@ end
 Then /^the formula (.*?) should have the following description:$/ do |name, description|
   formula = Homebrew::Formula.find_by(name: name)
   unless formula
-    fail "Unable to find an Homebrew::Formula with name \"#{name}\""
+    fail "Unable to find a Homebrew::Formula with name \"#{name}\""
   end
   formula.description.should == description
 end
@@ -226,7 +226,7 @@ end
 Then /^I should see the (.*?) formula description automatically extracted from the homepage$/ do |name|
   formula = Homebrew::Formula.find_by(name: name)
   unless formula
-    fail "Unable to find an Homebrew::Formula with name \"#{name}\""
+    fail "Unable to find a Homebrew::Formula with name \"#{name}\""
   end
 
   xpath = "//blockquote/p[normalize-space(.)='#{formula.description}']"
