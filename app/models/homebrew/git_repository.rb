@@ -13,11 +13,13 @@ module Homebrew
     # otherwise just call `git pull`.
     #
     def self.fetch_up_to_date_git_repository
-      git = if File.exists?(AppConfig.homebrew.git_repository.location)
+      git = if File.exist?(AppConfig.homebrew.git_repository.location)
               open_git_repository
             else
+              path = File.join(AppConfig.homebrew.git_repository.location,
+                               AppConfig.homebrew.git_repository.name)
               # Create the location path
-              FileUtils.mkdir_p(AppConfig.homebrew.git_repository.location)
+              FileUtils.mkdir_p(path)
               # Clone the Git repo to the location path
               clone_git_repository
             end

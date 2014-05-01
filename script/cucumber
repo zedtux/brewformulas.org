@@ -1,8 +1,6 @@
 #!/usr/bin/env ruby
 
-path = "#{File.dirname(__FILE__)}"
-path << '/../vendor/{gems,plugins}/cucumber*/bin/cucumber'
-vendored_cucumber_bin = Dir[path].first
+vendored_cucumber_bin = Dir["#{File.dirname(__FILE__)}/../vendor/{gems,plugins}/cucumber*/bin/cucumber"].first
 if vendored_cucumber_bin
   load File.expand_path(vendored_cucumber_bin)
 else

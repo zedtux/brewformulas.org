@@ -4,6 +4,8 @@
 # instead of editing this one.
 # Cucumber will automatically load all features/**/*.rb files.
 
+ENV['RAILS_ENV'] = 'cucumber'
+
 require 'cucumber/rails'
 require 'cucumber/timecop'
 

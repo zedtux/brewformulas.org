@@ -33,16 +33,14 @@ Then /^I should see the (success|error|info)? alert "(.*?)"( on the homepage)?$/
   expect(current_url).to eq(root_url) if on_homepage
 
   type = case type
-         when 'error'
-           'danger'
-         when 'success', 'info'
+         when 'error', 'success', 'info'
            type
          else
            'info'
          end
 
   xpath = ["//div[contains(@class, 'alert') and"]
-  xpath << "contains(@class, 'alert-#{type}') and"
+  xpath << "contains(@class, '#{type}') and"
   xpath << "contains(normalize-space(.),\"#{message}\")]"
   page.should have_xpath(xpath.join(' '))
 end

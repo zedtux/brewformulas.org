@@ -53,11 +53,12 @@ module Homebrew
     }
     scope :new_this_week, lambda {
       where("created_at BETWEEN LOCALTIMESTAMP - INTERVAL '7 days' " \
-            "AND LOCALTIMESTAMP")
+            'AND LOCALTIMESTAMP')
     }
     scope :inactive, lambda {
       where('touched_on < ?', Import.last_succes_date_or_today)
     }
+    scope :with_a_description, -> { where('description is not NULL') }
 
     # @nodoc ~~~ custom class methods ~~~
 

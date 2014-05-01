@@ -23,10 +23,12 @@ set :deploy_to, '/var/www/brewformulas.org'
 # set :pty, true
 
 # Default value for :linked_files is []
-set :linked_files, %w{config/database.yml config/newrelic.yml config/sidekiq.appconfig.yml}
+set :linked_files, %w(config/database.yml config/newrelic.yml
+                      config/sidekiq.appconfig.yml)
 
 # Default value for linked_dirs is []
-# set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+# set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle
+#                      public/system}
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
@@ -46,7 +48,6 @@ set :puma_threads, [0, 16]
 set :puma_workers, 0
 set :puma_init_active_record, false
 set :puma_preload_app, true
-
 
 namespace :deploy do
 

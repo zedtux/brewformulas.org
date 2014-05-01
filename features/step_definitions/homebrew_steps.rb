@@ -146,6 +146,17 @@ Given /^the (.*?) formula has (.*?) as external dependency$/ do |formula_name, d
   formula.dependencies << dependence
 end
 
+Given /^(\d+) formulas has a description$/ do |count|
+  count = count.to_i
+
+  Homebrew::Formula.count.should >= count
+
+  count.times do
+    formula = Homebrew::Formula.order("RANDOM()").first
+    formula.update_attribute(:description, 'This is a test')
+  end
+end
+
 When /^I click the formula "(.*?)"$/ do |formula|
   click_on formula
 end
@@ -334,4 +345,8 @@ Then /^I should see a conflict with (.*?)$/ do |conflicts|
     xpath << "[normalize-space(.)='#{conflict_name}']"
     page.should have_xpath(xpath)
   end
+end
+
+Then /^the formulas with a description coverage should be (\d+)%$/ do |percentage|
+  page.should have_xpath('//div[@id="formulas_coverage"]', text: "#{percentage}%")
 end

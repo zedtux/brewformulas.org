@@ -1,13 +1,12 @@
 source 'https://rubygems.org'
 
-gem 'rails', '~> 4.0.2'
+gem 'rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'jquery-rails'
 gem 'less-rails'
 gem 'therubyracer', :platforms => :ruby
 gem 'bootstrap-on-rails'
 gem 'turbolinks'
-gem 'jbuilder', '~> 1.2'
 gem 'pg'
 gem 'puma'
 gem 'slim-rails'
@@ -22,7 +21,9 @@ gem 'open_uri_redirections' # open-uri library patched to follow http to https r
 gem 'array_is_uniq', :require => 'array' # Implemented the missing unqi? method on Ruby Arrays
 gem 'pluralize_no_count_if_one'
 
-gem 'capistrano3-puma'
+group :assets do
+  gem 'coffee-rails'
+end
 
 group :development do
   gem 'better_errors'
@@ -36,9 +37,10 @@ group :development do
   gem 'capistrano-bundler'
   gem 'rails_best_practices'
   gem 'rubocop'
+  gem 'capistrano3-puma'
 end
 
-group :test do
+group :test, :cucumber do
   gem 'capybara'
   gem 'cucumber-rails', :require => false
   gem 'database_cleaner'

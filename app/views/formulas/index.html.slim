@@ -4,6 +4,10 @@
   p.text-center
     iframe src="http://ghbtns.com/github-btn.html?user=zedtux&repo=brewformulas.org&type=watch&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="170" height="30"
     a href="https://twitter.com/share" class="twitter-share-button" data-via="brewformulas" data-size="large" data-related="machomebrew" Tweet
+  p Coverage of formulas with description:
+  div class="progress" id="formulas_coverage"
+    div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="#{@coverage}" aria-valuemin="0" aria-valuemax="100" style="width: #{@coverage}%"
+      span class="sr-only" #{@coverage}% Complete (success)
 
 ul class="nav nav-tabs"
   li class="active"

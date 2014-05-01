@@ -4,10 +4,11 @@
 # @author [guillaumeh]
 #
 class FormulasController < ApplicationController
+  before_filter :current_objects, only: :index
+  before_filter :calculate_percentage, only: :index
   before_filter :current_object, only: [:show, :refresh_description]
 
   def index
-    @formulas = Homebrew::Formula.internals.active.order(:name)
     @new_since_a_week = Homebrew::Formula.internals.new_this_week.order(:name)
     @inactive_formulas = Homebrew::Formula.internals.inactive.order(:name)
     if @inactive_formulas.present?
@@ -38,5 +39,18 @@ class FormulasController < ApplicationController
   rescue ActiveRecord::RecordNotFound
     flash[:error] = "This formula doesn't exists"
     redirect_to root_url
+  end
+
+  def current_objects
+    @formulas = Homebrew::Formula.internals.active.order(:name)
+  end
+
+  def calculate_percentage
+    with_a_description_count = Homebrew::Formula.internals
+                                                .with_a_description.count
+    @coverage = 0
+    unless with_a_description_count.zero?
+      @coverage = (with_a_description_count * 100) / @formulas.size
+    end
   end
 end

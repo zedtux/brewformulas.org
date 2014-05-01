@@ -1,4 +1,6 @@
 AllCops:
-  Excludes:
+  Exclude:
     - !ruby/regexp /\/db\/.*$/
     - !ruby/regexp /\/features\/.*$/
+    - !ruby/regexp /\/cache\/.*$/
+    - !ruby/regexp /\/script\/.*$/
