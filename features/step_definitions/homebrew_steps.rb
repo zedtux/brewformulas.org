@@ -31,6 +31,17 @@ Given /^some formulas exist$/ do
   import.save
 end
 
+Given /(\d+) formulas exist/ do |count|
+  count = count.to_i
+  count.times do |time|
+    Homebrew::Formula.create!(
+      filename: "libfake#{time}",
+      name: "LibFake#{time}",
+      homepage: "http://libfake#{time}.sourceforge.net/"
+    )
+  end
+end
+
 Given /^following Homebrew formula exists:$/ do |formula|
   formula = formula.rows_hash
   formula['filename'] = formula['name'] if formula['filename'].blank?
