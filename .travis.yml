@@ -2,10 +2,11 @@ language: ruby
 rvm:
   - 2.0.0
 bundler_args: --without development
-
 env:
   - DB=postgresql
-
+script:
+  - bundle exec rake db:schema:load
+  - bundle exec rake db:test:prepare
 before_script:
   - cp config/database.travis.yml config/database.yml
   - psql -c 'create database brewformulas_org_test' -U postgres
