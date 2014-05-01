@@ -2,7 +2,7 @@ postgresql: &postgresql
   adapter: postgresql
   username: postgres
   password:
-  database: brewformulas_org
+  database: brewformulas_org_test
   min_messages: ERROR
 
 defaults: &defaults
