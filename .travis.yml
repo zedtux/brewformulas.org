@@ -7,6 +7,7 @@ env:
 script:
   - bundle exec rake db:schema:load
   - bundle exec rake db:test:prepare
+  - bundle exec rake
 before_script:
   - cp config/database.travis.yml config/database.yml
   - psql -c 'create database brewformulas_org_test' -U postgres
