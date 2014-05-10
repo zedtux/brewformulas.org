@@ -53,11 +53,11 @@ class FormulasController < ApplicationController
       @coverage = (with_a_description_count * 100) / @formulas.size
     end
   end
-  
+
   def new_since_a_week
     @new_since_a_week = Homebrew::Formula.internals.new_this_week.order(:name)
   end
-  
+
   def inactive_formulas
     @inactive_formulas = Homebrew::Formula.internals.inactive.order(:name)
   end
