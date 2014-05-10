@@ -289,10 +289,7 @@ end
 
 Then /^I should see (no|\d+) (new|inactive) formulas?$/ do |formula_count, status|
   formula_count = 0 if formula_count == 'no'
-  text = case status
-  when 'new'      then 'New since a week'
-  when 'inactive' then 'Inactive'
-  end
+  text = status == 'new' ? 'New since a week' : 'Inactive'
   expect(page).to have_content("#{formula_count}#{text}")
 end
 
