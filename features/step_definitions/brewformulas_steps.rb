@@ -1,25 +1,25 @@
-When /^I go to brewformulas.org$/ do
+When(/^I go to brewformulas.org$/) do
   visit root_url
 end
 
-When /^I go to the formula (\w+) on brewformulas.org$/ do |name|
+When(/^I go to the formula (\w+) on brewformulas.org$/) do |name|
   visit formula_path(name)
 end
 
-When /^I go to the imports on brewformulas.org$/ do
+When(/^I go to the imports on brewformulas.org$/) do
   visit imports_path
 end
 
-When /^I search a formula with "(.*)"$/ do |name_or_keyword|
+When(/^I search a formula with "(.*)"$/) do |name_or_keyword|
   fill_in 'Formula', with: name_or_keyword
   click_on 'Search'
 end
 
-Then /^I should not see any formula$/ do
+Then(/^I should not see any formula$/) do
   expect(page).to have_content 'No formula found.'
 end
 
-Then /^I should see the (.*) Homebrew formulas?$/ do |formulas|
+Then(/^I should see the (.*) Homebrew formulas?$/) do |formulas|
   formulas.gsub!(/and/, ' ') if formulas.include?('and')
   formulas.gsub!(/,/, ' ')
   formulas.gsub!(/  /, ' ')

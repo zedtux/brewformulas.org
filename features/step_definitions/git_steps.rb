@@ -1,10 +1,10 @@
-Given /^the Github homebrew repository is not clone yet$/ do
+Given(/^the Github homebrew repository is not clone yet$/) do
   # @todo  Mock the filesystem as it is too slow and files aren't deleted
   # when next test is executed
   FileUtils.rm_rf(AppConfig.homebrew.git_repository.location)
 end
 
-Given /^the Github homebrew repository has been cloned$/ do
+Given(/^the Github homebrew repository has been cloned$/) do
   step 'the Github homebrew repository is not clone yet'
 
   git_working_dir = File.join(
@@ -17,7 +17,7 @@ Given /^the Github homebrew repository has been cloned$/ do
   )
 end
 
-Given /^the Github homebrew repository has some formulae$/ do
+Given(/^the Github homebrew repository has some formulae$/) do
   HomebrewFormula.new_formula(
     name: 'A2ps',
     homepage: 'http://www.gnu.org/software/a2ps/'
@@ -29,7 +29,7 @@ Given /^the Github homebrew repository has some formulae$/ do
   )
 end
 
-Given /^the Github homebrew repository has the following formula:$/ do |table|
+Given(/^the Github homebrew repository has the following formula:$/) do |table|
   homebrew_formula = table.rows_hash
   HomebrewFormula.new_formula(
     name: homebrew_formula['Name'],
@@ -37,15 +37,15 @@ Given /^the Github homebrew repository has the following formula:$/ do |table|
   )
 end
 
-Given /^the Github homebrew repository has a new formula$/ do
+Given(/^the Github homebrew repository has a new formula$/) do
   HomebrewFormula.new_formula(name: 'llvm', homepage: 'http://llvm.org/')
 end
 
-Given /^the Github homebrew repository has the (?:new )?(\w+) formula with homepage "(.*?)"$/ do |name, homepage|
+Given(/^the Github homebrew repository has the (?:new )?(\w+) formula with homepage "(.*?)"$/) do |name, homepage|
   HomebrewFormula.new_formula(name: name, homepage: homepage)
 end
 
-Given /^the Github homebrew repository has an deleted formula$/ do
+Given(/^the Github homebrew repository has an deleted formula$/) do
   # Create a new formula in the DB
   # without adding it to the HomebrewFormula collection
   # When HomebrewFormula will create the formulas,
@@ -53,7 +53,7 @@ Given /^the Github homebrew repository has an deleted formula$/ do
   Homebrew::Formula.create!(filename: 'arm', name: 'Arm')
 end
 
-Given /^the Github homebrew repository has a formula having multiple formula classes$/ do
+Given(/^the Github homebrew repository has a formula having multiple formula classes$/) do
   HomebrewFormula.new_formula(
     name: 'llvm',
     homepage: 'http://llvm.org/',
@@ -63,7 +63,7 @@ Given /^the Github homebrew repository has a formula having multiple formula cla
   )
 end
 
-Given /^the Github homebrew repository has an updated formula$/ do
+Given(/^the Github homebrew repository has an updated formula$/) do
   HomebrewFormula.new_formula(
     name: 'A52dec',
     homepage: 'http://liba52.sourceforge.net/',
@@ -71,11 +71,11 @@ Given /^the Github homebrew repository has an updated formula$/ do
   )
 end
 
-Given /^the Github homebrew repository doesn't have update$/ do
+Given(/^the Github homebrew repository doesn't have update$/) do
   # Nothing todo yet here.
 end
 
-Given /^the Github homebrew repository has a formula having backticks$/ do
+Given(/^the Github homebrew repository has a formula having backticks$/) do
   HomebrewFormula.new_formula(
     name: 'Lsyncd',
     homepage: 'https://github.com/axkibe/lsyncd',
@@ -83,7 +83,7 @@ Given /^the Github homebrew repository has a formula having backticks$/ do
   )
 end
 
-Given /^the Github homebrew repository has a formula with (dependencies|conflicts( with a reason( on multiple lines| with because issue)?)?)$/ do |dependencies_or_conflicts, with_reason, multiple_lines_or_because|
+Given(/^the Github homebrew repository has a formula with (dependencies|conflicts( with a reason( on multiple lines| with because issue)?)?)$/) do |dependencies_or_conflicts, with_reason, multiple_lines_or_because|
   attributes = {
     name: 'Xpdf',
     homepage: 'http://www.foolabs.com/xpdf/'
@@ -115,7 +115,7 @@ Given /^the Github homebrew repository has a formula with (dependencies|conflict
   HomebrewFormula.new_formula(attributes)
 end
 
-Given /^the Github homebrew repository has a formula with an external dependency$/ do
+Given(/^the Github homebrew repository has a formula with an external dependency$/) do
   HomebrewFormula.new_formula(
     name: 'Cliclick',
     homepage: 'http://www.bluem.net/jump/cliclick/',
@@ -123,10 +123,10 @@ Given /^the Github homebrew repository has a formula with an external dependency
   )
 end
 
-When /^the background task to get or update the formulae is executed$/ do
+When(/^the background task to get or update the formulae is executed$/) do
   HomebrewFormulaImportWorker.new.perform
 end
 
-Then /^the Github homebrew repository should be cloned$/ do
+Then(/^the Github homebrew repository should be cloned$/) do
   File.exists?(AppConfig.homebrew.git_repository.location).should be_true
 end
