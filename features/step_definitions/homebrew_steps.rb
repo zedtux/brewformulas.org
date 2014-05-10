@@ -163,7 +163,7 @@ Given /^(\d+) formulas has a description$/ do |count|
   Homebrew::Formula.count.should >= count
 
   count.times do
-    formula = Homebrew::Formula.order("RANDOM()").first
+    formula = Homebrew::Formula.order('RANDOM()').first
     formula.update_attribute(:description, 'This is a test')
   end
 end
