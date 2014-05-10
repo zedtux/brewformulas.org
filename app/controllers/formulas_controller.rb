@@ -12,6 +12,7 @@ class FormulasController < ApplicationController
   before_filter :current_object, only: [:show, :refresh_description]
 
   def index; end
+
   def show; end
 
   def refresh_description
