@@ -6,7 +6,7 @@
 class FormulasController < ApplicationController
   before_filter :current_objects, only: :index
   before_filter :calculate_percentage, only: :index
-  before_filter :new_since_a_weekm, only: :index
+  before_filter :new_since_a_week, only: :index
   before_filter :inactive_formulas, only: :index
   before_filter :current_object, only: [:show, :refresh_description]
 
