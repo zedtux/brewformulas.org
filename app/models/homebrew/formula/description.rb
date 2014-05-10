@@ -45,7 +45,7 @@ module Homebrew
           SoftwareDescriptionFetchers::Strategies::Github.new(@html)
         when :google_code
           SoftwareDescriptionFetchers::Strategies::GoogleCode.new(@html)
-        when :unknown
+        else
           SoftwareDescriptionFetchers::Strategies::Default.new(
             @html, name: @formula.name, filename: @formula.filename
           )
