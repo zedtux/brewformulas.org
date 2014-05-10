@@ -8,14 +8,10 @@ class FormulasController < ApplicationController
   before_filter :calculate_percentage, only: :index
   before_filter :new_since_a_week, only: :index
   before_filter :inactive_formulas, only: :index
+  before_filter :first_import_end_date, only: :index
   before_filter :current_object, only: [:show, :refresh_description]
 
-  def index
-    if @inactive_formulas.present?
-      @first_import_end_date = Import.first.ended_at.to_date
-    end
-  end
-
+  def index; end
   def show; end
 
   def refresh_description
@@ -60,5 +56,10 @@ class FormulasController < ApplicationController
 
   def inactive_formulas
     @inactive_formulas = Homebrew::Formula.internals.inactive.order(:name)
+  end
+
+  def first_import_end_date
+    retrun unless @inactive_formulas.present?
+    @first_import_end_date = Import.first.ended_at.to_date
   end
 end
