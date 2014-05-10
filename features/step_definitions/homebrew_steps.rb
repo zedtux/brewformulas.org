@@ -287,14 +287,13 @@ Then /^I should see some formulas$/ do
   expect(page).to_not have_content("#{count}All")
 end
 
-Then /^I should see (no|\d+) new formulas?$/ do |formula_count|
-  formula_count = 0 if formula_count == "no"
-  expect(page).to have_content("#{formula_count}New since a week")
-end
-
-Then /^I should see (no|\d+) inactive formulas?$/ do |formula_count|
-  formula_count = 0 if formula_count == "no"
-  expect(page).to have_content("#{formula_count}Inactive")
+Then /^I should see (no|\d+) (new|inactive) formulas?$/ do |formula_count, status|
+  formula_count = 0 if formula_count == 'no'
+  text = case status
+  when 'new'      : 'New since a week'
+  when 'inactive' : 'Inactive'
+  end
+  expect(page).to have_content("#{formula_count}#{text}")
 end
 
 Then /^I should see one formula$/ do
