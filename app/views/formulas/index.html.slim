@@ -29,19 +29,19 @@ div class="tab-content"
       .alert.alert-info
         = 'No formula found.'
     - else
-      = render partial: 'formulas', locals: { formulas: @formulas }
+      = render partial: 'formulas', formulas: @formulas
   div class="tab-pane" id="new_since_a_week"
     - if @new_since_a_week.blank?
       .alert.alert-info
         = "No new formula this week."
     - else
-      = render partial: 'formulas', locals: { formulas: @new_since_a_week }
+      = render partial: 'formulas', formulas: @new_since_a_week
   div class="tab-pane" id="inactive"
     - if @inactive_formulas.blank?
       .alert.alert-info
         = "No inactive formulas."
     - else
-      = render partial: 'formulas', locals: { formulas: @inactive_formulas }
+      = render partial: 'formulas', formulas: @inactive_formulas
       p class="text-muted"
         | This list include only formulae since the first import done on the
         '
