@@ -22,7 +22,7 @@ module HomebrewFormula
   #   formula_two: {name: "llvm", homepage: "http://llvm.org", primary: true}
   # }
   def self.write_formulae_to(formula_basedir)
-    raise "No formula to be written" unless self.formulas
+    raise 'No formula to be written' unless self.formulas
 
     self.formulas.each do |formula|
 
@@ -69,7 +69,7 @@ module HomebrewFormula
   def self.formula_conflict_with_because(formula)
     because_issue = formula[:conflicts_with][:because_issue]
     @formula_content << ','
-    @formula_content << "\n  " if formula[:conflicts_with][:on_multiple_lines]
+    @formula_content << '\n  ' if formula[:conflicts_with][:on_multiple_lines]
     @formula_content << ' '
     @formula_content << (because_issue ? ':beacuse' : ':because')
     @formula_content << " => '#{formula[:conflicts_with][:because]}'"
@@ -88,7 +88,7 @@ module HomebrewFormula
       formula_conflict_with_because(formula)
     end
 
-    @formula_content << "\n"
+    @formula_content << '\n'
   end
 
   def self.formula_custom_ruby_code(formula)
@@ -106,7 +106,7 @@ module HomebrewFormula
     formula_conflicts(formula) if formula[:conflicts_with]
     formula_custom_ruby_code(formula)
 
-    @formula_content << "\nend\n"
+    @formula_content << '\nend\n'
     @formula_content
   end
 end
