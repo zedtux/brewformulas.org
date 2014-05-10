@@ -1,6 +1,6 @@
 def check_formula_names
   # Ensure Homebrew::Formula#name never contains double or simple quotes
-  Homebrew::Formula.all.collect(&:name).each do |name|
+  Homebrew::Formula.all.map(&:name).each do |name|
     name.should_not =~ /[\"|\']/
   end
 end
