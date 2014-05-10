@@ -31,7 +31,7 @@ Given(/^some formulas exist$/) do
   import.save
 end
 
-Given /(\d+) formulas exist/ do |count|
+Given(/^(\d+) formulas exist$/) do |count|
   count = count.to_i
   count.times do |time|
     Homebrew::Formula.create!(
@@ -172,7 +172,7 @@ When(/^I click the formula "(.*?)"$/) do |formula|
   click_on formula
 end
 
-When /the background task to fetch formula description runs/ do
+When(/^the background task to fetch formula description runs$/) do
   FormulaDescriptionFetchWorker.new.perform(Homebrew::Formula.last.id)
 end
 
