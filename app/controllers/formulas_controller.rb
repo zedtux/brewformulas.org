@@ -60,7 +60,7 @@ class FormulasController < ApplicationController
   end
 
   def first_import_end_date
-    retrun unless @inactive_formulas.present?
+    return unless @inactive_formulas.present?
     @first_import_end_date = Import.first.ended_at.to_date
   end
 end
