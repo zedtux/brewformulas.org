@@ -53,16 +53,22 @@ class HomebrewFormulaImportWorker
   # and create/update the Homebrew::Formula
   #
   def perform
-    @import = Import.create(success: true)
+    @import = Import.create!(success: true)
 
     import_formulas
   rescue StandardError => error
     @import.message = error.message
     @import.success = false
     raise
+  rescue ActiveRecord::RecordInvalid => error
+    Rails.logger.warn 'Unable to create a new import : ' \
+                      "#{error.message}"
   ensure
     @import.ended_at = Time.now
-    @import.save
+    unless @import.save
+      Rails.logger.warn 'Unable to update the import with ID ' \
+                        "#{@import.id} : #{@import.errors.full_message}"
+    end
   end
 
   private

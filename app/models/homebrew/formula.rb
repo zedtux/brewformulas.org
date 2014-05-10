@@ -120,10 +120,13 @@ module Homebrew
 
       # In the case a description has been found
       if description.found?
-        update_attributes(
+        unless update_attributes(
           description: description.text,
           description_automatic: true
         )
+          Rails.logger.warn 'Unable to update description with text ' \
+                            "#{description.text}"
+        end
       end
     end
 
