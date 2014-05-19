@@ -1,4 +1,6 @@
-redis_url = "redis://#{AppConfig.redis.server}:#{AppConfig.redis.port}/"
+redis_url = 'redis://'
+redis_url << ":#{AppConfig.redis.password}@" if AppConfig.redis.respond_to?(:password)
+redis_url << "#{AppConfig.redis.server}:#{AppConfig.redis.port}/"
 redis_url << "#{AppConfig.redis.db_num}"
 
 message = 'Sidekiq using Redis setting '

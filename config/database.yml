@@ -1,9 +1,10 @@
 postgresql: &postgresql
   adapter: postgresql
-  host: <%= ENV['POSTGRESQL_1_PORT_5432_TCP_ADDR'] || "localhost" %>
+  host: <%= ENV['POSTGRESQL_1_PORT_5432_TCP_ADDR'] || 'localhost' %>
   port: <%= ENV['POSTGRESQL_1_PORT_5432_TCP_PORT'] || 5432 %>
-  username: <%= ENV['POSTGRESQL_USER'] || "brewformulas" %>
+  username: <%= ENV['POSTGRESQL_USER'] || 'brewformulas' %>
   password: <%= ENV['POSTGRESQL_PASSWORD'] %>
+  template: <%= ENV['POSTGRESQL_TEMPLATE'] %>
   database: brewformulas_org
   min_messages: ERROR
 
