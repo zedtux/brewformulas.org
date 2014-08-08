@@ -141,8 +141,9 @@ module Git
     end
 
     def run_command(git_cmd, &block)
-      if git_cmd.include?("\"--\"")
-        regex = %r{git\s(\w+).*\s"--"\s"([\w\:\/\.\_\-]+)"\s"([\w\/\.\s]+)"}
+      has_dash_dash = git_cmd.include?("\"--\"") || git_cmd.include?("'--'")
+      if has_dash_dash
+        regex = %r{git\s(\w+).*\s(?:"|')--(?:"|')\s(?:"|')([\w\:\/\.\_\-]+)(?:"|')\s(?:"|')([\w\/\.\s]+)(?:"|')}
         action, _, self.root_path = git_cmd.scan(regex).first
       else
         action = git_cmd.scan(/git (\w+).*/).flatten.first

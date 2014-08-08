@@ -128,5 +128,5 @@ When(/^the background task to get or update the formulae is executed$/) do
 end
 
 Then(/^the Github homebrew repository should be cloned$/) do
-  File.exists?(AppConfig.homebrew.git_repository.location).should be_true
+  expect(File.exists?(AppConfig.homebrew.git_repository.location)).to be_truthy
 end

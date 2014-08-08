@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails'
-gem 'uglifier', '>= 1.3.0'
+gem 'uglifier'
 gem 'jquery-rails'
 gem 'less-rails'
 gem 'therubyracer', :platforms => :ruby

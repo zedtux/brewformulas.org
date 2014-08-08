@@ -4,7 +4,7 @@ postgresql: &postgresql
   port: <%= ENV['POSTGRESQL_1_PORT_5432_TCP_PORT'] || 5432 %>
   username: <%= ENV['POSTGRESQL_USER'] || 'brewformulas' %>
   password: <%= ENV['POSTGRESQL_PASSWORD'] %>
-  template: <%= ENV['POSTGRESQL_TEMPLATE'] %>
+  template: <%= ENV['POSTGRESQL_TEMPLATE'] || 'template0' %>
   database: brewformulas_org
   min_messages: ERROR
 

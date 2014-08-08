@@ -181,10 +181,8 @@ When(/^I request to update the formula description$/) do
 end
 
 Then(/^there should be some formulas in the database$/) do
-  Homebrew::Formula.exists?.should(
-    be_true,
+  expect(Homebrew::Formula.exists?).to be_truthy,
     "Expected to have formula in the database but didn't."
-  )
 end
 
 Then(/^new formulas should be available in the database$/) do
