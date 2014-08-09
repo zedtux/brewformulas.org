@@ -15,6 +15,7 @@ Rails.logger.info message
 # We need here the rescue nil has the AppConfig gem
 # doesn't support respond_to?
 begin
+  fail if Rails.env.development?
   sidekiq_conf = AppConfig.sidekiq
   Rails.logger.info 'Sidekiq with authentication'
 rescue
