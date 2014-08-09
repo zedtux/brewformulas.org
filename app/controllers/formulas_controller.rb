@@ -46,7 +46,8 @@ class FormulasController < ApplicationController
     with_a_description_count = Homebrew::Formula.internals
                                                 .with_a_description.count
     @coverage = 0
-    unless with_a_description_count.zero?
+
+    unless with_a_description_count.zero? || @formulas.size.zero?
       @coverage = (with_a_description_count * 100) / @formulas.size
     end
   end

@@ -54,3 +54,10 @@ Feature: Formula list
     Then I should see some formulas
     And I should see no inactive formulas
     And I should see 1 new formula
+
+  @github-issues-5
+  Scenario: Looking at formula list during the initial import
+    Given on formulas exist
+    And a formula with a description exists
+    When I go to brewformulas.org
+    And I should see no new formulas
