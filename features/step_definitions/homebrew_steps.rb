@@ -240,7 +240,7 @@ Then(/^the formula (.*?) should have the following description:$/) do |name, des
   unless formula
     fail "Unable to find a Homebrew::Formula with name \"#{name}\""
   end
-  formula.description.should == description
+  expect(formula.description).to eql(description)
 end
 
 Then(/^I should see the (.*?) formula description automatically extracted from the homepage$/) do |name|

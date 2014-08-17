@@ -31,7 +31,7 @@ module SoftwareDescriptionFetchers
       def regex
         /(^.*(?:#{@software_name}|#{@software_filename})
           (?:\)|\s\u2122|\s[\d\.]+|\scodec)?\s(?:is\s
-          (?:an?|the)|(?:project\s)?provides)[\s\w\'\(\)\,\-\+\/\.]+\.(?:\s|$)
+          (?:an?|the)|(?:project\s)?provides)[\s\w\'\(\)\,\-\+\/\.\:]+\.(?:\s|$)
         )/ix
       end
 

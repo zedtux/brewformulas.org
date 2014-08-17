@@ -18,6 +18,7 @@ fixture_root = File.join(Rails.root, 'features', 'fixtures', 'webmock')
   'http://www.monkeymental.com/' => 'cdpr',
   'http://www.celt-codec.org/' => 'celt',
   'http://www.bluem.net/jump/cliclick/' => 'cliclick',
+  'http://libmemcached.org/' => 'libmemcached',
   'http://llvm.org/' => 'llvm',
   'https://github.com/axkibe/lsyncd' => 'lsyncd',
   'http://www.foolabs.com/xpdf/' => 'xpdf',
