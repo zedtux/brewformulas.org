@@ -54,7 +54,7 @@ class Homepage
     meta_refresh = Nokogiri::HTML(content).at('meta[http-equiv="refresh"]')
     return content unless meta_refresh
 
-    new_path = meta_refresh['content'][/URL=(.+)/i, 1].gsub(/['"]/, '')
+    new_path = meta_refresh['content'][/URL=\s+?(.+)/i, 1].gsub(/['"]/, '')
     fetch_content_from([@url, new_path].join('/'))
   end
 
