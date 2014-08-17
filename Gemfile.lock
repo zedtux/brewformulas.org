@@ -1,6 +1,6 @@
 GIT
   remote: https://github.com/thoughtbot/shoulda-matchers.git
-  revision: 86fb6b9c1efcee5dc0c325aaa64e2fb0fd33c48a
+  revision: 165859247cd679e4894e88a21d351927b68fe6f9
   specs:
     shoulda-matchers (2.6.2)
       activesupport (>= 3.0.0)
@@ -84,7 +84,7 @@ GEM
     colorize (0.7.3)
     commonjs (0.2.7)
     connection_pool (2.0.0)
-    coveralls (0.7.0)
+    coveralls (0.7.1)
       multi_json (~> 1.3)
       rest-client
       simplecov (>= 0.7)
@@ -189,7 +189,7 @@ GEM
       json
       require_all
       ruby-progressbar
-    rails_layout (1.0.20)
+    rails_layout (1.0.21)
     railties (4.1.4)
       actionpack (= 4.1.4)
       activesupport (= 4.1.4)
@@ -205,12 +205,12 @@ GEM
     rest-client (1.7.2)
       mime-types (>= 1.16, < 3.0)
       netrc (~> 0.7)
-    rspec-core (3.0.3)
+    rspec-core (3.0.4)
       rspec-support (~> 3.0.0)
-    rspec-expectations (3.0.3)
+    rspec-expectations (3.0.4)
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.0.0)
-    rspec-mocks (3.0.3)
+    rspec-mocks (3.0.4)
       rspec-support (~> 3.0.0)
     rspec-rails (3.0.2)
       actionpack (>= 3.0)
@@ -220,16 +220,15 @@ GEM
       rspec-expectations (~> 3.0.0)
       rspec-mocks (~> 3.0.0)
       rspec-support (~> 3.0.0)
-    rspec-support (3.0.3)
-    rubocop (0.24.1)
-      json (>= 1.7.7, < 2)
-      parser (>= 2.2.0.pre.3, < 3.0)
+    rspec-support (3.0.4)
+    rubocop (0.25.0)
+      parser (>= 2.2.0.pre.4, < 3.0)
       powerpack (~> 0.0.6)
       rainbow (>= 1.99.1, < 3.0)
       ruby-progressbar (~> 1.4)
     ruby-progressbar (1.5.1)
     safe_yaml (1.0.3)
-    sexp_processor (4.4.3)
+    sexp_processor (4.4.4)
     sidekiq (2.17.7)
       celluloid (>= 0.15.2)
       connection_pool (>= 1.0.0)
@@ -282,7 +281,7 @@ GEM
     tilt (1.4.1)
     timecop (0.7.1)
     timers (1.1.0)
-    tins (1.3.0)
+    tins (1.3.1)
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
