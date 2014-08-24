@@ -1,0 +1,14 @@
+postgresql:
+  image: postgres
+redis:
+  image: redis
+web:
+  build: .
+  command: bin/rails server -e production
+  links:
+   - postgresql
+   - redis
+  ports:
+   - "3000:3000"
+  environment:
+    POSTGRESQL_USER: postgres
