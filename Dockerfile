@@ -21,19 +21,26 @@ RUN apt-get update
 RUN apt-get install newrelic-sysmond
 
 
-# ~~~~ User Home Maintenance ~~~~
-# Clone the Git repository with the latest version from master branch
-RUN mkdir -p /application/
-WORKDIR /application/
-# Import the Brewformulas source code
-RUN git clone https://github.com/zedtux/brewformulas.org /application/
-
-
 # ~~~~ Rails Preparation ~~~~
+RUN mkdir /application/
+# Rubygems
+RUN gem install rubygems-update --no-ri --no-rdoc
+RUN update_rubygems
 # Bundler
-RUN gem install bundler
-
-
-# ~~~~ Brewformulas.org ~~~~
-# Switch the working directory
+RUN gem install bundler --no-ri --no-rdoc
+# Copy the Gemfile and Gemfile.lock into the image.
+# Temporarily set the working directory to where they are.
+WORKDIR /application/
+ADD Gemfile /application/Gemfile
+ADD Gemfile.lock /application/Gemfile.lock
 RUN bundle --deployment --without development test cucumber
+
+# ~~~~ Sources Preparation ~~~~
+# Import the Brewformulas source code
+ADD . /application/
+RUN rm -rf /application/.git/
+
+RUN bundle exec rake assets:precompile RAILS_ENV=production
+
+# Run the Rails server
+CMD bundle exec rails server
