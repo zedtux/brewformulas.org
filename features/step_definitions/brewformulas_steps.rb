@@ -29,6 +29,6 @@ Then(/^I should see the (.*) Homebrew formulas?$/) do |formulas|
   base_xpath << 'and contains(normalize-space(.), "'
 
   formulas.split.each do |formula|
-    page.should have_xpath(base_xpath.dup << formula << '")]')
+    expect(page).to have_xpath(base_xpath.dup << formula << '")]')
   end
 end

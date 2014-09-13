@@ -1,7 +1,7 @@
 h1 Search a formula
 - if @formulas.blank?
   .alert.alert-info
-    = "No formula found."
+    = 'No formula found.'
 - else
   .list-group
     - @formulas.each do |formula|
@@ -9,7 +9,7 @@ h1 Search a formula
         h4.list-group-item-heading
           = formula.name
           small
-            = formula.external? ? "external dependency" : formula.filename
+            = formula.external? ? 'external dependency' : formula.filename
           - if formula.new?
             span class="label label-success" New
         p.list-group-item-text= formula.description

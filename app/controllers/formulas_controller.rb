@@ -4,12 +4,16 @@
 # @author [guillaumeh]
 #
 class FormulasController < ApplicationController
-  before_filter :current_objects, only: :index
-  before_filter :calculate_percentage, only: :index
-  before_filter :new_since_a_week, only: :index
-  before_filter :inactive_formulas, only: :index
-  before_filter :first_import_end_date, only: :index
-  before_filter :current_object, only: [:show, :refresh_description]
+  before_action :current_objects, only: :index
+  before_action :calculate_percentage, only: :index
+  before_action :new_since_a_week, only: :index
+  before_action :inactive_formulas, only: :index
+  before_action :first_import_end_date, only: :index
+  before_action :current_object, only: [:show, :refresh_description]
+  before_action :respond_with_format, except: [:refresh_description, :search]
+
+  # Allowed formats for this controller
+  respond_to :html, :json
 
   def index; end
 
@@ -32,10 +36,16 @@ class FormulasController < ApplicationController
   private
 
   def current_object
-    @formula = Homebrew::Formula.find_by!(name: params[:id])
+    @formula = Homebrew::Formula.where('lower(name) = ?',
+                                       params[:id].downcase).first!
   rescue ActiveRecord::RecordNotFound
-    flash[:error] = "This formula doesn't exists"
-    redirect_to root_url
+    respond_to do |format|
+      format.html {
+        flash[:error] = 'This formula doesn\'t exists'
+        redirect_to root_url
+      }
+      format.json { respond_with({}, status: :not_found) }
+    end
   end
 
   def current_objects
@@ -63,5 +73,18 @@ class FormulasController < ApplicationController
   def first_import_end_date
     return unless @inactive_formulas.present?
     @first_import_end_date = Import.first.ended_at.to_date
+  end
+
+  def respond_with_format
+    respond_to do |format|
+      format.html
+      format.json {
+        if action_name == 'show'
+          respond_with(@formula, status: :ok)
+        else
+          respond_with([], status: 415)
+        end
+      }
+    end
   end
 end
