@@ -47,8 +47,8 @@ group :test, :cucumber do
   gem 'email_spec'
   gem 'launchy'
   gem 'rspec-rails'
-  gem 'shoulda-matchers', :git => "https://github.com/thoughtbot/shoulda-matchers.git"
-  gem 'cucumber-timecop', :require => false
+  gem 'shoulda-matchers', :git => 'https://github.com/thoughtbot/shoulda-matchers.git'
+  gem 'cucumber-timecop', '0.0.3', :require => false
   gem 'rake'
   gem 'webmock'
   gem 'coveralls', require: false
