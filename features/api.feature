@@ -14,6 +14,59 @@ Feature: API
     Then I should receive a 404 HTTP error code
 
   Scenario: GET request in JSON to a formula URL
-    Given the A52dec formula with homepage "http://liba52.sourceforge.net/" exists
+    Given following Homebrew formulas exist:
+      | name           | homepage                          |
+      | A52dec         | http://liba52.sourceforge.net/    |
+      | GstPluginsUgly | http://code.google.com/p/libdnet/ |
+      | GPac           | http://www.pcre.org/              |
+    And the automatically extracted description for the A52dec formula is "a52dec is a test program for liba52."
+    And the formula A52dec is a dependency of GPac
+    And the formula A52dec is a dependency of GstPluginsUgly
     When I send a GET request in JSON to the a52dec formula url
     Then I should receive a 200 HTTP code
+    And the request body should be the following JSON:
+    """
+    {
+      "formula": "a52dec",
+      "description": "a52dec is a test program for liba52.",
+      "reference": "Extracted automatically from A52dec homepage",
+      "homepage": "http://liba52.sourceforge.net/",
+      "version": "",
+      "dependencies": [
+      ],
+      "dependents": [
+        "GPac",
+        "GstPluginsUgly"
+      ]
+    }
+    """
+
+  Scenario: GET request in JSON to a formula URL with both dependencies and dependents
+    Given following Homebrew formulas exist:
+      | name  | homepage                          |
+      | Zsh   | http://www.zsh.org/               |
+      | Pcre  | http://www.pcre.org/              |
+      | Gdbm  | http://www.gnu.org/software/gdbm/ |
+      | Zshdb | https://github.com/rocky/zshdb    |
+    And the Zsh formula has the description "Zsh is a shell designed for interactive use, although it is also a powerful scripting language."
+    And the formula Zsh is a dependency of Zshdb
+    And the formulas Pcre, and Gdbm are dependencies of Zsh
+    When I send a GET request in JSON to the zsh formula url
+    Then I should receive a 200 HTTP code
+    And the request body should be the following JSON:
+    """
+    {
+      "formula": "zsh",
+      "description": "Zsh is a shell designed for interactive use, although it is also a powerful scripting language.",
+      "reference": "",
+      "homepage": "http://www.zsh.org/",
+      "version": "",
+      "dependencies": [
+        "Gdbm",
+        "Pcre"
+      ],
+      "dependents": [
+        "Zshdb"
+      ]
+    }
+    """

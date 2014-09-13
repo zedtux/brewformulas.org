@@ -130,12 +130,28 @@ module Homebrew
       end
     end
 
+    def reference
+      "Extracted automatically from #{name} homepage" if description_automatic?
+    end
+
     #
     # Get if the formula is new
     #
     # @return [Boolean] return true if new otherwise false
     def new?
       created_at.to_date == Time.now.utc.to_date
+    end
+
+    def as_json(options = {})
+      {
+        formula: name.downcase,
+        description: description.to_s,
+        reference: reference.to_s,
+        homepage: homepage.to_s,
+        version: version.to_s,
+        dependencies: dependencies.map(&:name).sort,
+        dependents: formula_dependents.map(&:formula).map(&:name).sort
+      }
     end
 
     private
