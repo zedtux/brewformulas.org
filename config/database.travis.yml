@@ -4,6 +4,7 @@ postgresql: &postgresql
   password:
   database: brewformulas_org_test
   min_messages: ERROR
+  template: template0
 
 defaults: &defaults
   pool: 5
