@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.github.com/zedtux/gpair/master/media/developpeur_breton_logo.png" alt="Je suis un developpeyr Breton!"/>
+  <img src="https://raw.github.com/zedtux/gpair/master/media/developpeur_breton_logo.png" alt="Je suis un développeur Breton!"/>
 </p>
 
 # brewformulas.org
