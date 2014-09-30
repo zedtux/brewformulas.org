@@ -1,4 +1,5 @@
 image: ruby2.0.0
 script:
+  - echo "Hello Drone"
   - bundle install
   - bundle exec rake
