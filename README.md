@@ -25,3 +25,4 @@ In the case you would like to get access to the technical documentation, [it's o
 # Docker
 
 This application has a Dockerfile which is used to test docker. It's a working version that you can try yourself.
+You must install [Docker](http://docker.com/) on your system.
