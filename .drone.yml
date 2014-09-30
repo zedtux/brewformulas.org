@@ -1,0 +1,3 @@
+script:
+  - bundle install
+  - bundle exec rake
