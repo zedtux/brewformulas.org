@@ -1,6 +1,8 @@
 image: ruby2.0.0
 script:
-  - bundle install
+  - cp config/database.travis.yml config/database.yml
+  - psql -c 'create database brewformulas_org_test' -U postgres
+  - bundle install --without development
   - bundle exec rake db:create db:setup db:test:prepare
   - bundle exec rake
 services:
