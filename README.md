@@ -21,3 +21,7 @@ The website is under heavy development so feel free to check regularly in order 
 # Documentation
 
 In the case you would like to get access to the technical documentation, [it's over here](http://rdoc.info/github/zedtux/brewformulas.org/master/frames).
+
+# Docker
+
+This application has a Dockerfile which is used to test docker. It's a working version that you can try yourself.
