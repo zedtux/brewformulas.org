@@ -8,3 +8,7 @@ script:
 services:
   - postgres
   - redis
+notify:
+  email:
+    recipients:
+      - zedtux@zedroot.org
