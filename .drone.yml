@@ -7,3 +7,4 @@ script:
   - bundle exec rake RAILS_ENV=test
 services:
   - postgres
+  - redis
