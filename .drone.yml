@@ -3,7 +3,7 @@ script:
   - cp config/database.travis.yml config/database.yml
   - psql -c 'create database brewformulas_org_test' -U postgres -h 127.0.0.1
   - bundle install --without development
-  - bundle exec rake db:create db:setup db:test:prepare
-  - bundle exec rake
+  - bundle exec rake db:create db:setup RAILS_ENV=test
+  - bundle exec rake RAILS_ENV=test
 services:
   - postgres
