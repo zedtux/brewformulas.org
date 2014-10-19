@@ -25,6 +25,14 @@ group :assets do
   gem 'coffee-rails'
 end
 
+group :deployment do
+  gem 'capistrano'
+  gem 'capistrano-rails'
+  gem 'capistrano-bundler'
+  gem 'capistrano3-puma'
+  gem 'capistrano-sidekiq'
+end
+
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_19, :mri_20, :rbx]
@@ -32,12 +40,8 @@ group :development do
   gem 'quiet_assets'
   gem 'rails_layout'
   gem 'yard'
-  gem 'capistrano'
-  gem 'capistrano-rails'
-  gem 'capistrano-bundler'
   gem 'rails_best_practices'
   gem 'rubocop'
-  gem 'capistrano3-puma'
 end
 
 group :test, :cucumber do
