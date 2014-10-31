@@ -160,7 +160,7 @@ end
 Given(/^(\d+) formulas has a description$/) do |count|
   count = count.to_i
 
-  Homebrew::Formula.count.should >= count
+  expect(Homebrew::Formula.count).to be >= count
 
   count.times do
     formula = Homebrew::Formula.order('RANDOM()').first
