@@ -40,9 +40,8 @@ WORKDIR /application/
 ADD Gemfile /application/Gemfile
 ADD Gemfile.lock /application/Gemfile.lock
 ADD vendor/cache/ /application/vendor/cache/
-RUN ls -al vendor/
+RUN bundle package --all
 RUN ls -al vendor/cache/
-RUN bundle install --local --deployment --without development test cucumber
 
 # ~~~~ Sources Preparation ~~~~
 # Import the Brewformulas source code
