@@ -44,19 +44,6 @@ GEM
     bootstrap-on-rails (3.2.0)
       less-rails
     builder (3.2.2)
-    capistrano (3.2.1)
-      i18n
-      rake (>= 10.0.0)
-      sshkit (~> 1.3)
-    capistrano-bundler (1.1.3)
-      capistrano (~> 3.1)
-      sshkit (~> 1.2)
-    capistrano-rails (1.1.2)
-      capistrano (~> 3.1)
-      capistrano-bundler (~> 1.1)
-    capistrano3-puma (0.7.0)
-      capistrano (~> 3.0)
-      puma (>= 2.6)
     capybara (2.4.3)
       mime-types (>= 1.16)
       nokogiri (>= 1.3.3)
@@ -77,7 +64,6 @@ GEM
       execjs
     coffee-script-source (1.8.0)
     colored (1.2)
-    colorize (0.7.3)
     commonjs (0.2.7)
     connection_pool (2.0.0)
     coveralls (0.7.1)
@@ -140,9 +126,6 @@ GEM
     minitest (5.4.1)
     multi_json (1.10.1)
     multi_test (0.1.1)
-    net-scp (1.2.1)
-      net-ssh (>= 2.6.5)
-    net-ssh (2.9.1)
     netrc (0.7.7)
     newrelic_rpm (3.9.4.245)
     nokogiri (1.6.3.1)
@@ -264,10 +247,6 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (~> 2.8)
-    sshkit (1.5.1)
-      colorize
-      net-scp (>= 1.1.2)
-      net-ssh (>= 2.8.0)
     temple (0.6.8)
     term-ansicolor (1.3.0)
       tins (~> 1.0)
@@ -304,10 +283,6 @@ DEPENDENCIES
   better_errors
   binding_of_caller
   bootstrap-on-rails
-  capistrano
-  capistrano-bundler
-  capistrano-rails
-  capistrano3-puma
   capybara
   coffee-rails
   coveralls

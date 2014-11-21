@@ -20,24 +20,16 @@ gem 'nokogiri'
 gem 'open_uri_redirections' # open-uri library patched to follow http to https redirects
 gem 'array_is_uniq', :require => 'array' # Implemented the missing unqi? method on Ruby Arrays
 gem 'pluralize_no_count_if_one'
+gem 'quiet_assets'
 
 group :assets do
   gem 'coffee-rails'
-end
-
-group :deployment do
-  gem 'capistrano'
-  gem 'capistrano-rails'
-  gem 'capistrano-bundler'
-  gem 'capistrano3-puma'
-  gem 'capistrano-sidekiq'
 end
 
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_19, :mri_20, :rbx]
   gem 'hub', :require => nil
-  gem 'quiet_assets'
   gem 'rails_layout'
   gem 'yard'
   gem 'rails_best_practices'
