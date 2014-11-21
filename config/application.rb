@@ -36,5 +36,9 @@ module BrewformulasOrg
     # my_locales = Rails.root.join('my', 'locales', '*.{rb,yml}').to_s
     # config.i18n.load_path += Dir[my_locales]
     # config.i18n.default_locale = :de
+
+    # When running in Docker, the logs are sent to the STDOUT so that you can
+    # use the `docker logs` command to see them all.
+    config.logger = Logger.new(STDOUT) if ENV['RUNNING_IN_DOCKER']
   end
 end

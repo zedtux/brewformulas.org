@@ -18,25 +18,22 @@
 FROM litaio/ruby:2.1.5
 MAINTAINER zedtux, zedtux@zedroot.org
 
+ENV RUNNING_IN_DOCKER true
 
-# ~~~~ OS Maintenance ~~~~
-# Keep up-to-date the container OS
-RUN apt-get update && apt-get install -y libpq-dev wget git
-
-
-# ~~~~ Newrelic ~~~~
-RUN echo deb http://apt.newrelic.com/debian/ newrelic non-free >> /etc/apt/sources.list.d/newrelic.list && \
-  wget -O- https://download.newrelic.com/548C16BF.gpg | apt-key add - && \
+# ~~~~ System Dependencies ~~~~
+RUN apt-get install -y ca-certificates && \
+  echo deb http://apt.newrelic.com/debian/ newrelic non-free >> /etc/apt/sources.list.d/newrelic.list && \
+  curl https://download.newrelic.com/548C16BF.gpg | apt-key add - && \
   apt-get update && \
-  apt-get install -y newrelic-sysmond
+  apt-get install -y libpq-dev \
+  git \
+  newrelic-sysmond && \
+# ~~~~ Application ~~~~
+  mkdir /application/ && \
+  gem install rubygems-update --no-ri --no-rdoc && \
+  update_rubygems && \
+  gem install bundler --no-ri --no-rdoc
 
-
-# ~~~~ Rails Preparation ~~~~
-RUN mkdir /application/
-# Rubygems
-RUN gem install rubygems-update --no-ri --no-rdoc && update_rubygems
-# Bundler
-RUN gem install bundler --no-ri --no-rdoc
 # Copy the Gemfile and Gemfile.lock into the image.
 # Temporarily set the working directory to where they are.
 WORKDIR /application/
