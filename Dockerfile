@@ -9,6 +9,9 @@
 # 4) Run sidekiq
 #   docker run --rm --link bfdb:postgres --link bfred:redis -e POSTGRESQL_USER=postgres zedtux/brewformulas sidekiq
 #
+# When first run use the following command to setup the postgres db:
+#   docker run --rm --link bfdb:postgres --link bfred:redis -e POSTGRESQL_USER=postgres zedtux/brewformulas rake db:create db:migrate
+#
 # VERSION       1.0
 
 # ~~~~ Image base ~~~~
@@ -40,8 +43,7 @@ WORKDIR /application/
 ADD Gemfile /application/Gemfile
 ADD Gemfile.lock /application/Gemfile.lock
 ADD vendor/cache/ /application/vendor/cache/
-RUN bundle package --all
-RUN ls -al vendor/cache/
+RUN bundle install --local --deployment --without development test cucumber
 
 # ~~~~ Sources Preparation ~~~~
 # Import the Brewformulas source code
