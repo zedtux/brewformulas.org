@@ -3,7 +3,7 @@
 # VERSION       1.0
 
 # ~~~~ Image base ~~~~
-FROM litaio/ruby:2.1.3
+FROM litaio/ruby:2.1.5
 MAINTAINER zedtux, zedtux@zedroot.org
 
 
@@ -39,5 +39,4 @@ RUN rm -rf /application/.git/
 
 RUN bundle exec rake assets:precompile RAILS_ENV=production
 
-# Run the Rails server
-CMD bundle exec rails server
+ENTRYPOINT ["bundle exec"]
