@@ -1,16 +1,19 @@
 # Brewformulas.org web application Docker image
 #
 # 1) Start a PostgreSQL
-#   docker run -d --name=bfdb postgres:9
+#   $ docker run -d --name=bfdb postgres:9
 # 2) Start a Redis
-#   docker run -d --name=bfred redis:2.8
+#   $ docker run -d --name=bfred redis:2.8
 # 3) Start the UI
-#   docker run --rm --link bfdb:postgres --link bfred:redis -p 3000:3000 -e POSTGRESQL_USER=postgres zedtux/brewformulas
+#   $ docker run --rm --link bfdb:postgres --link bfred:redis -p 3000:3000 -e POSTGRESQL_USER=postgres zedtux/brewformulas
 # 4) Run sidekiq
-#   docker run --rm --link bfdb:postgres --link bfred:redis -e POSTGRESQL_USER=postgres zedtux/brewformulas sidekiq
+#   $ docker run --rm --link bfdb:postgres --link bfred:redis -e POSTGRESQL_USER=postgres zedtux/brewformulas sidekiq
 #
 # When first run use the following command to setup the postgres db:
 #   docker run --rm --link bfdb:postgres --link bfred:redis -e POSTGRESQL_USER=postgres zedtux/brewformulas rake db:create db:migrate
+# In the case you have a dump of the database to import (Don't execute the db:migrate):
+#   $ cd /path/where/the/import/is/
+#   $ docker run --rm -i --link brewformulasdb:postgres -v $PWD/:/tmp/ postgres:latest bash -c 'exec psql -h "$POSTGRES_PORT_5432_TCP_ADDR" -p "$POSTGRES_PORT_5432_TCP_PORT" -U postgres -d <table_name> < /tmp/<dump_file_name>.sql
 #
 # VERSION       1.0
 
