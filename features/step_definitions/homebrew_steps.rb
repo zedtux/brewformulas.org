@@ -157,7 +157,7 @@ Given(/^the (.*?) formula has (.*?) as external dependency$/) do |formula_name, 
   formula.dependencies << dependence
 end
 
-Given(/^(\d+) formulas has a description$/) do |count|
+Given(/^(\d+) formulas have a description$/) do |count|
   count = count.to_i
 
   expect(Homebrew::Formula.count).to be >= count
