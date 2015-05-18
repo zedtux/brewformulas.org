@@ -18,7 +18,7 @@
 # VERSION       1.0
 
 # ~~~~ Image base ~~~~
-FROM litaio/ruby:2.1.5
+FROM litaio/ruby:2.2.2
 MAINTAINER zedtux, zedtux@zedroot.org
 
 ENV RUNNING_IN_DOCKER true
