@@ -26,7 +26,7 @@ Given(/^some formulas exist$/) do
     homepage: 'http://liba52.sourceforge.net/'
   )
   @homebrew_formula_count = Homebrew::Formula.count
-  import.ended_at = Time.now
+  import.ended_at = Time.zone.now
   import.success = true
   import.save
 end
@@ -157,7 +157,7 @@ Given(/^the (.*?) formula has (.*?) as external dependency$/) do |formula_name, 
   formula.dependencies << dependence
 end
 
-Given(/^(\d+) formulas has a description$/) do |count|
+Given(/^(\d+) formulas have a description$/) do |count|
   count = count.to_i
 
   expect(Homebrew::Formula.count).to be >= count
@@ -186,7 +186,7 @@ Then(/^there should be some formulas in the database$/) do
 end
 
 Then(/^new formulas should be available in the database$/) do
-  Homebrew::Formula.count.should > 1
+  Homebrew::Formula.count.should be > 1
   check_formula_names
 end
 
@@ -231,7 +231,7 @@ Then(/^a formula should be updated$/) do
 end
 
 Then(/^a formula should be flagged as deleted in the database$/) do
-  Homebrew::Formula.where('touched_on < ?', Date.today).count.should eq(1)
+  Homebrew::Formula.where('touched_on < ?', Time.zone.now).count.should eq(1)
   check_formula_names
 end
 

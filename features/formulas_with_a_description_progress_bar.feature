@@ -20,12 +20,12 @@ I want a progress bar showing me the pourcentage of formulas with a description
 
   Scenario: Check the progress bar with 12 formulas with 2 with a description
     Given 12 formulas exist
-    And 2 formulas has a description
+    And 2 formulas have a description
     When I go to brewformulas.org
     Then the formulas with a description coverage should be 16%
 
   Scenario: Check the progress bar with 12 formulas with 3 with a description
     Given 12 formulas exist
-    And 3 formulas has a description
+    And 3 formulas have a description
     When I go to brewformulas.org
     Then the formulas with a description coverage should be 25%
