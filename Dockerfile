@@ -32,25 +32,17 @@ RUN apt-get install -y ca-certificates && \
   git \
   newrelic-sysmond && \
 # ~~~~ Application ~~~~
-  mkdir /application/ && \
+  mkdir /brewformulas/ && \
   gem install rubygems-update --no-ri --no-rdoc && \
   update_rubygems && \
   gem install bundler --no-ri --no-rdoc
 
-# Copy the Gemfile and Gemfile.lock into the image.
-# Temporarily set the working directory to where they are.
-WORKDIR /application/
-ADD Gemfile /application/Gemfile
-ADD Gemfile.lock /application/Gemfile.lock
-ADD vendor/cache/ /application/vendor/cache/
-RUN bundle install --local --deployment --without development test cucumber
-
 # ~~~~ Sources Preparation ~~~~
-# Import the Brewformulas source code
-ADD . /application/
-RUN rm -rf /application/.git/
-
-RUN bundle exec rake assets:precompile RAILS_ENV=production
+# Prepare gems
+RUN mkdir /brewformulas/application/
+ADD . /brewformulas/application/
+WORKDIR /brewformulas/application/
+RUN bundle install --local --without production
 
 EXPOSE 3000
 

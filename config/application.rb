@@ -39,6 +39,8 @@ module BrewformulasOrg
 
     # When running in Docker, the logs are sent to the STDOUT so that you can
     # use the `docker logs` command to see them all.
-    config.logger = Logger.new(STDOUT) if ENV['RUNNING_IN_DOCKER']
+    if ENV['RUNNING_IN_DOCKER'] && Rails.env.production?
+      config.logger = Logger.new(STDOUT)
+    end
   end
 end

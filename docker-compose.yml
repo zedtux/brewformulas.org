@@ -4,11 +4,14 @@ redis:
   image: redis:3.0.1
 web:
   build: .
-  command: bin/rails server
+  command: bin/rails server -b 0.0.0.0
   links:
    - postgresql
    - redis
   ports:
    - "3000:3000"
   environment:
-    POSTGRESQL_USER: postgres
+    - POSTGRESQL_USER=postgres
+    - RAILS_ENV=development
+  volumes:
+    - .:/brewformulas/application/
