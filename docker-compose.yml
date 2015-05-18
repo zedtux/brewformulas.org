@@ -1,10 +1,10 @@
 postgresql:
-  image: postgres:9
+  image: postgres:9.4.1
 redis:
-  image: redis:2.8
+  image: redis:3.0.1
 web:
   build: .
-  command: bin/rails server -e production
+  command: bin/rails server
   links:
    - postgresql
    - redis
