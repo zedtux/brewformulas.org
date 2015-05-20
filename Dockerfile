@@ -32,17 +32,16 @@ RUN apt-get install -y ca-certificates && \
   git \
   newrelic-sysmond && \
 # ~~~~ Application ~~~~
-  mkdir /brewformulas/ && \
+  mkdir -p /brewformulas/application/ && \
   gem install rubygems-update --no-ri --no-rdoc && \
   update_rubygems && \
   gem install bundler --no-ri --no-rdoc
 
 # ~~~~ Sources Preparation ~~~~
 # Prepare gems
-RUN mkdir /brewformulas/application/
-ADD . /brewformulas/application/
 WORKDIR /brewformulas/application/
-RUN bundle install --local --without production
+ADD . /brewformulas/application/
+RUN bundle install --without production
 
 EXPOSE 3000
 
