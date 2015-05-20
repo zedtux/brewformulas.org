@@ -138,15 +138,17 @@ module Git
       else
         fail "Not implemented Git action #{action}!"
       end
+
+      `exit 0`
     end
 
     def run_command(git_cmd, &block)
       has_dash_dash = git_cmd.include?("\"--\"") || git_cmd.include?("'--'")
       if has_dash_dash
-        regex = %r{git\s(\w+).*\s(?:"|')--(?:"|')\s(?:"|')([\w\:\/\.\_\-]+)(?:"|')\s(?:"|')([\w\/\.\s]+)(?:"|')}
+        regex = %r{git\s+(\w+).*\s(?:"|')--(?:"|')\s(?:"|')([\w\:\/\.\_\-]+)(?:"|')\s(?:"|')([\w\/\.\s]+)(?:"|')}
         action, _, self.root_path = git_cmd.scan(regex).first
       else
-        action = git_cmd.scan(/git (\w+).*/).flatten.first
+        action = git_cmd.scan(/git.*(clone|pull).*/).flatten.first
       end
 
       run_action(action)

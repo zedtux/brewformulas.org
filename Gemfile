@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails'
+gem 'responders'
 gem 'uglifier'
 gem 'jquery-rails'
 gem 'less-rails'
