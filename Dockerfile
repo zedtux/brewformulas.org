@@ -46,4 +46,4 @@ RUN bundle install --without production
 EXPOSE 3000
 
 ENTRYPOINT ["bundle", "exec"]
-CMD ["bin/rails server"]
+CMD ["rails", "server", "-b", "0.0.0.0"]
