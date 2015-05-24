@@ -41,7 +41,7 @@ RUN apt-get install -y ca-certificates && \
 # Prepare gems
 WORKDIR /brewformulas/application/
 ADD . /brewformulas/application/
-RUN bundle install --without production
+RUN bundle install --without production --jobs 8
 
 EXPOSE 3000
 
