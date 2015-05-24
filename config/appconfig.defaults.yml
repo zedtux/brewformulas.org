@@ -1,16 +1,16 @@
 brewformulas:
-  page_title: "Homebrew Formulas"
-  description: "Homebrew (The missing package manager for OS X) formula list to search and discover new formulas"
-  author: "HAIN Guillaume <zedtux@zedroot.org>"
-  keywords: "MAC, Apple, Homebrew, brew, mxcl, Formula, Formulas, Formulae, search, description"
+  page_title: Homebrew Formulas
+  description: Homebrew (The missing package manager for OS X) formula list to search and discover new formulas
+  author: HAIN Guillaume <zedtux@zedroot.org>
+  keywords: 'MAC, Apple, Homebrew, brew, mxcl, Formula, Formulas, Formulae, search, description'
 homebrew:
   git_repository:
-    url: "https://github.com/Homebrew/homebrew.git"
-    name: "homebrew"
-    location: <%= File.join(Rails.root, "cache") %>
+    url: https://github.com/Homebrew/homebrew.git
+    name: homebrew
+    location: <%= File.join(Rails.root, 'cache') %>
 redis:
   server: <%= ENV['REDIS_PORT_6379_TCP_ADDR'] || 'localhost' %>
   port: <%= ENV['REDIS_PORT_6379_TCP_PORT'] || 6379 %>
   db_num: 0
-  namespace: 'brewformulas'
+  namespace: brewformulas
   password: <%= ENV['REDIS_PASSWORD'] %>
