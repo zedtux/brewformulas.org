@@ -13,13 +13,11 @@ module Homebrew
     # otherwise just call `git pull`.
     #
     def self.fetch_up_to_date_git_repository
-      git = if File.exist?(AppConfig.homebrew.git_repository.location)
+      git = if git_repository_cloned?
               open_git_repository
             else
-              path = File.join(AppConfig.homebrew.git_repository.location,
-                               AppConfig.homebrew.git_repository.name)
               # Create the location path
-              FileUtils.mkdir_p(path)
+              FileUtils.mkdir_p(cloned_repository_path)
               # Clone the Git repo to the location path
               clone_git_repository
             end
@@ -29,9 +27,8 @@ module Homebrew
     end
 
     def self.open_git_repository
-      location = AppConfig.homebrew.git_repository.location
       name = AppConfig.homebrew.git_repository.name
-      path = File.join(location, name)
+      path = cloned_repository_path
       Rails.logger.info "Reusing Git repository #{name} from #{path}"
       Git.open(path)
     end
@@ -42,6 +39,15 @@ module Homebrew
       path = AppConfig.homebrew.git_repository.location
       Rails.logger.info "Cloning Git repository #{name} from #{url} to #{path}"
       Git.clone(url, name, path: path, depth: 1)
+    end
+
+    def self.cloned_repository_path
+      File.join(AppConfig.homebrew.git_repository.location,
+                AppConfig.homebrew.git_repository.name)
+    end
+
+    def self.git_repository_cloned?
+      File.exist?(cloned_repository_path)
     end
   end
 end
