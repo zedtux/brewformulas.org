@@ -1,0 +1,19 @@
+#!/usr/bin/env sh
+
+if [ -z "$NEW_RELIC_LICENSE_KEY" ]; then
+  echo "WARNING: The NEW_RELIC_LICENSE_KEY variable is undefined"
+  export NEW_RELIC_LICENSE_KEY=$NEWRELIC_LICENSE_KEY
+fi
+
+echo "Starting NewRelic ..."
+/etc/init.d/newrelic-sysmond start
+
+cd /brewformulas/application/
+
+if [ -z "$BREWFORMULAS_WORKER" ]; then
+  echo "Starting Rails server ..."
+  bundle exec rails server -b 0.0.0.0 -p 80
+else
+  echo "Starting workers ..."
+  bundle exec sidekiq
+fi
