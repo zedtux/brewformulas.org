@@ -4,7 +4,7 @@
 
 # brewformulas.org
 
-[![Build Status](https://travis-ci.org/zedtux/brewformulas.org.png?branch=master)](https://travis-ci.org/zedtux/brewformulas.org) [![Coverage Status](https://coveralls.io/repos/zedtux/brewformulas.org/badge.png)](https://coveralls.io/r/zedtux/brewformulas.org) [![Code Climate](https://codeclimate.com/github/zedtux/brewformulas.org.png)](https://codeclimate.com/github/zedtux/brewformulas.org) [![Dependency Status](https://gemnasium.com/zedtux/brewformulas.org.png)](https://gemnasium.com/zedtux/brewformulas.org) [![PullReview stats](https://www.pullreview.com/github/zedtux/brewformulas.org/badges/master.svg?)](https://www.pullreview.com/github/zedtux/brewformulas.org/reviews/master)
+[![Build Status](https://travis-ci.org/zedtux/brewformulas.org.png?branch=master)](https://travis-ci.org/zedtux/brewformulas.org) [![Coverage Status](https://coveralls.io/repos/zedtux/brewformulas.org/badge.png)](https://coveralls.io/r/zedtux/brewformulas.org) [![Code Climate](https://codeclimate.com/github/zedtux/brewformulas.org.png)](https://codeclimate.com/github/zedtux/brewformulas.org) [![Dependency Status](https://gemnasium.com/zedtux/brewformulas.org.png)](https://gemnasium.com/zedtux/brewformulas.org) [![PullReview stats](https://www.pullreview.com/github/zedtux/brewformulas.org/badges/master.svg?)](https://www.pullreview.com/github/zedtux/brewformulas.org/reviews/master) [![Stack Share](http://img.shields.io/badge/tech-stack-0690fa.svg?style=flat)](http://stackshare.io/zedtux/brewformulas-org)
 
 [Brewformulas.org](http://brewformulas.org) is a website to easily search and discover Homebrew formulas.
 
