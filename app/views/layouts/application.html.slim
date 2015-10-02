@@ -45,7 +45,7 @@ html lang="en"
           = form_for :search, url: search_formulas_path, method: :get, html: {class: 'navbar-form navbar-right'} do |f|
             = f.label :term, 'Formula'
             .form-group
-              = f.text_field :term, class: 'form-control', placeholder: 'Name or filename',
+              = f.text_field :term, class: 'form-control search', placeholder: 'Name, filename or description',
                 value: params[:search] && params[:search][:term] || ''
             = f.submit 'Search', class: 'btn btn-success'
 

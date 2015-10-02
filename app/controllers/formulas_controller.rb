@@ -26,11 +26,13 @@ class FormulasController < ApplicationController
   end
 
   def search
+    search_term = params[:search][:term]
     @formulas = Homebrew::Formula.active_or_external.where(
-                  'filename iLIKE ? OR name iLIKE ?',
-                  "%#{params[:search][:term]}%",
-                  "%#{params[:search][:term]}%"
-                ).order(:name)
+      'filename ILIKE ? OR name ILIKE ? OR description ILIKE ?',
+      "%#{search_term}%",
+      "%#{search_term}%",
+      "%#{search_term}%",
+    ).order(:name)
   end
 
   private
