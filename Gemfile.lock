@@ -125,6 +125,9 @@ GEM
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
     json (1.8.2)
+    kaminari (0.16.3)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
     launchy (2.4.3)
       addressable (~> 2.3)
     less (2.6.0)
@@ -322,6 +325,7 @@ DEPENDENCIES
   git
   hub
   jquery-rails
+  kaminari
   launchy
   less-rails
   newrelic_rpm
@@ -348,3 +352,6 @@ DEPENDENCIES
   uglifier
   webmock
   yard
+
+BUNDLED WITH
+   1.10.6

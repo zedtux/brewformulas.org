@@ -12,15 +12,15 @@
 ul class="nav nav-tabs"
   li class="active"
     a href="#all_formulas" data-toggle="tab"
-      span class="badge pull-right"= @formulas.size
+      span class="badge pull-right"= @formulas.total_count
       | All
   li
     a href="#new_since_a_week" data-toggle="tab"
-      span class="badge pull-right"= @new_since_a_week.size
+      span class="badge pull-right"= @new_since_a_week.total_count
       | New since a week
   li
     a href="#inactive" data-toggle="tab"
-      span class="badge pull-right"= @inactive_formulas.size
+      span class="badge pull-right"= @inactive_formulas.total_count
       | Inactive
 
 div class="tab-content"
