@@ -118,16 +118,14 @@ module Homebrew
       description = Homebrew::Formula::Description.new(self)
       description.lookup_from(html)
 
-      # In the case a description has been found
-      if description.found?
-        unless update_attributes(
-          description: description.text,
-          description_automatic: true
-        )
-          Rails.logger.warn 'Unable to update description with text ' \
-                            "#{description.text}"
-        end
-      end
+      return unless description.found?
+      return if update_attributes(
+        description: description.text,
+        description_automatic: true
+      )
+
+      Rails.logger.warn 'Unable to update description with text ' \
+                        "#{description.text}"
     end
 
     def reference
@@ -142,7 +140,7 @@ module Homebrew
       created_at.to_date == Time.now.utc.to_date
     end
 
-    def as_json(options = {})
+    def as_json(_options = {}) # rubocop:disable Metrics/AbcSize
       {
         formula: name.downcase,
         description: description.to_s,
@@ -152,7 +150,7 @@ module Homebrew
         dependencies: dependencies.map(&:name).sort,
         dependents: formula_dependents.map(&:formula).map(&:name).sort
       }
-    end
+    end # rubocop:enable Metrics/AbcSize
 
     private
 

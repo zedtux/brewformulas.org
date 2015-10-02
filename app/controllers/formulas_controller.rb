@@ -27,10 +27,10 @@ class FormulasController < ApplicationController
 
   def search
     @formulas = Homebrew::Formula.active_or_external.where(
-                  'filename iLIKE ? OR name iLIKE ?',
-                  "%#{params[:search][:term]}%",
-                  "%#{params[:search][:term]}%"
-                ).order(:name)
+      'filename iLIKE ? OR name iLIKE ?',
+      "%#{params[:search][:term]}%",
+      "%#{params[:search][:term]}%"
+    ).order(:name)
   end
 
   private
@@ -40,10 +40,10 @@ class FormulasController < ApplicationController
                                        params[:id].downcase).first!
   rescue ActiveRecord::RecordNotFound
     respond_to do |format|
-      format.html {
+      format.html do
         flash[:error] = 'This formula doesn\'t exists'
         redirect_to root_url
-      }
+      end
       format.json { respond_with({}, status: :not_found) }
     end
   end
@@ -54,12 +54,10 @@ class FormulasController < ApplicationController
 
   def calculate_percentage
     with_a_description_count = Homebrew::Formula.internals
-                                                .with_a_description.count
+                               .with_a_description.count
     @coverage = 0
-
-    unless with_a_description_count.zero? || @formulas.size.zero?
-      @coverage = (with_a_description_count * 100) / @formulas.size
-    end
+    @coverage = (with_a_description_count * 100) / @formulas.size unless
+      with_a_description_count.zero? || @formulas.size.zero?
   end
 
   def new_since_a_week
@@ -78,13 +76,13 @@ class FormulasController < ApplicationController
   def respond_with_format
     respond_to do |format|
       format.html
-      format.json {
+      format.json do
         if action_name == 'show'
           respond_with(@formula, status: :ok)
         else
           respond_with([], status: 415)
         end
-      }
+      end
     end
   end
 end
