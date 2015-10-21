@@ -46,3 +46,7 @@ div.tab-pane {
 h1 > iframe {
   margin-left: 50px;
 }
+
+.search {
+  min-width: 230px;
+}
