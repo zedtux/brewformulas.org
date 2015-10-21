@@ -29,7 +29,6 @@ class Homepage
 
   private
 
-
   #
   # Fetch the HTML content from a given URL
   # @param url [String] URL from where to fetch the content

@@ -11,7 +11,8 @@ module SoftwareDescriptionFetchers
           fail ArgumentError, 'You must provide a name and a filename'
         end
 
-        @software_name, @software_filename = options[:name], options[:filename]
+        @software_name = options[:name]
+        @software_filename = options[:filename]
         @html = nokogiri_html
       end
 
@@ -29,10 +30,10 @@ module SoftwareDescriptionFetchers
       end
 
       def regex
-        /(^.*(?:#{@software_name}|#{@software_filename})
+        %r{(^.*(?:#{@software_name}|#{@software_filename})
           (?:\)|\s\u2122|\s[\d\.]+|\scodec)?\s(?:is\s
           (?:an?|the)|(?:project\s)?provides)[\s\w\'\(\)\,\-\+\/\.\:]+\.(?:\s|$)
-        )/ix
+        )}ix
       end
 
       def look_html_body

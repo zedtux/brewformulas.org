@@ -26,7 +26,7 @@ BrewformulasOrg::Application.configure do
   # Debug mode disables concatenation and preprocessing of assets.
   # This option may cause significant delays in view rendering with a large
   # number of complex assets.
-  config.assets.debug = true  # Send email in development mode.
+  config.assets.debug = true # Send email in development mode.
   config.action_mailer.perform_deliveries = true
 
   # Precompiled assets always have a digest now

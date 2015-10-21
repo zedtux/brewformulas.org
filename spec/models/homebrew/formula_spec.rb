@@ -1,11 +1,10 @@
 require 'spec_helper'
 
 describe Homebrew::Formula do
-
   describe 'DB' do
     it do
       should have_db_column(:name).of_type(:string)
-                                  .with_options(null: false)
+        .with_options(null: false)
     end
     it { should have_db_column(:version).of_type(:string) }
     it { should have_db_column(:homepage).of_type(:string) }
@@ -13,17 +12,17 @@ describe Homebrew::Formula do
     it { should have_db_column(:touched_on).of_type(:date) }
     it do
       should have_db_column(:filename).of_type(:string)
-                                      .with_options(null: false)
+        .with_options(null: false)
     end
     it do
       should have_db_column(:description_automatic).of_type(:boolean)
-                                                   .with_options(default:
+        .with_options(default:
                                                                  false)
     end
     it do
       should have_db_column(:external).of_type(:boolean)
-                                      .with_options(default: false,
-                                                    null: false)
+        .with_options(default: false,
+                      null: false)
     end
     it { should have_db_index(:filename) }
     it { should have_db_index(:external) }
@@ -67,5 +66,4 @@ describe Homebrew::Formula do
     end
     it { should validate_presence_of(:name) }
   end
-
 end

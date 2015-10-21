@@ -58,7 +58,7 @@ module Homebrew
 
       conflicts.gsub!(/('|")/, '')
 
-      conflicts, _ = extract_conflict_reason_if_possible!(conflicts)
+      conflicts, = extract_conflict_reason_if_possible!(conflicts)
 
       conflicting_formulas = conflicts.strip.split(',').map(&:strip)
       conflicting_formulas.map do |name|

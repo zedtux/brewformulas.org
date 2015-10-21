@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Homebrew::FormulaDependency do
-
   describe 'DB' do
     it do
       should have_db_column(:formula_id).of_type(:integer)
@@ -27,5 +26,4 @@ describe Homebrew::FormulaDependency do
       should validate_uniqueness_of(:dependency_id).scoped_to(:formula_id)
     end
   end
-
 end
