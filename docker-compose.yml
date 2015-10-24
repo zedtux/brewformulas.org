@@ -1,12 +1,21 @@
-postgresql:
-  image: postgres:9.4.1
+postgres:
+  image: postgres:9.4.5
 redis:
-  image: redis:3.0.1
+  image: redis:3.0.5
+workers:
+  image: brewformulasorg_web
+  command: sidekiq
+  links:
+    - postgres:postgres
+    - redis:redis
+  environment:
+    - POSTGRESQL_USER=postgres
+    - RUNNING_IN_DOCKER=true
 web:
   build: .
   command: bin/rails server -b 0.0.0.0
   links:
-   - postgresql
+   - postgres
    - redis
   ports:
    - "3000:3000"
