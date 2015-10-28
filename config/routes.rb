@@ -6,6 +6,8 @@ BrewformulasOrg::Application.routes.draw do
 
   resources :imports, only: :index
 
+  resources :api, only: :index
+
   resources :formulas, only: [:index, :show], path: '' do
     member do
       get 'refresh_description'
