@@ -3,6 +3,6 @@
 #
 # @author [napcae]
 #
-class ApiController < ApplicationController
+class DocumentationController < ApplicationController
   def index; end
 end
