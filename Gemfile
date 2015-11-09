@@ -24,6 +24,8 @@ gem 'open_uri_redirections'
 gem 'array_is_uniq', require: 'array'
 gem 'pluralize_no_count_if_one'
 gem 'quiet_assets'
+# Markdown required gem
+gem 'redcarpet'
 # Pagination
 gem 'kaminari'
 
