@@ -4,6 +4,7 @@
 # @author [guillaumeh]
 #
 class FormulasController < ApplicationController
+  before_action :set_page, only: :index
   before_action :current_objects, only: :index
   before_action :calculate_percentage, only: :index
   before_action :new_since_a_week, only: :index
@@ -14,6 +15,9 @@ class FormulasController < ApplicationController
 
   # Allowed formats for this controller
   respond_to :html, :json
+
+  PAGE = 1
+  PAGE_SIZE = 25
 
   def index; end
 
@@ -37,6 +41,10 @@ class FormulasController < ApplicationController
 
   private
 
+  def set_page
+    @page = params[:page] || PAGE
+  end
+
   def current_object
     @formula = Homebrew::Formula.where('lower(name) = ?',
                                        params[:id].downcase).first!
@@ -52,6 +60,7 @@ class FormulasController < ApplicationController
 
   def current_objects
     @formulas = Homebrew::Formula.internals.active.order(:name)
+                .page(@page).per(PAGE_SIZE)
   end
 
   def calculate_percentage
@@ -64,10 +73,12 @@ class FormulasController < ApplicationController
 
   def new_since_a_week
     @new_since_a_week = Homebrew::Formula.internals.new_this_week.order(:name)
+                        .page(@page).per(PAGE_SIZE)
   end
 
   def inactive_formulas
     @inactive_formulas = Homebrew::Formula.internals.inactive.order(:name)
+                         .page(@page).per(PAGE_SIZE)
   end
 
   def first_import_end_date
@@ -82,7 +93,12 @@ class FormulasController < ApplicationController
         if action_name == 'show'
           respond_with(@formula, status: :ok)
         else
-          respond_with([], status: 415)
+          response = {
+            formulas: @formulas,
+            new_formulas: @new_since_a_week,
+            inactive_formulas: @inactive_formulas
+          }
+          respond_with(response, status: :ok)
         end
       end
     end

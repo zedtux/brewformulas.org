@@ -125,6 +125,9 @@ GEM
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
     json (1.8.2)
+    kaminari (0.16.3)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
     launchy (2.4.3)
       addressable (~> 2.3)
     less (2.6.0)
@@ -200,6 +203,7 @@ GEM
       thor (>= 0.18.1, < 2.0)
     rainbow (2.0.0)
     rake (10.4.2)
+    redcarpet (3.3.3)
     redis (3.2.1)
     redis-namespace (1.5.2)
       redis (~> 3.0, >= 3.0.4)
@@ -322,6 +326,7 @@ DEPENDENCIES
   git
   hub
   jquery-rails
+  kaminari
   launchy
   less-rails
   newrelic_rpm
@@ -335,6 +340,7 @@ DEPENDENCIES
   rails_best_practices
   rails_layout
   rake
+  redcarpet
   responders
   rspec-rails
   rubocop
@@ -348,3 +354,6 @@ DEPENDENCIES
   uglifier
   webmock
   yard
+
+BUNDLED WITH
+   1.10.6
