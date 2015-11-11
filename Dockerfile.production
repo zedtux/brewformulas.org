@@ -1,49 +1,29 @@
 # Brewformulas.org web application Docker image
-#
-# 1) Start a PostgreSQL
-#   $ docker run -d --name=bfdb postgres:9
-# 2) Start a Redis
-#   $ docker run -d --name=bfred redis:2.8
-# 3) Start the UI
-#   $ docker run --rm --link bfdb:postgres --link bfred:redis -p 3000:3000 -e POSTGRESQL_USER=postgres zedtux/brewformulas
-# 4) Run sidekiq
-#   $ docker run --rm --link bfdb:postgres --link bfred:redis -e POSTGRESQL_USER=postgres zedtux/brewformulas sidekiq
-#
-# When first run use the following command to setup the postgres db:
-#   docker run --rm --link bfdb:postgres --link bfred:redis -e POSTGRESQL_USER=postgres zedtux/brewformulas rake db:create db:migrate
-# In the case you have a dump of the database to import (Don't execute the db:migrate):
-#   $ cd /path/where/the/import/is/
-#   $ docker run --rm -i --link brewformulasdb:postgres -v $PWD/:/tmp/ postgres:latest bash -c 'exec psql -h "$POSTGRES_PORT_5432_TCP_ADDR" -p "$POSTGRES_PORT_5432_TCP_PORT" -U postgres -d <table_name> < /tmp/<dump_file_name>.sql
-#
-# VERSION       1.0
-
 # ~~~~ Image base ~~~~
-FROM litaio/ruby:2.2.2
+FROM ruby:2.2.3-slim
 MAINTAINER zedtux, zedtux@zedroot.org
 
 ENV RUNNING_IN_DOCKER true
 
+# ~~~~ Sources Preparation ~~~~
+RUN mkdir -p /brewformulas/application/
+WORKDIR /brewformulas/application/
+ADD . /brewformulas/application/
+
 # ~~~~ System Dependencies ~~~~
 RUN apt-get install -y ca-certificates && \
+  curl -L https://github.com/just-containers/skaware/releases/download/v1.16.1/s6-2.2.2.0-linux-amd64-bin.tar.gz | tar -C / -zx && \
   echo deb http://apt.newrelic.com/debian/ newrelic non-free >> /etc/apt/sources.list.d/newrelic.list && \
   curl https://download.newrelic.com/548C16BF.gpg | apt-key add - && \
   apt-get update && \
-  apt-get install -y libpq-dev \
-  git \
-  newrelic-sysmond && \
-# ~~~~ Application ~~~~
-  mkdir -p /brewformulas/application/ && \
+  apt-get install -y libpq-dev git make gcc g++ newrelic-sysmond && \
   gem install rubygems-update --no-ri --no-rdoc && \
   update_rubygems && \
   gem install bundler --no-ri --no-rdoc && \
-  curl -L https://github.com/just-containers/skaware/releases/download/v1.10.0/s6-2.1.3.0-linux-amd64-bin.tar.gz | tar -C / -zx
-
-# ~~~~ Sources Preparation ~~~~
-# Prepare gems
-WORKDIR /brewformulas/application/
-ADD . /brewformulas/application/
-RUN bundle install --without development test cucumber --jobs 8 && \
-  bundle exec rake assets:precompile RAILS_ENV=production
+  bundle install --without production --jobs 8 && \
+  apt-get remove --purge -y make gcc g++ && \
+  apt-get autoremove -y && \
+  apt-get clean -y
 
 # ~~~~ S6 files ~~~~
 COPY s6 /etc/s6/
