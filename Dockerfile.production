@@ -21,9 +21,11 @@ RUN apt-get install -y ca-certificates && \
   update_rubygems && \
   gem install bundler --no-ri --no-rdoc && \
   bundle install --without production --jobs 8 && \
+  bundle exec rake assets:precompile RAILS_ENV=production && \
   apt-get remove --purge -y make gcc g++ && \
   apt-get autoremove -y && \
-  apt-get clean -y
+  apt-get clean -y && \
+  rm -f tmp/pids/*
 
 # ~~~~ S6 files ~~~~
 COPY s6 /etc/s6/
