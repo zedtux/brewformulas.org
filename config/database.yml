@@ -10,7 +10,7 @@ postgresql: &postgresql
 
 defaults: &defaults
   <<: *postgresql
-  pool: 5
+  pool: 30
   timeout: 5000
 
 development:
@@ -27,5 +27,5 @@ cucumber:
 
 production:
   <<: *defaults
-  pool: 10
+  pool: 15
   database: brewformulas_org_prod

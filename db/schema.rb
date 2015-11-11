@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20131207105221) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "homebrew_formula_conflicts", force: true do |t|
+  create_table "homebrew_formula_conflicts", force: :cascade do |t|
     t.integer  "formula_id",  null: false
     t.integer  "conflict_id", null: false
     t.datetime "created_at"
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20131207105221) do
 
   add_index "homebrew_formula_conflicts", ["formula_id", "conflict_id"], name: "homebrew_formula_conflicts_uniqueness", unique: true, using: :btree
 
-  create_table "homebrew_formula_dependencies", force: true do |t|
+  create_table "homebrew_formula_dependencies", force: :cascade do |t|
     t.integer  "formula_id",    null: false
     t.integer  "dependency_id", null: false
     t.datetime "created_at"
@@ -34,7 +34,7 @@ ActiveRecord::Schema.define(version: 20131207105221) do
 
   add_index "homebrew_formula_dependencies", ["formula_id", "dependency_id"], name: "homebrew_formula_dependencies_uniqueness", unique: true, using: :btree
 
-  create_table "homebrew_formulas", force: true do |t|
+  create_table "homebrew_formulas", force: :cascade do |t|
     t.string   "name",                                  null: false
     t.string   "version"
     t.string   "homepage"
@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 20131207105221) do
   add_index "homebrew_formulas", ["external"], name: "index_homebrew_formulas_on_external", using: :btree
   add_index "homebrew_formulas", ["filename"], name: "index_homebrew_formulas_on_filename", using: :btree
 
-  create_table "imports", force: true do |t|
+  create_table "imports", force: :cascade do |t|
     t.boolean  "success"
     t.text     "message"
     t.datetime "ended_at"
