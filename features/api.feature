@@ -6,7 +6,7 @@ Feature: API
 
   Scenario: GET request in JSON to the root URL
     When I send a GET request in JSON to the root url
-    Then I should receive a 415 HTTP error code
+    Then I should receive a 200 HTTP code
 
   Scenario: GET request in JSON to a missing formula URL
     Given on formulas exist

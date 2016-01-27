@@ -9,8 +9,8 @@ Given(
   get "/#{formula_name}.json", formula: 'json'
 end
 
-Then(/^I should receive a (404|415) HTTP error code$/) do |code|
-  expect(last_response.status).to eql(code.to_i)
+Then(/^I should receive a 404 HTTP error code$/) do
+  expect(last_response.status).to eql(404)
 end
 
 Then(/^I should receive a 200 HTTP code$/) do
