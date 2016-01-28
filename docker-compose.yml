@@ -11,6 +11,11 @@ workers:
   environment:
     - POSTGRESQL_USER=postgres
     - RUNNING_IN_DOCKER=true
+bundle:
+  image: brewformulasorg_web
+  command: echo Bundler data container
+  volumes:
+    - /bundle
 web:
   build: .
   command: bin/rails server -b 0.0.0.0
@@ -24,3 +29,5 @@ web:
     - RAILS_ENV=development
   volumes:
     - .:/brewformulas/application/
+  volumes_from:
+    - bundle
