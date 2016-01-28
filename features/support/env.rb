@@ -11,6 +11,7 @@ require 'cucumber/timecop'
 
 require 'simplecov'
 require 'coveralls'
+require 'capybara-screenshot/cucumber'
 
 SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
   SimpleCov::Formatter::HTMLFormatter,

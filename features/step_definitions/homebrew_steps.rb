@@ -162,8 +162,8 @@ Given(/^(\d+) formulas have a description$/) do |count|
 
   expect(Homebrew::Formula.count).to be >= count
 
-  count.times do
-    formula = Homebrew::Formula.order('RANDOM()').first
+  formulae = Homebrew::Formula.order("RANDOM() LIMIT #{count}")
+  formulae.each do |formula|
     formula.update_attribute(:description, 'This is a test')
   end
 end
@@ -353,5 +353,6 @@ Then(/^I should see a conflict with (.*?)$/) do |conflicts|
 end
 
 Then(/^the formulas with a description coverage should be (\d+)%$/) do |percentage|
-  page.should have_xpath('//div[@id="formulas_coverage"]', text: "#{percentage}%")
+  expect(page).to have_xpath('//div[@id="formulas_coverage"]',
+                             text: "#{percentage}%")
 end

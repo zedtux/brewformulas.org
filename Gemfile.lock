@@ -58,6 +58,9 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    capybara-screenshot (1.0.11)
+      capybara (>= 1.0, < 3)
+      launchy
     celluloid (0.16.0)
       timers (~> 4.0.0)
     chronic (0.10.2)
@@ -317,6 +320,7 @@ DEPENDENCIES
   binding_of_caller
   bootstrap-on-rails
   capybara
+  capybara-screenshot
   coffee-rails
   coveralls
   cucumber-rails
@@ -356,4 +360,4 @@ DEPENDENCIES
   yard
 
 BUNDLED WITH
-   1.10.6
+   1.11.2

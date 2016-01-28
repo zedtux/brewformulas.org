@@ -55,4 +55,5 @@ group :test, :cucumber do
   gem 'rake'
   gem 'webmock'
   gem 'coveralls', require: false
+  gem 'capybara-screenshot'
 end

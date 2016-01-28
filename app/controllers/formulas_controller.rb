@@ -66,9 +66,11 @@ class FormulasController < ApplicationController
   def calculate_percentage
     with_a_description_count = Homebrew::Formula.internals
                                .with_a_description.count
+    total_count = Homebrew::Formula.internals.active.count
     @coverage = 0
-    @coverage = (with_a_description_count * 100) / @formulas.size unless
-      with_a_description_count.zero? || @formulas.size.zero?
+    unless with_a_description_count.zero? || total_count.zero?
+      @coverage = (with_a_description_count * 100) / total_count
+    end
   end
 
   def new_since_a_week
