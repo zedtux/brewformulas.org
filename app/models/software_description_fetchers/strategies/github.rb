@@ -17,8 +17,8 @@ module SoftwareDescriptionFetchers
       private
 
       def fetch_description
-        xpath = '//div[contains(@class, "repository-description")]/p/text()'
-        @doc.xpath(xpath).first.try(:text)
+        xpath = '//span[contains(@class, "repository-meta-content")]/text()'
+        @doc.xpath(xpath).first.try(:text).try(:squish)
       end
     end
   end
