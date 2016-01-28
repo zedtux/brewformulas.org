@@ -28,6 +28,6 @@ web:
     - POSTGRESQL_USER=postgres
     - RAILS_ENV=development
   volumes:
-    - .:/brewformulas/application/
+    - .:/application/
   volumes_from:
     - bundle

@@ -28,7 +28,7 @@ RUN apt-get install -y ca-certificates && \
   echo deb http://apt.newrelic.com/debian/ newrelic non-free >> /etc/apt/sources.list.d/newrelic.list && \
   curl https://download.newrelic.com/548C16BF.gpg | apt-key add - && \
   apt-get update && \
-  apt-get install -y libpq-dev git make g++ gcc \
+  apt-get install -y libpq-dev git make g++ gcc libfreetype6 libfontconfig1 \
   newrelic-sysmond && \
 # ~~~~ Application ~~~~
   mkdir -p /brewformulas/application/ && \
@@ -36,13 +36,34 @@ RUN apt-get install -y ca-certificates && \
   update_rubygems && \
   gem install bundler --no-ri --no-rdoc
 
-# ~~~~ Sources Preparation ~~~~
-# Prepare gems
-WORKDIR /brewformulas/application/
-ADD . /brewformulas/application/
-RUN bundle install --without production --jobs 8
+# ~~~~ Set up the environment ~~~~
+ENV PHANTOMJS_VERSION 1.9.8
 
-EXPOSE 3000
+# ~~~~ Phantomjs ~~~~
+RUN cd /tmp && \
+    curl -L -O https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 && \
+    tar xjf /tmp/phantomjs-$PHANTOMJS_VERSION-linux-x86_64.tar.bz2 -C /tmp && \
+    mv /tmp/phantomjs-$PHANTOMJS_VERSION-linux-x86_64/bin/phantomjs /usr/local/bin && \
+    rm -rf /tmp/phantomjs-$PHANTOMJS_VERSION-linux-x86_64
 
-ENTRYPOINT ["bundle", "exec"]
-CMD ["rails", "server", "-b", "0.0.0.0"]
+
+# ~~~~ Rails Preparation ~~~~
+# Rubygems
+RUN gem install rubygems-update && update_rubygems
+# Bundler
+RUN gem install bundler
+
+ENV APP_HOME /application
+RUN mkdir $APP_HOME
+WORKDIR $APP_HOME
+
+ADD Gemfile* $APP_HOME/
+
+# --- Add this to your Dockerfile ---
+ENV BUNDLE_GEMFILE=$APP_HOME/Gemfile \
+  BUNDLE_JOBS=8 \
+  BUNDLE_PATH=/bundle
+
+RUN bundle install --without production
+
+ADD . $APP_HOME
