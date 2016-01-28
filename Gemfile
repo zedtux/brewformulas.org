@@ -56,4 +56,6 @@ group :test, :cucumber do
   gem 'webmock'
   gem 'coveralls', require: false
   gem 'capybara-screenshot'
+  gem 'poltergeist'
+  gem 'selenium-webdriver'
 end

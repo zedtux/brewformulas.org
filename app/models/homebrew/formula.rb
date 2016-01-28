@@ -147,6 +147,7 @@ module Homebrew
         reference: reference.to_s,
         homepage: homepage.to_s,
         version: version.to_s,
+        new: new?,
         dependencies: dependencies.map(&:name).sort,
         dependents: formula_dependents.map(&:formula).map(&:name).sort
       }

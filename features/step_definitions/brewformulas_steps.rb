@@ -1,5 +1,5 @@
 When(/^I go to brewformulas.org$/) do
-  visit root_url
+  visit '/'
 end
 
 When(/^I go to the formula (\w+) on brewformulas.org$/) do |name|

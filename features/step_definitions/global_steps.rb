@@ -21,8 +21,17 @@ When(/^I click the (.*?) formula name$/) do |formula_name|
   click_on formula_name
 end
 
+When(/^I scroll to the bottom of the page$/) do
+  page.execute_script "window.scrollBy(0,10000)"
+end
+
 Then(/^show me the page$/) do
-  save_and_open_page
+  screenshot_and_save_page
+end
+
+Then(/^show me a screenshot$/) do
+  saver = Capybara::Screenshot::Saver.new(Capybara, Capybara.page, false)
+  saver.save
 end
 
 Then(/^I should see "(.*?)"$/) do |something|

@@ -31,13 +31,15 @@ Given(/^some formulas exist$/) do
   import.save
 end
 
-Given(/^(\d+) formulas exist$/) do |count|
+Given(/^(\d+)(?: new)? formulas exist$/) do |count|
   count = count.to_i
-  count.times do |time|
+  count.times do
+    counter = Homebrew::Formula.count + 1
     Homebrew::Formula.create!(
-      filename: "libfake#{time}",
-      name: "LibFake#{time}",
-      homepage: "http://libfake#{time}.sourceforge.net/"
+      filename: "libfake#{counter}",
+      name: "LibFake#{counter}",
+      homepage: "http://libfake#{counter}.sourceforge.net/",
+      touched_on: Time.now
     )
   end
 end
@@ -289,6 +291,9 @@ Then(/^I should see (no|\d+) (new|inactive) formulas?$/) do |formula_count, stat
   formula_count = 0 if formula_count == 'no'
   text = status == 'new' ? 'New since a week' : 'Inactive'
   expect(page).to have_content("#{formula_count}#{text}")
+  if status == 'new'
+    expect(page).to have_css('span.label', text: 'New', count: formula_count)
+  end
 end
 
 Then(/^I should see one formula$/) do

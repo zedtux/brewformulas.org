@@ -41,8 +41,9 @@ $(document).ready ->
   createDOMformula = (data) ->
     h4Heading = $("<h4 class=\"list-group-item-heading\">#{data.formula}</h4>")
     smallFormula = "<small>#{data.formula}</small>"
-    successLabel = '<span class="label label-success">New</span>'
-    h4Heading.append(smallFormula, successLabel)
+    if (data.new)
+      successLabel = '<span class="label label-success">New</span>'
+      h4Heading.append(smallFormula, successLabel)
 
     anchor = $("<a class=\"list-group-item\" href=\"/#{data.formula}\"></a>")
     itemText = "<p class=\"list-group-item-text\">#{data.description}</p>"

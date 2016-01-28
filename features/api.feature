@@ -31,6 +31,7 @@ Feature: API
       "description": "a52dec is a test program for liba52.",
       "reference": "Extracted automatically from A52dec homepage",
       "homepage": "http://liba52.sourceforge.net/",
+      "new": true,
       "version": "",
       "dependencies": [
       ],
@@ -60,6 +61,7 @@ Feature: API
       "description": "Zsh is a shell designed for interactive use, although it is also a powerful scripting language.",
       "reference": "",
       "homepage": "http://www.zsh.org/",
+      "new": true,
       "version": "",
       "dependencies": [
         "Gdbm",
