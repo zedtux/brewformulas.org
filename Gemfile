@@ -36,10 +36,17 @@ end
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', platforms: [:mri_19, :mri_20, :rbx]
+  # Command-line wrapper for git that makes you better at GitHub
   gem 'hub', require: nil
+  # Generates Rails application layout files for use with various front-end
+  # frameworks.
   gem 'rails_layout'
+  # YARD is a documentation generation tool for the Ruby programming language.
   gem 'yard'
+  # A code metric tool for rails codes, written in Ruby.
   gem 'rails_best_practices'
+  # Automatic Ruby code style checking tool. Aims to enforce the
+  # community-driven Ruby Style Guide.
   gem 'rubocop', require: false
 end
 

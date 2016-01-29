@@ -19,10 +19,6 @@ WebMock.disable_net_connect!(:allow_localhost => true)
 require 'capybara-screenshot/cucumber'
 Capybara::Screenshot.prune_strategy = :keep_last_run
 
-SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
-  SimpleCov::Formatter::HTMLFormatter,
-  Coveralls::SimpleCov::Formatter
-]
 SimpleCov.start 'rails' do
   add_filter '.bundle/'
   add_group 'Workers', 'app/worker'
@@ -90,9 +86,9 @@ end
 Cucumber::Rails::Database.javascript_strategy = :truncation
 
 Before do |scenario|
-  Rails.logger.debug "-------> Before Scenario: #{scenario.to_sexp[3]}"
+  Rails.logger.debug "-------> Before Scenario: #{scenario.name}"
 end
 
 After do |scenario|
-  Rails.logger.debug "<------- After Scenario: #{scenario.to_sexp[3]}"
+  Rails.logger.debug "<------- After Scenario: #{scenario.name}"
 end
