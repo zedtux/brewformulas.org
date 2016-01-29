@@ -1,46 +1,46 @@
 markdown:
     API Documentation
-	=================
+  =================
     <br><br>
     Our page is accessible by a simple API. Any tool which can send HTTP Requests should be able to retrieve information.
 
     Access
     ------
     To access the API, send a GET request with the formula name and an appending *.json to the root url.
-    For example, a simple 
+    For example, a simple
 
 
-    	GET /a52dec.json
+      GET /a52dec.json
 
 
     returns
 
-    	HTTP 1.1 200 OK
-    
-	    {
-		  "formula": "a52dec",
-		  "description": "a52dec is a test program for liba52. It decodes ATSC A/52 streams, and also includes a demultiplexer for mpeg-1 and mpeg-2 program streams.",
-		  "reference": "Extracted automatically from A52dec homepage",
-		  "homepage": "http://liba52.sourceforge.net/",
-		  "version": "",
-		  "dependencies": [
-		  ],
-		  "dependents": [
-		    "GstPluginsUgly",
-		    "GPac"
-		  ]
-		}
+      HTTP 1.1 200 OK
+
+      {
+      "formula": "a52dec",
+      "description": "a52dec is a test program for liba52. It decodes ATSC A/52 streams, and also includes a demultiplexer for mpeg-1 and mpeg-2 program streams.",
+      "reference": "Extracted automatically from A52dec homepage",
+      "homepage": "http://liba52.sourceforge.net/",
+      "version": "",
+      "dependencies": [
+      ],
+      "dependents": [
+        "GstPluginsUgly",
+        "GPac"
+      ]
+    }
 
 
-	Missing formula
-	---------------
+  Missing formula
+  ---------------
 
-	Should there be no formula for the requested URL, a ```HTTP 404 NOT FOUND``` including an empty JSON will be send.
+  Should there be no formula for the requested URL, a ```HTTP 404 NOT FOUND``` including an empty JSON will be send.
 
-	    GET /MissingFormula.json
+      GET /MissingFormula.json
 
-	Response
+  Response
 
-    	HTTP 1.1 404 Not Found
+      HTTP 1.1 404 Not Found
 
         {}
