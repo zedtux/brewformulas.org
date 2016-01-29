@@ -14,6 +14,8 @@ gem 'slim-rails'
 gem 'git'
 gem 'appconfig', require: 'app_config'
 gem 'sidekiq'
+# https://github.com/mperham/sidekiq/blob/master/lib/sidekiq/redis_connection.rb#L44
+gem 'redis-namespace'
 gem 'sidetiq' # Recurring jobs
 gem 'sinatra', '>= 1.3.0', require: nil
 gem 'newrelic_rpm'

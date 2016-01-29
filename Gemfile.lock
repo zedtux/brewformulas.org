@@ -239,6 +239,8 @@ GEM
     rake (10.5.0)
     redcarpet (3.3.4)
     redis (3.2.2)
+    redis-namespace (1.5.2)
+      redis (~> 3.0, >= 3.0.4)
     ref (2.0.0)
     require_all (1.3.3)
     responders (2.1.1)
@@ -384,6 +386,7 @@ DEPENDENCIES
   rails_layout
   rake
   redcarpet
+  redis-namespace
   responders
   rspec-rails
   rubocop
