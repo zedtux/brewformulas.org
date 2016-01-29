@@ -18,7 +18,7 @@
 # VERSION       1.0
 
 # ~~~~ Image base ~~~~
-FROM ruby:2.2.3-slim
+FROM ruby:2.3.0-slim
 MAINTAINER zedtux, zedtux@zedroot.org
 
 ENV RUNNING_IN_DOCKER true
@@ -28,6 +28,7 @@ RUN apt-get install -y ca-certificates && \
   echo deb http://apt.newrelic.com/debian/ newrelic non-free >> /etc/apt/sources.list.d/newrelic.list && \
   curl https://download.newrelic.com/548C16BF.gpg | apt-key add - && \
   apt-get update && \
+  # libfreetype6 libfontconfig1 are used for Phantomjs
   apt-get install -y libpq-dev git make g++ gcc libfreetype6 libfontconfig1 \
   newrelic-sysmond && \
 # ~~~~ Application ~~~~

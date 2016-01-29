@@ -1,6 +1,6 @@
 # Brewformulas.org web application Docker image
 # ~~~~ Image base ~~~~
-FROM ruby:2.2.3-slim
+FROM ruby:2.3.0-slim
 MAINTAINER zedtux, zedtux@zedroot.org
 
 ENV RUNNING_IN_DOCKER true
