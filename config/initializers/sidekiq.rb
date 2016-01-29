@@ -7,9 +7,11 @@ redis_url << "#{AppConfig.redis.db_num}"
 
 message = 'Sidekiq using Redis setting '
 message << redis_url
-message << ' with namespace "'
-message << AppConfig.redis.namespace
-message << '"'
+if AppConfig.redis.try(:namespace)
+  message << ' with namespace "'
+  message << AppConfig.redis.namespace
+  message << '"'
+end
 Rails.logger.info message
 
 # We need here the rescue nil has the AppConfig gem
@@ -31,10 +33,10 @@ if sidekiq_conf
 end
 
 Sidekiq.configure_server do |config|
-  config.redis = { url: redis_url, namespace: AppConfig.redis.namespace }
+  config.redis = { url: redis_url, namespace: AppConfig.redis.try(:namespace) }
 end
 Sidekiq.configure_client do |config|
-  config.redis = { url: redis_url, namespace: AppConfig.redis.namespace }
+  config.redis = { url: redis_url, namespace: AppConfig.redis.try(:namespace) }
 end
 
 Sidetiq.configure do |config|
