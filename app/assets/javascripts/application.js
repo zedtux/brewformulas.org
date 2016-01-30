@@ -17,4 +17,5 @@
 //= require bootstrap/collapse
 //= require bootstrap/dropdown
 //= require bootstrap/tab
+//= require_tree ../../../vendor/assets/javascripts/.
 //= require_tree .
