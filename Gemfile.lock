@@ -131,6 +131,7 @@ GEM
     docile (1.1.5)
     domain_name (0.5.25)
       unf (>= 0.0.5, < 1.0.0)
+    dynamic_sitemaps (2.0.0)
     email_spec (2.0.0)
       htmlentities (~> 4.3.3)
       launchy (~> 2.1)
@@ -364,6 +365,7 @@ DEPENDENCIES
   cucumber-rails
   cucumber-timecop (= 0.0.3)
   database_cleaner
+  dynamic_sitemaps
   email_spec
   git
   hub

@@ -29,6 +29,9 @@ gem 'redcarpet'
 # Pagination
 gem 'kaminari'
 
+# SEO
+gem 'dynamic_sitemaps'
+
 group :assets do
   gem 'coffee-rails'
 end

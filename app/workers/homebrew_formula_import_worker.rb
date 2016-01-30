@@ -6,6 +6,7 @@
 class HomebrewFormulaImportWorker
   include Sidekiq::Worker
   include Sidetiq::Schedulable
+  sidekiq_options backtrace: true
 
   attr_accessor :formula
 
@@ -65,7 +66,9 @@ class HomebrewFormulaImportWorker
                       "#{error.message}"
   ensure
     @import.ended_at = Time.now
-    unless @import.save
+    if @import.save
+      DynamicSitemaps.generate_sitemap
+    else
       Rails.logger.warn 'Unable to update the import with ID ' \
                         "#{@import.id} : #{@import.errors.full_message}"
     end

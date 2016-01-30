@@ -16,7 +16,7 @@ module Homebrew
         GithubGistFormula
       )
       class_name = formula.scan(
-        /^class\s(\w+)\s<\s(?:#{inheriting_classes.join("|")})$/
+        /^(\s+)?class\s(\w+)\s<\s(?:#{inheriting_classes.join("|")})$/
       )
       class_name.flatten.last
     end
@@ -92,6 +92,7 @@ module Homebrew
       formula = Homebrew::Formula.find_by(filename: filename)
       return formula if formula
 
+      Rails.logger.info "Creating formula '#{name}' (#{filename})"
       Homebrew::Formula.create!(filename: filename, name: name, external: true)
     end
   end

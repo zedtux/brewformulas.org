@@ -8,6 +8,9 @@ BrewformulasOrg::Application.routes.draw do
 
   resources :documentation, only: :index
 
+  get 'sitemap.xml' => 'home#sitemap', format: :xml, as: :sitemap
+  get 'robots.:format' => 'home#robots', format: :text, as: :robots
+
   resources :formulas, only: [:index, :show], path: '' do
     member do
       get 'refresh_description'

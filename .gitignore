@@ -80,3 +80,5 @@ pickle-email-*.html
 
 # Keep newrelic license key secret =)
 config/newrelic.yml
+
+public/sitemaps/
