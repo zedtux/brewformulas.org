@@ -31,6 +31,7 @@ gem 'kaminari'
 
 # SEO
 gem 'dynamic_sitemaps'
+gem 'metamagic'
 
 group :assets do
   gem 'coffee-rails'
