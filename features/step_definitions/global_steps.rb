@@ -22,7 +22,7 @@ When(/^I click the (.*?) formula name$/) do |formula_name|
 end
 
 When(/^I scroll to the bottom of the page$/) do
-  page.execute_script "window.scrollBy(0,10000)"
+  page.execute_script 'window.scrollBy(0,10000)'
 end
 
 Then(/^show me the page$/) do
@@ -38,8 +38,10 @@ Then(/^I should see "(.*?)"$/) do |something|
   expect(page).to have_content(something)
 end
 
-Then(/^I should see the (success|error|info)? alert "(.*?)"( on the homepage)?$/) do |type, message, on_homepage|
-  expect(current_url).to eq(root_url) if on_homepage
+Then(
+  /^I should see the (success|error|info)? alert "(.*?)"( on the homepage)?$/
+) do |type, message, on_homepage|
+  expect(current_path).to eq(root_path) if on_homepage
 
   type = case type
          when 'error', 'success', 'info'
