@@ -15,14 +15,20 @@ It is a Rails 4 and Ruby 2 application using Twitter bootstrap for the UI and si
 
 The aim of http://brewformulas.org/ is to provide a fast and simple web site to search for a [Homebrew](https://github.com/Homebrew/homebrew) formula.
 
-
 The website is under heavy development so feel free to check regularly in order to discover new features.
 
 # Documentation
 
-In the case you would like to get access to the technical documentation, [it's over here](http://rdoc.info/github/zedtux/brewformulas.org/master/frames).
+In the case you would like to get access to the technical documentation,
+[it's over here](http://rdoc.info/github/zedtux/brewformulas.org/master/frames).
 
-# Docker
+# Build a new Docker container instance
 
-This application has a Dockerfile which is used to test docker. It's a working version that you can try yourself.
-You must install [Docker](http://docker.com/) on your [Mac](https://docs.docker.com/installation/mac/) or [Linux](https://docs.docker.com/installation/ubuntulinux/).
+When a new release is ready, here are the steps to follow to build and publish
+a new container :
+
+```
+$ docker build -f Dockerfile.production -t `whoami`/brewformulas.org .
+$ docker tag `whoami`/brewformulas.org quay.io/`whoami`/brewformulas.org
+$ docker push quay.io/`whoami`/brewformulas.org
+```
