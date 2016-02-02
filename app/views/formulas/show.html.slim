@@ -1,6 +1,6 @@
 - meta title: @formula.name, description: truncate(@formula.description.presence || AppConfig.brewformulas.description, length: 160), keywords: AppConfig.brewformulas.keywords
 
-h1
+h2
   = @formula.name
   - unless @formula.external?
     small= @formula.filename
