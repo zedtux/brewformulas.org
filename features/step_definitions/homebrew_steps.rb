@@ -228,7 +228,8 @@ end
 Then(/^a formula should be updated$/) do
   Homebrew::Formula.select(:created_at, :updated_at).to_a.find do |formula|
     formula.created_at != formula.updated_at
-  end.should be_present, "Expected to have a formula with a different date of update than creation but didn't"
+  end.should be_present, 'Expected to have a formula with a different date ' \
+                         "of update than creation but didn't"
   check_formula_names
 end
 
@@ -242,7 +243,8 @@ Then(/^the formula (.*?) should have the following description:$/) do |name, des
   unless formula
     fail "Unable to find a Homebrew::Formula with name \"#{name}\""
   end
-  expect(formula.description).to eql(description)
+  formula_description = formula.description || 'No description available'
+  expect(formula_description).to eql(description)
 end
 
 Then(/^I should see the (.*?) formula description automatically extracted from the homepage$/) do |name|

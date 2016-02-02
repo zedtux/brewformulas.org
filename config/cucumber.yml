@@ -6,3 +6,4 @@ std_opts = "-r features/support/ -r features/step_definitions --format #{ENV['CU
 default: <%= std_opts %> features
 wip: --tags @wip:3 --wip features
 rerun: <%= rerun_opts %> --format rerun --out rerun.txt --strict --tags ~@wip
+seo: --tags @seo features

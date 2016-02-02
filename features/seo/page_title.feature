@@ -1,9 +1,9 @@
-Feature: Show the formula name in the page title
-  In order to see which formula is selected
-  As a user
+@seo
+Feature: Page title
+  In order to improve the visibility of Brewformulas.org on search engines
+  As a crawler
   I want to have the formula name in the title of the page
-  So that when I use tabs in my web browser
-  I can see directly which formula is selected in a specific tab
+  So that it will be re-used in the search engine results
 
   Scenario: Check the page title when on the homepage
     When I go to brewformulas.org

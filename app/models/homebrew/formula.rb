@@ -65,14 +65,6 @@ module Homebrew
     # @nodoc ~~~ custom instance methods ~~~
 
     #
-    # Get the description of the formula
-    #
-    # @return [String] description of the formula or "No description available"
-    def description
-      self[:description] || 'No description available'
-    end
-
-    #
     # Set the touched_on field
     #
     # The touched_on field is used in order to detect

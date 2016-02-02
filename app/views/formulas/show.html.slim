@@ -1,4 +1,4 @@
-- meta title: @formula.name, description: @formula.description.presence || AppConfig.brewformulas.description, keywords: AppConfig.brewformulas.keywords
+- meta title: @formula.name, description: truncate(@formula.description.presence || AppConfig.brewformulas.description, length: 160), keywords: AppConfig.brewformulas.keywords
 
 h1
   = @formula.name

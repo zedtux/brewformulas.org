@@ -7,4 +7,4 @@
           = formula.external? ? "external dependency" : formula.filename
         - if formula.new?
           span class="label label-success" New
-      p.list-group-item-text= formula.description
+      p.list-group-item-text= formula.description || 'No description available'
