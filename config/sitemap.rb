@@ -5,6 +5,7 @@ host 'brewformulas.org'
 
 sitemap :site do
   url root_url, last_mod: Time.now, change_freq: 'daily', priority: 1.0
+  url documentation_index_url
 end
 
 # You can have multiple sitemaps like the above – just make sure their names
@@ -42,5 +43,4 @@ end
 #   end
 
 # Ping search engines after sitemap generation:
-#
-#   ping_with "http://#{host}/sitemap.xml"
+ping_with "http://#{host}/sitemap.xml"
