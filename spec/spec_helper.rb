@@ -4,10 +4,6 @@ ENV['RAILS_ENV'] ||= 'test'
 require 'simplecov'
 require 'coveralls'
 
-SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter[
-  SimpleCov::Formatter::HTMLFormatter,
-  Coveralls::SimpleCov::Formatter
-]
 SimpleCov.start 'rails' do
   add_filter '.bundle/'
 end
@@ -15,7 +11,6 @@ end
 require File.expand_path('../../config/environment', __FILE__)
 require 'rspec/rails'
 require 'email_spec'
-require 'rspec/autorun'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -24,6 +19,7 @@ Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 RSpec.configure do |config|
   config.include(EmailSpec::Helpers)
   config.include(EmailSpec::Matchers)
+
   # ## Mock Framework
   #
   # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
@@ -59,5 +55,12 @@ RSpec.configure do |config|
   end
   config.after(:each) do
     DatabaseCleaner.clean
+  end
+end
+
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    with.library :rails
   end
 end

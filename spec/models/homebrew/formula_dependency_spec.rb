@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Homebrew::FormulaDependency do
+describe Homebrew::FormulaDependency, type: :model do
   describe 'DB' do
     it do
       should have_db_column(:formula_id).of_type(:integer)

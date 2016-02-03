@@ -390,7 +390,7 @@ DEPENDENCIES
   rake
   redcarpet
   responders
-  rspec-rails
+  rspec-rails (~> 3.0)
   rubocop
   selenium-webdriver
   shoulda-matchers

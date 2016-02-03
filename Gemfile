@@ -54,13 +54,16 @@ group :development do
   gem 'rubocop', require: false
 end
 
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0'
+end
+
 group :test, :cucumber do
   gem 'capybara'
   gem 'cucumber-rails', require: false
   gem 'database_cleaner'
   gem 'email_spec'
   gem 'launchy'
-  gem 'rspec-rails'
   gem 'shoulda-matchers'
   gem 'cucumber-timecop', '0.0.3', require: false
   gem 'rake'

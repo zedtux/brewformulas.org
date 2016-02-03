@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe Homebrew::Formula do
+describe Homebrew::Formula, type: :model do
   describe 'DB' do
     it do
       should have_db_column(:name).of_type(:string)
