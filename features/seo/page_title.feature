@@ -7,7 +7,7 @@ Feature: Page title
 
   Scenario: Check the page title when on the homepage
     When I go to brewformulas.org
-    Then the page title should be "Formula list — BrewFormulas"
+    Then the page title should be "Search and discover Homebrew formulae — BrewFormulas"
 
   Scenario: Chech the page title when having selected a formula
     Given the A2ps formula with homepage "http://www.gnu.org/software/a2ps/" exists
