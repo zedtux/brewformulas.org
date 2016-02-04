@@ -19,3 +19,10 @@
 //= require bootstrap/tab
 //= require_tree ../../../vendor/assets/javascripts/.
 //= require_tree .
+
+// Fix Twitter bootstrap issue with Dropdowns and turbolinks
+$(document).on('page:load', function() {
+  $("[data-toggle='dropdown']").each(function(element) {
+    $(this).dropdown();
+  });
+});
