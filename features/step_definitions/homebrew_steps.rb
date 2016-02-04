@@ -358,7 +358,7 @@ Then(/^I should see a conflict with (.*?)$/) do |conflicts|
     conflict_name.gsub!(/and /, '')
     xpath = '//ul[@id="formula_conflicts"]/li'
     xpath << "[normalize-space(.)='#{conflict_name}']"
-    page.should have_xpath(xpath)
+    expect(page).to have_xpath(xpath)
   end
 end
 
