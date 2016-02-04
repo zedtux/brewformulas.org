@@ -6,7 +6,7 @@ h1 Search a formula
   .list-group
     - @formulas.each do |formula|
       a.list-group-item href="#{formula_path(formula.name)}"
-        h4.list-group-item-heading
+        h3.list-group-item-heading
           = formula.name
           small
             = formula.external? ? 'external dependency' : formula.filename
