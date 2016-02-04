@@ -1,7 +1,7 @@
 # Change this to your host.
 # See the readme at https://github.com/lassebunk/dynamic_sitemaps
 # for examples of multiple hosts and folders.
-host 'brewformulas.org'
+host ENV['VIRTUAL_HOST'] || 'brewformulas.org'
 
 sitemap :site do
   url root_url, last_mod: Time.now, change_freq: 'daily', priority: 1.0
@@ -16,7 +16,7 @@ end
 # automatically set <lastmod> to the date and time in page.updated_at:
 #
 sitemap_for Homebrew::Formula.internals.active, name: :formula do |formula|
-  url formula_url(formula.name)
+  url formula_url(formula.name), last_mod: formula.updated_at
 end
 
 # For products with special sitemap name and priority, and link to comments:
