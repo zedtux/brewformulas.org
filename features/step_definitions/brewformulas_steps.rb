@@ -25,7 +25,7 @@ Then(/^I should see the (.*) Homebrew formulas?$/) do |formulas|
   formulas.gsub!(/  /, ' ')
 
   base_xpath = '//div[@class="list-group"]/a[@class="list-group-item"]'
-  base_xpath << '/h4[@class="list-group-item-heading" '
+  base_xpath << '/h3[@class="list-group-item-heading" '
   base_xpath << 'and contains(normalize-space(.), "'
 
   formulas.split.each do |formula|
