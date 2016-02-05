@@ -43,4 +43,4 @@ end
 #   end
 
 # Ping search engines after sitemap generation:
-ping_with "http://#{host}/sitemap.xml"
+# ping_with "http://#{host}/sitemap.xml"
