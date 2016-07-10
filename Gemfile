@@ -14,7 +14,8 @@ gem 'slim-rails'
 gem 'git'
 gem 'appconfig', require: 'app_config'
 gem 'sidekiq'
-gem 'sidetiq' # Recurring jobs
+gem 'sidekiq-scheduler' # Recurring jobs
+gem 'sidekiq-unique-jobs' # The missing unique jobs in sidekiq
 gem 'sinatra', '>= 1.3.0', require: nil
 gem 'newrelic_rpm'
 gem 'nokogiri'

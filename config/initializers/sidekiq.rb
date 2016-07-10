@@ -34,12 +34,13 @@ end
 
 Sidekiq.configure_server do |config|
   config.redis = { url: redis_url, namespace: AppConfig.redis.try(:namespace) }
+  config.on(:startup) do
+    scheduler_file_path = File.expand_path('../../../config/scheduler.yml',
+                                           __FILE__)
+    Sidekiq.schedule = YAML.load_file(scheduler_file_path)
+    Sidekiq::Scheduler.reload_schedule!
+  end
 end
 Sidekiq.configure_client do |config|
   config.redis = { url: redis_url, namespace: AppConfig.redis.try(:namespace) }
-end
-
-Sidetiq.configure do |config|
-  # When `true` uses UTC instead of local times (default: false).
-  config.utc = false
 end

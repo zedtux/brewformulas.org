@@ -5,7 +5,7 @@ brewformulas:
   keywords: 'MAC, Apple, Homebrew, brew, mxcl, Formula, Formulas, Formulae, search, description'
 homebrew:
   git_repository:
-    url: https://github.com/Homebrew/homebrew.git
+    url: https://github.com/Homebrew/homebrew-core.git
     name: homebrew
     location: <%= File.join(Rails.root, 'cache') %>
 redis:

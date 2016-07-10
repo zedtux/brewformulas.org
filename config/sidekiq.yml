@@ -1,4 +1,5 @@
 ---
 :concurrency: 25
+:logfile: ./log/sidekiq.log
 production:
   :concurrency: 4

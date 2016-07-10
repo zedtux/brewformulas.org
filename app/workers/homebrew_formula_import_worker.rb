@@ -5,12 +5,10 @@
 #
 class HomebrewFormulaImportWorker
   include Sidekiq::Worker
-  include Sidetiq::Schedulable
-  sidekiq_options backtrace: true
+
+  sidekiq_options backtrace: true, retry: false, unique: :until_executed
 
   attr_accessor :formula
-
-  recurrence { daily }
 
   #
   # Create new Homebrew::Formula if missing otherwise update the existing one
@@ -31,7 +29,7 @@ class HomebrewFormulaImportWorker
     File.join(
       AppConfig.homebrew.git_repository.location,
       AppConfig.homebrew.git_repository.name,
-      'Library', 'Formula', '*.rb'
+      'Formula', '*.rb'
     )
   end
 
@@ -42,11 +40,9 @@ class HomebrewFormulaImportWorker
     formulas = Dir[formulas_path]
     formulas.each { |path| create_or_update_formula_from(path) }
 
-    Rails.logger.info <<-eos
-      Iterated over #{formulas.size} formulas and #{Homebrew::Formula.count}
-      in database including #{Homebrew::Formula.externals.count}
-      external formulas.
-    eos
+    Rails.logger.info "Iterated over #{formulas.size} formulas and " \
+                      "#{Homebrew::Formula.count} in database including " \
+                      "#{Homebrew::Formula.externals.count} external formulas."
   end
 
   #
@@ -54,6 +50,7 @@ class HomebrewFormulaImportWorker
   # and create/update the Homebrew::Formula
   #
   def perform
+    Rails.logger.info 'Starting new import ...'
     @import = Import.create!(success: true)
 
     import_formulas
@@ -62,15 +59,14 @@ class HomebrewFormulaImportWorker
     @import.success = false
     raise
   rescue ActiveRecord::RecordInvalid => error
-    Rails.logger.warn 'Unable to create a new import : ' \
-                      "#{error.message}"
+    Rails.logger.warn "Unable to create a new import : #{error.message}"
   ensure
     @import.ended_at = Time.now
     if @import.save
       DynamicSitemaps.generate_sitemap
     else
-      Rails.logger.warn 'Unable to update the import with ID ' \
-                        "#{@import.id} : #{@import.errors.full_message}"
+      Rails.logger.warn "Unable to update the import with ID #{@import.id} : " \
+                        "#{@import.errors.full_message}"
     end
   end
 

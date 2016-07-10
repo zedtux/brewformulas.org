@@ -10,7 +10,9 @@ workers:
     - redis:redis
   environment:
     - POSTGRESQL_USER=postgres
-    - RUNNING_IN_DOCKER=true
+    - RAILS_ENV=development
+  volumes:
+    - .:/application/
 bundle:
   image: brewformulasorg_web
   command: echo Bundler data container

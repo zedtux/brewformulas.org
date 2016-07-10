@@ -1,5 +1,5 @@
 require 'sidekiq/web'
-require 'sidetiq/web'
+require 'sidekiq-scheduler/web'
 
 BrewformulasOrg::Application.routes.draw do
   mount Sidekiq::Web => '/sidekiq'
