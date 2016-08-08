@@ -124,7 +124,7 @@ module Git
 
     def make_paths
       FileUtils.mkdir_p(File.join(root_path, '.git'))
-      self.working_dir = File.join(root_path, 'Library', 'Formula')
+      self.working_dir = File.join(root_path, 'Formula')
       FileUtils.mkdir_p(working_dir)
     end
 

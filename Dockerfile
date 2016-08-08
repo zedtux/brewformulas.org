@@ -50,7 +50,7 @@ RUN cd /tmp && \
 
 # ~~~~ Rails Preparation ~~~~
 # Rubygems
-RUN gem install rubygems-update && update_rubygems
+RUN gem install rubygems-update -v 2.6.1 && update_rubygems
 # Bundler
 RUN gem install bundler
 

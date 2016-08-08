@@ -1,6 +1,11 @@
 require 'webmock'
 include WebMock::API
 
+WebMock.enable!
+
+# Allow local connections for poltergeist
+WebMock.disable_net_connect!(:allow_localhost => true)
+
 fixture_root = File.join(Rails.root, 'features', 'fixtures', 'webmock')
 
 {
