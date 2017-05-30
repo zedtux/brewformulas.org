@@ -164,7 +164,7 @@ GEM
     open_uri_redirections (0.2.1)
     parser (2.3.1.2)
       ast (~> 2.2)
-    pg (0.18.4)
+    pg (0.20.0)
     pkg-config (1.1.7)
     pluralize_no_count_if_one (0.0.1)
       railties
