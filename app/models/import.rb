@@ -1,7 +1,7 @@
 # Import of formulas
 #
 # @author [guillaumeh]
-class Import < ActiveRecord::Base
+class Import < ApplicationRecord
   # @nodoc ~~~ special behaviours ~~~
 
   # @nodoc ~~~ callbacks ~~~

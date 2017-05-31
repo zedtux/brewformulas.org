@@ -1,76 +1,67 @@
 source 'https://rubygems.org'
 
-gem 'rails'
-gem 'responders'
-gem 'uglifier'
-gem 'jquery-rails'
-gem 'less-rails'
-gem 'therubyracer', platforms: :ruby
-gem 'bootstrap-on-rails'
-gem 'turbolinks'
-gem 'pg'
-gem 'puma'
-gem 'slim-rails'
-gem 'git'
-gem 'appconfig', require: 'app_config'
-gem 'sidekiq'
-gem 'sidekiq-scheduler' # Recurring jobs
-gem 'sidekiq-unique-jobs' # The missing unique jobs in sidekiq
-gem 'sinatra', '>= 1.3.0', require: nil
-gem 'newrelic_rpm'
-gem 'nokogiri'
-# open-uri library patched to follow http to https redirects
-gem 'open_uri_redirections'
-# Implemented the missing uniq? method on Ruby Arrays
-gem 'array_is_uniq', require: 'array'
-gem 'pluralize_no_count_if_one'
-gem 'quiet_assets'
-# Markdown required gem
-gem 'redcarpet'
-# Pagination
-gem 'kaminari'
+git_source(:github) do |repo_name|
+  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
+  "https://github.com/#{repo_name}.git"
+end
+
+# Frontend gems
+gem 'bootstrap', '~> 4.0.0.alpha6' # Bootstrap 4 Ruby Gem for Rails / Sprockets and Compass
+gem 'tether-rails', '~> 1.4.0' # Tether for the Rails asset pipeline
+gem 'sass-rails', '~> 5.0' # Use SCSS for stylesheets
+gem 'uglifier', '>= 1.3.0' # Use Uglifier as compressor for JavaScript assets
+gem 'slim-rails', '~> 3.1.2' # Provides the generator settings required for Rails 3+ to use Slim
+gem 'jquery-rails', '~> 4.3.1' # This gem provides jQuery and the jQuery-ujs driver for your Rails 4+ application
+gem 'octicons_helper', '~> 3.0.1' # A rails helper that makes including svg Octicons simple.
+gem 'pluralize_no_count_if_one', '~> 0.0.1' # Add the missing :no_count_if_one option to the Rails pluralize helper
+gem 'unobtrusive_flash', '>= 3' # Turnkey Flash messages for your Rails app
+gem 'sparkline', '~> 0.1.0' # jQuery Sparklines for Rails
+
+# Backend gems
+gem 'rails', '~> 5.1.0'
+gem 'pg', '~> 0.18' # Use postgresql as the database for Active Record
+gem 'puma', '~> 3.7' # Use Puma as the app server
+gem 'interactor', '~> 3.1.0' # Interactor provides a common interface for performing complex user interactions
+gem 'sidekiq', '~> 5.0.0' # Simple, efficient background processing for Ruby.
+gem 'sidekiq-scheduler', '~> 2.1.4' # Light weight job scheduling extension for Sidekiq that adds support for queueinga jobs in a recurring way.
+gem 'sidekiq-unique-jobs', '~> 5.0.8' # The missing unique jobs in sidekiq
+gem 'git', '~> 1.3.0' # Ruby/Git is a Ruby library that can be used to create, read and manipulate Git repositories by wrapping system calls to the git binary.
+gem 'simple_form', github: 'elsurudo/simple_form', branch: 'rails-5.1.0' # Forms made easy!
+gem 'open_uri_redirections', '~> 0.2.1' # OpenURI patch to allow redirections between HTTP and HTTPS
+gem 'pres', '~> 1.4.1' # A Simple Rails Presenter
+gem 'punching_bag', '~> 0.5.0', github: 'tmartin314/punching_bag', branch: 'rails5'
+gem 'groupdate', '~> 3.2.0' # The simplest way to group temporal data
+gem 'redcarpet', '~> 3.4.0' # A fast, safe and extensible Markdown to (X)HTML parser
+gem 'opbeat', '~> 3.0.9' # performance monitoring
+# See https://github.com/rails/execjs#readme for more supported runtimes
+# gem 'therubyracer', platforms: :ruby
+
+gem 'turbolinks', '~> 5' # Turbolinks makes navigating your web application faster.
+# gem 'redis', '~> 3.0' # Use Redis adapter to run Action Cable in production
+# gem 'bcrypt', '~> 3.1.7' # Use ActiveModel has_secure_password
 
 # SEO
-gem 'dynamic_sitemaps'
-gem 'metamagic'
-
-group :assets do
-  gem 'coffee-rails'
-end
+gem 'dynamic_sitemaps', '~> 2.0.0' # Dynamic sitemap generation plugin for Ruby on Rails.
+gem 'metamagic', '~> 3.1.7' # Simple Ruby on Rails plugin for creating meta tags.
 
 group :development do
   gem 'better_errors'
-  gem 'binding_of_caller', platforms: [:mri_19, :mri_20, :rbx]
-  # Command-line wrapper for git that makes you better at GitHub
-  gem 'hub', require: nil
-  # Generates Rails application layout files for use with various front-end
-  # frameworks.
-  gem 'rails_layout'
-  # YARD is a documentation generation tool for the Ruby programming language.
-  gem 'yard'
-  # A code metric tool for rails codes, written in Ruby.
-  gem 'rails_best_practices'
-  # Automatic Ruby code style checking tool. Aims to enforce the
-  # community-driven Ruby Style Guide.
-  gem 'rubocop', require: false
+  gem 'binding_of_caller'
+
+  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'spring'
+  gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
-group :development, :test do
-  gem 'rspec-rails', '~> 3.0'
-end
-
-group :test, :cucumber do
-  gem 'capybara'
-  gem 'cucumber-rails', require: false
-  gem 'database_cleaner'
-  gem 'email_spec'
-  gem 'launchy'
-  gem 'shoulda-matchers'
-  gem 'cucumber-timecop', '0.0.3', require: false
-  gem 'rake'
-  gem 'webmock'
-  gem 'coveralls', require: false
-  gem 'capybara-screenshot'
-  gem 'poltergeist'
-  gem 'selenium-webdriver'
+group :test do
+  gem 'rspec-rails', '~> 3.6.0'
+  gem 'cucumber-rails', '~> 1.5.0', require: false
+  # database_cleaner is not required, but highly recommended
+  gem 'database_cleaner', '~> 1.6.1'
+  gem 'coveralls', '~> 0.8.15', require: false
+  gem 'webmock', '~> 3.0.1'
+  gem 'cucumber-timecop', '~> 0.0.6', require: false
+  gem 'capybara-screenshot', '~> 1.0.14'
+  gem 'shoulda-matchers', '~> 3.1.1'
+  gem 'ffaker', '~> 2.5.0'
 end

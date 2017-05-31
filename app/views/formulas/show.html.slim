@@ -1,106 +1,100 @@
-- meta title: @formula.name, description: truncate(@formula.description.presence || AppConfig.brewformulas.description, length: 160), keywords: AppConfig.brewformulas.keywords
+- meta title: @formula.name, description: truncate(@formula.description.presence || Rails.configuration.description, length: 160)
 
-h2
-  = @formula.name
-  - unless @formula.external?
-    small= @formula.filename
-  - unless @formula.external?
-    a href="https://twitter.com/share" class="twitter-share-button" data-text="I have installed #{@formula.name} with homebrew" data-via="brewformulas" data-related="machomebrew" Tweet
-
-- if @formula.external?
-  p.text-info This formula is an external dependency which means that Homebrew will not install it.
-
-hr
-
-h4 Description
-- if @formula.description?
-  blockquote
-    p= @formula.description
-    - if @formula.description_automatic?
-      small
-        | Extracted automatically from
+.container.mt-5
+  .row.mt-2
+    .col
+      h1
+        = @formula.name
+        - unless @formula.external?
+          small.ml-3= @formula.filename
         '
-        cite title="#{@formula.homepage}" #{@formula.name} homepage
-- else
-  .alert.alert-info
-    | No description available. You can request to update it by
-    '
-    a data-no-turbolink="true" href="#{refresh_description_formula_path(@formula.name)}" clicking this link
-    '.
+        span.badge class="badge-#{@formula.inactive? ? 'danger' : 'success'}"= @formula.inactive? ? t('inactive') : t('active')
+        - unless @formula.external?
+          = link_to 'Tweet', 'https://twitter.com/share', class: 'twitter-share-button float-right', data: { text: "I have installed #{@formula.name} with homebrew", via: 'brewformulas', related: "machomebrew" }
 
-dl.dl-horizontal
-  dt Homepage
-  dd
-    a href="#{@formula.homepage}" target="_blank" #{@formula.homepage}
-  dt Version
-  dd= @formula.version || "Unavailable"
+      - if @formula.external?
+        p.text-info= t('.external_formula_description')
 
-- unless @formula.external?
-  h4= "Install #{@formula.name}"
-  pre= "brew install #{@formula.filename}"
-  br
+      hr
 
-  h4
-    | Dependencies
-    span class="badge" title="Dependencies count"= @formula.dependencies.size
-  - if @formula.dependencies.blank?
-    p This formula has no dependencies.
-  - else
-    p
-      | The following
-      '
-      = pluralize(@formula.dependencies.size, "dependency", nil, no_count_if_one: true)
-      '  will be installed if you install
-      = @formula.name
-      ':
-    ul.list-inline#formula_dependencies
-      - @formula.dependencies.each do |dependency|
-        li.dependency
-          a href="#{formula_path(dependency.name)}"
-            span class="glyphicon glyphicon-link"
-            = dependency.name
-
-- if @formula.dependents.present?
-  h4
-    | Dependents
-    span class="badge" title="Dependents count"= @formula.dependents.size
-  p.dependents
-    | This formula is required by
-    '
-    - @formula.dependent_names.take(3).each_with_index do |dependent_name, index|
-      a href="#{formula_path(dependent_name)}"
-        span class="glyphicon glyphicon-link"
-        = dependent_name
-      - if @formula.dependents.size > 1
-        - case @formula.dependents.size
-        - when 2
-          - if index == 0
-            '  and
-            '
-        - when 3
-          - if index == 0
-            ',
-            '
-          - elsif index == 1
-            ' , and
-            '
-        - else
-          ',
+  .row.mt-2
+    .col-lg-8
+      h2= t('description').capitalize
+      - if @formula.description?
+        blockquote.blockquote
+          p.mb-0= @formula.description
+          - if @formula.description_automatic?
+            footer.blockquote-footer
+              == t('.extracted_automatically_from', title: @formula.homepage, name: @formula.name)
+      - else
+        .alert.alert-info
+          = t('.no_description_available')
           '
-    - if @formula.dependents.size > 3
-      = " and #{(@formula.dependents.size - 3).to_s} other formulas"
-    '.
+          == t('.you_can_request_update_with_link', link: refresh_formula_path(@formula.name))
+      = link_to t('.open_new_issue'), homebrew_new_issue_github_url(title: @formula.name), class: 'btn btn-secondary', data: { toggle: 'tooltip' }, title: t('.report_issue_title'), target: '_blank'
+    .col-lg-4
+      dl.dl-horizontal
+        dt= t('homepage').capitalize
+        dd
+          a href="#{@formula.homepage}" target="_blank"= @formula.homepage
+        dt= t('version').capitalize
+        dd= @formula.version || t('unavailable').capitalize
+        dt= t('source_file').capitalize
+        dd
+          = octicon 'mark-github'
+          '
+          = link_to t('source_file'), @formula.url, target: '_blank'
+        dt= t('hits')
+        dd= @formula.hits
 
-- if @formula.conflicts.present?
-  h4
-    | Conflicts
-    span class="badge" title="Conflicts count"= @formula.conflicts.size
-  p.conflicts
-    | This formula is in confict with
-    '
-    ul.list-inline#formula_conflicts
-      - @formula.conflicts.each do |conflict|
-        li.conflict
-          a href="#{formula_path(conflict.name)}"
-            span class="glyphicon glyphicon-link"
-            = conflict.name
+  - unless @formula.external?
+    .row.mt-3
+      .col
+        h4= t('.install_formula', name: @formula.name)
+        pre
+          code= "brew install #{@formula.filename}"
+        br
+
+  .row.mt-2
+    .col
+      h4
+        = t('dependency').pluralize.capitalize
+        '
+        span class="badge badge-default badge-pill" title="#{t('.dependency_count')}"= @formula.dependencies.size
+      - if @formula.dependencies.blank?
+        p= t('.no_dependencies')
+      - else
+        p= t('.the_following_dependencies_will_be_installed', dependency: pluralize(@formula.dependencies.size, t('dependency'), nil, no_count_if_one: true), name: @formula.name)
+        span#formula-dependents
+          = render partial: 'shared/formula_list', locals: { formulas: @formula.dependencies.order(:name).first(3), formula_count: @formula.dependencies.count, formula_name: @formula.name, show_other_formulae_link: true, formula_type: 'dependencies' }
+
+  - if @formula.dependents.present?
+    .row.mt-2
+      .col
+        h4
+          = t('dependent').capitalize.pluralize
+          '
+          span class="badge badge-default badge-pill" title="Dependents count"= @formula.dependents.size
+        p.dependents
+          | This formula is required by
+          '
+          span#formula-dependents
+            = render partial: 'shared/formula_list', locals: { formulas: @formula.dependents.order(:name).first(3), formula_count: @formula.dependents.count, formula_name: @formula.name, show_other_formulae_link: true, formula_type: 'dependents' }
+
+  - if @formula.conflicts.present?
+    .row.mt-2
+      .col
+        h4
+          = t('conflict').capitalize.pluralize
+          '
+          span class="badge badge-default badge-pill" title="#{t('.conflict_count')}"= @formula.conflicts.size
+        p.conflicts
+          = t('.this_formula_is_in_conflict_with_the_following')
+          '
+          ul.list-inline#formula_conflicts
+            - @formula.conflicts.each do |conflict|
+              li.conflict
+                = link_to formula_path(conflict.name) do
+                  = octicon 'link'
+                  '
+                  = conflict.name

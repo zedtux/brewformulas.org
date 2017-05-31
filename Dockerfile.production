@@ -1,22 +1,23 @@
 # Brewformulas.org web application Docker image
 # ~~~~ Image base ~~~~
-FROM ruby:2.3.0-slim
+FROM ruby:2.3.1-slim
 MAINTAINER zedtux, zedtux@zedroot.org
 
 ENV RUNNING_IN_DOCKER true
+ENV APP_HOME /application
+
+# ~~~~ Running user ~~~~
+RUN useradd -ms /bin/bash brewformulas && \
+  mkdir -p $APP_HOME
 
 # ~~~~ Sources Preparation ~~~~
-RUN mkdir -p /brewformulas/application/
-WORKDIR /brewformulas/application/
-ADD . /brewformulas/application/
+WORKDIR $APP_HOME
+ADD . $APP_HOME
 
 # ~~~~ System Dependencies ~~~~
 RUN apt-get install -y ca-certificates && \
-  curl -L https://github.com/just-containers/skaware/releases/download/v1.16.1/s6-2.2.2.0-linux-amd64-bin.tar.gz | tar -C / -zx && \
-  echo deb http://apt.newrelic.com/debian/ newrelic non-free >> /etc/apt/sources.list.d/newrelic.list && \
-  curl https://download.newrelic.com/548C16BF.gpg | apt-key add - && \
   apt-get update && \
-  apt-get install -y libpq-dev git make gcc g++ newrelic-sysmond && \
+  apt-get install -y libpq-dev git make gcc g++ && \
   gem install rubygems-update --no-ri --no-rdoc && \
   update_rubygems && \
   gem install bundler --no-ri --no-rdoc && \
@@ -27,11 +28,9 @@ RUN apt-get install -y ca-certificates && \
   apt-get clean -y && \
   rm -f tmp/pids/*
 
-# ~~~~ S6 files ~~~~
-COPY s6 /etc/s6/
+USER brewformulas
 
-# ~~~~ Container configuration ~~~~
-EXPOSE 80
+EXPOSE 3000
 
 ENTRYPOINT ["bundle", "exec"]
-CMD ["/usr/bin/s6-svscan", "/etc/s6"]
+CMD ["bin/rails server -b 0.0.0.0"]

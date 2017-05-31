@@ -32,14 +32,14 @@ Feature: Formulas import
     And the Github homebrew repository has been cloned
     And the Github homebrew repository has a formula having multiple formula classes
     When the background task to get or update the formulae is executed
-    Then a new formula should be available in the database
+    Then 3 new formula should be available in the database
 
   Scenario: Update existing repository with new formula
     Given some formulas exist
     And the Github homebrew repository has been cloned
     And the Github homebrew repository has a new formula
     When the background task to get or update the formulae is executed
-    Then a new formula should be available in the database
+    Then 3 new formula should be available in the database
 
   Scenario: Update existing repository with deleted formula
     Given it is currently yesterday 2 hours after midnight
@@ -107,3 +107,12 @@ Feature: Formulas import
     When the background task to get or update the formulae is executed
     Then new formulas should be available in the database
     And some formulas should be linked as conflicts
+
+  @github-issues-61
+  Scenario: Import a formula conflicting with another formula having an at symbol (@) in the name
+    Given no formula exist in homebrew
+    And the Github homebrew repository has a formula with a conflict including an @ in the name with a reason
+    And the Github homebrew repository has been cloned
+    When the background task to get or update the formulae is executed
+    Then 2 new formula should be available in the database
+    And the conflicting formula name should be imported correctly

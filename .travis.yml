@@ -1,15 +1,24 @@
+sudo: required
+
 language: ruby
-rvm:
-  - 2.3.0
-bundler_args: --without development
-env:
-  - DB=postgresql
-script:
-  - bundle exec rake db:schema:load
-  - bundle exec rake db:test:prepare
-  - bundle exec rake
-before_script:
-  - cp config/database.travis.yml config/database.yml
-  - psql -c 'create database brewformulas_org_test' -U postgres
+
 services:
-  - redis-server
+  - docker
+
+install:
+  - docker run -d --name redis redis:3.2.8
+  - docker run -d --name postgres postgres:9.6.2
+  - docker build -t zedtux/brewformulas.org .
+
+script:
+  - docker run --link redis:redis --link postgres:database -it zedtux/brewformulas.org bundle exec rake db:create db:setup RAILS_ENV=test
+  - docker run --link redis:redis --link postgres:database -it zedtux/brewformulas.org bundle exec rake
+
+after_success:
+  - "docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS"
+  - export DOCKER_TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+  - echo "Tagging the docker image with $DOCKER_TAG ..."
+  - "docker tag zedtux/brewformulas.org:latest zedtux/brewformulas.org:$DOCKER_TAG"
+  - docker images
+  - "docker push zedtux/brewformulas.org:$DOCKER_TAG"
+  - docker logout

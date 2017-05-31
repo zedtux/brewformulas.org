@@ -16,8 +16,70 @@
 #
 # This would use the information in config/locales/es.yml.
 #
+# The following keys must be escaped otherwise they will not be retrieved by
+# the default I18n backend:
+#
+# true, false, on, off, yes, no
+#
+# Instead, surround them with single quotes.
+#
+# en:
+#   'true': 'foo'
+#
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  about: "about"
+  conflict: "conflict"
+  credit_line: "BrewFormulas is open source and free to use forever."
+  dependency: "dependency"
+  dependent: "dependent"
+  description: "description"
+  descriptions: "Descriptions"
+  distance_of_time_since_updated_ago: "%{dotiw} ago"
+  filenames: "Filenames"
+  homepage: "homepage"
+  names: "Names"
+  not_available: "Not available"
+  read_more: "Read more"
+  search: "Search"
+  see_more: "See More"
+  some_links: "some links"
+  source_file: "source file"
+  trending: "trending"
+  unavailable: "unavailable"
+  version: "version"
+  formulas:
+    index:
+      jumbotron:
+        title: "Homebrew formulas index"
+        text: "The aim of this website is to provide an easy way to search for a Homebrew formula."
+      inactives: "Inactives"
+      news: "News"
+      results: "Results"
+      search_result_count: Search result count
+    show:
+      conflict_count: "Conflict count"
+      dependency_count: "Dependency count"
+      external_formula_description: "This formula is an external dependency which means that Homebrew will not install it."
+      extracted_automatically_from: "Extracted automatically from <cite title=\"%{title}\">%{name} homepage</cite>"
+      install_formula: "Install %{name}"
+      no_dependencies: "This formula has no dependencies."
+      no_description_available: "No description available."
+      open_new_issue: "Open new issue"
+      report_issue_title: "Opens a new tab on the Hombrew github repoistory, in a new issue."
+      the_following_dependencies_will_be_installed: "The following %{dependency} will be installed if you install %{name}:"
+      this_formula_is_in_conflict_with_the_following: "This formula is in confict with the following :"
+      you_can_request_update_with_link: "You can request to update it by <a href=\"%{link}\" data-no-turbolink=\"true\" data-remote=\"true\" rel=\"nofollow\" data-method=\"post\" data-toggle=\"tooltip\" title=\"BrewFormulas will retry to grab the formula description from the homepage.\">clicking this link</a>."
+  layouts:
+    application:
+      about_text: "Find all the available formulae from the Homebrew project and get a description of what the formula does. You can search for any kind of information and find the formula you will install today. Don't forget to share what you've installed using our Twitter button :)"
+      api_documentation: "API Documentation"
+  links:
+    twitter: "Follow on Twitter"
+  messages:
+    no_formula_yet: "No formula yet"
+    no_new_formula_yet: "No new formula in the last 7 days."
+    request_successfully_submitted: "Your request has been successfully submitted."
+    sorry_nothing_found: "Oh, sorry, nothing found for <strong>\"%{terms}\"</strong>."

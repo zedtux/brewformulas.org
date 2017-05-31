@@ -4,7 +4,7 @@ include WebMock::API
 WebMock.enable!
 
 # Allow local connections for poltergeist
-WebMock.disable_net_connect!(:allow_localhost => true)
+WebMock.disable_net_connect!(allow_localhost: true)
 
 fixture_root = File.join(Rails.root, 'features', 'fixtures', 'webmock')
 
@@ -23,9 +23,11 @@ fixture_root = File.join(Rails.root, 'features', 'fixtures', 'webmock')
   'http://www.monkeymental.com/' => 'cdpr',
   'http://www.celt-codec.org/' => 'celt',
   'http://www.bluem.net/jump/cliclick/' => 'cliclick',
+  'https://ipfs.io/' => 'ipfs',
   'http://libmemcached.org/' => 'libmemcached',
   'http://llvm.org/' => 'llvm',
   'https://github.com/axkibe/lsyncd' => 'lsyncd',
+  'https://nodejs.org/' => '12',
   'http://www.foolabs.com/xpdf/' => 'xpdf',
   'https://code.google.com/p/zopfli/' => 'zopfli',
   'http://www.zsh.org/' => 'zsh'

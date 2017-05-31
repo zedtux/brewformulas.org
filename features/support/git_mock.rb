@@ -25,21 +25,20 @@ module HomebrewFormula
     raise 'No formula to be written' unless self.formulas
 
     self.formulas.each do |formula|
-
       @formula_content = "require 'formula'\n\n"
 
       formula[:others].each do |sub_formula|
-        @formula_content << build_formula_class(sub_formula)
+        build_formula_class(sub_formula)
       end
 
-      @formula_content << build_formula_class(formula)
+      build_formula_class(formula)
       write_formula(formula, formula_basedir)
     end
   end
 
   def self.write_formula(formula, basedir)
     formula_path = File.join(basedir, "#{formula[:name].downcase}.rb")
-    File.open(formula_path, 'w') { |f| f.write(@formula_content) }
+    File.open(formula_path, 'w+') { |f| f.puts(@formula_content) }
   end
 
   def self.clean!
@@ -52,9 +51,14 @@ module HomebrewFormula
   def self.formula_attributes(formula)
     # Class attributes (homepage, version)
     formula.keys.each do |attribute|
-      next if [:name, :others, :code, :depends_on, :conflicts_with
+      next if [:name, :others, :code, :depends_on, :conflicts_with, :url_tag
       ].include?(attribute)
-      @formula_content << "  #{attribute} \"#{formula[attribute.to_sym]}\"\n"
+      if attribute == :url && formula.keys.include?(:url_tag)
+        @formula_content << "  url \"#{formula[attribute.to_sym]}\",\n"
+        @formula_content << "      tag: \"#{formula[:url_tag]}\"\n"
+      else
+        @formula_content << "  #{attribute} \"#{formula[attribute.to_sym]}\"\n"
+      end
     end
   end
 
@@ -69,7 +73,7 @@ module HomebrewFormula
   def self.formula_conflict_with_because(formula)
     because_issue = formula[:conflicts_with][:because_issue]
     @formula_content << ','
-    @formula_content << '\n  ' if formula[:conflicts_with][:on_multiple_lines]
+    @formula_content << "\n  " if formula[:conflicts_with][:on_multiple_lines]
     @formula_content << ' '
     @formula_content << (because_issue ? ':beacuse' : ':because')
     @formula_content << " => '#{formula[:conflicts_with][:because]}'"
@@ -80,7 +84,7 @@ module HomebrewFormula
     conflicts = []
     formulas = [*formula[:conflicts_with][:formulas]]
     formulas.each_with_index do |formula_name, index|
-      conflicts << index.even? ? "\"#{formula_name}\"" : "'#{formula_name}'"
+      conflicts << (index.even? ? "\"#{formula_name}\"" : "'#{formula_name}'")
     end
     @formula_content << "\n  conflicts_with #{conflicts.join(', ')}"
 
@@ -88,7 +92,7 @@ module HomebrewFormula
       formula_conflict_with_because(formula)
     end
 
-    @formula_content << '\n'
+    @formula_content << "\n"
   end
 
   def self.formula_custom_ruby_code(formula)
@@ -96,8 +100,6 @@ module HomebrewFormula
   end
 
   def self.build_formula_class(formula)
-    @formula_content = ''
-
     # Class name and inheritance
     @formula_content << "class #{formula[:name].camelize} < Formula\n"
 
@@ -106,7 +108,7 @@ module HomebrewFormula
     formula_conflicts(formula) if formula[:conflicts_with]
     formula_custom_ruby_code(formula)
 
-    @formula_content << '\nend\n'
+    @formula_content << "\nend\n"
     @formula_content
   end
 end

@@ -3,9 +3,8 @@ module Homebrew
   #
   # @author [guillaumeh]
   #
-  class FormulaDependency < ActiveRecord::Base
+  class FormulaDependency < ApplicationRecord
     # @nodoc ~~~ special behaviours ~~~
-    self.table_name = 'homebrew_formula_dependencies'
 
     # @nodoc ~~~ callbacks ~~~
 

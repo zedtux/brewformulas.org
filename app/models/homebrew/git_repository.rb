@@ -27,23 +27,23 @@ module Homebrew
     end
 
     def self.open_git_repository
-      name = AppConfig.homebrew.git_repository.name
+      name = Rails.configuration.homebrew.git_repository.name
       path = cloned_repository_path
       Rails.logger.info "Reusing Git repository #{name} from #{path}"
       Git.open(path)
     end
 
     def self.clone_git_repository
-      url = AppConfig.homebrew.git_repository.url
-      name = AppConfig.homebrew.git_repository.name
-      path = AppConfig.homebrew.git_repository.location
+      url = Rails.configuration.homebrew.git_repository.url
+      name = Rails.configuration.homebrew.git_repository.name
+      path = Rails.configuration.homebrew.git_repository.location
       Rails.logger.info "Cloning Git repository #{name} from #{url} to #{path}"
       Git.clone(url, name, path: path, depth: 1)
     end
 
     def self.cloned_repository_path
-      File.join(AppConfig.homebrew.git_repository.location,
-                AppConfig.homebrew.git_repository.name)
+      File.join(Rails.configuration.homebrew.git_repository.location,
+                Rails.configuration.homebrew.git_repository.name)
     end
 
     def self.git_repository_cloned?

@@ -10,15 +10,17 @@ module Homebrew
   #
   # @author [guillaumeh]
   #
-  class Formula < ActiveRecord::Base
+  class Formula < ApplicationRecord
     # @nodoc ~~~ virtual attributes ~~~
     cattr_accessor :detected_service
 
     # @nodoc ~~~ special behaviours ~~~
-    self.table_name = 'homebrew_formulas'
+    acts_as_punchable
+    serialize :yearly_hits, Array
 
     # @nodoc ~~~ callbacks ~~~
     before_create :touch
+    before_validation :initialize_yearly_hits_if_needed
     after_update :fetch_description
 
     # @nodoc ~~~ links ~~~
@@ -47,10 +49,6 @@ module Homebrew
     scope :externals, -> { where(external: true) }
     scope :internals, -> { where(external: false) }
     scope :active, -> { where(touched_on: Import.last_succes_date_or_today) }
-    scope :active_or_external, lambda {
-      where('touched_on = ? OR external IS TRUE',
-            Import.last_succes_date_or_today)
-    }
     scope :new_this_week, lambda {
       where("created_at BETWEEN LOCALTIMESTAMP - INTERVAL '7 days' " \
             'AND LOCALTIMESTAMP')
@@ -75,6 +73,10 @@ module Homebrew
     #
     def touch
       self.touched_on = Time.now.utc.to_date
+    end
+
+    def inactive?
+      touched_on < Import.last_succes_date_or_today
     end
 
     #
@@ -145,14 +147,70 @@ module Homebrew
       }
     end # rubocop:enable Metrics/AbcSize
 
+    def tags
+      []
+    end
+
+    #
+    # Build the Homebrew's github URL to the current formula file
+    #
+    def url
+      formula_url = Rails.configuration.homebrew.git_repository.url
+      formula_url = formula_url.gsub(/\.git$/, '/tree/master/Formula/')
+      formula_url << filename
+      formula_url << '.rb'
+    end
+
+    #
+    # Build an array of numbers representing the amount of hits per months per
+    # months for a year time window. Used in order to build the formula visits
+    # graph.
+    #
+    def year_hits
+      year_and_month = I18n.l(Date.today - 0.month, format: '%Y%m')
+      yearly_hits << month_hits_for(year_and_month).first
+    end
+
+    #
+    # Returns the highest amount of hits in the last year.
+    #
+    def heighest_hit
+      year_hits.max
+    end
+
     private
 
     def fetch_description
       # Don't update the description
       # until the homepage is updated
-      return unless self.homepage_changed?
+      return unless self.saved_change_to_attribute?(:homepage)
 
       FormulaDescriptionFetchWorker.perform_async(id)
+    end
+
+    def month_hits_for(year_and_months)
+      months_hits = Punch.unscoped
+                         .group('year_and_month')
+                         .where(punchable: self,
+                                year_and_month: Array(year_and_months))
+                         .count
+      Array(year_and_months).each do |year_and_month|
+        next if months_hits.key?(year_and_month)
+        months_hits[year_and_month] = 0
+      end
+
+      months_hits.values.reverse
+    end
+
+    def initialize_yearly_hits_if_needed
+      return if yearly_hits.is_a?(Array) && yearly_hits.present?
+
+      if yearly_hits.is_a?(String)
+        self.yearly_hits = JSON.parse(yearly_hits)
+        return true
+      end
+
+      self.yearly_hits = [0,0,0,0,0,0,0,0,0,0,0]
     end
   end
 end

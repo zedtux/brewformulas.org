@@ -1,3 +1,0 @@
-sidekiq:
-  user: <%= ENV['SIDEKIQ_USER'] %>
-  password: <%= ENV['SIDEKIQ_PASSWORD'] %>

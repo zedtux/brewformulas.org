@@ -1,15 +1,15 @@
 Given(/^the Github homebrew repository is not clone yet$/) do
   # @todo  Mock the filesystem as it is too slow and files aren't deleted
   # when next test is executed
-  FileUtils.rm_rf(AppConfig.homebrew.git_repository.location)
+  FileUtils.rm_rf(Rails.configuration.homebrew.git_repository.location)
 end
 
 Given(/^the Github homebrew repository has been cloned$/) do
   step 'the Github homebrew repository is not clone yet'
 
   git_working_dir = File.join(
-    AppConfig.homebrew.git_repository.location,
-    AppConfig.homebrew.git_repository.name
+    Rails.configuration.homebrew.git_repository.location,
+    Rails.configuration.homebrew.git_repository.name
   )
 
   Git::Lib.new.run_command(
@@ -41,7 +41,9 @@ Given(/^the Github homebrew repository has a new formula$/) do
   HomebrewFormula.new_formula(name: 'llvm', homepage: 'http://llvm.org/')
 end
 
-Given(/^the Github homebrew repository has the (?:new )?(\w+) formula with homepage "(.*?)"$/) do |name, homepage|
+Given(
+  /^the Github homebrew repository has the (?:new )?(\w+) formula with homepage "(.*?)"$/
+) do |name, homepage|
   HomebrewFormula.new_formula(name: name, homepage: homepage)
 end
 
@@ -53,7 +55,9 @@ Given(/^the Github homebrew repository has an deleted formula$/) do
   Homebrew::Formula.create!(filename: 'arm', name: 'Arm')
 end
 
-Given(/^the Github homebrew repository has a formula having multiple formula classes$/) do
+Given(
+  /^the Github homebrew repository has a formula having multiple formula classes$/
+) do
   HomebrewFormula.new_formula(
     name: 'llvm',
     homepage: 'http://llvm.org/',
@@ -115,6 +119,22 @@ Given(/^the Github homebrew repository has a formula with (dependencies|conflict
   HomebrewFormula.new_formula(attributes)
 end
 
+Given(/^the Github homebrew repository has a formula with a conflict including an @ in the name with a reason$/) do
+  attributes = {
+    name: 'Node',
+    homepage: 'https://nodejs.org/'
+  }
+
+  attributes.merge!(
+    conflicts_with: {
+      formulas: 'node@0.12',
+      because: 'Differing version of same formula',
+    }
+  )
+
+  HomebrewFormula.new_formula(attributes)
+end
+
 Given(/^the Github homebrew repository has a formula with an external dependency$/) do
   HomebrewFormula.new_formula(
     name: 'Cliclick',
@@ -123,10 +143,28 @@ Given(/^the Github homebrew repository has a formula with an external dependency
   )
 end
 
+Given(
+  /^the (.*?) formula file has the version attribute with the value "(.*?)"$/
+) do |name, version|
+  HomebrewFormula.new_formula(name: name, version: version)
+end
+
+Given(
+  /^the (.*?) formula file has the url attribute with the tag key value "(.*?)"$/
+) do |name, version|
+  url = "https://#{name.downcase}.io"
+  HomebrewFormula.new_formula(name: name, url_tag: version, homepage: url,
+                              url: url)
+end
+
+Given(/^the (.*?) formula with the URL (.*?) exists$/) do |name, url|
+  HomebrewFormula.new_formula(name: name, url: url)
+end
+
 When(/^the background task to get or update the formulae is executed$/) do
   HomebrewFormulaImportWorker.new.perform
 end
 
 Then(/^the Github homebrew repository should be cloned$/) do
-  expect(File.exist?(AppConfig.homebrew.git_repository.location)).to be_truthy
+  expect(File.exist?(Rails.configuration.homebrew.git_repository.location)).to be_truthy
 end

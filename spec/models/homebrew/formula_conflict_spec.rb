@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Homebrew::FormulaConflict, type: :model do
   describe 'DB' do
@@ -22,7 +22,11 @@ describe Homebrew::FormulaConflict, type: :model do
     it { should validate_presence_of(:formula_id) }
     it { should validate_presence_of(:conflict_id) }
     it do
-      Homebrew::FormulaConflict.create!(formula_id: 1, conflict_id: 1)
+      formula = Homebrew::Formula.create!(
+        filename: FFaker::Lorem.words.join(' '),
+        name: FFaker::Lorem.word
+      )
+      Homebrew::FormulaConflict.create!(formula: formula, conflict: formula)
       should validate_uniqueness_of(:conflict_id).scoped_to(:formula_id)
     end
   end

@@ -27,8 +27,8 @@ class HomebrewFormulaImportWorker
   # Build the formulas folder path
   def formulas_path
     File.join(
-      AppConfig.homebrew.git_repository.location,
-      AppConfig.homebrew.git_repository.name,
+      Rails.configuration.homebrew.git_repository.location,
+      Rails.configuration.homebrew.git_repository.name,
       'Formula', '*.rb'
     )
   end
@@ -54,6 +54,8 @@ class HomebrewFormulaImportWorker
     @import = Import.create!(success: true)
 
     import_formulas
+
+    DynamicSitemaps.generate_sitemap
   rescue StandardError => error
     @import.message = error.message
     @import.success = false
@@ -61,10 +63,7 @@ class HomebrewFormulaImportWorker
   rescue ActiveRecord::RecordInvalid => error
     Rails.logger.warn "Unable to create a new import : #{error.message}"
   ensure
-    @import.ended_at = Time.now
-    if @import.save
-      DynamicSitemaps.generate_sitemap
-    else
+    unless @import.update(ended_at: Time.now)
       Rails.logger.warn "Unable to update the import with ID #{@import.id} : " \
                         "#{@import.errors.full_message}"
     end

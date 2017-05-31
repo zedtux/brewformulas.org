@@ -1,108 +1,79 @@
-#
-# Formulas controller
-#
-# @author [guillaumeh]
-#
 class FormulasController < ApplicationController
-  before_action :set_page, only: :index
-  before_action :current_objects, only: :index
-  before_action :calculate_percentage, only: :index
-  before_action :new_since_a_week, only: :index
-  before_action :inactive_formulas, only: :index
-  before_action :first_import_end_date, only: :index
-  before_action :current_object, only: [:show, :refresh_description]
-  before_action :respond_with_format, except: [:refresh_description, :search]
+  before_action :current_object, only: [:show, :refresh]
+  before_action :new_formulae_since_a_week, only: :index
 
-  # Allowed formats for this controller
-  respond_to :html, :json
+  def index
+    respond_to do |format|
+      format.html do
+        @trending_formulae = Homebrew::Formula.most_hit(1.month.ago, 8)
+        @inactive_formulas = Homebrew::Formula.internals
+                                              .inactive
+                                              .order(:name)
+                                              .limit(8)
+      end
+      format.json do
+        render json: Homebrew::Formula.internals.active.order(:name)
+      end
+    end
+  end
 
-  PAGE = 1
-  PAGE_SIZE = 25
+  def show
+    @formula.punch(request) unless @formula.inactive?
 
-  def index; end
+    respond_to do |format|
+      format.html
+      format.json { render json: @formula, status: :ok }
+    end
+  end
 
-  def show; end
-
-  def refresh_description
+  def refresh
     FormulaDescriptionFetchWorker.perform_async(@formula.id)
-    flash[:success] = 'Your request has been successfully submitted.'
-    redirect_to action: 'show', id: @formula.name
+    flash[:success] = t('messages.request_successfully_submitted')
+
+    respond_to do |format|
+      format.html do
+        @formula.reload
+
+        render action: :show
+      end
+      format.js
+    end
+  end
+
+  def search_term
+    @search_term ||= params.require(:search).permit(:terms, :names, :filenames,
+                                                    :descriptions)
+  rescue ActionController::ParameterMissing
+    nil
   end
 
   def search
-    search_term = params[:search][:term]
-    @formulas = Homebrew::Formula.active_or_external.where(
-      'filename ILIKE ? OR name ILIKE ? OR description ILIKE ?',
-      "%#{search_term}%",
-      "%#{search_term}%",
-      "%#{search_term}%",
-    ).order(:name)
+    if search_term
+      @search_context = SearchFormulas.call(search_term)
+    end
+
+    render action: :index
   end
 
   private
 
-  def set_page
-    @page = params[:page] || PAGE
-  end
-
   def current_object
-    @formula = Homebrew::Formula.where('lower(name) = ?',
-                                       params[:id].downcase).first!
+    @formula = Homebrew::Formula.find_by!('LOWER(name) = ?',
+                                          params[:id].downcase)
   rescue ActiveRecord::RecordNotFound
     respond_to do |format|
       format.html do
         flash[:error] = 'This formula doesn\'t exists'
         redirect_to root_url
       end
-      format.json { respond_with({}, status: :not_found) }
+      format.json { render json: {}, status: :not_found }
     end
   end
 
-  def current_objects
-    @formulas = Homebrew::Formula.internals.active.order(:name)
-                .page(@page).per(PAGE_SIZE)
-  end
-
-  def calculate_percentage
-    with_a_description_count = Homebrew::Formula.internals
-                               .with_a_description.count
-    total_count = Homebrew::Formula.internals.active.count
-    @coverage = 0
-    unless with_a_description_count.zero? || total_count.zero?
-      @coverage = (with_a_description_count * 100) / total_count
-    end
-  end
-
-  def new_since_a_week
-    @new_since_a_week = Homebrew::Formula.internals.new_this_week.order(:name)
-                        .page(@page).per(PAGE_SIZE)
-  end
-
-  def inactive_formulas
-    @inactive_formulas = Homebrew::Formula.internals.inactive.order(:name)
-                         .page(@page).per(PAGE_SIZE)
-  end
-
-  def first_import_end_date
-    return unless @inactive_formulas.present?
-    @first_import_end_date = Import.first.ended_at.to_date
-  end
-
-  def respond_with_format
-    respond_to do |format|
-      format.html
-      format.json do
-        if action_name == 'show'
-          respond_with(@formula, status: :ok)
-        else
-          response = {
-            formulas: @formulas,
-            new_formulas: @new_since_a_week,
-            inactive_formulas: @inactive_formulas
-          }
-          respond_with(response, status: :ok)
-        end
-      end
-    end
+  def new_formulae_since_a_week
+    @new_formulae_since_a_week = Homebrew::Formula.internals
+                                                  .new_this_week
+                                                  .order(:name)
+                                                  .limit(8)
   end
 end

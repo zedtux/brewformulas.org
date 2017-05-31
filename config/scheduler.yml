@@ -1,3 +1,0 @@
-fetch_homebrew_formulae:
-  cron: "0 1 * * *"
-  class: HomebrewFormulaImportWorker

@@ -1,46 +1,49 @@
-require File.expand_path('../boot', __FILE__)
+require_relative 'boot'
 
-require 'rails/all'
+require "rails"
+# Pick the frameworks you want:
+require "active_model/railtie"
+require "active_job/railtie"
+require "active_record/railtie"
+require "action_controller/railtie"
+# require "action_mailer/railtie"
+require "action_view/railtie"
+require "action_cable/engine"
+require "sprockets/railtie"
+# require "rails/test_unit/railtie"
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
-Bundler.require(:default, Rails.env)
+Bundler.require(*Rails.groups)
 
 module BrewformulasOrg
-  #
-  # Brewformulas application
-  #
-  # @author [guillaumeh]
-  #
   class Application < Rails::Application
-    # don't generate RSpec tests for views and helpers
-    config.generators do |g|
-      g.test_framework :rspec
-      g.view_specs false
-      g.helper_specs false
-    end
+    # Initialize configuration defaults for originally generated Rails version.
+    config.load_defaults 5.1
 
-    # Settings in config/environments/* take precedence over
-    # those specified here.
+    # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
-    # Set Time.zone default to the specified zone and
-    # make Active Record auto-convert to this zone.
-    # Run "rake -D time" for a list of tasks for finding time zone names.
-    # Default is UTC.
-    # config.time_zone = 'Central Time (US & Canada)'
+    # Don't generate system test files.
+    config.generators.system_tests = nil
 
-    # The default locale is :en and
-    # all translations from config/locales/*.rb,yml are auto loaded.
-    # my_locales = Rails.root.join('my', 'locales', '*.{rb,yml}').to_s
-    # config.i18n.load_path += Dir[my_locales]
-    # config.i18n.default_locale = :de
+    config.author = 'HAIN Guillaume <zedtux@zedroot.org>'
+    config.title = 'Search and discover Homebrew formulae'
+    config.description = 'Homebrew (The missing package manager for OS X) ' \
+                         'formula list to search and discover new formulas'
+    config.keywords = 'MAC, Apple, Homebrew, brew, mxcl, Formula, Formulas, ' \
+                      'Formulae, search, description'
 
-    # When running in Docker, the logs are sent to the STDOUT so that you can
-    # use the `docker logs` command to see them all.
-    if ENV['RUNNING_IN_DOCKER'] && Rails.env.production?
-      config.logger = Logger.new(STDOUT)
-    end
+    config.homebrew = OpenStruct.new
+    config.homebrew.git_repository = OpenStruct.new
+    config.homebrew.git_repository.url = 'https://github.com/Homebrew/homebrew-core.git'
+    config.homebrew.git_repository.name = 'homebrew'
+    config.homebrew.git_repository.location = File.join(Rails.root, 'cache')
+
+    config.opbeat.organization_id = ENV['OPBEAT_ORGANIZATION_ID']
+    config.opbeat.app_id = ENV['OPBEAT_APP_ID']
+    config.opbeat.secret_token = ENV['OPBEAT_SECRET_TOKEN']
+    config.opbeat.logger = Rails.logger
   end
 end

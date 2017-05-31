@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Homebrew::FormulaDependency, type: :model do
   describe 'DB' do
@@ -22,7 +22,11 @@ describe Homebrew::FormulaDependency, type: :model do
     it { should validate_presence_of(:formula_id) }
     it { should validate_presence_of(:dependency_id) }
     it do
-      Homebrew::FormulaDependency.create!(formula_id: 1, dependency_id: 1)
+      formula = Homebrew::Formula.create!(
+        filename: FFaker::Lorem.words.join(' '),
+        name: FFaker::Lorem.word
+      )
+      Homebrew::FormulaDependency.create!(formula: formula, dependency: formula)
       should validate_uniqueness_of(:dependency_id).scoped_to(:formula_id)
     end
   end

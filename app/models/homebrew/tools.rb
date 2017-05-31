@@ -21,13 +21,51 @@ module Homebrew
       class_name.flatten.last
     end
 
+    def self.extract_homepage(formula)
+      { homepage: formula.scan(/^\s+homepage\s+(?:'|")(.*)(?:'|")$/).flatten.first }
+    end
+
+    def self.extract_version_from_version(formula)
+      formula.scan(/^\s+version\s+(?:'|")(.*)(?:'|")$/).flatten.first
+    end
+
+    def self.version_regex
+      %r{
+          # Handle the case of versions like 5.0-20161210
+          (?:\d-)?
+          # Catching the version
+          (\d[\d\_\.-]+(?:[a-z]{1}|rc\d+)?)
+          # Manage version with an -src at the end. I.e. 2.0-src
+          (?:-src)?
+          # URL file extention management
+          (?:\.(?:tar\.(?:bz2|gz|xz|lz)|zip|tgz|tar|jar))?
+          # End of the URL
+          $
+        }x
+    end
+
+    def self.extract_version_from_url(formula)
+      url = formula.scan(/^\s+url\s+(?:'|")(.*)(?:'|")$/).flatten.first
+      return unless url
+      url = url.tr('_', '.')
+      url.scan(version_regex).flatten.first
+    end
+
+    def self.extract_version_from_url_tag(formula)
+      formula.scan(/^\s+url\s+(?:"|')[\w\/:\.]+(?:"|').*tag:\s+(?:"|')v?([\w\/:\.]+)(?:"|')$/m).flatten.first
+    end
+
     def self.extract_attributes(formula)
-      attributes_to_extract = %w(homepage version)
-      # Extract the formula attributes shown on brewformulas.org
-      extracted_attributes = formula.scan(
-        /^\s+(#{attributes_to_extract.join("|")})\s+(?:'|")(.*)(?:'|")$/
-      )
-      Hash[*extracted_attributes.flatten]
+      extracted_attributes = {}
+
+      extracted_attributes.merge!(extract_homepage(formula))
+
+      version = extract_version_from_version(formula)
+      version ||= extract_version_from_url(formula)
+      version ||= extract_version_from_url_tag(formula)
+      extracted_attributes.merge!({ version: version })
+
+      extracted_attributes
     end
 
     def self.conflicts_because_check(conflicts)
@@ -62,7 +100,7 @@ module Homebrew
 
       conflicting_formulas = conflicts.strip.split(',').map(&:strip)
       conflicting_formulas.map do |name|
-        find_or_create_formula!(name, name.classify)
+        find_or_create_formula!(name, name.camelize)
       end
     end
 
