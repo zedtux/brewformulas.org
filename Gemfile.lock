@@ -106,7 +106,7 @@ GEM
       cucumber
       timecop
     cucumber-wire (0.0.1)
-    database_cleaner (1.5.3)
+    database_cleaner (1.6.1)
     debug_inspector (0.0.2)
     diff-lcs (1.2.5)
     docile (1.1.5)
