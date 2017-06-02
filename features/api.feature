@@ -9,7 +9,7 @@ Feature: API
     Then I should receive a 200 HTTP code
 
   Scenario: GET request in JSON to a missing formula URL
-    Given on formulas exist
+    Given no formulas exist in homebrew
     When I send a GET request in JSON to the not-existing formula url
     Then I should receive a 404 HTTP error code
 

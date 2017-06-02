@@ -4,67 +4,56 @@ html lang="en"
     meta charset="utf-8"
     meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"
     meta name="viewport" content="width=device-width, initial-scale=1.0"
-    = metamagic site: 'BrewFormulas', title: [:title, :site], separator: ' — '
-    meta name="author" content="#{AppConfig.brewformulas.author}"
+    = metamagic site: 'BrewFormulas', title: [:title, :site], separator: ' — ', description: Rails.configuration.description, author: Rails.configuration.author, keywords: Rails.configuration.keywords
     = csrf_meta_tags
+    = action_cable_meta_tag
+    = stylesheet_link_tag 'application', media: 'all'
+    = favicon_link_tag 'favicon.ico', rel: 'shortcut icon'
+    = javascript_include_tag 'application'
 
-    /! HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries
+    /! Le HTML5 shim, for IE6-8 support of HTML elements
     /[if lt IE 9]
-      = javascript_include_tag 'https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js'
-      = javascript_include_tag 'https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js'
+      = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.2/html5shiv.min.js"
 
-    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
-    = favicon_link_tag 'favicon.ico', rel: 'shortcut icon', type: 'image/x-icon'
-
-  body.container
-    .navbar.navbar-default.navbar-fixed-top role="navigation"
+  body class="#{controller_name} #{action_name}"
+    #navbarHeader.bg-inverse.collapse aria-expanded="false"
       .container
-        .navbar-header
-          button.navbar-toggle data-toggle="collapse" data-target=".navbar-collapse"
-            span.sr-only Toggle navigation
-            span.icon-bar
-            span.icon-bar
-            span.icon-bar
-          a.navbar-brand href="#{root_url}"
-            h1 Homebrew Formulas
-        .navbar-collapse.collapse
-          ul.nav.navbar-nav
-            li
-              a href="http://brew.sh" target="_blank" Homebrew project
-            li class="dropdown"
-              a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                | Brewformulas.org
-                b class="caret"
-              ul class="dropdown-menu"
-                li
-                  a href="#{documentation_index_path}" API
-                li class="divider"
-                li
+        .row
+          .col-sm-8.py-4
+            h4.text-white= t('about').capitalize
+            p.text-muted= t('.about_text')
+          .col-sm-4.py-4
+            h4.text-white= t('some_links').capitalize
+            ul.list-unstyled
+              li
+                = link_to t('links.twitter'), 'https://twitter.com/brewformulas', class: 'text-white', target: '_blank'
+              li.hidden-lg-up
+                = link_to 'Homebrew project', 'https://brew.sh', class: 'text-white', target: '_blank'
+              li
+                = link_to t('.api_documentation'), documentation_index_path, class: 'text-white'
 
-                li
-                  a href="https://github.com/zedtux/brewformulas.org" target="_blank" Github page
-                li class="divider"
-                li
-                  a href="#{imports_path}" Imports
-          = form_for :search, url: search_formulas_path, method: :get, html: {class: 'navbar-form navbar-right'} do |f|
-            = f.label :term, 'Formula'
-            .form-group
-              = f.text_field :term, class: 'form-control search', placeholder: 'Name, filename or description',
-                value: params[:search] && params[:search][:term] || ''
-            = f.submit 'Search', class: 'btn btn-success'
+    .navbar.navbar-toggleable-md.navbar-light
+      .container.d-flex.justify-content-between
+        = link_to 'Homebrew Formulas', root_url, class: 'navbar-brand'
 
-    .container
+        ul.navbar-nav.mr-auto.mt-2.mt-md-0.hidden-md-down
+          li.nav-item.active
+            = link_to 'Homebrew project', 'https://brew.sh', class: 'nav-link', target: '_blank'
 
-      - flash.each do |type, message|
-        div class="alert alert-dismissable #{bootstrap_class_for(type)}"
-          button type="button" class="close" data-dismiss="alert" aria-hidden="true" &times;
-          = message
+        button.navbar-toggler.d-block.collapsed type="button" data-toggle="collapse" data-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation"
+          span.navbar-toggler-icon
 
-      .row
-        = yield
+    // Flash messages
+    - if Rails.env.test?
+      = flash_messages
+    - else
+      .unobtrusive-flash-container
 
-      .footer
-        footer
-          p &copy; Open source from 2013 until #{Time.now.year}
+    = yield
 
-  = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    footer.text-muted.mt-3
+      .container
+        p.float-right
+          = link_to 'Back to top', '#'
+
+        p= t('credit_line')

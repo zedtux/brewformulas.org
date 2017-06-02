@@ -1,0 +1,19 @@
+- formulas.each_with_index do |formula, index|
+  = link_to formula_path(formula.name) do
+    = octicon 'link'
+    '
+    = formula.name
+
+  - case
+  - when formula_count <= 3 && (formulas.count - 1) == index
+    |.
+  - when (formulas.count - (formula_count > 3 ? 1 : 2)) == index
+    '  and
+  - else
+    ',
+
+- if formula_count > 3 && show_other_formulae_link
+  = link_to send("formula_#{formula_type}_path", formula_name), remote: true do
+    = formula_count - 3
+    |  other formulas
+  |.

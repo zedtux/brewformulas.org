@@ -1,13 +1,19 @@
 namespace :brewformulas do
   desc 'Dump Formula homepage into a fixture file'
   task :dump_homepage, [:formula_name] => [:environment] do |_t, args|
-    formula = Homebrew::Formula.find_by!(name: args[:formula_name])
+    formula = Homebrew::Formula.find_by!('LOWER(name) = ?', args[:formula_name])
 
-    fail "Formula #{formula.name} has no homepage!" unless formula.homepage
+    fail "Formula #{formula.name} has no homepage! " unless formula.homepage
 
     fixture_path = Rails.root.join('features', 'fixtures',
                                    'webmock', formula.name.downcase)
-    fail "A fixture file already exists for Formula #{formula.name}!" if File.exist?(fixture_path)
+
+    if File.exist?(fixture_path)
+      fail "A fixture file already exists for Formula #{formula.name}! " \
+           "Remove it manually if you really want to replace it.\n" \
+           'You can do it with rm -rf features/fixtures/webmock/' \
+           "#{formula.name.downcase}/ and then rerun this task."
+    end
 
     puts 'Getting homepage...'
     homepage = Homepage.new(formula.homepage)

@@ -1,28 +1,38 @@
-// This is a manifest file that'll be compiled into application.js, which will include all the files
-// listed below.
+// This is a manifest file that'll be compiled into application.js, which will
+// include all the files listed below.
 //
-// Any JavaScript/Coffee file within this directory, lib/assets/javascripts, vendor/assets/javascripts,
-// or vendor/assets/javascripts of plugins, if any, can be referenced here using a relative path.
+// Any JavaScript/Coffee file within this directory, lib/assets/javascripts, or
+// any plugin's vendor/assets/javascripts directory can be referenced here using
+// a relative path.
 //
-// It's not advisable to add code directly here, but if you do, it'll appear at the bottom of the
-// compiled file.
+// It's not advisable to add code directly here, but if you do, it'll appear at
+// the bottom of the compiled file. JavaScript code in this file should be added
+// after the last require_* statement.
 //
-// Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
-// about supported directives.
+// Read Sprockets README
+// (https://github.com/rails/sprockets#sprockets-directives) for details about
+// supported directives.
 //
 //= require jquery
-//= require jquery_ujs
+//= require rails-ujs
+//= require unobtrusive_flash
+//= require unobtrusive_flash_bootstrap
+//= require tether
+//
+//= require bootstrap-sprockets
+//
+//= require jquery.sparkline
+//
 //= require turbolinks
-//= require bootstrap/alert
-//= require bootstrap/collapse
-//= require bootstrap/dropdown
-//= require bootstrap/tab
-//= require_tree ../../../vendor/assets/javascripts/.
 //= require_tree .
 
-// Fix Twitter bootstrap issue with Dropdowns and turbolinks
-$(document).on('page:load', function() {
-  $("[data-toggle='dropdown']").each(function(element) {
-    $(this).dropdown();
-  });
+/*
+ * require_tree ../../../vendor/assets/javascripts/.
+ */
+
+// Temporary fix for the unobtrusive_flash gem
+$(document).on('DOMNodeInserted', function(e) {
+  $('.unobtrusive-flash-container .alert.fade').addClass('show');
 });
+
+UnobtrusiveFlash.flashOptions['timeout'] = 2000; // milliseconds

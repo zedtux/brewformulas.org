@@ -1,4 +1,4 @@
-require 'spec_helper'
+require 'rails_helper'
 
 describe Homebrew::Formula, type: :model do
   describe 'DB' do

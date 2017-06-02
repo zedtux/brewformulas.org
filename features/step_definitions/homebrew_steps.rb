@@ -1,7 +1,7 @@
 def check_formula_names
   # Ensure Homebrew::Formula#name never contains double or simple quotes
   Homebrew::Formula.all.map(&:name).each do |name|
-    name.should_not =~ /[\"|\']/
+    expect(name).to_not match(/[\"|\']/)
   end
 end
 
@@ -188,28 +188,28 @@ Then(/^there should be some formulas in the database$/) do
 end
 
 Then(/^new formulas should be available in the database$/) do
-  Homebrew::Formula.count.should be > 1
+  expect(Homebrew::Formula.count).to be > 1
   check_formula_names
 end
 
 Then(/^some formulas should be linked as dependencies$/) do
-  Homebrew::FormulaDependency.count.should_not be_zero
+  expect(Homebrew::FormulaDependency.count).to_not be_zero
   check_formula_names
 end
 
 Then(/^a formula should be flagged as external dependency$/) do
-  Homebrew::Formula.externals.count.should_not be_zero
+  expect(Homebrew::Formula.externals.count).to_not be_zero
   check_formula_names
 end
 
 Then(/^some formulas should be linked as conflicts$/) do
-  Homebrew::FormulaConflict.count.should_not be_zero
+  expect(Homebrew::FormulaConflict.count).to_not be_zero
   check_formula_names
 end
 
 Then(/^formulas should not been updated$/) do
   Homebrew::Formula.select(:created_at, :updated_at).all? do |formula|
-    formula.created_at.to_i.should == formula.updated_at.to_i
+    expect(formula.created_at.to_i).to eql(formula.updated_at.to_i)
   end
 end
 
@@ -217,24 +217,34 @@ Then(/^no new formula should be in the database$/) do
   expect(Homebrew::Formula.count).to eq(@homebrew_formula_count)
 end
 
-Then(/^a new formula should be available in the database$/) do
+Then(/^(a|\d+) new formula should be available in the database$/) do |count|
   formula = Homebrew::Formula.select(:created_at, :updated_at).last
   # Comparing date time isn't working
-  formula.created_at.to_i.should eq(formula.updated_at.to_i)
-  expect(Homebrew::Formula.count).to eq(@homebrew_formula_count.to_i + 1)
+  expect(formula.created_at.to_i).to eq(formula.updated_at.to_i)
+  expect(Homebrew::Formula.count).to eq(count == 'a' ? 1 : count.to_i)
   check_formula_names
 end
 
+Then(/^the conflicting formula name should be imported correctly$/) do
+  expect(Homebrew::Formula.last.name).to eql('Node@0.12')
+end
+
 Then(/^a formula should be updated$/) do
-  Homebrew::Formula.select(:created_at, :updated_at).to_a.find do |formula|
+  formulas = Homebrew::Formula.select(:created_at, :updated_at)
+                              .to_a.find do |formula|
     formula.created_at != formula.updated_at
-  end.should be_present, 'Expected to have a formula with a different date ' \
-                         "of update than creation but didn't"
+  end
+
+  expect(formulas)
+    .to be_present, 'Expected to have a formula with a different date ' \
+                    "of update than creation but didn't"
   check_formula_names
 end
 
 Then(/^a formula should be flagged as deleted in the database$/) do
-  Homebrew::Formula.where('touched_on < ?', Time.zone.now).count.should eq(1)
+  expect(Homebrew::Formula.where('touched_on < ?', Time.zone.now).count)
+    .to eq(1)
+
   check_formula_names
 end
 
@@ -255,16 +265,16 @@ Then(/^I should see the (.*?) formula description automatically extracted from t
 
   xpath = "//blockquote/p[normalize-space(.)='#{formula.description}']"
   description_source = "#{name} homepage"
-  xpath << '/../small[normalize-space(.)="'
-  xpath << "Extracted automatically from #{description_source}"
-  xpath << '"]/cite[@title="'
+  xpath << "/../footer[contains(., '"
+  xpath << 'Extracted automatically from '
+  xpath << "')]/cite[@title=\""
   xpath << formula.homepage
   xpath << '" and normalize-space(.)="'
   xpath << description_source
   xpath << '"]'
 
   visit formula_path(name)
-  page.should have_xpath(xpath)
+  expect(page).to have_xpath(xpath)
 end
 
 Then(/^I should see the following formula details:$/) do |details|
@@ -272,16 +282,16 @@ Then(/^I should see the following formula details:$/) do |details|
     xpath = "//dl[@class='dl-horizontal']/"
     xpath << "dt[normalize-space(.)='#{attribute}']/../"
     xpath << "dd[normalize-space(.)='#{value}']"
-    page.should have_xpath(xpath)
+    expect(page).to have_xpath(xpath)
   end
 end
 
 Then(/^I should see the installation instruction "(.*?)"$/) do |instruction|
-  page.should have_xpath("//pre[normalize-space(.)='#{instruction}']")
+  expect(page).to have_xpath("//pre[normalize-space(.)='#{instruction}']")
 end
 
 Then(/^I not should see the installation instruction$/) do
-  page.should_not have_xpath('//pre')
+  expect(page).to_not have_xpath('//pre')
 end
 
 Then(/^I should see some formulas$/) do
@@ -289,15 +299,18 @@ Then(/^I should see some formulas$/) do
   expect(page).to_not have_content("#{count}All")
 end
 
-Then(/^I should see (no|\d+) (new|inactive) formulas?$/) do |formula_count, status|
+Then(
+  /^I should( not)? see( \d+)? (news?|inactives?) formulas?$/
+) do |negation, formula_count, status|
   formula_count = 0 if formula_count == 'no'
-  text = status == 'new' ? 'New since a week' : 'Inactive'
-  # TODO : Check why with Cucumber the badges doesn't appreat anymore
-  # Should be a CSS issue as the screenshot do not show them but the html
-  # screenshot (without CSS) does.
-  # expect(page).to have_content("#{formula_count}#{text}")
-  if status == 'new'
-    expect(page).to have_css('span.label', text: 'New', count: formula_count)
+
+  status << 's' unless status.ends_with?('s')
+
+  if negation
+    expect(page).to_not have_css('.formulae-back h2', text: status.capitalize)
+  else
+    expect(page).to have_css('.formulae-back h2', text: status.capitalize)
+    expect(page).to have_css("##{status} .card", count: formula_count)
   end
 end
 
@@ -306,7 +319,7 @@ Then(/^I should see one formula$/) do
 end
 
 Then(/^I should not see the (.*?) formula$/) do |name|
-  page.should_not have_xpath("//h4[@class='list-group-item-heading' and normalize-space(.)='#{name}']")
+  expect(page).to_not have_xpath("//h4[@class='list-group-item-heading' and normalize-space(.)='#{name}']")
 end
 
 Then(/^I should see no dependencies$/) do
@@ -317,15 +330,21 @@ Then(/^I should see no conflicts$/) do
   expect(page).to_not have_content('This formula is in conflict with')
 end
 
-Then(/^I should see (.*?) as(?: a)? dependency$/) do |dependencies|
+Then(/^I should see (.*?) as(?: a)? dependenc(?:y|ies)$/) do |dependencies|
   all_dependencies = if dependencies.include?(',')
                        dependencies.split(',')
                      else
                        [dependencies]
                      end
+  dependency = all_dependencies.detect { |dependency| dependency.include?(' and ') }
+  if dependency
+    all_dependencies.delete(dependency)
+    all_dependencies |= dependency.split(' and ')
+  end
+  all_dependencies.map!(&:strip)
 
   # Check h4 title
-  expect(page).to have_content("Dependencies#{all_dependencies.size}")
+  expect(page).to have_content("Dependencies #{all_dependencies.size}")
 
   pluralized = (all_dependencies.size > 1 ? "#{all_dependencies.size} dependencies" : 'dependency')
   expect(page).to have_content("The following #{pluralized} will be installed if you install")
@@ -333,7 +352,7 @@ Then(/^I should see (.*?) as(?: a)? dependency$/) do |dependencies|
   all_dependencies.each do |dependence_name|
     dependence_name.strip!
     dependence_name.gsub!(/and /, '')
-    page.should have_xpath("//ul[@id='formula_dependencies']/li[normalize-space(.)='#{dependence_name}']")
+    expect(page).to have_xpath("//span[@id='formula-dependents']/a[normalize-space(.)='#{dependence_name}']")
   end
 end
 
@@ -351,7 +370,7 @@ Then(/^I should see a conflict with (.*?)$/) do |conflicts|
                   end
 
   # Check h4 title
-  expect(page).to have_content("Conflicts#{all_conflicts.size}")
+  expect(page).to have_content("Conflicts #{all_conflicts.size}")
 
   all_conflicts.each do |conflict_name|
     conflict_name.strip!

@@ -27,7 +27,7 @@ Feature: Formula dependencies
       | Snort   | http://www.snort.org              |
     And the formulas Daq, Libdnet, and Pcre are dependencies of Snort
     When I go to the formula Snort on brewformulas.org
-    Then I should see Daq, Libdnet, and Pcre as a dependency
+    Then I should see Daq, Libdnet and Pcre as dependencies
 
   Scenario: Look at a formula which is a dependency for another formula
     Given following Homebrew formulas exist:
@@ -58,7 +58,7 @@ Feature: Formula dependencies
       | Snort   | http://www.snort.org              |
     And the formulas Daq, Libdnet, and Pcre are dependents of Snort
     When I go to the formula Snort on brewformulas.org
-    Then I should see Daq, Libdnet, and Pcre as dependents
+    Then I should see Daq, Libdnet and Pcre as dependents
 
   Scenario: Look at a formula which is a dependency for 4 formulas
     Given following Homebrew formulas exist:
@@ -70,7 +70,7 @@ Feature: Formula dependencies
       | Snort      | http://www.snort.org              |
     And the formulas Daq, Libdnet, Pcre, and Pkg-config are dependents of Snort
     When I go to the formula Snort on brewformulas.org
-    Then I should see Daq, Libdnet, Pcre, and 1 other formulas as dependents
+    Then I should see Daq, Libdnet, Pcre and 1 other formulas as dependents
 
   Scenario: Look at a dependency which is not provided by Homebrew
     Given the Cliclick formula with homepage "http://www.bluem.net/jump/cliclick/" exists

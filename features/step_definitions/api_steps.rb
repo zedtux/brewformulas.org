@@ -6,7 +6,7 @@ Given(
   /^I send a GET request in JSON to the (.*?) formula url$/
 ) do |formula_name|
   formula_name = 'this-formula-doesnt-exist' if formula_name == 'not-existing'
-  get "/#{formula_name}.json", formula: 'json'
+  get "/#{formula_name}.json", format: 'json'
 end
 
 Then(/^I should receive a 404 HTTP error code$/) do

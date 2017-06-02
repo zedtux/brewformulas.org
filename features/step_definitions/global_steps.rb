@@ -25,6 +25,11 @@ When(/^I scroll to the bottom of the page$/) do
   page.execute_script 'window.scrollBy(0,10000)'
 end
 
+When(/^I uncheck "(.*?)"$/) do |label|
+  label_element = find(:css, "label", text: label)
+  find(:css, "##{label_element[:for]}").set(false)
+end
+
 Then(/^show me the page$/) do
   screenshot_and_save_page
 end
@@ -53,7 +58,7 @@ Then(
   xpath = ["//div[contains(@class, 'alert') and"]
   xpath << "contains(@class, '#{type}') and"
   xpath << "contains(normalize-space(.),\"#{message}\")]"
-  page.should have_xpath(xpath.join(' '))
+  expect(page).to have_xpath(xpath.join(' '))
 end
 
 Then(/^the page title should be "(.*?)"$/) do |title|

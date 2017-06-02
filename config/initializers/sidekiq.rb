@@ -1,17 +1,20 @@
+redis_conf = Rails.application.config_for(:redis)
+
 redis_url = 'redis://'
-if AppConfig.redis['password'].present?
-  redis_url << ":#{AppConfig.redis['password']}@"
+if redis_conf['password'].present?
+  redis_url << ":#{redis_conf['password']}@"
 end
-redis_url << "#{AppConfig.redis.server}:#{AppConfig.redis.port}/"
-redis_url << "#{AppConfig.redis.db_num}"
+redis_url << "#{redis_conf['host']}:#{redis_conf['port']}/"
+redis_url << "#{redis_conf['db']}"
 
 message = 'Sidekiq using Redis setting '
 message << redis_url
-if AppConfig.redis.try(:namespace)
+if redis_conf['namespace']
   message << ' with namespace "'
-  message << AppConfig.redis.namespace
+  message << redis_conf['namespace']
   message << '"'
 end
+puts message
 Rails.logger.info message
 
 # We need here the rescue nil has the AppConfig gem
@@ -33,7 +36,7 @@ if sidekiq_conf
 end
 
 Sidekiq.configure_server do |config|
-  config.redis = { url: redis_url, namespace: AppConfig.redis.try(:namespace) }
+  config.redis = { url: redis_url, namespace: redis_conf['namespace'] }
   config.on(:startup) do
     scheduler_file_path = File.expand_path('../../../config/scheduler.yml',
                                            __FILE__)
@@ -42,5 +45,5 @@ Sidekiq.configure_server do |config|
   end
 end
 Sidekiq.configure_client do |config|
-  config.redis = { url: redis_url, namespace: AppConfig.redis.try(:namespace) }
+  config.redis = { url: redis_url, namespace: redis_conf['namespace'] }
 end

@@ -1,1 +1,0 @@
---use-cache --no-private --protected --tag nodoc:"Not for documentation" --hide-tag nodoc app/models/*.rb app/models/**/*.rb lib/**/*.rb config/initializers/*.rb

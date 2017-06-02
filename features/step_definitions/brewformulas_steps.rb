@@ -11,12 +11,18 @@ When(/^I go to the imports on brewformulas.org$/) do
 end
 
 When(/^I search a formula with "(.*)"$/) do |name_or_keyword|
-  fill_in 'Formula', with: name_or_keyword
-  click_on 'Search'
+  fill_in 'search_terms', with: name_or_keyword
+  click_on 'formula_search'
+  @searched_for_terms = name_or_keyword
 end
 
 Then(/^I should not see any formula$/) do
-  expect(page).to have_content 'No formula found.'
+  nothing_found_message = I18n.t('messages.sorry_nothing_found',
+                                 terms: @searched_for_terms)
+  # Removes HTML tags
+  nothing_found_message = ActionView::Base.full_sanitizer
+                                          .sanitize(nothing_found_message)
+  expect(page).to have_content(nothing_found_message)
 end
 
 Then(/^I should see the (.*) Homebrew formulas?$/) do |formulas|
@@ -24,11 +30,10 @@ Then(/^I should see the (.*) Homebrew formulas?$/) do |formulas|
   formulas.gsub!(/,/, ' ')
   formulas.gsub!(/  /, ' ')
 
-  base_xpath = '//div[@class="list-group"]/a[@class="list-group-item"]'
-  base_xpath << '/h3[@class="list-group-item-heading" '
-  base_xpath << 'and contains(normalize-space(.), "'
+  base_xpath = '//div[@id="results"]//div[contains(@class, "card")]' \
+               '//a[normalize-space(.)="'
 
   formulas.split.each do |formula|
-    expect(page).to have_xpath(base_xpath.dup << formula << '")]')
+    expect(page).to have_xpath(base_xpath.dup << formula << '"]')
   end
 end

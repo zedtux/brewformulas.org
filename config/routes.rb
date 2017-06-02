@@ -1,10 +1,8 @@
 require 'sidekiq/web'
 require 'sidekiq-scheduler/web'
 
-BrewformulasOrg::Application.routes.draw do
+Rails.application.routes.draw do
   mount Sidekiq::Web => '/sidekiq'
-
-  resources :imports, only: :index
 
   resources :documentation, only: :index
 
@@ -13,12 +11,20 @@ BrewformulasOrg::Application.routes.draw do
 
   resources :formulas, only: [:index, :show], path: '' do
     member do
-      get 'refresh_description'
+      post :refresh
     end
+
     collection do
-      get 'search'
+      get :search
     end
+
+    resources :dependents, only: [:index]
   end
 
-  root 'formulas#index'
+  namespace :formulas do
+    resources :news, only: :index
+    resources :trendings, only: :index
+  end
+
+  root to: 'formulas#index'
 end

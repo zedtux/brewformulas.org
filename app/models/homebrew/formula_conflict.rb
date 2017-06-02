@@ -3,9 +3,8 @@ module Homebrew
   #
   # @author [guillaumeh]
   #
-  class FormulaConflict < ActiveRecord::Base
+  class FormulaConflict < ApplicationRecord
     # @nodoc ~~~ special behaviours ~~~
-    self.table_name = 'homebrew_formula_conflicts'
 
     # @nodoc ~~~ callbacks ~~~
 
