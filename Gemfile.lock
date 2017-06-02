@@ -177,7 +177,7 @@ GEM
       railties
     pres (1.4.1)
     public_suffix (2.0.5)
-    puma (3.8.2)
+    puma (3.9.0)
     rack (2.0.2)
     rack-protection (2.0.0)
       rack
@@ -337,7 +337,7 @@ DEPENDENCIES
   pg (~> 0.18)
   pluralize_no_count_if_one (~> 0.0.1)
   pres (~> 1.4.1)
-  puma (~> 3.7)
+  puma (~> 3.9)
   punching_bag (~> 0.5.0)!
   rails (~> 5.1.0)
   redcarpet (~> 3.4.0)

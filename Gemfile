@@ -20,7 +20,7 @@ gem 'sparkline', '~> 0.1.0' # jQuery Sparklines for Rails
 # Backend gems
 gem 'rails', '~> 5.1.0'
 gem 'pg', '~> 0.18' # Use postgresql as the database for Active Record
-gem 'puma', '~> 3.7' # Use Puma as the app server
+gem 'puma', '~> 3.9' # Use Puma as the app server
 gem 'interactor', '~> 3.1.0' # Interactor provides a common interface for performing complex user interactions
 gem 'sidekiq', '~> 5.0.0' # Simple, efficient background processing for Ruby.
 gem 'sidekiq-scheduler', '~> 2.1.4' # Light weight job scheduling extension for Sidekiq that adds support for queueinga jobs in a recurring way.
