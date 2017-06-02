@@ -66,7 +66,7 @@ group :test, :cucumber do
   gem 'email_spec'
   gem 'launchy'
   gem 'shoulda-matchers'
-  gem 'cucumber-timecop', '0.0.3', require: false
+  gem 'cucumber-timecop', '0.0.6', require: false
   gem 'rake'
   gem 'webmock'
   gem 'coveralls', require: false
