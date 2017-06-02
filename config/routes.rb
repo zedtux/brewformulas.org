@@ -19,6 +19,7 @@ Rails.application.routes.draw do
     end
 
     resources :dependents, only: [:index]
+    resource :dependencies, only: [:index]
   end
 
   namespace :formulas do
