@@ -1,0 +1,1 @@
+$('span#formula-dependencies').html('<%= j render(partial: "shared/formula_list", locals: { formulas: @formula.dependencies.order(:name), formula_count: @formula.dependencies.count, formula_name: @formula.name, show_other_formulae_link: false, formula_type: "dependencies" }) %>');

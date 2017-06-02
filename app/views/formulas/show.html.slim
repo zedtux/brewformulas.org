@@ -65,7 +65,7 @@
         p= t('.no_dependencies')
       - else
         p= t('.the_following_dependencies_will_be_installed', dependency: pluralize(@formula.dependencies.size, t('dependency'), nil, no_count_if_one: true), name: @formula.name)
-        span#formula-dependents
+        span#formula-dependencies
           = render partial: 'shared/formula_list', locals: { formulas: @formula.dependencies.order(:name).first(3), formula_count: @formula.dependencies.count, formula_name: @formula.name, show_other_formulae_link: true, formula_type: 'dependencies' }
 
   - if @formula.dependents.present?
