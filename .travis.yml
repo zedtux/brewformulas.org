@@ -17,6 +17,7 @@ script:
 after_success:
   - "docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS"
   - export DOCKER_TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+  - export DOCKER_TAG=`echo $DOCKER_TAG | sed -e 's/\//-/g'`
   - echo "Tagging the docker image with $DOCKER_TAG ..."
   - "docker tag zedtux/brewformulas.org:latest zedtux/brewformulas.org:$DOCKER_TAG"
   - docker images
