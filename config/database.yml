@@ -84,8 +84,7 @@ test: &test
 production:
   <<: *default
   database: brewformulas_org_prod
-  username: brewformulas
-  password: <%= ENV['BREWF_DATABASE_PASSWORD'] %>
+  username: <%= ENV['POSTGRESQL_USER'] %>
 
 cucumber:
   <<: *test
