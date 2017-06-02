@@ -85,6 +85,7 @@ production:
   <<: *default
   database: brewformulas_org_prod
   username: <%= ENV['POSTGRESQL_USER'] %>
+  pool: 15
 
 cucumber:
   <<: *test
