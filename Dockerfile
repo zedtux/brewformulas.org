@@ -44,6 +44,8 @@ ENV BUNDLE_GEMFILE=$APP_HOME/Gemfile \
 
 RUN bundle install --without production
 
+RUN bundle exec rake assets:precompile RAILS_ENV=production
+
 # ~~~~ Import application ~~~~
 COPY . $APP_HOME
 
