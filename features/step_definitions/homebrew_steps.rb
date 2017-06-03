@@ -352,7 +352,7 @@ Then(/^I should see (.*?) as(?: a)? dependenc(?:y|ies)$/) do |dependencies|
   all_dependencies.each do |dependence_name|
     dependence_name.strip!
     dependence_name.gsub!(/and /, '')
-    expect(page).to have_xpath("//span[@id='formula-dependents']/a[normalize-space(.)='#{dependence_name}']")
+    expect(page).to have_xpath("//span[@id='formula-dependencies']/a[normalize-space(.)='#{dependence_name}']")
   end
 end
 

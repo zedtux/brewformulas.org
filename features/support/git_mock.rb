@@ -132,10 +132,8 @@ module Git
 
     def run_action(action)
       case action
-      when 'clone'
+      when 'clone', 'pull'
         make_paths
-        HomebrewFormula.write_formulae_to(working_dir)
-      when 'pull'
         HomebrewFormula.write_formulae_to(working_dir)
       else
         fail "Not implemented Git action #{action}!"

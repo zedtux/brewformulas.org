@@ -76,6 +76,8 @@ module Homebrew
     end
 
     def inactive?
+      return false unless Import.last_succes_date_or_today
+
       touched_on < Import.last_succes_date_or_today
     end
 
