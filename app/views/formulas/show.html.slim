@@ -39,11 +39,12 @@
           a href="#{@formula.homepage}" target="_blank"= @formula.homepage
         dt= t('version').capitalize
         dd= @formula.version || t('unavailable').capitalize
-        dt= t('source_file').capitalize
-        dd
-          = octicon 'mark-github'
-          '
-          = link_to t('source_file'), @formula.url, target: '_blank'
+        - unless @formula.inactive?
+          dt= t('source_file').capitalize
+          dd
+            = octicon 'mark-github'
+            '
+            = link_to t('source_file'), @formula.url, target: '_blank'
         dt= t('hits')
         dd= @formula.hits
 
