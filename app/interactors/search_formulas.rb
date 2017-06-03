@@ -6,6 +6,7 @@ class SearchFormulas
 
   def call
     sanity_checks!
+    enables_all_search_options_if_all_search_options_disabled!
 
     search_query = search_formula_from_terms
 
@@ -19,6 +20,15 @@ class SearchFormulas
     return true if context.terms
 
     context.fail!(errors: { terms: 'is missing' })
+  end
+
+  def enables_all_search_options_if_all_search_options_disabled!
+    return if context.names == '1' || context.filenames == '1' ||
+              context.descriptions == '1'
+
+    context.names = '1'
+    context.filenames = '1'
+    context.descriptions = '1'
   end
 
   def build_sql_query

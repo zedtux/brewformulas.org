@@ -68,18 +68,24 @@ section.jumbotron.text-center
         = render partial: 'formula', collection: @inactive_formulas
 
   - if action_name == 'search'
-    - if @search_context.result_count.zero?
-      p.h4.text-center== t('messages.sorry_nothing_found', terms: @search_term[:terms])
+    - if @search_context.failure?
+      p.h4.text-center= t('messages.search_error')
+      '
+      .text-center.text-danger
+        = @search_context.errors.full_messages
     - else
-      .container.mb-5
-        .row
-          .col-12
-            h2.float-left
-              = t('.results')
-              '
-              span class="badge badge-default badge-pill" title="#{t('.search_result_count')}"= @search_context.result_count
-        .row
-          .col-12
-            hr
-        .row#results
-          = render partial: 'formula', collection: @search_context.results
+      - if @search_context.result_count.zero?
+        p.h4.text-center== t('messages.sorry_nothing_found', terms: @search_term[:terms])
+      - else
+        .container.mb-5
+          .row
+            .col-12
+              h2.float-left
+                = t('.results')
+                '
+                span class="badge badge-default badge-pill" title="#{t('.search_result_count')}"= @search_context.result_count
+          .row
+            .col-12
+              hr
+          .row#results
+            = render partial: 'formula', collection: @search_context.results

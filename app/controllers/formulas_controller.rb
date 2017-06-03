@@ -50,6 +50,9 @@ class FormulasController < ApplicationController
   def search
     if search_term
       @search_context = SearchFormulas.call(search_term)
+      params[:search][:names] = @search_context.names
+      params[:search][:filenames] = @search_context.filenames
+      params[:search][:descriptions] = @search_context.descriptions
     end
 
     render action: :index

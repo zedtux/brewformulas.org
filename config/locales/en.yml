@@ -82,4 +82,5 @@ en:
     no_formula_yet: "No formula yet"
     no_new_formula_yet: "No new formula in the last 7 days."
     request_successfully_submitted: "Your request has been successfully submitted."
+    search_error: "Oh, sorry but an error occurs with your search."
     sorry_nothing_found: "Oh, sorry, nothing found for <strong>\"%{terms}\"</strong>."
