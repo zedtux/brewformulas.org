@@ -10,3 +10,6 @@ development:
 test:
   <<: *default
   db: 1
+
+production:
+  <<: *default
