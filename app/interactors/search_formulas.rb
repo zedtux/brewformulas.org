@@ -5,6 +5,8 @@ class SearchFormulas
   include InteractorTimer
 
   def call
+    copy_term_in_terms_if_needed!
+
     sanity_checks!
     enables_all_search_options_if_all_search_options_disabled!
 
@@ -29,6 +31,13 @@ class SearchFormulas
     context.names = '1'
     context.filenames = '1'
     context.descriptions = '1'
+  end
+
+  def copy_term_in_terms_if_needed!
+    return if context.terms
+    return unless context.term
+
+    context.terms = context.term
   end
 
   def build_sql_query

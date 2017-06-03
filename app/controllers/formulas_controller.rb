@@ -42,7 +42,7 @@ class FormulasController < ApplicationController
 
   def search_term
     @search_term ||= params.require(:search).permit(:terms, :names, :filenames,
-                                                    :descriptions)
+                                                    :descriptions, :term)
   rescue ActionController::ParameterMissing
     nil
   end
@@ -50,9 +50,7 @@ class FormulasController < ApplicationController
   def search
     if search_term
       @search_context = SearchFormulas.call(search_term)
-      params[:search][:names] = @search_context.names
-      params[:search][:filenames] = @search_context.filenames
-      params[:search][:descriptions] = @search_context.descriptions
+      updates_params_from_search_context!
     end
 
     render action: :index
@@ -78,5 +76,13 @@ class FormulasController < ApplicationController
                                                   .new_this_week
                                                   .order(:name)
                                                   .limit(8)
+  end
+
+  def updates_params_from_search_context!
+    params[:search][:terms] = @search_context.terms
+    @search_term[:terms] = @search_context.terms
+    params[:search][:names] = @search_context.names
+    params[:search][:filenames] = @search_context.filenames
+    params[:search][:descriptions] = @search_context.descriptions
   end
 end
