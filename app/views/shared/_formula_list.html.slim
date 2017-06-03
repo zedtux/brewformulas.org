@@ -13,7 +13,7 @@
     ',
 
 - if formula_count > 3 && show_other_formulae_link
-  = link_to send("formula_#{formula_type}_path", formula_name), remote: true do
+  = link_to send("formula_#{formula_type}_path", formula_name), remote: true, rel: 'nofollow' do
     = formula_count - 3
     |  other formulas
   |.
