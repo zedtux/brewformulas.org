@@ -21,18 +21,18 @@ Rails.logger.info message
 # doesn't support respond_to?
 begin
   fail if Rails.env.development?
-  sidekiq_conf = AppConfig.sidekiq
+
+  fail unless ENV['SIDEKIQ_USER'] && ENV['SIDEKIQ_PASSWORD']
   Rails.logger.info 'Sidekiq with authentication'
-rescue
-  Rails.logger.info 'Sidekiq without authentication'
-end
-if sidekiq_conf
+
   require 'sidekiq'
   require 'sidekiq/web'
 
   Sidekiq::Web.use(Rack::Auth::Basic) do |user, password|
-    [user, password] == [AppConfig.sidekiq.user, AppConfig.sidekiq.password]
+    [user, password] == [ENV['SIDEKIQ_USER'], ENV['SIDEKIQ_PASSWORD']]
   end
+rescue
+  Rails.logger.info 'Sidekiq without authentication'
 end
 
 Sidekiq.configure_server do |config|
