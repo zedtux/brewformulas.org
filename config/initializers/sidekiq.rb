@@ -37,12 +37,6 @@ end
 
 Sidekiq.configure_server do |config|
   config.redis = { url: redis_url, namespace: redis_conf['namespace'] }
-  config.on(:startup) do
-    scheduler_file_path = File.expand_path('../../../config/scheduler.yml',
-                                           __FILE__)
-    Sidekiq.schedule = YAML.load_file(scheduler_file_path)
-    Sidekiq::Scheduler.reload_schedule!
-  end
 end
 Sidekiq.configure_client do |config|
   config.redis = { url: redis_url, namespace: redis_conf['namespace'] }
