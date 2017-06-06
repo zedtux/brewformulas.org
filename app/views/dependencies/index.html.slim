@@ -1,0 +1,28 @@
+.container.mt-5
+  .row.mt-2
+    .col
+      h1
+        = @formula.name
+        - unless @formula.external?
+          small.ml-3= @formula.filename
+        '
+        span.badge class="badge-#{@formula.inactive? ? 'danger' : 'success'}"= @formula.inactive? ? t('inactive') : t('active')
+        - unless @formula.external?
+          = link_to 'Tweet', 'https://twitter.com/share', class: 'twitter-share-button float-right', data: { text: "I have installed #{@formula.name} with homebrew", via: 'brewformulas', related: "machomebrew" }
+
+      - if @formula.external?
+        p.text-info= t('formulas.show.external_formula_description')
+
+      hr
+
+  .row.mt-2
+    .col
+      h4
+        = t('dependency').pluralize.capitalize
+        '
+        span class="badge badge-default badge-pill" title="#{t('formulas.show.dependency_count')}"= @formula.dependencies.size
+      p.dependencies
+        = t('formulas.show.the_following_dependencies_will_be_installed', dependency: pluralize(@formula.dependencies.size, t('dependency'), nil, no_count_if_one: true), name: @formula.name)
+        br
+        span#formula-dependencies
+          = render partial: 'shared/formula_list', locals: { formulas: @formula.dependencies.order(:name).first(3), formula_count: @formula.dependencies.count, formula_name: @formula.name, show_other_formulae_link: true, formula_type: 'dependencies' }

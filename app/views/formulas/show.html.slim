@@ -77,7 +77,7 @@
           '
           span class="badge badge-default badge-pill" title="Dependents count"= @formula.dependents.size
         p.dependents
-          | This formula is required by
+          = t('formulas.show.this_formula_is_required_by')
           '
           span#formula-dependents
             = render partial: 'shared/formula_list', locals: { formulas: @formula.dependents.order(:name).first(3), formula_count: @formula.dependents.count, formula_name: @formula.name, show_other_formulae_link: true, formula_type: 'dependents' }

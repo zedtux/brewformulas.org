@@ -5,6 +5,11 @@ class DependenciesController < ApplicationController
 
   def index
     @presented_formula = present(@formula)
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   private

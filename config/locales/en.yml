@@ -71,6 +71,7 @@ en:
       report_issue_title: "Opens a new tab on the Hombrew github repoistory, in a new issue."
       the_following_dependencies_will_be_installed: "The following %{dependency} will be installed if you install %{name}:"
       this_formula_is_in_conflict_with_the_following: "This formula is in confict with the following :"
+      this_formula_is_required_by: 'This formula is required by'
       you_can_request_update_with_link: "You can request to update it by <a href=\"%{link}\" data-no-turbolink=\"true\" data-remote=\"true\" rel=\"nofollow\" data-method=\"post\" data-toggle=\"tooltip\" title=\"BrewFormulas will retry to grab the formula description from the homepage.\">clicking this link</a>."
   layouts:
     application:
