@@ -7,12 +7,12 @@ services:
     image: redis:3.2.8
 
   bundle:
-    image: brewformulasorg_web
+    image: zedtux/brewformulas.org
     command: echo Bundler data container
     volumes:
       - /bundle
   workers:
-    image: brewformulasorg_web
+    image: zedtux/brewformulas.org
     command: bundle exec sidekiq
     links:
       - postgres:database
@@ -26,6 +26,7 @@ services:
     volumes_from:
       - bundle
   web:
+    image: zedtux/brewformulas.org
     build: .
     command: bin/rails server -b 0.0.0.0 -p 3000
     links:
