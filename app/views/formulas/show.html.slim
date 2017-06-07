@@ -31,7 +31,7 @@
           = t('.no_description_available')
           '
           == t('.you_can_request_update_with_link', link: refresh_formula_path(@formula.name))
-      = link_to t('.open_new_issue'), homebrew_new_issue_github_url(title: @formula.name), class: 'btn btn-secondary', data: { toggle: 'tooltip' }, title: t('.report_issue_title'), target: '_blank'
+      = link_to t('.open_new_issue'), homebrew_new_issue_github_url(title: @formula.name), class: 'btn btn-secondary mb-3', data: { toggle: 'tooltip' }, title: t('.report_issue_title'), target: '_blank'
     .col-lg-4
       dl.dl-horizontal
         dt= t('homepage').capitalize
