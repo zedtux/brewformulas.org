@@ -23,7 +23,7 @@ gem 'pg', '~> 0.18' # Use postgresql as the database for Active Record
 gem 'puma', '~> 3.9' # Use Puma as the app server
 gem 'interactor', '~> 3.1.0' # Interactor provides a common interface for performing complex user interactions
 gem 'sidekiq', '~> 5.0.2' # Simple, efficient background processing for Ruby.
-gem 'sidekiq-scheduler', '~> 2.1.4' # Light weight job scheduling extension for Sidekiq that adds support for queueinga jobs in a recurring way.
+gem 'sidekiq-scheduler', '~> 2.1.5' # Light weight job scheduling extension for Sidekiq that adds support for queueinga jobs in a recurring way.
 gem 'sidekiq-unique-jobs', '~> 5.0.8' # The missing unique jobs in sidekiq
 gem 'git', '~> 1.3.0' # Ruby/Git is a Ruby library that can be used to create, read and manipulate Git repositories by wrapping system calls to the git binary.
 gem 'simple_form', github: 'elsurudo/simple_form', branch: 'rails-5.1.0' # Forms made easy!
