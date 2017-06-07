@@ -16,6 +16,7 @@ gem 'octicons_helper', '~> 3.0.1' # A rails helper that makes including svg Octi
 gem 'pluralize_no_count_if_one', '~> 0.0.1' # Add the missing :no_count_if_one option to the Rails pluralize helper
 gem 'unobtrusive_flash', '>= 3' # Turnkey Flash messages for your Rails app
 gem 'sparkline', '~> 0.1.0' # jQuery Sparklines for Rails
+gem 'jquery-infinite-pages', '~> 0.2.0' # A light-weight infinite scrolling jQuery plugin, wrapped in a gem for Rails
 
 # Backend gems
 gem 'rails', '~> 5.1.1'
@@ -33,6 +34,7 @@ gem 'punching_bag', '~> 0.5.0', github: 'tmartin314/punching_bag', branch: 'rail
 gem 'groupdate', '~> 3.2.0' # The simplest way to group temporal data
 gem 'redcarpet', '~> 3.4.0' # A fast, safe and extensible Markdown to (X)HTML parser
 gem 'opbeat', '~> 3.0.9' # performance monitoring
+gem 'kaminari', '~> 1.0.1' # sophisticated paginator for Rails
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 

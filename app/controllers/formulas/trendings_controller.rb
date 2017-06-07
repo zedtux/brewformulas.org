@@ -9,6 +9,7 @@ module Formulas
 
     def trending_formulae
       @trending_formulae = Homebrew::Formula.most_hit(1.month.ago, nil)
+                                            .page(params[:page])
     end
   end
 end

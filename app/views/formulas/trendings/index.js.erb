@@ -1,0 +1,9 @@
+// Append new data
+$("<%= j render(partial: 'formulas/formula', collection: @trending_formulae) %>").appendTo($(".row#trendings"));
+
+// Update pagination link
+<% if @trending_formulae.last_page? %>
+  $('.pagination').html('');
+<% else %>
+  $('.pagination').html("<%= j link_to_next_page(@trending_formulae, I18n.t('next_page'), remote: true) %>");
+<% end %>

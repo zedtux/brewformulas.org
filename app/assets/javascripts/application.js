@@ -17,10 +17,11 @@
 //= require rails-ujs
 //= require unobtrusive_flash
 //= require unobtrusive_flash_bootstrap
-//= require tether
 //
+//= require tether
 //= require bootstrap-sprockets
 //
+//= require jquery.infinite-pages
 //= require jquery.sparkline
 //
 //= require turbolinks

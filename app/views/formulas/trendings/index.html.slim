@@ -7,8 +7,11 @@
       .row
         .col-12
           hr
-      .row#news
+      .row#trendings
         = render partial: 'formulas/formula', collection: @trending_formulae
+
+        p.pagination
+          = link_to_next_page @trending_formulae, t('next_page'), remote: true
     - else
 
       .alert.alert-info role="alert"= t('messages.no_formula_yet')
