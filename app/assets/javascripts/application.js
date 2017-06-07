@@ -25,10 +25,9 @@
 //
 //= require turbolinks
 //= require_tree .
-
-/*
- * require_tree ../../../vendor/assets/javascripts/.
- */
+//
+//= require_tree ../../../vendor/assets/javascripts/.
+//
 
 // Temporary fix for the unobtrusive_flash gem
 $(document).on('DOMNodeInserted', function(e) {
