@@ -10,7 +10,8 @@
         '
         span.badge class="badge-#{@formula.inactive? ? 'danger' : 'success'}"= @formula.inactive? ? t('inactive') : t('active')
         - unless @formula.external?
-          = link_to 'Tweet', 'https://twitter.com/share', class: 'twitter-share-button float-right', data: { text: "I have installed #{@formula.name} with homebrew", via: 'brewformulas', related: "machomebrew" }
+          .float-right
+            = link_to 'Tweet', 'https://twitter.com/share', class: 'twitter-share-button', data: { text: "I have installed #{@formula.name} with homebrew", via: 'brewformulas', related: 'machomebrew', size: 'large' }
 
       - if @formula.external?
         p.text-info= t('.external_formula_description')
