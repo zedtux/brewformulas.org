@@ -48,10 +48,8 @@ class FormulasController < ApplicationController
   end
 
   def search
-    if search_term
-      @search_context = SearchFormulas.call(search_term)
-      updates_params_from_search_context!
-    end
+    @search_context = SearchFormulas.call(search_term)
+    updates_params_from_search_context! if @search_context.success?
 
     render action: :index
   end
