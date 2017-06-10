@@ -5,7 +5,7 @@ MAINTAINER zedtux, zedtux@zedroot.org
 ENV DEBIAN_FRONTEND noninteractive
 
 # ~~~~ System locales ~~~~
-RUN apt-get update && apt-get install -y locales curl && \
+RUN apt-get update && apt-get install -y locales && \
   dpkg-reconfigure locales && \
   locale-gen C.UTF-8 && \
   /usr/sbin/update-locale LANG=C.UTF-8 && \
@@ -16,7 +16,6 @@ RUN apt-get update && apt-get install -y locales curl && \
 ENV LC_ALL C.UTF-8
 ENV LANG en_US.UTF-8
 ENV LANGUAGE en_US.UTF-8
-ENV PHANTOMJS_VERSION 2.1.1
 ENV APP_HOME /application
 
 # ~~~~ User and folders ~~~~
