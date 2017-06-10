@@ -43,13 +43,12 @@ class FormulasController < ApplicationController
   def search_term
     @search_term ||= params.require(:search).permit(:terms, :names, :filenames,
                                                     :descriptions, :term)
+    @search_term.merge(page: params[:page]) if @search_term
   rescue ActionController::ParameterMissing
     nil
   end
 
   def search
-    search_term = search_term.merge(page: params[:page]) if search_term
-
     @search_context = SearchFormulas.call(search_term)
     updates_params_from_search_context! if @search_context.success?
 
