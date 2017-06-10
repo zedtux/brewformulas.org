@@ -48,7 +48,7 @@ class FormulasController < ApplicationController
   end
 
   def search
-    search_term = search_term.merge(page: params[:page]) unless search_term
+    search_term = search_term.merge(page: params[:page]) if search_term
 
     @search_context = SearchFormulas.call(search_term)
     updates_params_from_search_context! if @search_context.success?
