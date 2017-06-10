@@ -8,17 +8,24 @@ services:
 install:
   - docker run -d --name redis redis:3.2.8
   - docker run -d --name postgres postgres:9.6.2
-  - docker build -t zedtux/brewformulas.org .
+  - cp Dockerfile.production Dockerfile
+  - "docker build -t zedtux/brewformulas.org:latest ."
 
 script:
-  - docker run --link redis:redis --link postgres:database -it zedtux/brewformulas.org bundle exec rake db:create db:setup RAILS_ENV=test
-  - docker run --link redis:redis --link postgres:database -it zedtux/brewformulas.org bundle exec rake
+  - cp Dockerfile.ci Dockerfile
+  - "docker build -t zedtux/brewformulas.org:ci ."
+  - docker run --link redis:redis --link postgres:database -it zedtux/brewformulas.org:ci bundle exec rake db:create db:setup RAILS_ENV=test
+  - docker run --link redis:redis --link postgres:database -it zedtux/brewformulas.org:ci bundle exec rake
 
 after_success:
   - "docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS"
   - export DOCKER_TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
   - export DOCKER_TAG=`echo $DOCKER_TAG | sed -e 's/\//-/g'`
-  - cp Dockerfile.production Dockerfile
-  - docker build -t zedtux/brewformulas.org:$DOCKER_TAG .
+  - echo "Tagging the docker image with $DOCKER_TAG ..."
+  - "docker tag zedtux/brewformulas.org:latest zedtux/brewformulas.org:$DOCKER_TAG"
+  - docker rm `docker ps --no-trunc -aq`
   - "docker push zedtux/brewformulas.org:$DOCKER_TAG"
+  - "docker rmi zedtux/brewformulas.org:$DOCKER_TAG"
+  - "docker rmi zedtux/brewformulas.org:ci"
+  - "docker rmi zedtux/brewformulas.org:latest"
   - docker logout
