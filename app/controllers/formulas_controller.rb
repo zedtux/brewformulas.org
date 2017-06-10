@@ -1,5 +1,5 @@
 class FormulasController < ApplicationController
-  before_action :current_object, only: [:show, :refresh]
+  before_action :current_object, only: [:show, :refresh, :refresh_description]
   before_action :new_formulae_since_a_week, only: :index
 
   def index
@@ -38,6 +38,10 @@ class FormulasController < ApplicationController
       end
       format.js
     end
+  end
+
+  def refresh_description
+    redirect_to formula_url(@formula.name), status: :moved_permanently
   end
 
   def search_term

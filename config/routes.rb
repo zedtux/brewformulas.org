@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :formulas, only: [:index, :show], path: '' do
     member do
       post :refresh
+      get :refresh_description # Redirect with 301 to the formula show page
     end
 
     collection do
