@@ -30,7 +30,7 @@ Then(/^I should see the (.*) Homebrew formulas?$/) do |formulas|
   formulas.gsub!(/,/, ' ')
   formulas.gsub!(/  /, ' ')
 
-  base_xpath = '//div[@id="results"]//div[contains(@class, "card")]' \
+  base_xpath = '//div[@id="pagination"]//div[contains(@class, "card")]' \
                '//a[normalize-space(.)="'
 
   formulas.split.each do |formula|
