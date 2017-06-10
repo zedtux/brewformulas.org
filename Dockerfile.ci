@@ -7,4 +7,5 @@
 FROM zedtux/brewformulas.org:latest
 MAINTAINER zedtux, zedtux@zedroot.org
 
-RUN bundle install --without development
+RUN bundle config --delete without && \
+    bundle install --without development --jobs 8

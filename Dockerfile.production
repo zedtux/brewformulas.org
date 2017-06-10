@@ -36,7 +36,7 @@ RUN apt-get update && \
   gem install rubygems-update --no-ri --no-rdoc && \
   update_rubygems && \
   gem install bundler --no-ri --no-rdoc && \
-  bundle install --without development test cucumber --jobs 8 && \
+  bundle install --without development test --jobs 8 && \
   bundle exec rake assets:precompile RAILS_ENV=production && \
   chown -R brewformulas:brewformulas $APP_HOME && \
   chown -R brewformulas:brewformulas /usr/local/bundle && \
