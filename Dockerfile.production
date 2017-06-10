@@ -39,6 +39,7 @@ RUN apt-get update && \
   bundle install --without development test cucumber --jobs 8 && \
   bundle exec rake assets:precompile RAILS_ENV=production && \
   chown -R brewformulas:brewformulas $APP_HOME && \
+  chown -R brewformulas:brewformulas /usr/local/bundle && \
   apt-get remove --purge -y make gcc g++ && \
   apt-get autoremove -y && \
   apt-get clean -y && \

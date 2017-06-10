@@ -4,7 +4,7 @@
 # This will allow then to push the production image (and not this image) which
 # will not have all the stuff for running the tests.
 #
-FROM zedtux/brewformulas
+FROM zedtux/brewformulas.org:latest
 MAINTAINER zedtux, zedtux@zedroot.org
 
 RUN bundle install --without development
