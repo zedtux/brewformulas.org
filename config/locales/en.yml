@@ -81,6 +81,8 @@ en:
   links:
     twitter: "Follow on Twitter"
   messages:
+    an_error_occurs_retry_again: "There was an error, please try again"
+    loading_next_page: "Loading next page..."
     no_formula_yet: "No formula yet"
     no_new_formula_yet: "No new formula in the last 7 days."
     request_successfully_submitted: "Your request has been successfully submitted."

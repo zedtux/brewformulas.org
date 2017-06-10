@@ -12,7 +12,7 @@ class SearchFormulas
 
     search_query = search_formula_from_terms
 
-    context.results = search_query.all
+    context.results = search_query.page(context.page)
     context.result_count = search_query.count
   end
 

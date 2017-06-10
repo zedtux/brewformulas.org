@@ -1,5 +1,5 @@
 // Append new data
-$("<%= j render(partial: 'formulas/formula', collection: @trending_formulae) %>").appendTo($(".row#trendings"));
+$("<%= j render(partial: 'formulas/formula', collection: @trending_formulae) %>").appendTo($(".row#pagination"));
 
 // Update pagination link
 <% if @trending_formulae.last_page? %>

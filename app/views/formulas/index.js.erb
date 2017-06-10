@@ -1,0 +1,9 @@
+// Append new data
+$("<%= j render(partial: 'formulas/formula', collection: @search_context.results) %>").appendTo($(".row#pagination"));
+
+// Update pagination link
+<% if @search_context.results.last_page? %>
+  $('.pagination').html('');
+<% else %>
+  $('.pagination').html("<%= j link_to_next_page(@search_context.results, I18n.t('next_page'), remote: true) %>");
+<% end %>

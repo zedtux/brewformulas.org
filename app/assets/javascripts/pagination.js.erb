@@ -1,0 +1,13 @@
+$(document).on('turbolinks:load', function() {
+  if ($('.row#pagination').length) {
+    $('.row#pagination').infinitePages({
+      debug: true,
+      loading: function() {
+        return $(this).text('<%= I18n.t("messages.loading_next_page") %>');
+      },
+      error: function() {
+        return $(this).button('<%= I18n.t("messages.an_error_occurs_retry_again") %>');
+      }
+    });
+  }
+});

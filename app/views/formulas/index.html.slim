@@ -87,5 +87,8 @@ section.jumbotron.text-center
           .row
             .col-12
               hr
-          .row#results
+          .row#pagination
             = render partial: 'formula', collection: @search_context.results
+
+            p.pagination
+              = link_to_next_page @search_context.results, t('next_page'), remote: true
