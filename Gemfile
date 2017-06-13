@@ -20,7 +20,7 @@ gem 'jquery-infinite-pages', '~> 0.2.0' # A light-weight infinite scrolling jQue
 
 # Backend gems
 gem 'rails', '~> 5.1.1'
-gem 'pg', '~> 0.18' # Use postgresql as the database for Active Record
+gem 'pg', '~> 0.21' # Use postgresql as the database for Active Record
 gem 'puma', '~> 3.9' # Use Puma as the app server
 gem 'interactor', '~> 3.1.0' # Interactor provides a common interface for performing complex user interactions
 gem 'sidekiq', '~> 5.0.2' # Simple, efficient background processing for Ruby.
