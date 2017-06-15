@@ -12,4 +12,4 @@ RUN apt-get update && apt-get install -y make gcc g++
 
 USER brewformulas
 RUN bundle config --delete without && \
-    bundle install --without development --jobs 8
+    bundle install --jobs 8
