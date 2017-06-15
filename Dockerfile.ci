@@ -7,5 +7,7 @@
 FROM zedtux/brewformulas.org:latest
 MAINTAINER zedtux, zedtux@zedroot.org
 
+RUN apt-get update && apt-get install -y make gcc g++
+
 RUN bundle config --delete without && \
     bundle install --without development --jobs 8
