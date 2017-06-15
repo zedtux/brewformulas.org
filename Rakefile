@@ -9,9 +9,10 @@ begin
   RSpec::Core::RakeTask.new
 
   task default: [:spec, :cucumber]
-rescue LoadError
+rescue LoadError => error
   unless Rails.env.production?
-    puts 'WARNING: Could not load the RSpec and/or Cucumber Rake tasks'
+    puts 'WARNING: Could not load the RSpec and/or Cucumber Rake tasks' \
+         "(#{error.inspect})"
   end
 end
 
