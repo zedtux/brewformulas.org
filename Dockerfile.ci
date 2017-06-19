@@ -8,6 +8,9 @@ FROM zedtux/brewformulas.org:latest
 MAINTAINER zedtux, zedtux@zedroot.org
 
 USER root
+
+ENV RAILS_ENV test
+
 RUN apt-get update && apt-get install -y make gcc g++
 
 USER brewformulas
