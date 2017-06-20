@@ -39,6 +39,7 @@ en:
   descriptions: "Descriptions"
   distance_of_time_since_updated_ago: "%{dotiw} ago"
   filenames: "Filenames"
+  hits: "Hits"
   homepage: "homepage"
   names: "Names"
   next_page: "Next page"
