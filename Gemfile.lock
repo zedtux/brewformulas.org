@@ -267,7 +267,7 @@ GEM
       connection_pool (~> 2.2, >= 2.2.0)
       rack-protection (>= 1.5.0)
       redis (~> 3.3, >= 3.3.3)
-    sidekiq-scheduler (2.1.6)
+    sidekiq-scheduler (2.1.7)
       redis (~> 3)
       rufus-scheduler (~> 3.2)
       sidekiq (>= 3)
@@ -367,7 +367,7 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   shoulda-matchers (~> 3.1.1)
   sidekiq (~> 5.0.3)
-  sidekiq-scheduler (~> 2.1.6)
+  sidekiq-scheduler (~> 2.1.7)
   sidekiq-unique-jobs (~> 5.0.8)
   simple_form!
   slim-rails (~> 3.1.2)
