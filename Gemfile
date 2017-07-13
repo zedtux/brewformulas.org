@@ -64,6 +64,6 @@ group :test do
   gem 'webmock', '~> 3.0.1'
   gem 'cucumber-timecop', '~> 0.0.6', require: false
   gem 'capybara-screenshot', '~> 1.0.16'
-  gem 'shoulda-matchers', '~> 3.1.1'
+  gem 'shoulda-matchers', '~> 3.1.2'
   gem 'ffaker', '~> 2.6.0'
 end
