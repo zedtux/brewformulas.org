@@ -169,8 +169,8 @@ module Homebrew
     # graph.
     #
     def year_hits
-      year_and_month = I18n.l(Date.today - 0.month, format: '%Y%m')
-      yearly_hits << month_hits_for(year_and_month).first
+      year_and_months = 12.times.map { |month_num| I18n.l(Date.today - month_num.month, format: '%Y%m') }
+      self.update(yearly_hits: month_hits_for(year_and_months))
     end
 
     #
