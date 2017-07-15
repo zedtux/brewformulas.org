@@ -170,7 +170,9 @@ module Homebrew
     #
     def year_hits
       year_and_months = 12.times.map { |month_num| I18n.l(Date.today - month_num.month, format: '%Y%m') }
-      self.update(yearly_hits: month_hits_for(year_and_months))
+      self.yearly_hits = month_hits_for(year_and_months)
+      save
+      yearly_hits
     end
 
     #
