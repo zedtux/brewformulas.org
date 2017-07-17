@@ -20,7 +20,7 @@ class FormulasController < ApplicationController
   def show
     unless @formula.inactive?
       @formula.punch(request)
-      @formula.update_yearly_hits!
+      @formula.send(:update_yearly_hits!)
     end
 
     respond_to do |format|
