@@ -19,8 +19,8 @@ module Homebrew
     serialize :yearly_hits, Array
 
     # @nodoc ~~~ callbacks ~~~
-    before_create :touch
     before_validation :initialize_yearly_hits_if_needed
+    before_create :touch
     after_update :fetch_description
 
     # @nodoc ~~~ links ~~~
@@ -169,9 +169,6 @@ module Homebrew
     # graph.
     #
     def year_hits
-      year_and_months = 12.times.map { |month_num| I18n.l(Date.today - month_num.month, format: '%Y%m') }
-      self.yearly_hits = month_hits_for(year_and_months)
-      save
       yearly_hits
     end
 
@@ -183,6 +180,12 @@ module Homebrew
     end
 
     private
+
+    def year_and_months
+      12.times.map do |month_num|
+        I18n.l(Date.today - month_num.month, format: '%Y%m')
+      end
+    end
 
     def fetch_description
       # Don't update the description
@@ -215,6 +218,10 @@ module Homebrew
       end
 
       self.yearly_hits = [0,0,0,0,0,0,0,0,0,0,0]
+    end
+
+    def update_yearly_hits!
+      self.update(yearly_hits: month_hits_for(year_and_months))
     end
   end
 end

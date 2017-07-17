@@ -18,7 +18,10 @@ class FormulasController < ApplicationController
   end
 
   def show
-    @formula.punch(request) unless @formula.inactive?
+    unless @formula.inactive?
+      @formula.punch(request)
+      @formula.send(:update_yearly_hits!)
+    end
 
     respond_to do |format|
       format.html
