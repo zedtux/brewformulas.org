@@ -181,7 +181,7 @@ module Homebrew
 
     private
 
-    def year_and_months do
+    def year_and_months
       12.times.map do |month_num|
         I18n.l(Date.today - month_num.month, format: '%Y%m')
       end
