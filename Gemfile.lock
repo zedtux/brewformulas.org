@@ -61,7 +61,7 @@ GEM
     arel (8.0.0)
     autoprefixer-rails (7.0.1)
       execjs
-    better_errors (2.1.1)
+    better_errors (2.2.0)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
       rack (>= 0.9.0)
