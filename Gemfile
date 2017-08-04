@@ -19,7 +19,7 @@ gem 'sparkline', '~> 0.1.0' # jQuery Sparklines for Rails
 gem 'jquery-infinite-pages', '~> 0.2.0' # A light-weight infinite scrolling jQuery plugin, wrapped in a gem for Rails
 
 # Backend gems
-gem 'rails', '~> 5.1.2'
+gem 'rails', '~> 5.1.3'
 gem 'pg', '~> 0.21' # Use postgresql as the database for Active Record
 gem 'puma', '~> 3.9' # Use Puma as the app server
 gem 'interactor', '~> 3.1.0' # Interactor provides a common interface for performing complex user interactions
