@@ -70,7 +70,7 @@ en:
       no_dependencies: "This formula has no dependencies."
       no_description_available: "No description available."
       open_new_issue: "Open new issue"
-      report_issue_title: "Opens a new tab on the Hombrew github repoistory, in a new issue."
+      report_issue_title: "Opens a new tab on the Hombrew github repository, in a new issue."
       the_following_dependencies_will_be_installed: "The following %{dependency} will be installed if you install %{name}:"
       this_formula_is_in_conflict_with_the_following: "This formula is in confict with the following :"
       this_formula_is_required_by: 'This formula is required by'
