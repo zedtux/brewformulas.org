@@ -61,9 +61,9 @@ GEM
     arel (8.0.0)
     autoprefixer-rails (7.0.1)
       execjs
-    better_errors (2.1.1)
+    better_errors (2.3.0)
       coderay (>= 1.0.0)
-      erubis (>= 2.6.6)
+      erubi (>= 1.0.0)
       rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
@@ -124,7 +124,6 @@ GEM
     docile (1.1.5)
     dynamic_sitemaps (2.0.0)
     erubi (1.6.1)
-    erubis (2.7.0)
     et-orbi (1.0.5)
       tzinfo
     execjs (2.7.0)
