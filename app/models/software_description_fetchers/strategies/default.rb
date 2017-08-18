@@ -24,7 +24,7 @@ module SoftwareDescriptionFetchers
       private
 
       def clean_text(text)
-        clean_text = text.gsub(/(\n|\t|\s+)/, ' ')
+        clean_text = text.to_s.gsub(/(\n|\t|\s+)/, ' ')
         clean_text = clean_text.strip
         clean_text
       end
