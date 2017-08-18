@@ -21,7 +21,7 @@ gem 'jquery-infinite-pages', '~> 0.2.0' # A light-weight infinite scrolling jQue
 # Backend gems
 gem 'rails', '~> 5.1.3'
 gem 'pg', '~> 0.21' # Use postgresql as the database for Active Record
-gem 'puma', '~> 3.9' # Use Puma as the app server
+gem 'puma', '~> 3.10' # Use Puma as the app server
 gem 'interactor', '~> 3.1.0' # Interactor provides a common interface for performing complex user interactions
 gem 'sidekiq', '~> 5.0.4' # Simple, efficient background processing for Ruby.
 gem 'sidekiq-scheduler', '~> 2.1.8' # Light weight job scheduling extension for Sidekiq that adds support for queueinga jobs in a recurring way.
