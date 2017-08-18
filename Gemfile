@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 # Frontend gems
-gem 'bootstrap', '~> 4.0.0.alpha6' # Bootstrap 4 Ruby Gem for Rails / Sprockets and Compass
+gem 'bootstrap', '~> 4.0.0.beta' # Bootstrap 4 Ruby Gem for Rails / Sprockets and Compass
 gem 'tether-rails', '~> 1.4.0' # Tether for the Rails asset pipeline
 gem 'sass-rails', '~> 5.0' # Use SCSS for stylesheets
 gem 'uglifier', '>= 1.3.0' # Use Uglifier as compressor for JavaScript assets
