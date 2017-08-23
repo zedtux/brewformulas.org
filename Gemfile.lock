@@ -1,13 +1,4 @@
 GIT
-  remote: https://github.com/elsurudo/simple_form.git
-  revision: a1faca93ed39c0f54055890578307bdbade3de0b
-  branch: rails-5.1.0
-  specs:
-    simple_form (3.4.0)
-      actionpack (> 4, < 5.2)
-      activemodel (> 4, < 5.2)
-
-GIT
   remote: https://github.com/tmartin314/punching_bag.git
   revision: 4af97e78d7aa2613bd3776dba2d7075e8e08577f
   branch: rails5
@@ -374,7 +365,6 @@ DEPENDENCIES
   sidekiq (~> 5.0.4)
   sidekiq-scheduler (~> 2.1.8)
   sidekiq-unique-jobs (~> 5.0.10)
-  simple_form!
   slim-rails (~> 3.1.2)
   sparkline (~> 0.1.0)
   spring
@@ -386,4 +376,4 @@ DEPENDENCIES
   webmock (~> 3.0.1)
 
 BUNDLED WITH
-   1.15.1
+   1.15.3

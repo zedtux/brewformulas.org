@@ -27,7 +27,6 @@ gem 'sidekiq', '~> 5.0.4' # Simple, efficient background processing for Ruby.
 gem 'sidekiq-scheduler', '~> 2.1.8' # Light weight job scheduling extension for Sidekiq that adds support for queueinga jobs in a recurring way.
 gem 'sidekiq-unique-jobs', '~> 5.0.10' # The missing unique jobs in sidekiq
 gem 'git', '~> 1.3.0' # Ruby/Git is a Ruby library that can be used to create, read and manipulate Git repositories by wrapping system calls to the git binary.
-gem 'simple_form', github: 'elsurudo/simple_form', branch: 'rails-5.1.0' # Forms made easy!
 gem 'open_uri_redirections', '~> 0.2.1' # OpenURI patch to allow redirections between HTTP and HTTPS
 gem 'pres', '~> 1.4.1' # A Simple Rails Presenter
 gem 'punching_bag', '~> 0.5.0', github: 'tmartin314/punching_bag', branch: 'rails5'
