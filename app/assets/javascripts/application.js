@@ -18,7 +18,7 @@
 //= require unobtrusive_flash
 //= require unobtrusive_flash_bootstrap
 //
-//= require tether
+//= require popper
 //= require bootstrap-sprockets
 //
 //= require jquery.infinite-pages
