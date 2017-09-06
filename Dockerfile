@@ -1,5 +1,5 @@
 # ~~~~ Image base ~~~~
-FROM ruby:2.3.1-slim
+FROM ruby:2.4.1-slim
 MAINTAINER zedtux, zedtux@zedroot.org
 
 ENV DEBIAN_FRONTEND noninteractive
