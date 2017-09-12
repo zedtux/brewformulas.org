@@ -8,6 +8,8 @@
 
 [Brewformulas.org](http://brewformulas.org) is a website to easily search and discover Homebrew formulas. Their descriptions are automatically extracted [with different strategies](https://github.com/zedtux/brewformulas.org/wiki/Fix-or-add-description-fetching-strategy).
 
+You can now support this project on [the Tipeee page](https://www.tipeee.com/brewformulas-org)!
+
 # About this repository
 
 This repository hosts the source code of http://brewformulas.org/.
