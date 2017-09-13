@@ -27,8 +27,14 @@ section.jumbotron.text-center
             = t('descriptions')
 
     br
-    p.text-center
+    p
       iframe src="http://ghbtns.com/github-btn.html?user=zedtux&repo=brewformulas.org&type=watch&count=true&size=large" allowtransparency="true" frameborder="0" scrolling="0" width="170" height="30"
+      iframe src="//www.tipeee.com/brewformulas-org/embed/button"  allowtransparency="true" frameborder="0" scrolling="0" width="170" height="30"
+
+    p.lead
+      ' You can support us on
+      = link_to "Tipeee.com", 'https://www.tipeee.com/brewformulas-org', target: '_blank'
+      '  now by clicking the "Tip!" button
 
 .formulae-back
   - if @trending_formulae && @trending_formulae.size.keys.try(:size) > 0
