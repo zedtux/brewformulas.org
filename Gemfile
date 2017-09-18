@@ -29,7 +29,7 @@ gem 'sidekiq-unique-jobs', '~> 5.0.10' # The missing unique jobs in sidekiq
 gem 'git', '~> 1.3.0' # Ruby/Git is a Ruby library that can be used to create, read and manipulate Git repositories by wrapping system calls to the git binary.
 gem 'open_uri_redirections', '~> 0.2.1' # OpenURI patch to allow redirections between HTTP and HTTPS
 gem 'pres', '~> 1.4.1' # A Simple Rails Presenter
-gem 'punching_bag', '~> 0.5.0', github: 'tmartin314/punching_bag', branch: 'rails5'
+gem 'punching_bag', '~> 0.6.0', # Hit tracking plugin for Ruby on Rails that specializes in simple trending
 gem 'groupdate', '~> 3.2.0' # The simplest way to group temporal data
 gem 'redcarpet', '~> 3.4.0' # A fast, safe and extensible Markdown to (X)HTML parser
 gem 'opbeat', '~> 3.0.9' # performance monitoring
