@@ -9,7 +9,7 @@ end
 gem 'bootstrap', '~> 4.0.0.beta' # Bootstrap 4 Ruby Gem for Rails / Sprockets and Compass
 gem 'sass-rails', '~> 5.0' # Use SCSS for stylesheets
 gem 'uglifier', '>= 1.3.0' # Use Uglifier as compressor for JavaScript assets
-gem 'slim-rails', '~> 3.1.2' # Provides the generator settings required for Rails 3+ to use Slim
+gem 'slim-rails', '~> 3.1.3' # Provides the generator settings required for Rails 3+ to use Slim
 gem 'jquery-rails', '~> 4.3.1' # This gem provides jQuery and the jQuery-ujs driver for your Rails 4+ application
 gem 'octicons_helper', '~> 4.0.1' # A rails helper that makes including svg Octicons simple.
 gem 'pluralize_no_count_if_one', '~> 0.0.1' # Add the missing :no_count_if_one option to the Rails pluralize helper
