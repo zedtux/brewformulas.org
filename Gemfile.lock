@@ -38,8 +38,8 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
-    addressable (2.5.1)
-      public_suffix (~> 2.0, >= 2.0.2)
+    addressable (2.5.2)
+      public_suffix (>= 2.0.2, < 4.0)
     arel (8.0.0)
     autoprefixer-rails (7.1.2.4)
       execjs
@@ -119,7 +119,7 @@ GEM
       activesupport (>= 4.2.0)
     groupdate (3.2.0)
       activesupport (>= 3)
-    hashdiff (0.3.4)
+    hashdiff (0.3.7)
     httpclient (2.8.3)
     i18n (0.8.6)
     interactor (3.1.0)
@@ -181,7 +181,7 @@ GEM
       railties
     popper_js (1.11.1)
     pres (1.4.1)
-    public_suffix (2.0.5)
+    public_suffix (3.0.0)
     puma (3.10.0)
     punching_bag (0.6.0)
       railties (>= 3.2)
@@ -312,7 +312,7 @@ GEM
     voight_kampff (0.2.2)
       httpclient (~> 2.2)
       nokogiri (~> 1.6)
-    webmock (3.0.1)
+    webmock (3.1.0)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
       hashdiff
@@ -367,7 +367,7 @@ DEPENDENCIES
   turbolinks (~> 5)
   uglifier (>= 1.3.0)
   unobtrusive_flash (>= 3)
-  webmock (~> 3.0.1)
+  webmock (~> 3.1.0)
 
 BUNDLED WITH
    1.15.3
