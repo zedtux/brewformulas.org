@@ -33,7 +33,7 @@ gem 'punching_bag', '~> 0.6.0' # Hit tracking plugin for Ruby on Rails that spec
 gem 'groupdate', '~> 3.2.0' # The simplest way to group temporal data
 gem 'redcarpet', '~> 3.4.0' # A fast, safe and extensible Markdown to (X)HTML parser
 gem 'opbeat', '~> 3.0.9' # performance monitoring
-gem 'kaminari', '~> 1.0.1' # sophisticated paginator for Rails
+gem 'kaminari', '~> 1.1.0' # sophisticated paginator for Rails
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
