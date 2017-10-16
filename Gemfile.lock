@@ -169,10 +169,10 @@ GEM
     nio4r (2.1.0)
     nokogiri (1.8.1)
       mini_portile2 (~> 2.3.0)
-    octicons (4.0.1)
+    octicons (5.0.5)
       nokogiri (>= 1.6.3.1)
-    octicons_helper (4.0.1)
-      octicons (~> 4.0)
+    octicons_helper (4.0.7)
+      octicons
       rails
     opbeat (3.0.11)
       activesupport (>= 3.0.0)
@@ -344,7 +344,7 @@ DEPENDENCIES
   jquery-rails (~> 4.3.1)
   kaminari (~> 1.1.0)
   metamagic (~> 3.1.7)
-  octicons_helper (~> 4.0.1)
+  octicons_helper (~> 4.0.7)
   opbeat (~> 3.0.9)
   open_uri_redirections (~> 0.2.1)
   pg (~> 0.21)
