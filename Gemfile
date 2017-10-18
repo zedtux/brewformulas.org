@@ -55,7 +55,7 @@ group :development do
 end
 
 group :test do
-  gem 'rspec-rails', '~> 3.6.1'
+  gem 'rspec-rails', '~> 3.7.0'
   gem 'cucumber-rails', '~> 1.5.0', require: false
   # database_cleaner is not required, but highly recommended
   gem 'database_cleaner', '~> 1.6.1'
