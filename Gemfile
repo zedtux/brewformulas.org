@@ -62,7 +62,7 @@ group :test do
   gem 'coveralls', '~> 0.8.15', require: false
   gem 'webmock', '~> 3.1.0'
   gem 'cucumber-timecop', '~> 0.0.6', require: false
-  gem 'capybara-screenshot', '~> 1.0.17'
+  gem 'capybara-screenshot', '~> 1.0.18'
   gem 'shoulda-matchers', '~> 3.1.2'
   gem 'ffaker', '~> 2.7.0'
 end
