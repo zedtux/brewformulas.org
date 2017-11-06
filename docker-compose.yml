@@ -22,7 +22,6 @@ services:
       - RAILS_ENV=development
     volumes:
       - .:/application/
-      - /home/developer/Developments/punching_bag/:/punching_bag/
     volumes_from:
       - bundle
   web:
@@ -40,6 +39,5 @@ services:
       - VIRTUAL_HOST=localhost:3000
     volumes:
       - .:/application/
-      - /home/developer/Developments/punching_bag/:/punching_bag/
     volumes_from:
       - bundle
