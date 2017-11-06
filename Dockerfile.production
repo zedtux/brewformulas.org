@@ -33,7 +33,7 @@ RUN apt-get update && \
   /usr/sbin/update-locale LANG=C.UTF-8 && \
   echo 'en_US.UTF-8 UTF-8' >> /etc/locale.gen && \
   locale-gen && \
-  gem install rubygems-update --no-ri --no-rdoc && \
+  gem install rubygems-update --no-ri --no-rdoc --version 2.7.0 && \
   update_rubygems && \
   gem install bundler --no-ri --no-rdoc && \
   bundle install --without development test --jobs 8 && \

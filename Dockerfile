@@ -41,7 +41,9 @@ ENV BUNDLE_GEMFILE=$APP_HOME/Gemfile \
   BUNDLE_JOBS=8 \
   BUNDLE_PATH=/bundle
 
-RUN bundle install --without production
+RUN gem install rubygems-update --no-ri --no-rdoc --version 2.7.0 && \
+    update_rubygems && \
+    bundle install --without production
 
 # ~~~~ Import application ~~~~
 COPY . $APP_HOME
