@@ -61,7 +61,7 @@ group :test do
   # database_cleaner is not required, but highly recommended
   gem 'database_cleaner', '~> 1.6.2'
   gem 'coveralls', '~> 0.8.15', require: false
-  gem 'webmock', '~> 3.1.0'
+  gem 'webmock', '~> 3.1.1'
   gem 'cucumber-timecop', '~> 0.0.6', require: false
   gem 'capybara-screenshot', '~> 1.0.18'
   gem 'shoulda-matchers', '~> 3.1.2'
