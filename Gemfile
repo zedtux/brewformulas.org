@@ -21,7 +21,7 @@ gem 'popper_js', '~> 1.11.1' # Popper.js assets as a Ruby gem
 # Backend gems
 gem 'rails', '~> 5.1.4'
 gem 'pg', '~> 0.21' # Use postgresql as the database for Active Record
-gem 'puma', '~> 3.10' # Use Puma as the app server
+gem 'puma', '~> 3.11' # Use Puma as the app server
 gem 'interactor', '~> 3.1.0' # Interactor provides a common interface for performing complex user interactions
 gem 'sidekiq', '~> 5.0.5' # Simple, efficient background processing for Ruby.
 gem 'sidekiq-scheduler', '~> 2.1.10' # Light weight job scheduling extension for Sidekiq that adds support for queueinga jobs in a recurring way.
@@ -33,7 +33,7 @@ gem 'punching_bag', '~> 0.6.0' # Hit tracking plugin for Ruby on Rails that spec
 gem 'groupdate', '~> 3.2.0' # The simplest way to group temporal data
 gem 'redcarpet', '~> 3.4.0' # A fast, safe and extensible Markdown to (X)HTML parser
 gem 'opbeat', '~> 3.0.9' # performance monitoring
-gem 'skylight', '~> 1.4.3' # Skylight is a smart profiler for Rails apps
+gem 'skylight', '~> 1.4.4' # Skylight is a smart profiler for Rails apps
 gem 'kaminari', '~> 1.1.1' # sophisticated paginator for Rails
 gem 'dalli', '~> 2.7.6' # High performance memcached client for Ruby
 gem 'actionpack-action_caching', '~> 1.2.0' # Action caching for Action Pack
@@ -61,12 +61,12 @@ group :development do
 end
 
 group :test do
-  gem 'rspec-rails', '~> 3.7.1'
+  gem 'rspec-rails', '~> 3.7.2'
   gem 'cucumber-rails', '~> 1.5.0', require: false
   # database_cleaner is not required, but highly recommended
   gem 'database_cleaner', '~> 1.6.2'
   gem 'coveralls', '~> 0.8.15', require: false
-  gem 'webmock', '~> 3.1.0'
+  gem 'webmock', '~> 3.1.1'
   gem 'cucumber-timecop', '~> 0.0.6', require: false
   gem 'capybara-screenshot', '~> 1.0.18'
   gem 'shoulda-matchers', '~> 3.1.2'
