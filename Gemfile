@@ -35,6 +35,9 @@ gem 'redcarpet', '~> 3.4.0' # A fast, safe and extensible Markdown to (X)HTML pa
 gem 'opbeat', '~> 3.0.9' # performance monitoring
 gem 'skylight', '~> 1.4.3' # Skylight is a smart profiler for Rails apps
 gem 'kaminari', '~> 1.1.1' # sophisticated paginator for Rails
+gem 'dalli', '~> 2.7.6' # High performance memcached client for Ruby
+gem 'actionpack-action_caching', '~> 1.2.0' # Action caching for Action Pack
+gem 'rails-observers', '~> 0.1.5' # Rails observer
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
@@ -53,6 +56,8 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+
+  gem 'rack-mini-profiler', '~> 0.10.6' # Profiling toolkit for Rack applications with Rails integration
 end
 
 group :test do

@@ -5,6 +5,8 @@ services:
     image: postgres:9.6.2
   redis:
     image: redis:3.2.8
+  memcached:
+    image: memcached:1.5.3-alpine
 
   bundle:
     image: zedtux/brewformulas.org
@@ -17,9 +19,11 @@ services:
     links:
       - postgres:database
       - redis:redis
+      - memcached
     environment:
       - POSTGRESQL_USER=postgres
       - RAILS_ENV=development
+      - MEMCACHE_SERVERS=memcached
     volumes:
       - .:/application/
     volumes_from:
@@ -31,12 +35,14 @@ services:
     links:
      - postgres:database
      - redis
+     - memcached
     ports:
      - "3000:3000"
     environment:
       - POSTGRESQL_USER=postgres
       - RAILS_ENV=development
       - VIRTUAL_HOST=localhost:3000
+      - MEMCACHE_SERVERS=memcached
     volumes:
       - .:/application/
     volumes_from:

@@ -45,5 +45,8 @@ module BrewformulasOrg
     config.opbeat.app_id = ENV['OPBEAT_APP_ID']
     config.opbeat.secret_token = ENV['OPBEAT_SECRET_TOKEN']
     config.opbeat.logger = Rails.logger
+
+    config.autoload_paths << Rails.root.join('app', 'sweepers')
+    config.active_record.observers = :formulas_sweeper
   end
 end

@@ -1,6 +1,8 @@
 class FormulasController < ApplicationController
   before_action :current_object, only: [:show, :refresh, :refresh_description]
-  before_action :new_formulae_since_a_week, only: :index
+
+  caches_action :index, cache_path: 'formulas'
+  cache_sweeper :formulas_sweeper
 
   def index
     respond_to do |format|
@@ -10,6 +12,10 @@ class FormulasController < ApplicationController
                                               .inactive
                                               .order(:name)
                                               .limit(8)
+        @new_formulae_since_a_week = Homebrew::Formula.internals
+                                                      .new_this_week
+                                                      .order(:name)
+                                                      .limit(8)
       end
       format.json do
         render json: Homebrew::Formula.internals.active.order(:name)
@@ -75,13 +81,6 @@ class FormulasController < ApplicationController
       end
       format.json { render json: {}, status: :not_found }
     end
-  end
-
-  def new_formulae_since_a_week
-    @new_formulae_since_a_week = Homebrew::Formula.internals
-                                                  .new_this_week
-                                                  .order(:name)
-                                                  .limit(8)
   end
 
   def updates_params_from_search_context!
