@@ -1,6 +1,6 @@
 #
 # Extends the punching_bag gem in order to populate the :year_and_month column
-# with the current yeat and month.
+# with the current year and month.
 # This data is used later for the grouping of the data.
 #
 module PunchPatch
