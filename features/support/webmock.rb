@@ -23,6 +23,7 @@ fixture_root = File.join(Rails.root, 'features', 'fixtures', 'webmock')
   'http://www.monkeymental.com/' => 'cdpr',
   'http://www.celt-codec.org/' => 'celt',
   'http://www.bluem.net/jump/cliclick/' => 'cliclick',
+  'https://www.erlang.org/' => 'erlangat17',
   'https://ipfs.io/' => 'ipfs',
   'http://libmemcached.org/' => 'libmemcached',
   'http://llvm.org/' => 'llvm',

@@ -47,13 +47,20 @@ module Homebrew
           SoftwareDescriptionFetchers::Strategies::GoogleCode.new(@html)
         else
           SoftwareDescriptionFetchers::Strategies::Default.new(
-            @html, name: @formula.name, filename: @formula.filename
+            @html, name: clean_name(@formula.name),
+                   filename: clean_name(@formula.filename)
           )
         end
       end
 
       def grab_description
         @text = software_description_strategy.fetch
+      end
+
+      def clean_name(name)
+        return name.split('@').first if name.include?('@')
+
+        name
       end
     end
   end

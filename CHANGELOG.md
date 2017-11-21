@@ -3,6 +3,7 @@
 ## 2.1.0 (2017-11-21)
 
  - Memcache on homepage
+ - Handle formula names with an @ symbol (Fixes #129)
 
 ## 2.0.0 (2017-05-31)
 

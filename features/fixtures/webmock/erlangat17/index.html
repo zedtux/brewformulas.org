@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Erlang Programming Language</title>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+    <meta name="description" content="Erlang Programming Language"/>
+    <meta name="keywords" content="erlang, functional, programming, fault-tolerant, distributed, multi-platform, portable, software, multi-core, smp, concurrency"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <link rel="alternate" type="application/rss+xml" title="Overall RSS 2.0 Feed" href="/rss"/>
+    <link rel="alternate" type="application/rss+xml" title="News RSS 2.0 Feed" href="/rss/news"/>
+    <link rel="alternate" type="application/rss+xml" title="Article RSS 2.0 Feed" href="/rss/articles"/>
+    <link rel="alternate" type="application/rss+xml" title="Events RSS 2.0 Feed" href="/rss/event"/>
+    <link rel="alternate" type="application/rss+xml" title="Downloads RSS 2.0 Feed" href="/rss/download"/>
+
+    <link href="/css/bootstrap.css" rel="stylesheet" type="text/css"/>
+<link href="/css/new-style.css" rel="stylesheet" type="text/css"/>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+
+    
+  </head>
+
+  <body>
+    <script type="text/javascript">
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-3045895-2']);
+      _gaq.push(['_trackPageview']);
+    </script>
+
+    <div class="navbar" style="background-color:#FFF;">
+  <div class="container">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-responsive-collapse" style="position:absolute;right:5px;margin-bottom:0px;">
+      <span class="icon-bar"/>
+      <span class="icon-bar"/>
+      <span class="icon-bar"/>
+    </button>
+    <a class="navbar-brand" href="/"><img src="/img/erlang.png" width="60"/></a>
+    <div class="nav-collapse collapse navbar-responsive-collapse" style="padding:20px;">
+      <ul class="nav navbar-nav">
+        <li><a class="menu-headlines" href="/downloads"> DOWNLOADS </a></li>
+        <li><a class="menu-headlines" href="/docs"> DOCUMENTATION </a></li>
+        <li><a class="menu-headlines" href="/community"> COMMUNITY </a></li>
+        <li><a class="menu-headlines" href="/news"> NEWS </a></li>
+        <li><a class="menu-headlines" href="/events"> EVENTS </a></li>
+        <li><a class="menu-headlines" href="/about"> ABOUT </a></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+    
+<div class="col-lg-12 download-div">
+  
+  <!-- Default -->
+  <div class="container">
+    <div class="col-lg-8" style="padding:0px;">
+      <h2 style="color:#FFF;font-weight:600;">Build massively scalable soft real-time systems</h2>
+    </div>
+    <div class="col-lg-4" style="padding-top:15px;">
+      <a href="/downloads" class="btn btn-success">Download Erlang/OTP</a>
+      <span class="tab-nbsp">
+	<a href="http://www.github.com/erlang/otp"><img src="/img/GitHub-Mark-32px.png" width="35"/></a>
+      </span>
+    </div>
+  </div>
+  
+</div>
+<div class="container">
+  <div class="row">
+    <div class="col-lg-6">
+      <h3 class="sub-headlines">NEWS</h3>
+      <div class="inside-cols">
+	
+        <div>
+	  <p>
+            <img src="/img/news.png" width="16"/>
+            <a href="/news/115">Erlang/OTP 20.1 is released</a>
+          </p>
+	  <p style="font-size:10px;"><em>27 Sep 2017</em></p>
+	  <div style="padding-left:20px">
+            Erlang/OTP 20.1 is a service release containing mostly bug fixes and characteristics improvements but also some new features.
+          </div>
+	</div>
+	<br/>
+        
+        <div>
+	  <p>
+            <img src="/img/news.png" width="16"/>
+            <a href="/news/114">Erlang/OTP 20.0 is released</a>
+          </p>
+	  <p style="font-size:10px;"><em>21 Jun 2017</em></p>
+	  <div style="padding-left:20px">
+            Erlang/OTP 20.0 is a new major release with new features, quite a few (characteristics) improvements, as well as a few incompatibilities.
+          </div>
+	</div>
+	<br/>
+        
+        <div>
+	  <p>
+            <img src="/img/news.png" width="16"/>
+            <a href="/news/113">Erlang/OTP 20.0-rc2 is available for testing</a>
+          </p>
+	  <p style="font-size:10px;"><em>31 May 2017</em></p>
+	  <div style="padding-left:20px">
+            Erlang/OTP Release Candidate 2 is available for testing
+          </div>
+	</div>
+	<br/>
+        
+      </div>
+    </div>
+
+    <div class="col-lg-6">
+      
+      <div class="col-lg-6" style="box-sizing: border-box; position: relative; min-height: 1px; padding-right: 15px; padding-left: 15px; float: left; width: 600px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 20px;">
+<h3 class="sub-headlines" style="box-sizing: border-box; font-weight: 600; line-height: 1.1; margin-top: 20px; margin-bottom: 10px; font-size: 24px; color: rgb(109, 109, 109); text-shadow: rgb(204, 204, 204) 1px 1px 0px;">GETTING STARTED</h3>
+
+<div class="inside-cols" style="box-sizing: border-box; padding: 10px;">
+<h4 style="box-sizing: border-box; line-height: 1.1; margin-top: 10px; margin-bottom: 10px; font-size: 18px;">What is Erlang?</h4>
+
+<div class="divider" style="box-sizing: border-box; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(238, 238, 238); margin-bottom: 10px; margin-top: 10px;">
+<p style="box-sizing: border-box; margin: 0px 0px 10px;">&nbsp;</p>
+</div>
+
+<div style="box-sizing: border-box; padding-left: 20px;">
+<p style="box-sizing: border-box; margin: 0px 0px 10px;">Erlang is a programming language used to build massively scalable soft real-time systems with requirements on high availability. Some of its uses are in telecoms, banking, e-commerce, computer telephony and instant messaging. Erlang&#39;s runtime system has built-in support for concurrency, distribution and fault tolerance.</p>
+
+
+<p align="right" style="box-sizing: border-box; margin: 0px 0px 10px;"><a class="btn btn-default" href="http://erlang.org/doc/getting_started/users_guide.html" style="box-sizing: border-box; color: rgb(255, 255, 255); text-decoration: none; display: inline-block; padding: 8px 12px; margin-bottom: 0px; line-height: 1.42857; text-align: center; white-space: nowrap; vertical-align: middle; cursor: pointer; border-width: 1px; border-style: solid; border-color: rgba(0, 0, 0, 0.0980392) rgba(0, 0, 0, 0.0980392) rgba(0, 0, 0, 0.247059); border-radius: 4px; -webkit-user-select: none; background-image: -webkit-linear-gradient(top, rgb(193, 0, 83), rgb(162, 0, 62)); background-color: rgb(162, 0, 62); background-repeat: repeat-x;">Erlang Quickstart</a></p>
+</div>
+
+<h4 style="box-sizing: border-box; line-height: 1.1; margin-top: 10px; margin-bottom: 10px; font-size: 18px;">What is OTP?</h4>
+
+<div class="divider" style="box-sizing: border-box; border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: rgb(238, 238, 238); margin-bottom: 10px; margin-top: 10px;">
+<p style="box-sizing: border-box; margin: 0px 0px 10px;">&nbsp;</p>
+</div>
+
+<div style="box-sizing: border-box; padding-left: 20px;">
+<p style="box-sizing: border-box; margin: 0px 0px 10px;">OTP is set of Erlang libraries and design principles providing middle-ware to develop these systems. It includes its own distributed database, applications to interface towards other languages, debugging and release handling tools.</p>
+
+<p align="right" style="box-sizing: border-box; margin: 0px 0px 10px;"><a class="btn btn-default" href="http://erlang.org/doc/design_principles/users_guide.html" style="box-sizing: border-box; color: rgb(255, 255, 255); text-decoration: none; display: inline-block; padding: 8px 12px; margin-bottom: 0px; line-height: 1.42857; text-align: center; white-space: nowrap; vertical-align: middle; cursor: pointer; border-width: 1px; border-style: solid; border-color: rgba(0, 0, 0, 0.0980392) rgba(0, 0, 0, 0.0980392) rgba(0, 0, 0, 0.247059); border-radius: 4px; -webkit-user-select: none; background-image: -webkit-linear-gradient(top, rgb(193, 0, 83), rgb(162, 0, 62)); background-color: rgb(162, 0, 62); background-repeat: repeat-x;">Getting Started with OTP</a></p>
+</div>
+</div>
+</div>
+
+<div class="col-lg-12" style="box-sizing: border-box; position: relative; min-height: 1px; padding-right: 15px; padding-left: 15px; float: left; width: 1200px; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 14px; line-height: 20px;">&nbsp;</div>
+
+      
+    </div>
+
+    <div class="col-lg-12">
+      <div class="divider"><p/></div>
+    </div>
+
+    <div class="col-lg-6">
+      <h3 class="sub-headlines">MAILINGLIST HEADLINES</h3>
+      <div class="inside-cols">
+        <ul class="mailing">
+          
+          <li><a href="http://erlang.org/pipermail/erlang-questions/2017-November/094085.html" target="_blank">Patch package OTP 20.1.4 released
+</a></li>
+          
+          <li><a href="http://erlang.org/pipermail/erlang-questions/2017-November/094083.html" target="_blank">mnesia bound keys
+</a></li>
+          
+          <li><a href="http://erlang.org/pipermail/erlang-questions/2017-November/094079.html" target="_blank">Dialyzer and numeric range values
+</a></li>
+          
+          <li><a href="http://erlang.org/pipermail/erlang-questions/2017-November/094078.html" target="_blank">run_erl and systemd
+</a></li>
+          
+          <li><a href="http://erlang.org/pipermail/erlang-questions/2017-November/094073.html" target="_blank">How does Erlang TCP determine the end of a	TCP stream?
+</a></li>
+          
+	</ul>
+	<br/>
+	<p>
+          <a href="/mailman/listinfo/erlang-questions">Listinfo &amp; subscription...</a>
+        </p>
+      </div>
+  </div>
+</div>
+
+<div class="col-lg-12 text-center middle-splash">
+  
+  <!-- Default -->
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+	<p>
+	  <a target="_blank" href="http://www.pragprog.com/book/jaerlang2/programming-erlang">
+	    <img class="img-thumbnail book-pics" src="/img/jaerlang2.jpg" height="120" width="91" alt="Book cover of Programming Erlang"/>
+	  </a>
+	  <a target="_blank" href="http://oreilly.com/catalog/9780596518189">
+	    <img class="img-thumbnail book-pics" src="/img/francesco_erlang_programming.gif" height="120" alt="Book cover of Erlang Programming"/>
+	  </a>
+	  <a target="_blank" href="http://learnyousomeerlang.com">
+	    <img class="img-thumbnail book-pics" src="/img/erlang_newsmall.png" height="120" alt="Book cover of Erlang Programming"/>
+	  </a>
+	  <a target="_blank" href="http://www.manning.com/logan/">
+	    <img class="img-thumbnail book-pics" src="/img/logan_cover150.jpg" height="120" width="91" alt="Book cover of Erlang Programming"/>
+	  </a>
+	  <a target="_blank" href="http://shop.oreilly.com/product/0636920025818.do">
+	    <img class="img-thumbnail book-pics" src="/img/lrg.jpg" height="120" width="91" alt="Book cover of Erlang Programming"/>
+	  </a>
+          <a target="_blank" href="http://shop.oreilly.com/product/0636920024149.do">
+            <img class="img-thumbnail book-pics" src="/img/design_for_scalability_with_erlang_otp.jpg" height="120" alt="Book cover of Erlang Programming"/>
+          </a>
+          <a href="https://erlangcentral.org/books">And More...</a>
+	</p>
+      </div>
+    </div>
+  </div>
+  
+</div>
+<div class="row">
+    <div class="col-lg-12 text-center"><h3 class="sub-headlines">WE <img src="/img/heart.png"/> <img src="/img/tools.png"/> ERLANG</h3></div>
+</div>
+
+
+    <div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="divider"><p/></div>
+    </div>
+    <div class="col-lg-12 text-center">
+      <div class="col-lg-4">
+	<a href="/download.html" title="DOWNLOAD"><img src="/img/download.png"/></a>
+      </div>
+      <div class="col-lg-4">
+	<a href="http://www.github.com/erlang/otp"><img src="/img/GitHub-Mark-32px.png"/></a>
+      </div>
+      <div class="col-lg-4">
+	<a href="http://www.twitter.com/erlang_org"><img src="/img/twitter.png" width="32"/></a>
+      </div>
+    </div>
+    <div class="col-lg-12">
+      <div class="divider"><p/></div>
+    </div>
+  </div>
+</div>
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-42993178-1', 'erlang.org');
+      ga('send', 'pageview');
+    </script>
+  </body>
+</html>
