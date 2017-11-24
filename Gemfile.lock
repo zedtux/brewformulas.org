@@ -192,7 +192,7 @@ GEM
       railties (>= 3.2)
       voight_kampff (~> 0.2)
     rack (2.0.3)
-    rack-mini-profiler (0.10.6)
+    rack-mini-profiler (0.10.7)
       rack (>= 1.2.0)
     rack-protection (2.0.0)
       rack
@@ -365,7 +365,7 @@ DEPENDENCIES
   pres (~> 1.4.1)
   puma (~> 3.11)
   punching_bag (~> 0.6.0)
-  rack-mini-profiler (~> 0.10.6)
+  rack-mini-profiler (~> 0.10.7)
   rails (~> 5.1.4)
   rails-observers (~> 0.1.5)
   redcarpet (~> 3.4.0)
