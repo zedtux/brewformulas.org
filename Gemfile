@@ -57,7 +57,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 
-  gem 'rack-mini-profiler', '~> 0.10.6' # Profiling toolkit for Rack applications with Rails integration
+  gem 'rack-mini-profiler', '~> 0.10.7' # Profiling toolkit for Rack applications with Rails integration
 end
 
 group :test do
