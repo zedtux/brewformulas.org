@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 # Frontend gems
-gem 'bootstrap', '~> 4.0.0.beta' # Bootstrap 4 Ruby Gem for Rails / Sprockets and Compass
+gem 'bootstrap', '~> 4.0.0.beta2' # Bootstrap 4 Ruby Gem for Rails / Sprockets and Compass
 gem 'sass-rails', '~> 5.0' # Use SCSS for stylesheets
 gem 'uglifier', '>= 1.3.0' # Use Uglifier as compressor for JavaScript assets
 gem 'slim-rails', '~> 3.1.3' # Provides the generator settings required for Rails 3+ to use Slim
@@ -16,7 +16,7 @@ gem 'pluralize_no_count_if_one', '~> 0.0.1' # Add the missing :no_count_if_one o
 gem 'unobtrusive_flash', '>= 3' # Turnkey Flash messages for your Rails app
 gem 'sparkline', '~> 0.1.0' # jQuery Sparklines for Rails
 gem 'jquery-infinite-pages', '~> 0.2.0' # A light-weight infinite scrolling jQuery plugin, wrapped in a gem for Rails
-gem 'popper_js', '~> 1.11.1' # Popper.js assets as a Ruby gem
+gem 'popper_js', '~> 1.12.5' # Popper.js assets as a Ruby gem
 
 # Backend gems
 gem 'rails', '~> 5.1.4'
