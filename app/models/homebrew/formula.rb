@@ -190,7 +190,7 @@ module Homebrew
     def fetch_description
       # Don't update the description
       # until the homepage is updated
-      return unless self.saved_change_to_attribute?(:homepage)
+      return unless saved_change_to_attribute?(:homepage)
 
       FormulaDescriptionFetchWorker.perform_async(id)
     end
@@ -217,11 +217,11 @@ module Homebrew
         return true
       end
 
-      self.yearly_hits = [0,0,0,0,0,0,0,0,0,0,0]
+      self.yearly_hits = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     end
 
     def update_yearly_hits!
-      self.update(yearly_hits: month_hits_for(year_and_months))
+      update(yearly_hits: month_hits_for(year_and_months))
     end
   end
 end
