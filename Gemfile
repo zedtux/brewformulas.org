@@ -16,7 +16,7 @@ gem 'pluralize_no_count_if_one', '~> 0.0.1' # Add the missing :no_count_if_one o
 gem 'unobtrusive_flash', '>= 3' # Turnkey Flash messages for your Rails app
 gem 'sparkline', '~> 0.1.0' # jQuery Sparklines for Rails
 gem 'jquery-infinite-pages', '~> 0.2.0' # A light-weight infinite scrolling jQuery plugin, wrapped in a gem for Rails
-gem 'popper_js', '~> 1.12.5' # Popper.js assets as a Ruby gem
+gem 'popper_js', '~> 1.12.9' # Popper.js assets as a Ruby gem
 
 # Backend gems
 gem 'rails', '~> 5.1.4'
