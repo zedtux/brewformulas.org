@@ -184,7 +184,7 @@ GEM
     pg (0.21.0)
     pluralize_no_count_if_one (0.0.1)
       railties
-    popper_js (1.12.5)
+    popper_js (1.12.9)
     pres (1.4.1)
     public_suffix (3.0.1)
     puma (3.11.0)
@@ -361,7 +361,7 @@ DEPENDENCIES
   open_uri_redirections (~> 0.2.1)
   pg (~> 0.21)
   pluralize_no_count_if_one (~> 0.0.1)
-  popper_js (~> 1.12.5)
+  popper_js (~> 1.12.9)
   pres (~> 1.4.1)
   puma (~> 3.11)
   punching_bag (~> 0.6.0)
