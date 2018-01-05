@@ -70,5 +70,5 @@ group :test do
   gem 'cucumber-timecop', '~> 0.0.6', require: false
   gem 'capybara-screenshot', '~> 1.0.18'
   gem 'shoulda-matchers', '~> 3.1.2'
-  gem 'ffaker', '~> 2.7.0'
+  gem 'ffaker', '~> 2.8.0'
 end
