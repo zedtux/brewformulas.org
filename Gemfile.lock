@@ -49,7 +49,7 @@ GEM
       coderay (>= 1.0.0)
       erubi (>= 1.0.0)
       rack (>= 0.9.0)
-    binding_of_caller (0.7.3)
+    binding_of_caller (0.8.0)
       debug_inspector (>= 0.0.1)
     bootstrap (4.0.0.beta2.1)
       autoprefixer-rails (>= 6.0.3)
