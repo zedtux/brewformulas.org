@@ -187,7 +187,7 @@ GEM
     popper_js (1.12.9)
     pres (1.4.1)
     public_suffix (3.0.1)
-    puma (3.11.0)
+    puma (3.11.1)
     punching_bag (0.6.0)
       railties (>= 3.2)
       voight_kampff (~> 0.2)
