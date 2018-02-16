@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 # Frontend gems
-gem 'bootstrap', '~> 4.0.0.beta3' # Bootstrap 4 Ruby Gem for Rails / Sprockets and Compass
+gem 'bootstrap', '~> 4.0.0' # Bootstrap 4 Ruby Gem for Rails / Sprockets and Compass
 gem 'sass-rails', '~> 5.0' # Use SCSS for stylesheets
 gem 'uglifier', '>= 1.3.0' # Use Uglifier as compressor for JavaScript assets
 gem 'slim-rails', '~> 3.1.3' # Provides the generator settings required for Rails 3+ to use Slim
