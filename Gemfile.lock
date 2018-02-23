@@ -181,7 +181,7 @@ GEM
     opbeat (3.0.11)
       activesupport (>= 3.0.0)
     open_uri_redirections (0.2.1)
-    pg (0.21.0)
+    pg (1.0.0)
     pluralize_no_count_if_one (0.0.1)
       railties
     popper_js (1.12.9)
@@ -359,7 +359,7 @@ DEPENDENCIES
   octicons_helper (~> 4.2.0)
   opbeat (~> 3.0.9)
   open_uri_redirections (~> 0.2.1)
-  pg (~> 0.21)
+  pg (~> 1.0)
   pluralize_no_count_if_one (~> 0.0.1)
   popper_js (~> 1.12.9)
   pres (~> 1.4.1)
