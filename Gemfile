@@ -33,7 +33,7 @@ gem 'punching_bag', '~> 0.6.0' # Hit tracking plugin for Ruby on Rails that spec
 gem 'groupdate', '~> 4.0.0' # The simplest way to group temporal data
 gem 'redcarpet', '~> 3.4.0' # A fast, safe and extensible Markdown to (X)HTML parser
 gem 'opbeat', '~> 3.0.9' # performance monitoring
-gem 'skylight', '~> 1.5.0' # Skylight is a smart profiler for Rails apps
+gem 'skylight', '~> 1.6.0' # Skylight is a smart profiler for Rails apps
 gem 'kaminari', '~> 1.1.1' # sophisticated paginator for Rails
 gem 'dalli', '~> 2.7.7' # High performance memcached client for Ruby
 gem 'actionpack-action_caching', '~> 1.2.0' # Action caching for Action Pack
