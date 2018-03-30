@@ -19,7 +19,7 @@ gem 'jquery-infinite-pages', '~> 0.2.0' # A light-weight infinite scrolling jQue
 gem 'popper_js', '~> 1.12.9' # Popper.js assets as a Ruby gem
 
 # Backend gems
-gem 'rails', '~> 5.1.5'
+gem 'rails', '~> 5.1.6'
 gem 'pg', '~> 1.0' # Use postgresql as the database for Active Record
 gem 'puma', '~> 3.11' # Use Puma as the app server
 gem 'interactor', '~> 3.1.0' # Interactor provides a common interface for performing complex user interactions
