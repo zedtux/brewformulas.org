@@ -114,7 +114,7 @@ GEM
     et-orbi (1.0.9)
       tzinfo
     execjs (2.7.0)
-    ffaker (2.8.1)
+    ffaker (2.9.0)
     ffi (1.9.21)
     gherkin (4.1.3)
     git (1.3.0)
@@ -348,7 +348,7 @@ DEPENDENCIES
   dalli (~> 2.7.7)
   database_cleaner (~> 1.6.2)
   dynamic_sitemaps (~> 2.0.0)
-  ffaker (~> 2.8.1)
+  ffaker (~> 2.9.0)
   git (~> 1.3.0)
   groupdate (~> 4.0.0)
   interactor (~> 3.1.0)
