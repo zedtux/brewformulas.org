@@ -35,7 +35,7 @@ gem 'redcarpet', '~> 3.4.0' # A fast, safe and extensible Markdown to (X)HTML pa
 gem 'opbeat', '~> 3.0.9' # performance monitoring
 gem 'skylight', '~> 1.6.0' # Skylight is a smart profiler for Rails apps
 gem 'kaminari', '~> 1.1.1' # sophisticated paginator for Rails
-gem 'dalli', '~> 2.7.7' # High performance memcached client for Ruby
+gem 'dalli', '~> 2.7.8' # High performance memcached client for Ruby
 gem 'actionpack-action_caching', '~> 1.2.0' # Action caching for Action Pack
 gem 'rails-observers', '~> 0.1.5' # Rails observer
 # See https://github.com/rails/execjs#readme for more supported runtimes
