@@ -43,7 +43,7 @@ GEM
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
     arel (8.0.0)
-    autoprefixer-rails (8.0.0)
+    autoprefixer-rails (8.3.0)
       execjs
     better_errors (2.4.0)
       coderay (>= 1.0.0)
@@ -51,7 +51,7 @@ GEM
       rack (>= 0.9.0)
     binding_of_caller (0.8.0)
       debug_inspector (>= 0.0.1)
-    bootstrap (4.0.0)
+    bootstrap (4.1.0)
       autoprefixer-rails (>= 6.0.3)
       popper_js (>= 1.12.9, < 2)
       sass (>= 3.5.2)
@@ -115,7 +115,7 @@ GEM
       tzinfo
     execjs (2.7.0)
     ffaker (2.9.0)
-    ffi (1.9.21)
+    ffi (1.9.23)
     gherkin (4.1.3)
     git (1.3.0)
     globalid (0.4.1)
@@ -224,7 +224,7 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (12.3.1)
-    rb-fsevent (0.10.2)
+    rb-fsevent (0.10.3)
     rb-inotify (0.9.10)
       ffi (>= 0.5.0, < 2)
     redcarpet (3.4.0)
@@ -250,7 +250,7 @@ GEM
     rufus-scheduler (3.4.2)
       et-orbi (~> 1.0)
     safe_yaml (1.0.4)
-    sass (3.5.5)
+    sass (3.5.6)
       sass-listen (~> 4.0.0)
     sass-listen (4.0.0)
       rb-fsevent (~> 0.9, >= 0.9.4)
@@ -340,7 +340,7 @@ DEPENDENCIES
   actionpack-action_caching (~> 1.2.0)
   better_errors
   binding_of_caller
-  bootstrap (~> 4.0.0)
+  bootstrap (~> 4.1.0)
   capybara-screenshot (~> 1.0.19)
   coveralls (~> 0.8.15)
   cucumber-rails (~> 1.5.0)
