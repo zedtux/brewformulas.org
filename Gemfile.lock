@@ -43,7 +43,7 @@ GEM
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
     arel (8.0.0)
-    autoprefixer-rails (8.3.0)
+    autoprefixer-rails (8.4.1)
       execjs
     better_errors (2.4.0)
       coderay (>= 1.0.0)
@@ -51,7 +51,7 @@ GEM
       rack (>= 0.9.0)
     binding_of_caller (0.8.0)
       debug_inspector (>= 0.0.1)
-    bootstrap (4.1.0)
+    bootstrap (4.1.1)
       autoprefixer-rails (>= 6.0.3)
       popper_js (>= 1.12.9, < 2)
       sass (>= 3.5.2)
@@ -342,7 +342,7 @@ DEPENDENCIES
   actionpack-action_caching (~> 1.2.0)
   better_errors
   binding_of_caller
-  bootstrap (~> 4.1.0)
+  bootstrap (~> 4.1.1)
   capybara-screenshot (~> 1.0.19)
   coveralls (~> 0.8.15)
   cucumber-rails (~> 1.5.0)
