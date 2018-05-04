@@ -64,7 +64,7 @@ group :test do
   gem 'rspec-rails', '~> 3.7.2'
   gem 'cucumber-rails', '~> 1.5.0', require: false
   # database_cleaner is not required, but highly recommended
-  gem 'database_cleaner', '~> 1.6.2'
+  gem 'database_cleaner', '~> 1.7.0'
   gem 'coveralls', '~> 0.8.15', require: false
   gem 'webmock', '~> 3.4.1'
   gem 'cucumber-timecop', '~> 0.0.6', require: false

@@ -105,7 +105,7 @@ GEM
       timecop
     cucumber-wire (0.0.1)
     dalli (2.7.8)
-    database_cleaner (1.6.2)
+    database_cleaner (1.7.0)
     debug_inspector (0.0.3)
     diff-lcs (1.3)
     docile (1.1.5)
@@ -348,7 +348,7 @@ DEPENDENCIES
   cucumber-rails (~> 1.5.0)
   cucumber-timecop (~> 0.0.6)
   dalli (~> 2.7.8)
-  database_cleaner (~> 1.6.2)
+  database_cleaner (~> 1.7.0)
   dynamic_sitemaps (~> 2.0.0)
   ffaker (~> 2.9.0)
   git (~> 1.3.0)
