@@ -30,7 +30,7 @@ gem 'git', '~> 1.3.0' # Ruby/Git is a Ruby library that can be used to create, r
 gem 'open_uri_redirections', '~> 0.2.1' # OpenURI patch to allow redirections between HTTP and HTTPS
 gem 'pres', '~> 1.4.1' # A Simple Rails Presenter
 gem 'punching_bag', '~> 0.6.0' # Hit tracking plugin for Ruby on Rails that specializes in simple trending
-gem 'groupdate', '~> 4.0.0' # The simplest way to group temporal data
+gem 'groupdate', '~> 4.0.1' # The simplest way to group temporal data
 gem 'redcarpet', '~> 3.4.0' # A fast, safe and extensible Markdown to (X)HTML parser
 gem 'opbeat', '~> 3.0.9' # performance monitoring
 gem 'skylight', '~> 2.0.0' # Skylight is a smart profiler for Rails apps
