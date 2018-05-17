@@ -26,7 +26,7 @@ gem 'interactor', '~> 3.1.0' # Interactor provides a common interface for perfor
 gem 'sidekiq', '~> 5.1.3' # Simple, efficient background processing for Ruby.
 gem 'sidekiq-scheduler', '~> 2.2.2' # Light weight job scheduling extension for Sidekiq that adds support for queueinga jobs in a recurring way.
 gem 'sidekiq-unique-jobs', '~> 5.0.10' # The missing unique jobs in sidekiq
-gem 'git', '~> 1.3.0' # Ruby/Git is a Ruby library that can be used to create, read and manipulate Git repositories by wrapping system calls to the git binary.
+gem 'git', '~> 1.4.0' # Ruby/Git is a Ruby library that can be used to create, read and manipulate Git repositories by wrapping system calls to the git binary.
 gem 'open_uri_redirections', '~> 0.2.1' # OpenURI patch to allow redirections between HTTP and HTTPS
 gem 'pres', '~> 1.4.1' # A Simple Rails Presenter
 gem 'punching_bag', '~> 0.6.0' # Hit tracking plugin for Ruby on Rails that specializes in simple trending
