@@ -62,7 +62,7 @@ end
 
 group :test do
   gem 'rspec-rails', '~> 3.7.2'
-  gem 'cucumber-rails', '~> 1.5.0', require: false
+  gem 'cucumber-rails', '~> 1.6.0', require: false
   # database_cleaner is not required, but highly recommended
   gem 'database_cleaner', '~> 1.7.0'
   gem 'coveralls', '~> 0.8.15', require: false
