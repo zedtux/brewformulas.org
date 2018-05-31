@@ -129,7 +129,7 @@ GEM
     httpclient (2.8.3)
     i18n (1.0.1)
       concurrent-ruby (~> 1.0)
-    interactor (3.1.0)
+    interactor (3.1.1)
     jquery-infinite-pages (0.2.0)
       coffee-script
       jquery-rails
@@ -357,7 +357,7 @@ DEPENDENCIES
   ffaker (~> 2.9.0)
   git (~> 1.4.0)
   groupdate (~> 4.0.1)
-  interactor (~> 3.1.0)
+  interactor (~> 3.1.1)
   jquery-infinite-pages (~> 0.2.0)
   jquery-rails (~> 4.3.3)
   kaminari (~> 1.1.1)
