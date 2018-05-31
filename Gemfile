@@ -22,7 +22,7 @@ gem 'popper_js', '~> 1.12.9' # Popper.js assets as a Ruby gem
 gem 'rails', '~> 5.1.6'
 gem 'pg', '~> 1.0' # Use postgresql as the database for Active Record
 gem 'puma', '~> 3.11' # Use Puma as the app server
-gem 'interactor', '~> 3.1.0' # Interactor provides a common interface for performing complex user interactions
+gem 'interactor', '~> 3.1.1' # Interactor provides a common interface for performing complex user interactions
 gem 'sidekiq', '~> 5.1.3' # Simple, efficient background processing for Ruby.
 gem 'sidekiq-scheduler', '~> 2.2.2' # Light weight job scheduling extension for Sidekiq that adds support for queueinga jobs in a recurring way.
 gem 'sidekiq-unique-jobs', '~> 5.0.10' # The missing unique jobs in sidekiq
